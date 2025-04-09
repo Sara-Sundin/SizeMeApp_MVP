@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="content">
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container text-center">
+            <h1>Seamless Sizing for Smarter Shopping.</h1> 
+            <p>Reduce returns. Boost confidence. Keep customers coming back.</p> 
+            <div class="py-2">
+                <a class="cta-btn cta-btn--primary" href="#">Try out the app.</a> 
+            </div>
+            <div class="py-2">
+                <a class="cta-btn cta-btn--secondary" href="#">Find your plan.</a>  
+            </div>        
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section id="info">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2>
+                        Sign up in minutes, personalize your fit, and see how SizeMeApp transforms the way you shop.
+                    </h2>
+                </div>
+                <div class="col-md-6 text-center py-4">
+                    Say goodbye to sizing struggles. With just a few clicks, you can build your profile and start exploring how better fit means better business.
+                </div> 
+                <div class="col-md-6 py-4">   
+                    <ul class="text-start">
+                        <li>Create your free account and join the SizeMeApp platform.</li>
+                        <li>Add your measurements - it only takes a few minutes.</li>
+                        <li>Explore how smart sizing improves the shopping experience.</li>
+                    </ul>                                
+                </div> 
+                <div class="col-md-12">  
+                    <a class="cta-btn cta-btn--tertiary" href="#">Sign Up Now.</a> 
+                </div> 
+            </div>
+        </div>
+    </section>           
+
+    <!-- Business Plan Section -->
+    <section id="plans" class="text-center my-4">
+        <div class="container">
+            <h3>Size Up Your Business</h3>
+            <div>
+                Whether you're a growing startup or a global retailer, 
+                SizeMeApp offers flexible plans to fit your goals. Start 
+                small and scale seamlessly with tools that help you reduce 
+                returns, improve customer satisfaction, and boost 
+                conversion rates.
+            </div>
+            <div class="plan-container py-4 my-4">
+
+                <!-- Starter Plan -->
+                <div class="plan-heading">
+                    <h4>Starter Plan</h4>
+                </div>
+                <div class="plan-info text-start my-3 py-2">
+                    <ul>
+                        <li>Up to 500 customer profiles/month.</li>
+                        <li>Basic fit algorithm access.</li>
+                        <li>Brand dashboard & analytics.</li>
+                        <li>Email support.</li>
+                    </ul>
+                    <div>
+                        <i class="fa-solid fa-hourglass-start"></i>
+                    </div>
+                    <div>
+                        <a class="cta-btn cta-btn--primary" href="#">From 500 Usd/month.</a> 
+                    </div>
+                </div>  
+                
+                <!-- Growth Plan -->
+                <div class="plan-heading">
+                    <h4>Growth Plan</h4>
+                </div>
+                <div class="plan-info text-start my-3 py-2">
+                    <ul>
+                        <li>Up to 500 customer profiles/month.</li>
+                        <li>Basic fit algorithm access.</li>
+                        <li>Brand dashboard & analytics.</li>
+                        <li>Email support.</li>
+                    </ul>
+                    <div>
+                        <i class="fa-solid fa-hourglass-start"></i>
+                    </div>
+                    <div>
+                        <a class="cta-btn cta-btn--secondary" href="#">From 500 Usd/month.</a> 
+                    </div>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="plan-heading">
+                    <h4>Enterprise Plan</h4>
+                </div>
+                <div class="plan-info text-start my-3 py-2">
+                    <ul>
+                        <li>Up to 500 customer profiles/month.</li>
+                        <li>Basic fit algorithm access.</li>
+                        <li>Brand dashboard & analytics.</li>
+                        <li>Email support.</li>
+                    </ul>
+                    <div>
+                        <i class="fa-solid fa-hourglass-start"></i>
+                    </div>
+                    <div>
+                        <a class="cta-btn cta-btn--tertiary" href="#">From 500 Usd/month.</a> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
