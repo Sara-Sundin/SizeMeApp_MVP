@@ -1,0 +1,141 @@
+/* Google fonts import */
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* CSS Variables Color and Fonts */
+:root {
+    --primary-font: "Abril Fatface", sans-serif;
+    --secondary-font: "Poppins", sans-serif;
+    --tertiary-font: "Raleway", sans-serif;
+    --primary-color: #94e6ed; 
+    --secondary-color: #f8b133; 
+    --tertiary-color: #c3b3d6;
+}
+
+/* General Styling */  
+  html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: var(--tertiary-font);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--primary-font);   
+}
+
+/* Buttons */
+.cta-btn {
+    color: black;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Variants */
+.cta-btn--primary {
+    background-color: var(--primary-color);
+}
+
+.cta-btn--secondary {
+    background-color: var(--secondary-color);
+}
+
+.cta-btn--tertiary {
+    background-color: var(--tertiary-color);
+}
+
+/* Navbar */
+.navbar {
+    background-color: black;
+   } 
+
+/* Hero Section Styling */
+
+#hero { /* Main content container holds the background image */
+    position: relative;
+    z-index: 1; /* Keep it above the pseudo-element background */
+    height: 700px;
+    width: auto;
+    background: linear-gradient(to bottom, black, white);
+    margin-top: 57.81px;
+}
+
+/* Add background image behind content only */
+#hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("../images/body_male.gif") no-repeat top center;
+    background-size: 80%;
+    opacity: 0.5;
+    z-index: -1;
+    margin-top: 20px;
+}
+
+#hero h1 {
+    font-size: 60px;
+    color: var(--primary-color);
+    padding-top: 80px;
+}
+
+#hero p {
+    font-family: var(--secondary-font);
+    color: var(--primary-color);
+    font-size: 30px;
+    line-height: 1.2;
+}
+
+/* Info Section */
+
+#info h2 {
+    font-size: 35px;
+}
+
+/* Business Plan Sections*/
+
+#plans h3 {
+    font-size: 50px;
+    color: var(--secondary-color);
+}
+
+.plan-container {
+    background: black;
+}
+
+.plan-heading {
+    display: inline-block;         /* Shrink-wrap to content */
+    background-color: white;     
+    border-radius: 8px;            /* Rounded corners */
+    padding: 0 1rem;
+}
+
+.plan-info {
+    background-color: white;     
+    border-radius: 8px; 
+    width: 260px; 
+    display: inline-block;
+    margin: 1rem auto; 
+}
