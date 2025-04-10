@@ -96,7 +96,7 @@ h4 {
 }
 
 #hero h1 {
-    font-size: 2rem;
+    font-size: 3.5rem;
     color: var(--primary-color);
     padding-top: 80px;
 }
@@ -182,8 +182,7 @@ footer {
 }
 
 footer p {
-    text-align: center;
-    margin: 0 auto 2rem auto; /* SSpacing at the bottom */
+    margin: 0 auto 2rem auto; /* Spacing at the bottom */
 }
 
 .custom-separator {
@@ -197,7 +196,6 @@ footer p {
 
 /* Contact Details */
 .contact-details {
-    flex: 1;
     text-align: left;;
 }
 
