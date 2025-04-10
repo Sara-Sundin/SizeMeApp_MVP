@@ -77,7 +77,7 @@ h4 {
     height: 700px;
     width: auto;
     background: linear-gradient(to bottom, black, white);
-    margin-top: 57.81px;
+    margin-top: 56px;
 }
 
 /* Add background image behind content only */
@@ -168,3 +168,94 @@ h4 {
 }
 
 /* Footer */
+
+footer {
+    background-color: black;
+    color: var(--secondary-color);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+footer p {
+    text-align: center;
+    margin: 0 auto 2rem auto; /* SSpacing at the bottom */
+}
+
+.custom-separator {
+    border: none; /* removes default gray border */
+    height: 1px;                 
+    background-color: #fff;      
+    width: 80%;                  
+    margin: 2rem auto; /* centers it */
+    opacity: 1; /* overrides transparency*/
+}
+
+/* Contact Details */
+.contact-details {
+    flex: 1;
+    text-align: left;;
+}
+
+.contact-sub-heading {
+    font-family: var(--secondary-font);
+    font-size: 25px;
+}
+
+/* Social Icons Container */
+.social-icons {
+    display: flex;
+    justify-content: left; /* Centers icons */
+    gap: 50px; /* Space between icons */
+}
+
+.social-icons a {
+    font-size: 35px; /* Adjust icon size */
+    color: var(--secondary-color);
+    transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Hover Effect */
+.social-icons a:hover {
+    color: var(--primary-color); /* Change color on hover */
+    transform: scale(1.2); /* Slightly enlarge on hover */
+}
+
+/* Contact Form */
+.contact-form-container {
+    flex: 1;
+}
+
+.contact-form-container h2 {
+    font-size: 40px;
+}
+
+.contact-form .form-group label {
+    text-align: left;
+    display: block; /* Ensures the label takes up full width */
+}
+
+/* Apply existing form styling from SizeMeApp */
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: block;
+    margin-bottom: 15px;
+    background-color: white !important;
+    color: #333;
+    font-size: 1rem;
+}
+
+/* Autofill Fixes (matching SizeMeApp styles) */
+.contact-form input:-webkit-autofill,
+.contact-form input:-moz-autofill,
+.contact-form input:-ms-autofill {
+    background-color: white !important;
+    color: #333 !important;
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    box-shadow: 0 0 0px 1000px white inset !important;
+}

@@ -89,10 +89,38 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <div class="contact-wrapper">
+
+            <hr class="custom-separator">
+
+            <section class="contact-wrapper">       
+                <!-- Contact Details -->
+                <div class="contact-details px-4">
+                    <div>
+                        <h2 class="contact-sub-heading py-2">Contact Details</h2>
+                        <div class="details">
+                            <p><i class="fa-solid fa-envelope"></i> Email: <a href="mailto:sara@sizemeapp.se">sara@sizemeapp.se</a></p>
+                            <p><i class="fa-solid fa-mobile-screen-button"></i> Phone: +46 (0) 700 630 492</p>
+                            <p><i class="fa-solid fa-location-dot"></i> Address: Thors väg 24, Lindome, Sweden</p>
+                        </div>    
+                    </div>
+                    <!-- Social Media -->
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/iknw.se/" target="_blank"
+                        aria-label="Visit our Instagram page (opens in a new tab)" rel="noopener"><i
+                            class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/sara-sundin-b2833890/" target="_blank"
+                            aria-label="Visit our LinkedIn page (opens in a new tab)" rel="noopener"><i
+                            class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://wa.me/46700630492" target="_blank" aria-label="Connect on Whatsapp (opens in a new tab)"
+                            rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <hr class="custom-separator">
+
                 <!-- Contact Form -->
-                <div class="contact-form-container">
-                    <h2 class="contact-sub-heading text-center">Send a message</h2>
+                <div class="contact-form-container p-4">
+                    <h2 class="py-2">Send us a message!</h2>
                     <form method="post" class="contact-form">
                         {% csrf_token %}
                         <div class="form-group">
@@ -107,43 +135,19 @@
                             <label for="message" class="text-left">Message:</label>
                             <textarea id="message" name="message" rows="5" required></textarea>
                         </div>
-                        <button type="submit" class="btn-orange">Send Message</button>
+                        <button type="submit" class="cta-btn cta-btn--secondary">Send Message</button>
                     </form>
                 </div>
-
-                <!-- Contact Details -->
-                <div class="contact-details">
-                    <h2 class="contact-sub-heading text-center">Or.. Contact us directly</h2>
-                    <div class="details">
-                        <p><i class="fa-solid fa-envelope"></i> Email: <a href="mailto:sara@sizemeapp.se">sara@sizemeapp.se</a></p>
-                        <p><i class="fa-solid fa-mobile-screen-button"></i> Phone: +46 (0) 700 630 492</p>
-                        <p><i class="fa-solid fa-location-dot"></i> Address: Thors väg 24, Lindome, Sweden</p>
-                    </div>    
-                </div>
-            </div>
-        </div>
-
-        <!-- Social Media -->
-            <h3 class="transparent-box about-box"> "Let’s Get Social – Connect with Us!"</h3>
-            <div class="social-icons">
-                <a href="https://www.instagram.com/iknw.se/" target="_blank"
-                aria-label="Visit our Instagram page (opens in a new tab)" rel="noopener"><i
-                    class="fa-brands fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/in/sara-sundin-b2833890/" target="_blank"
-                    aria-label="Visit our LinkedIn page (opens in a new tab)" rel="noopener"><i
-                    class="fa-brands fa-linkedin"></i></a>
-                <a href="https://wa.me/46700630492" target="_blank" aria-label="Connect on Whatsapp (opens in a new tab)"
-                    rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
-            </div>
-    
+            </section>
+        
             {% block copyright %}
             <p>&copy; 2025 TechFit Solutions. All rights reserved.</p>
             {% endblock copyright %}
 
-        </footer>
+    </footer>
 
         <!-- Bootstrap JS (CDN) -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
         <!-- Script for closing mobile toggle when clicking outside navbar-->
         <script>
