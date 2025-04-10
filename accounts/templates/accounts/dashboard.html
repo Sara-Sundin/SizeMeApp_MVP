@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+           
+    <!-- Starter Plan Section -->
+<section id="dashboard" class="text-center">
+
+     <!-- Dashboard Heading -->
+     <div class="mb-5 text-center text-md-start">
+        <h1>Welcome to your account, {{ user.first_name }}!</h1>
+    </div>
+
+    <!-- Profile Section -->
+    <div class="container py-5">
+        <div class="row align-items-center mb-5">
+            <!-- Profile Picture -->
+            <div class="col-12 col-md-3 text-center text-md-start mb-4 mb-md-0">
+                <div class="profile-picture-placeholder rounded-circle bg-secondary" style="width: 120px; height: 120px;"></div>
+            </div>
+    
+            <!-- User Info -->
+            <div class="col-12 col-md-9">
+                <div class="mb-3">
+                    <strong>Full Name:</strong> {{ user.full_name }}
+                </div>
+                <div class="mb-3">
+                    <strong>Email:</strong> {{ user.email }}
+                </div>
+                <a href="#" class="btn btn-outline-primary mt-2">Update your profile</a>
+            </div>
+        </div>
+    
+        <!-- Button Section (Two Columns) -->
+        <div class="row g-3">
+            <div class="col-12 col-md-6 d-grid">
+                <a href="#" class="btn btn-secondary">View Orders</a>
+            </div>
+            <div class="col-12 col-md-6 d-grid">
+                <a href="#" class="btn btn-secondary">Manage Subscriptions</a>
+            </div>
+        </div>
+    </div>    
+</section>
+
+{% endblock %}
