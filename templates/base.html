@@ -64,7 +64,7 @@
                                 <a class="nav-link {% if request.path == dashboard_url %}active{% endif %}" href="{{ dashboard_url }}">Dashboard</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {% if request.path == logout_url %}active{% endif %}" href="{{ logout_url }}">Logout</a>
+                                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                             </li>
                             {% else %}
                             <li class="nav-item">

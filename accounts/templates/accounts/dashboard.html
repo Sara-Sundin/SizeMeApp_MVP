@@ -43,4 +43,48 @@
     </div>    
 </section>
 
+{% if show_modal %}
+<script>
+  window.onload = function () {
+    const modal = new bootstrap.Modal(document.getElementById('measurementModal'));
+    modal.show();
+  }
+</script>
+{% endif %}
+
+<!-- Modal Measurements -->
+<div class="modal fade" id="measurementModal" tabindex="-1" aria-labelledby="measurementsLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="post" action="{% url 'update_measurements' %}">
+        {% csrf_token %}
+        <div class="modal-header">
+          <h5 class="modal-title" id="measurementsLabel">Enter Your Measurements</h5>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="chest">Chest (cm)</label>
+            <input type="number" name="chest" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="waist">Waist (cm)</label>
+            <input type="number" name="waist" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="hips">Hips (cm)</label>
+            <input type="number" name="hips" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="shoulders">Shoulders (cm)</label>
+            <input type="number" name="shoulders" class="form-control" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Save Measurements</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
