@@ -116,13 +116,13 @@ h4 {
 
 /* Business Plan Sections*/
 
+.plan-container {
+    background: black;
+}
+
 #plans h3 {
     font-size: 50px;
     color: var(--secondary-color);
-}
-
-.plan-container {
-    background: black;
 }
 
 .plan-heading {
