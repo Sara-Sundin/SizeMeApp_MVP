@@ -51,7 +51,7 @@ h4 {
     transition: background-color 0.3s ease;
 }
 
-/* Variants */
+/* Color variants cta-buttons */
 .cta-btn--primary {
     background-color: var(--primary-color);
 }
@@ -132,6 +132,33 @@ h4 {
     padding: 0 1rem;
 }
 
+.heading-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.icon-starter {
+    color: var(--primary-color);
+}
+
+.icon-growth {
+    color: var(--secondary-color);
+}
+
+.icon-enterprise {
+    color: var(--tertiary-color);
+}
+
+.mobile-icon {
+    font-size: 40px;
+}
+
+.lg-icon {
+    display: none;
+}
+
 .plan-info {
     background-color: white;     
     border-radius: 8px; 
@@ -139,3 +166,5 @@ h4 {
     display: inline-block;
     margin: 1rem auto; 
 }
+
+/* Footer */
