@@ -2,17 +2,19 @@
 {% load static %}
 
 {% block content %}
- <!-- Hero Section -->
- <section id="hero">
-    <div class="container text-center">
-        <h1>Seamless Sizing for Smarter Shopping.</h1> 
-        <p>Reduce returns. Boost confidence. Keep customers coming back.</p> 
-        <div class="py-2">
-            <a class="cta-btn cta-btn--primary" href="#">Try out the app.</a> 
+<section id="hero">
+    <div class="container">
+        <div class="row justify-content-center justify-content-lg-start">
+            <div class="col-12 col-md-10 col-lg-8 text-center text-lg-start">
+                <h1 class="hero-heading">Seamless Sizing for Smarter Shopping.</h1> 
+                <p class="hero-subtext">Reduce returns. Boost confidence. Keep customers coming back.</p> 
+
+                <div class="d-flex flex-column flex-md-row justify-content-center justify-content-lg-start gap-3 mt-4">
+                    <a class="cta-btn cta-btn--primary" href="#">Try out the app.</a> 
+                    <a class="cta-btn cta-btn--secondary" href="#">Find your plan.</a>  
+                </div>
+            </div>
         </div>
-        <div class="py-2">
-            <a class="cta-btn cta-btn--secondary" href="#">Find your plan.</a>  
-        </div>        
     </div>
 </section>
 
@@ -45,7 +47,7 @@
     <!-- Business Plan Section -->
 <section id="plans" class="text-center">
     <div class="container py-4">
-        <h3>Size Up Your Business</h3>
+        <h3 class="py-2">Size Up Your Business</h3>
         <div>
             Whether you're a growing startup or a global retailer, 
             SizeMeApp offers flexible plans to fit your goals. Start 
@@ -55,75 +57,95 @@
         </div>
     </div>
 
-    <div class="plan-container py-4">
-        <!-- Starter Plan -->
-        <div class="plan-heading">
-            <div class="heading-wrapper">
-                <h4>Starter<br>Plan</h4>
-                <i class="fa-solid fa-hourglass-start mobile-icon icon-starter"></i>           
+    <div class="container-fluid px-0">
+        <div class="plan-container py-4">
+            <div class="container">
+                <div class="row g-4">
+    
+                    <!-- Starter Plan -->
+                    <div class="col-12 col-lg-4">
+                        <div class="plan-box">
+                            <div class="plan-heading text-center">
+                                <div class="heading-wrapper">
+                                    <h4>Starter<br>Plan</h4>
+                                    <i class="fa-solid fa-hourglass-start mobile-icon icon-starter"></i>           
+                                </div>
+                            </div>                
+                            <div class="plan-info text-start my-3 py-2">
+                                <ul>
+                                    <li>Up to 500 customer profiles/month.</li>
+                                    <li>Basic fit algorithm access.</li>
+                                    <li>Brand dashboard & analytics.</li>
+                                    <li>Email support.</li>
+                                </ul>
+                                <div>
+                                    <i class="fa-solid fa-hourglass-start lg-icon"></i>
+                                </div>
+                                <div>
+                                    <a class="cta-btn cta-btn--primary" href="#">From 500 Usd/month.</a> 
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+    
+                    <!-- Growth Plan -->
+                    <div class="col-12 col-lg-4">
+                        <div class="plan-box">
+                            <div class="plan-heading">
+                                <div class="heading-wrapper">
+                                    <h4>Growth<br>Plan</h4>
+                                    <i class="fa-solid fa-seedling mobile-icon icon-growth"></i>           
+                                </div>
+                            </div>                
+                            <div class="plan-info text-start my-3 py-2">
+                                <ul>
+                                    <li>Up to 5,000 customer profiles/month.</li>
+                                    <li>Advanced sizing recommendations.</li>
+                                    <li>Custom brand integration.</li>
+                                    <li>Priority email & chat support.</li>
+                                    <li>Monthly insights report.</li>
+                                </ul>
+                                <div>
+                                    <i class="fa-solid fa-seedling lg-icon"></i>
+                                </div>
+                                <div>
+                                    <a class="cta-btn cta-btn--secondary" href="#">From 1000 Usd/month.</a> 
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+    
+                    <!-- Enterprise Plan -->
+                    <div class="col-12 col-lg-4">
+                        <div class="plan-box">
+                            <div class="plan-heading">
+                                <div class="heading-wrapper">
+                                    <h4>Enterprise<br>Plan</h4>
+                                    <i class="fa-solid fa-arrow-up-right-dots mobile-icon icon-enterprise"></i>           
+                                </div>
+                            </div>                
+                            <div class="plan-info text-start my-3 py-2">
+                                <ul>
+                                    <li>Unlimited customer profiles.</li>
+                                    <li>AI-powered sizing engine.</li>
+                                    <li>API access & custom onboarding.</li>
+                                    <li>Dedicated success manager.</li>
+                                    <li>Integration with internal systems.</li>
+                                </ul>
+                                <div>
+                                    <i class="fa-solid fa-arrow-up-right-dots lg-icon"></i>
+                                </div>
+                                <div>
+                                    <a class="cta-btn cta-btn--tertiary" href="#">From 1500 Usd/month.</a> 
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+    
+                </div>
             </div>
-        </div>                
-        <div class="plan-info text-start my-3 py-2">
-            <ul>
-                <li>Up to 500 customer profiles/month.</li>
-                <li>Basic fit algorithm access.</li>
-                <li>Brand dashboard & analytics.</li>
-                <li>Email support.</li>
-            </ul>
-            <div>
-                <i class="fa-solid fa-hourglass-start lg-icon"></i>
-            </div>
-            <div>
-                <a class="cta-btn cta-btn--primary" href="#">From 500 Usd/month.</a> 
-            </div>
-        </div>  
-
-        <!-- Growth Plan -->
-        <div class="plan-heading">
-            <div class="heading-wrapper">
-                <h4>Growth<br>Plan</h4>
-                <i class="fa-solid fa-seedling mobile-icon icon-growth"></i>           
-            </div>
-        </div>                
-        <div class="plan-info text-start my-3 py-2">
-            <ul>
-                <li>Up to 5,000 customer profiles/month.</li>
-                <li>Advanced sizing recommendations.</li>
-                <li>Custom brand integration.</li>
-                <li>Priority email & chat support.</li>
-                <li>Monthly insights report.</li>
-            </ul>
-            <div>
-                <i class="fa-solid fa-seedling lg-icon"></i>
-            </div>
-            <div>
-                <a class="cta-btn cta-btn--secondary" href="#">From 1000 Usd/month.</a> 
-            </div>
-        </div> 
-
-        <!-- Enterprise Plan -->
-        <div class="plan-heading">
-            <div class="heading-wrapper">
-                <h4>Enterprise<br>Plan</h4>
-                <i class="fa-solid fa-arrow-up-right-dots mobile-icon icon-enterprise"></i>           
-            </div>
-        </div>                
-        <div class="plan-info text-start my-3 py-2">
-            <ul>
-                <li>Unlimited customer profiles.</li>
-                <li>AI-powered sizing engine.</li>
-                <li>API access & custom onboarding.</li>
-                <li>Dedicated success manager.</li>
-                <li>Integration with internal systems.</li>
-            </ul>
-            <div>
-                <i class="fa-solid fa-arrow-up-right-dots lg-icon"></i>
-            </div>
-            <div>
-                <a class="cta-btn cta-btn--tertiary" href="#">From 1500 Usd/month.</a> 
-            </div>
-        </div> 
-    </div>
+        </div>
+    </div>    
 </section>
 
 {% endblock %}
