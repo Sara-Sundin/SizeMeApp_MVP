@@ -81,7 +81,7 @@ h4 {
     background-color: black;
    } 
 
-   .navbar p {
+.navbar p {
     color: white;
 }
 
@@ -211,9 +211,15 @@ h4 {
     background: linear-gradient(to bottom, black, white);
 }
 
-#starter-plan h1 {
+#starter-plan h1,
+.signup h1 {
     font-size: 60px;
-    color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.login h1 {
+    font-size: 60px;
+    color: var(--tertiary-color);
 }
 
 .starter-heading {    
@@ -294,7 +300,12 @@ footer p {
     display: block; /* Ensures the label takes up full width */
 }
 
-/* Apply existing form styling from SizeMeApp */
+/* Form field styling */
+.signup input[type="text"],
+.signup input[type="email"],
+.signup input[type="password"],
+.login [type="email"],
+.login input[type="password"],
 .contact-form input[type="text"],
 .contact-form input[type="email"],
 .contact-form textarea {

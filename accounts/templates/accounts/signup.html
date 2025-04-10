@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head_title %}Sign Up{% endblock %}
+
+{% block content %}
+<div class="container-fluid signup">
+  <div class="row">
+    <div class="col-md-8 mt-3 offset-md-2">
+      <h1 class="my-4">SIGN UP</h1>
+      <p>
+        Already have an account?
+        <a class="link" href="{% url 'login' %}">LOG IN</a> instead.
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 mt-3 offset-md-2">
+      <form class="signup" id="signup_form" method="post" action="">
+        {% csrf_token %}
+
+        <!-- Display General Errors -->
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+          {{ form.non_field_errors.0 }}
+        </div>
+        {% endif %}
+
+        <!-- Full Name Field -->
+        <div class="form-group">
+          {{ form.full_name.label_tag }}
+          {{ form.full_name }}
+          {% if form.full_name.errors %}
+          <small class="text-danger">{{ form.full_name.errors.0 }}</small>
+          {% endif %}
+        </div>
+
+        <!-- Email Field -->
+        <div class="form-group">
+          {{ form.email.label_tag }}
+          {{ form.email }}
+          {% if form.email.errors %}
+          <small class="text-danger">{{ form.email.errors.0 }}</small>
+          {% endif %}
+        </div>
+
+        <!-- Password Field with Toggle -->
+        <div class="form-group">
+          {{ form.password1.label_tag }}
+          <div class="input-group">
+            {{ form.password1 }}
+            <button type="button" class="btn toggle-password" onclick="togglePassword('{{ form.password1.id_for_label }}')">
+              <i class="fa fa-eye"></i>
+              <span class="toggle-text">Show Password</span>
+            </button>
+          </div>
+          {% if form.password1.errors %}
+          <small class="text-danger">{{ form.password1.errors.0 }}</small>
+          {% endif %}
+        </div>
+
+        <button class="cta-btn cta-btn--primary mb-3" type="submit">
+          Sign Up &raquo;
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Password Toggle Script -->
+<script>
+  function togglePassword(fieldId) {
+    const passwordField = document.getElementById(fieldId);
+    const toggleButton = passwordField.nextElementSibling;
+    const toggleIcon = toggleButton.querySelector("i");
+    const toggleText = toggleButton.querySelector(".toggle-text");
+
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+      toggleIcon.classList.replace("fa-eye", "fa-eye-slash");
+      toggleText.textContent = "Hide Password";
+    } else {
+      passwordField.type = "password";
+      toggleIcon.classList.replace("fa-eye-slash", "fa-eye");
+      toggleText.textContent = "Show Password";
+    }
+  }
+</script>
+{% endblock %}
