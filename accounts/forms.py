@@ -69,8 +69,3 @@ class CustomUserUpdateForm(UserChangeForm):
             "full_name",
             "email",
         ]
-
-        widgets = {
-            "full_name": forms.TextInput(attrs={"class": "form-control"}),
-            "email": forms.EmailInput(attrs={"class": "form-control"}),
-        }

@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'orders',
     'home',
 
+    'crispy_forms',
+    'crispy_bootstrap5', 
+
     # Django defaults
     'django.contrib.admin',
     'django.contrib.auth',
@@ -57,6 +60,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 ROOT_URLCONF = 'config.urls'
@@ -74,10 +80,14 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # Custom context processor
+                'home.context_processors.contact_form',
             ],
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'config.wsgi.application'
 

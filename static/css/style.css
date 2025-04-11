@@ -322,26 +322,6 @@ footer p {
     display: block; /* Ensures the label takes up full width */
 }
 
-/* Form field styling */
-.signup input[type="text"],
-.signup input[type="email"],
-.signup input[type="password"],
-.login [type="email"],
-.login input[type="password"],
-.contact-form input[type="text"],
-.contact-form input[type="email"],
-.contact-form textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    display: block;
-    margin-bottom: 15px;
-    background-color: white !important;
-    color: #333;
-    font-size: 1rem;
-}
-
 /* Autofill Fixes (matching SizeMeApp styles) */
 .contact-form input:-webkit-autofill,
 .contact-form input:-moz-autofill,
