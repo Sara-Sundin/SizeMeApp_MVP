@@ -42,16 +42,17 @@
 
       <!-- Instructions (Two Columns) -->
       <div class="row g-3">
-        <div class="col-12 col-md-6 d-grid px-5">
+        <div class="col-12 col-md-6 d-grid px-4">
           <h3>1. Your Measurements</h3>
-          <p>Add your measurements before entering
-             the application for a seamless experience.
+          <p>Add your measurements before entering the application.
             <br>
             <br>
             Come back here to update your measurements.</p>
-            <a href="#" class="cta-btn cta-btn--tertiary">Update Measurements</a>
+            <a href="#" class="cta-btn cta-btn--tertiary" data-bs-toggle="modal" data-bs-target="#measurementModal">
+              Update Measurements
+            </a>            
         </div>
-        <div class="col-12 col-md-6 d-grid px-5">
+        <div class="col-12 col-md-6 d-grid px-4">
           <h3>2. Start Browsing</h3>
           <p>Your will be redirected to our prototype webshop to try out the app.
             <br>
@@ -82,22 +83,31 @@
           <h5 class="modal-title" id="measurementsLabel">Enter Your Measurements</h5>
         </div>
         <div class="modal-body">
-          <div class="form-group">
+          
+          <div class="form-group mb-3">
             <label for="chest">Chest (cm)</label>
-            <input type="number" name="chest" class="form-control" required>
+            <input type="number" name="chest" id="chest" class="form-control" required
+                   value="{{ user.chest|default_if_none:'' }}">
           </div>
-          <div class="form-group">
+
+          <div class="form-group mb-3">
             <label for="waist">Waist (cm)</label>
-            <input type="number" name="waist" class="form-control" required>
+            <input type="number" name="waist" id="waist" class="form-control" required
+                   value="{{ user.waist|default_if_none:'' }}">
           </div>
-          <div class="form-group">
+
+          <div class="form-group mb-3">
             <label for="hips">Hips (cm)</label>
-            <input type="number" name="hips" class="form-control" required>
+            <input type="number" name="hips" id="hips" class="form-control" required
+                   value="{{ user.hips|default_if_none:'' }}">
           </div>
-          <div class="form-group">
+
+          <div class="form-group mb-3">
             <label for="shoulders">Shoulders (cm)</label>
-            <input type="number" name="shoulders" class="form-control" required>
+            <input type="number" name="shoulders" id="shoulders" class="form-control" required
+                   value="{{ user.shoulders|default_if_none:'' }}">
           </div>
+
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Save Measurements</button>
@@ -106,5 +116,6 @@
     </div>
   </div>
 </div>
+
 
 {% endblock %}
