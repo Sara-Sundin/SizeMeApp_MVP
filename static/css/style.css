@@ -69,6 +69,11 @@ h4 {
     background-color: var(--tertiary-color);
 }
 
+.cta-btn--black {
+    background-color: black;
+    color: white;
+}
+
 .cta-btn--border {
     background-color: white;
     border: solid 1px black;
