@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'sizemeapp',
     'orders',
     'home',
+    'webshop',
 
     'crispy_forms',
     'crispy_bootstrap5', 
