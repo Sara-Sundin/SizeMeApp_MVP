@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block head_title %}Log In{% endblock %}
 
@@ -17,39 +18,35 @@
 
   <div class="row">
     <div class="col-md-8 mt-3 offset-md-2">
-      <form class="login" id="login_form" method="post" action="">
+      <form method="post" class="login" id="login_form">
         {% csrf_token %}
 
-        <!-- Display General Errors -->
         {% if form.non_field_errors %}
         <div class="alert alert-danger">
           {{ form.non_field_errors.0 }}
         </div>
         {% endif %}
 
-        <!-- Email/Login Field -->
-        <div class="form-group">
-          {{ form.username.label_tag }}
-          {{ form.username }}
-          {% if form.username.errors %}
-          <small class="text-danger">{{ form.username.errors.0 }}</small>
-          {% endif %}
+        <!-- Username Field (Email) -->
+        {{ form.username|as_crispy_field }}
+
+        <!-- Password Field with Toggle Below -->
+      <div class="form-group mb-3">
+        {{ form.password.label_tag }}
+        <input type="password" name="{{ form.password.name }}" id="{{ form.password.id_for_label }}"
+              class="form-control" placeholder="Password (min. 8 characters)" required>
+
+        <div class="mt-2">
+          <button type="button" class="btn btn-sm btn-outline-secondary toggle-password" onclick="togglePassword('{{ form.password.id_for_label }}')">
+            <i class="fa fa-eye"></i>
+            <span class="toggle-text">Show Password</span>
+          </button>
         </div>
 
-        <!-- Password Field with Toggle -->
-        <div class="form-group">
-          {{ form.password.label_tag }}
-          <div class="input-group">
-            {{ form.password }}
-            <button type="button" class="btn toggle-password" onclick="togglePassword('{{ form.password.id_for_label }}')">
-              <i class="fa fa-eye"></i>
-              <span class="toggle-text">Show Password</span>
-            </button>
-          </div>
-          {% if form.password.errors %}
+        {% if form.password.errors %}
           <small class="text-danger">{{ form.password.errors.0 }}</small>
-          {% endif %}
-        </div>
+        {% endif %}
+      </div>
 
         <button class="cta-btn cta-btn--tertiary mb-3" type="submit">
           Log In &raquo;
@@ -63,7 +60,7 @@
 <script>
   function togglePassword(fieldId) {
     const passwordField = document.getElementById(fieldId);
-    const toggleButton = passwordField.nextElementSibling;
+    const toggleButton = event.currentTarget;
     const toggleIcon = toggleButton.querySelector("i");
     const toggleText = toggleButton.querySelector(".toggle-text");
 
