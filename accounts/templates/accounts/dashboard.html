@@ -7,40 +7,60 @@
 <section id="dashboard" class="text-center">
 
      <!-- Dashboard Heading -->
-     <div class="mb-5 text-center text-md-start">
-        <h1>Welcome to your account, {{ user.first_name }}!</h1>
+     <div class="mb-5 text-center">
+        <h1>Welcome to your account, {{ user.get_short_name }}!</h1>
     </div>
 
-    <!-- Profile Section -->
-    <div class="container py-5">
-        <div class="row align-items-center mb-5">
-            <!-- Profile Picture -->
-            <div class="col-12 col-md-3 text-center text-md-start mb-4 mb-md-0">
-                <div class="profile-picture-placeholder rounded-circle bg-secondary" style="width: 120px; height: 120px;"></div>
+      <!-- Profile Section -->
+    <div id="profile" class="container p-4">
+      <div class="row align-items-center mb-5">
+        
+        <!-- Profile Picture + Info -->
+        <div class="col-12 col-md-6 d-flex align-items-center mb-4 mb-md-0">
+          <!-- Profile Picture -->
+          <div class="me-3">
+            <div class="profile-picture-placeholder rounded-circle bg-secondary" style="width: 120px; height: 120px;"></div>
+          </div>
+          <!-- User Info -->
+          <div class="text-start">
+            <div class="mb-2">
+              <strong>Name:</strong> {{ user.full_name }}
             </div>
-    
-            <!-- User Info -->
-            <div class="col-12 col-md-9">
-                <div class="mb-3">
-                    <strong>Full Name:</strong> {{ user.full_name }}
-                </div>
-                <div class="mb-3">
-                    <strong>Email:</strong> {{ user.email }}
-                </div>
-                <a href="#" class="btn btn-outline-primary mt-2">Update your profile</a>
+            <div>
+              <strong>Email:</strong> {{ user.email }}
             </div>
+          </div>
         </div>
-    
-        <!-- Button Section (Two Columns) -->
-        <div class="row g-3">
-            <div class="col-12 col-md-6 d-grid">
-                <a href="#" class="btn btn-secondary">View Orders</a>
-            </div>
-            <div class="col-12 col-md-6 d-grid">
-                <a href="#" class="btn btn-secondary">Manage Subscriptions</a>
-            </div>
+
+        <!-- Update Button -->
+        <div class="col-12 col-md-6 text-center">
+          <a href="{% url 'update_profile' %}" class="cta-btn cta-btn--primary">
+            Update your profile
+          </a>
         </div>
-    </div>    
+      </div>
+
+      <!-- Instructions (Two Columns) -->
+      <div class="row g-3">
+        <div class="col-12 col-md-6 d-grid px-5">
+          <h3>1. Your Measurements</h3>
+          <p>Add your measurements before entering
+             the application for a seamless experience.
+            <br>
+            <br>
+            Come back here to update your measurements.</p>
+            <a href="#" class="cta-btn cta-btn--tertiary">Update Measurements</a>
+        </div>
+        <div class="col-12 col-md-6 d-grid px-5">
+          <h3>2. Start Browsing</h3>
+          <p>Your will be redirected to our prototype webshop to try out the app.
+            <br>
+            <br>
+            Done with sizing? Just hit the exit button in the webshop.</p>
+          <a href="#" class="cta-btn cta-btn--secondary">Enter the application</a>
+        </div>
+      </div>
+    </div>  
 </section>
 
 {% if show_modal %}

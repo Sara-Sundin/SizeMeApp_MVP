@@ -30,11 +30,14 @@ main {
 }
 
 /* Headings */
-h1,
+h1 {
+    font-family: var(--primary-font);   
+}
+
 h2,
 h3,
 h4 {
-    font-family: var(--primary-font);   
+    font-family: var(--secondary-font);   
 }
 
 /* Buttons */
@@ -234,6 +237,24 @@ h4 {
     margin: 1rem auto; 
 }
 
+/* Dashboard */
+
+#dashboard {
+    background: linear-gradient(to bottom, black, white);
+}
+
+#dashboard h1 {
+    font-size: 60px;
+    color: var(--primary-color);
+    width: 300px;
+    padding-top: 30px;
+}
+
+#profile {
+    background-color: white;
+    border-radius: 8px; 
+}
+
 /* Footer */
 
 footer {
@@ -365,9 +386,14 @@ footer p {
         margin: 1rem auto; 
         width: 300px;
     }
+
+    #dashboard h1 {
+        font-size: 70px;
+        width: 700px;
+    }
 }
 
-/* Tablet (md) */
+/* Desktop (lg) */
 @media (min-width: 1024px) {
 
     .plan-info {
@@ -408,5 +434,10 @@ footer p {
     #hero p {
         padding-top: 30px;
        
+    }
+
+    #dashboard h1 {
+        font-size: 90px;
+        width: 1000px;
     }
 }
