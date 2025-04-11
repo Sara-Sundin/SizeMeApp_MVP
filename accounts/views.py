@@ -49,7 +49,8 @@ def delete_account(request):
 
 def custom_logout(request):
     logout(request)
-    return redirect('home')
+    request.session["show_logged_out_modal"] = True
+    return redirect("home")
 
 
 class SignupView(CreateView):
