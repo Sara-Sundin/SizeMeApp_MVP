@@ -148,4 +148,20 @@
     </div>    
 </section>
 
+{% if show_account_deleted_modal %}
+<script>
+  window.onload = function () {
+    const goodbyeModal = new bootstrap.Modal(document.getElementById('accountDeletedModal'));
+    goodbyeModal.show();
+
+    // Optional: auto-dismiss after 3s
+    setTimeout(() => {
+      goodbyeModal.hide();
+    }, 3000);
+  }
+</script>
+{% endif %}
+
+{% include "home/delete_account_modal.html" %}
+
 {% endblock %}

@@ -64,60 +64,46 @@
     </div>  
 </section>
 
-{% if show_modal %}
+  {% if show_modal %}
+  <script>
+    window.onload = function () {
+      const modal = new bootstrap.Modal(document.getElementById('measurementModal'));
+      modal.show();
+    }
+  </script>
+  {% endif %}
+
+  {% if show_profile_updated_modal %}
 <script>
   window.onload = function () {
-    const modal = new bootstrap.Modal(document.getElementById('measurementModal'));
-    modal.show();
+    const successModalEl = document.getElementById('profileUpdatedModal');
+    const successModal = new bootstrap.Modal(successModalEl);
+    successModal.show();
+
+    // Auto-dismiss after 2 seconds
+    setTimeout(() => {
+      successModal.hide();
+    }, 2000);
   }
 </script>
 {% endif %}
 
-{% include "accounts/update_profile_modal.html" %}
 
-<!-- Modal Measurements -->
-<div class="modal fade" id="measurementModal" tabindex="-1" aria-labelledby="measurementsLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form method="post" action="{% url 'update_measurements' %}">
-        {% csrf_token %}
-        <div class="modal-header">
-          <h5 class="modal-title" id="measurementsLabel">Enter Your Measurements</h5>
-        </div>
-        <div class="modal-body">
-          
-          <div class="form-group mb-3">
-            <label for="chest">Chest (cm)</label>
-            <input type="number" name="chest" id="chest" class="form-control" required
-                   value="{{ user.chest|default_if_none:'' }}">
-          </div>
+{% if show_measurements_updated_modal %}
+<script>
+  window.onload = function () {
+    const measureModalEl = document.getElementById('measurementsUpdatedModal');
+    const measureModal = new bootstrap.Modal(measureModalEl);
+    measureModal.show();
 
-          <div class="form-group mb-3">
-            <label for="waist">Waist (cm)</label>
-            <input type="number" name="waist" id="waist" class="form-control" required
-                   value="{{ user.waist|default_if_none:'' }}">
-          </div>
+    // Auto-dismiss after 2 seconds
+    setTimeout(() => {
+      measureModal.hide();
+    }, 2000);
+  }
+</script>
+{% endif %}
 
-          <div class="form-group mb-3">
-            <label for="hips">Hips (cm)</label>
-            <input type="number" name="hips" id="hips" class="form-control" required
-                   value="{{ user.hips|default_if_none:'' }}">
-          </div>
-
-          <div class="form-group mb-3">
-            <label for="shoulders">Shoulders (cm)</label>
-            <input type="number" name="shoulders" id="shoulders" class="form-control" required
-                   value="{{ user.shoulders|default_if_none:'' }}">
-          </div>
-
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Save Measurements</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
+  {% include "accounts/update_profile_modal.html" %}
 
 {% endblock %}

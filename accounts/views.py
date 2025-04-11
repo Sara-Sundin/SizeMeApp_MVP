@@ -8,13 +8,20 @@ from .forms import CustomSignupForm, CustomLoginForm, CustomUserUpdateForm
 from .models import CustomUser
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 
 
 @login_required
 def dashboard_view(request):
     user = request.user
     show_modal = not all([user.chest, user.waist, user.hips, user.shoulders])
-    return render(request, 'accounts/dashboard.html', {"show_modal": show_modal})
+    show_profile_updated_modal = request.session.pop("show_profile_updated_modal", False)
+    show_measurements_updated_modal = request.session.pop("show_measurements_updated_modal", False)
+    return render(request, 'accounts/dashboard.html', {
+        "show_modal": show_modal,
+        "show_profile_updated_modal": show_profile_updated_modal,
+        "show_measurements_updated_modal": show_measurements_updated_modal,
+    })
 
 
 @login_required
@@ -26,6 +33,8 @@ def update_measurements(request):
         user.hips = request.POST.get("hips")
         user.shoulders = request.POST.get("shoulders")
         user.save()
+
+        request.session["show_measurements_updated_modal"] = True  # flag
     return redirect("dashboard")
 
 
@@ -34,6 +43,7 @@ def delete_account(request):
     if request.method == "POST":
         request.user.delete()
         logout(request)
+        request.session["show_account_deleted_modal"] = True  # flag for goodbye modal
         return redirect('home')
 
 
@@ -77,9 +87,9 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
         if password:
             user.set_password(password)
-            update_session_auth_hash(self.request, user)  # Keep user logged in
+            update_session_auth_hash(self.request, user)
 
         user.save()
+        self.request.session["show_profile_updated_modal"] = True
         return redirect(self.success_url)
     
- 
