@@ -1,3 +1,4 @@
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -28,9 +29,17 @@ def update_measurements(request):
     return redirect("dashboard")
 
 
+@login_required
+def delete_account(request):
+    if request.method == "POST":
+        request.user.delete()
+        logout(request)
+        return redirect('home')
+
+
 def custom_logout(request):
     logout(request)
-    return redirect('home')  # Change to 'login' or any page you prefer
+    return redirect('home')
 
 
 class SignupView(CreateView):
@@ -61,3 +70,16 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_object(self):
         return self.request.user
+
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        password = self.request.POST.get("password1")
+
+        if password:
+            user.set_password(password)
+            update_session_auth_hash(self.request, user)  # Keep user logged in
+
+        user.save()
+        return redirect(self.success_url)
+    
+ 

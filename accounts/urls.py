@@ -1,8 +1,13 @@
-from django.urls import path
 from . import views
-from .views import SignupView, CustomLoginView, ProfileUpdateView
-from .views import update_measurements
-from .views import custom_logout
+from django.urls import path
+from .views import (
+    update_measurements,
+    custom_logout,
+    delete_account,
+    SignupView,
+    CustomLoginView,
+    ProfileUpdateView,
+)
 
 
 urlpatterns = [
@@ -12,5 +17,6 @@ urlpatterns = [
     path('update-measurements/', update_measurements, name='update_measurements'),
     path('logout/', custom_logout, name='logout'),
     path('update-profile/', ProfileUpdateView.as_view(), name='update_profile'),
+    path('delete-account/', delete_account, name='delete_account'), 
 ]
 

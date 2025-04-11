@@ -34,9 +34,9 @@
 
         <!-- Update Button -->
         <div class="col-12 col-md-6 text-center">
-          <a href="{% url 'update_profile' %}" class="cta-btn cta-btn--primary">
+          <a href="#" class="cta-btn cta-btn--primary" data-bs-toggle="modal" data-bs-target="#profileModal">
             Update your profile
-          </a>
+          </a>          
         </div>
       </div>
 
@@ -72,6 +72,8 @@
   }
 </script>
 {% endif %}
+
+{% include "accounts/update_profile_modal.html" %}
 
 <!-- Modal Measurements -->
 <div class="modal fade" id="measurementModal" tabindex="-1" aria-labelledby="measurementsLabel" aria-hidden="true">
