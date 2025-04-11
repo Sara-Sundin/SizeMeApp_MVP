@@ -68,17 +68,9 @@ class CustomUserUpdateForm(UserChangeForm):
         fields = [
             "full_name",
             "email",
-            "chest",
-            "waist",
-            "hips",
-            "shoulders",
         ]
 
         widgets = {
             "full_name": forms.TextInput(attrs={"class": "form-control"}),
             "email": forms.EmailInput(attrs={"class": "form-control"}),
-            "chest": forms.NumberInput(attrs={"class": "form-control"}),
-            "waist": forms.NumberInput(attrs={"class": "form-control"}),
-            "hips": forms.NumberInput(attrs={"class": "form-control"}),
-            "shoulders": forms.NumberInput(attrs={"class": "form-control"}),
         }
