@@ -44,7 +44,7 @@ h4 {
 .cta-btn {
     color: black;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 14px;
     padding: 12px 24px;
     border: none;
     border-radius: 8px;
@@ -53,6 +53,7 @@ h4 {
     text-align: center;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    height: 50px;
 }
 
 /* Color variants cta-buttons */
