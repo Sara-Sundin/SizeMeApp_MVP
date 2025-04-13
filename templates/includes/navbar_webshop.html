@@ -2,9 +2,10 @@
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top">
     <div class="container">
-
         <!-- Brand logo / link -->
-        <li class="nav-item"><a class="nav-link" href="{% url 'webshop' %}">IKNW.</a></li>
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'images/logo_icon.png' %}" alt="SizeMeApp Logo" width="50">
+        </a>
         <li> {% if user.is_authenticated %}
             <button href="#" class="btn cta-btn--secondary btn-sm px-4">Exit size mode.</a>
             {% else %}
@@ -22,20 +23,11 @@
         <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'webshop' %}">Home</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="{% url 'webshop' %}">Shop</a>
                 </li>
-                <li>
-                    <a class="navbar-brand" href="{% url 'webshop' %}">
-                        <img src="{% static 'images/logo_icon.png' %}" alt="SizeMeApp Logo" width="50">
-                    </a>
-                </li>
-
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link {% if request.path == '/accounts/dashboard/' %}active{% endif %}" href="{% url 'dashboard' %}">Account</a>
+                    <a class="nav-link {% if request.path == '/accounts/dashboard/' %}active{% endif %}" href="{% url 'dashboard' %}">Back to Account</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>

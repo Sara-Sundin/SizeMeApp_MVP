@@ -20,8 +20,10 @@
                 <li class="nav-item">
                     <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">Home</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="#platform">Platform</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}#plans">Plans</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#contact">Contact</a></li>
 
                 {% if user.is_authenticated %}
                 <li class="nav-item">
