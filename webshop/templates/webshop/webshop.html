@@ -1,26 +1,31 @@
 {% extends "base.html" %} 
 {% load static %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/webshop.css' %}">
+{% endblock %}
+
 {% block navbar %}
   {% include "includes/navbar_webshop.html" %}
 {% endblock %}
 
 {% block content %}
-<section id="shop-hero p-5" style="background: url('{% static 'images/shop-hero.jpg' %}') center/cover no-repeat;">
-  <div class="container pb-5">
-    <h1 class="mb-4 text-center ">The Collection Is Here.</h1>
+<section id="shop-hero" class="px-4">
+  <div class="container" id="shop-hero-content">
+    <h1 class="text-center">The Collection Is Here.</h1>
 
     <!-- Main CTA -->
-    <div class="mb-4">
+    <div>
       <a href="#products" class="cta-btn cta-btn--secondary">Start shopping with IKNW.</a>
-    </div>
-
-    <!-- Category Buttons -->
-    <div class="d-flex flex-wrap justify-content-center gap-2">
-      <a href="#tshirts" class="btn cta-btn--primary btn-sm px-4">Crew Necks</a>
-      <a href="#shirts" class="btn cta-btn--tertiary btn-sm px-4">Shirts</a>
-      <a href="#hats" class="btn cta-btn--black btn-sm px-4">Hats</a>
     </div>
   </div>
 </section>
+
+<!-- Delivery Banner -->
+<div id="delivery-banner" class="row text-center">
+  <div class="col bg-black text-white">
+    <h4 class="logo-font">Free delivery on orders over ${{ free_delivery_threshold }}!</h4>
+  </div>
+</div>
+
 {% endblock %}

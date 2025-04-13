@@ -1,5 +1,18 @@
-#shop-hero .h1, h1 {
+#shop-hero h1 {
     font-size: 60px !important;
     color: white !important;
     padding-top: 150px;
 }
+
+#shop-hero {
+    background: url('/static/images/shop-hero.jpg') center/cover no-repeat;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#shop-hero-content {
+    text-align: center;
+}
+
