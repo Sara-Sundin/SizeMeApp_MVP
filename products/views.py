@@ -7,68 +7,68 @@ from django.db.models.functions import Lower
 from .models import Product, Category
 from .forms import ProductForm
 
-# Create your views here.
-
 def all_products(request):
-    """ A view to show all products, including sorting and search queries """
-
     products = Product.objects.all()
-    query = None
-    categories = None
-    sort = None
-    direction = None
+    query = request.GET.get('q')
+    category_names = request.GET.get('category')
+    sort = request.GET.get('sort')
+    direction = request.GET.get('direction')
 
-    if request.GET:
-        if 'sort' in request.GET:
-            sortkey = request.GET['sort']
-            sort = sortkey
-            if sortkey == 'name':
-                sortkey = 'lower_name'
-                products = products.annotate(lower_name=Lower('name'))
-            if sortkey == 'category':
-                sortkey = 'category__name'
-            if 'direction' in request.GET:
-                direction = request.GET['direction']
-                if direction == 'desc':
-                    sortkey = f'-{sortkey}'
-            products = products.order_by(sortkey)
-            
-        if 'category' in request.GET:
-            categories = request.GET['category'].split(',')
-            products = products.filter(category__name__in=categories)
-            categories = Category.objects.filter(name__in=categories)
+    selected_category = None
+    category_button_class = None
 
-        if 'q' in request.GET:
-            query = request.GET['q']
-            if not query:
-                messages.error(request, "You didn't enter any search criteria!")
-                return redirect(reverse('products'))
-            
-            queries = Q(name__icontains=query) | Q(description__icontains=query)
-            products = products.filter(queries)
+    if sort:
+        sortkey = sort
+        if sortkey == 'name':
+            products = products.annotate(lower_name=Lower('name'))
+            sortkey = 'lower_name'
+        elif sortkey == 'category':
+            sortkey = 'category__name'
+        if direction == 'desc':
+            sortkey = f'-{sortkey}'
+        products = products.order_by(sortkey)
+
+    if category_names:
+        category_list = category_names.split(',')
+        products = products.filter(category__name__in=category_list)
+        current_categories = Category.objects.filter(name__in=category_list)
+
+        # Use first category for active display
+        if current_categories:
+            selected_category = current_categories[0].friendly_name
+            # Optional: map name to color class
+            class_map = {
+                'Crew Necks': 'cta-btn--primary',
+                'Shirts': 'cta-btn--tertiary',
+                'Hats': 'cta-btn--black',
+            }
+            category_button_class = class_map.get(selected_category, 'btn-outline-dark')
+    else:
+        current_categories = None
+
+    if query:
+        queries = Q(name__icontains=query) | Q(description__icontains=query)
+        products = products.filter(queries)
+    elif 'q' in request.GET:
+        messages.error(request, "You didn't enter any search criteria!")
+        return redirect(reverse('products'))
 
     current_sorting = f'{sort}_{direction}'
 
     context = {
         'products': products,
         'search_term': query,
-        'current_categories': categories,
+        'current_categories': current_categories,
         'current_sorting': current_sorting,
+        'selected_category': selected_category,
+        'category_button_class': category_button_class,
     }
-
     return render(request, 'products/products.html', context)
 
-
 def product_detail(request, product_id):
-    """ A view to show individual product details """
-
+    """ Show individual product details """
     product = get_object_or_404(Product, pk=product_id)
-
-    context = {
-        'product': product,
-    }
-
-    return render(request, 'products/product_detail.html', context)
+    return render(request, 'products/product_detail.html', {'product': product})
 
 
 @login_required
@@ -77,24 +77,18 @@ def add_product(request):
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
-    
+
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             product = form.save()
             messages.success(request, 'Successfully added product!')
             return redirect(reverse('product_detail', args=[product.id]))
-        else:
-            messages.error(request, 'Failed to add product. Please ensure the form is valid.')
+        messages.error(request, 'Failed to add product. Please ensure the form is valid.')
     else:
         form = ProductForm()
-        
-    template = 'products/add_product.html'
-    context = {
-        'form': form,
-    }
 
-    return render(request, template, context)
+    return render(request, 'products/add_product.html', {'form': form})
 
 
 @login_required
@@ -103,7 +97,7 @@ def edit_product(request, product_id):
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
-    
+
     product = get_object_or_404(Product, pk=product_id)
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product)
@@ -111,19 +105,12 @@ def edit_product(request, product_id):
             form.save()
             messages.success(request, 'Successfully updated product!')
             return redirect(reverse('product_detail', args=[product.id]))
-        else:
-            messages.error(request, 'Failed to update product. Please ensure the form is valid.')
+        messages.error(request, 'Failed to update product. Please ensure the form is valid.')
     else:
         form = ProductForm(instance=product)
         messages.info(request, f'You are editing {product.name}')
 
-    template = 'products/edit_product.html'
-    context = {
-        'form': form,
-        'product': product,
-    }
-
-    return render(request, template, context)
+    return render(request, 'products/edit_product.html', {'form': form, 'product': product})
 
 
 @login_required
@@ -132,7 +119,7 @@ def delete_product(request, product_id):
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
-    
+
     product = get_object_or_404(Product, pk=product_id)
     product.delete()
     messages.success(request, 'Product deleted!')

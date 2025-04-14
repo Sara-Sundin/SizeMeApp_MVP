@@ -6,28 +6,23 @@
 {% endblock %}
 
 {% block content %}
-    <!-- Category Buttons -->
-    <div class="d-flex flex-wrap justify-content-center gap-2 py-4 bg-white">
-        <a href="#tshirts" class="btn cta-btn--primary btn-sm px-4">Crew Necks</a>
-        <a href="#shirts" class="btn cta-btn--tertiary btn-sm px-4">Shirts</a>
-        <a href="#hats" class="btn cta-btn--black btn-sm px-4">Hats</a>
-    </div>
-    <div class="overlay"></div>
+<div class="overlay"></div>
     <div class="container-fluid bg-black">
         <div class="row">
             <div class="col text-center mt-3">
-                {% for c in current_categories %}
-                    <a class="category-badge text-decoration-none" href="{% url 'products' %}?category={{ c.name }}">
-                        <span class="p-2 mt-2 badge badge-white text-black rounded-0 border border-dark">{{ c.friendly_name }}</span>
-                    </a>
-                {% endfor %}
                 <hr class="w-50 mb-1">
             </div>
         </div>
         <div class="row">
-            <div class="d-flex flex-wrap justify-content-center gap-2 py-4">
-                <a href="#all_products" class="btn cta-btn--border btn-sm px-4">All Products</a>
-            </div>
+
+        <!-- Mirror active category as styled inactive button -->
+        {% if selected_category %}
+        <div class="d-flex flex-wrap justify-content-center gap-2 py-4">
+            <span class="btn {{ category_button_class }} btn-sm px-4">{{ selected_category }}</span>
+        </div>
+        {% endif %}
+        
+
             <div class="product-container col-10 offset-1">
                 <div class="row mt-1 mb-2">
                     <div class="col-12 col-md-6 my-auto order-md-last d-flex justify-content-center justify-content-md-end">
@@ -149,4 +144,5 @@
             }
         })
     </script>
+
 {% endblock %}
