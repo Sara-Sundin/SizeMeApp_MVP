@@ -23,10 +23,13 @@ INSTALLED_APPS = [
     'orders',
     'home',
     'webshop',
+    'bag',
+    'checkout',
 
     'crispy_forms',
     'crispy_bootstrap5',
     'storages',
+    'django_countries',
 
     'django.contrib.admin',
     'django.contrib.auth',
