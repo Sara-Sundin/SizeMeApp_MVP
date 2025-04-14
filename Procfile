@@ -1,1 +1,1 @@
-web: gunicorn myproject.wsgi
+web: gunicorn sizemeapp_mvp.wsgi
