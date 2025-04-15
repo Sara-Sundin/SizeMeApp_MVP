@@ -126,26 +126,25 @@ h4 {
 
 #hero { /* Main content container holds the background image */
     position: relative;
+    overflow: hidden;
     z-index: 1; /* Keep it above the pseudo-element background */
-    height: 700px;
-    width: auto;
+    min-height: 90vh;
+    height: auto; /* let it grow if needed */
     background: linear-gradient(to bottom, black, white);
 }
 
-/* Add background image behind content only */
-#hero::before {
-    content: "";
+  .hero-bg {
     position: absolute;
-    top: 0;
+    top: 20px;
     left: 0;
     right: 0;
-    bottom: 0;
+    height: 100%;
     background: url("../images/body_male.gif") no-repeat top center;
     background-size: 80%;
     opacity: 0.5;
     z-index: -1;
-    margin-top: 20px;
-}
+    pointer-events: none; /* optional: make sure it's not clickable */
+  }  
 
 #hero h1 {
     font-size: 3.5rem;
@@ -363,7 +362,7 @@ footer p {
         line-height: 1.2;
     }
 
-    #hero::before {
+    .hero-bg {
         background-size: 60%;
         margin-top: 40px;
     }
@@ -425,7 +424,7 @@ footer p {
         line-height: 1.4;
     }
 
-    #hero::before {
+    .hero-bg {
         background-size: 75%;
         margin-left: 600px;
         margin-top: 50px;
