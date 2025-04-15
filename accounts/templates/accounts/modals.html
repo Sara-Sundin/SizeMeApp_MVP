@@ -95,47 +95,47 @@
   
 <!-- Modal Measurements -->
 <div class="modal fade" id="measurementModal" tabindex="-1" aria-labelledby="measurementsLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <form method="post" action="{% url 'update_measurements' %}">
-          {% csrf_token %}
-          <div class="modal-header">
-            <h5 class="modal-title" id="measurementsLabel">Enter Your Measurements</h5>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="post" action="{% url 'update_measurements' %}">
+        {% csrf_token %}
+        <div class="modal-header">
+          <h5 class="modal-title" id="measurementsLabel">Enter Your Measurements</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group mb-3">
+            <label for="chest">Chest (cm)</label>
+            <input type="number" name="chest" id="chest" class="form-control" required
+                   value="{{ user.chest|default_if_none:'' }}">
           </div>
-          <div class="modal-body">
-            
-            <div class="form-group mb-3">
-              <label for="chest">Chest (cm)</label>
-              <input type="number" name="chest" id="chest" class="form-control" required
-                     value="{{ user.chest|default_if_none:'' }}">
-            </div>
-  
-            <div class="form-group mb-3">
-              <label for="waist">Waist (cm)</label>
-              <input type="number" name="waist" id="waist" class="form-control" required
-                     value="{{ user.waist|default_if_none:'' }}">
-            </div>
-  
-            <div class="form-group mb-3">
-              <label for="hips">Hips (cm)</label>
-              <input type="number" name="hips" id="hips" class="form-control" required
-                     value="{{ user.hips|default_if_none:'' }}">
-            </div>
-  
-            <div class="form-group mb-3">
-              <label for="shoulders">Shoulders (cm)</label>
-              <input type="number" name="shoulders" id="shoulders" class="form-control" required
-                     value="{{ user.shoulders|default_if_none:'' }}">
-            </div>
-  
+
+          <div class="form-group mb-3">
+            <label for="waist">Waist (cm)</label>
+            <input type="number" name="waist" id="waist" class="form-control" required
+                   value="{{ user.waist|default_if_none:'' }}">
           </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Save Measurements</button>
+
+          <div class="form-group mb-3">
+            <label for="hips">Hips (cm)</label>
+            <input type="number" name="hips" id="hips" class="form-control" required
+                   value="{{ user.hips|default_if_none:'' }}">
           </div>
-        </form>
-      </div>
+
+          <div class="form-group mb-3">
+            <label for="shoulders">Shoulders (cm)</label>
+            <input type="number" name="shoulders" id="shoulders" class="form-control" required
+                   value="{{ user.shoulders|default_if_none:'' }}">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMeasurementsModal">Delete</button>
+        </div>
+      </form>
     </div>
   </div>
+</div>
 
   <!-- Measurements Updated Confirmation Modal -->
 <div class="modal fade" id="measurementsUpdatedModal" tabindex="-1" aria-labelledby="measurementsUpdatedLabel" aria-hidden="true">
@@ -151,6 +151,28 @@
       </div>
     </div>
   </div>
+
+  <!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteMeasurementsModal" tabindex="-1" aria-labelledby="deleteMeasurementsLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="post" action="{% url 'delete_measurements' %}">
+        {% csrf_token %}
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title" id="deleteMeasurementsLabel">Confirm Deletion</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete your saved measurements?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
   
   <!-- Logout Confirmation Modal -->
 <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">

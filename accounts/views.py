@@ -37,6 +37,18 @@ def update_measurements(request):
         request.session["show_measurements_updated_modal"] = True  # flag
     return redirect("dashboard")
 
+@login_required
+def delete_measurements(request):
+    if request.method == "POST":
+        user = request.user
+        user.chest = None
+        user.waist = None
+        user.hips = None
+        user.shoulders = None
+        user.save()
+
+        request.session["show_measurements_updated_modal"] = True  # flag
+    return redirect("dashboard")
 
 @login_required
 def delete_account(request):
