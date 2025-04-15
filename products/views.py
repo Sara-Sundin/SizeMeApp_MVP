@@ -14,40 +14,49 @@ CATEGORY_BUTTON_CLASSES = {
     'hats': 'cta-btn--black',
 }
 
+
 def all_products(request):
     products = Product.objects.all()
     query = request.GET.get('q')
     category_names = request.GET.get('category')
-    sort = request.GET.get('sort')
-    direction = request.GET.get('direction')
+    sort_param = request.GET.get('sort', 'None_None')
 
     selected_category = None
     category_button_class = None
+    current_categories = None
 
-    if sort:
-        sortkey = sort
-        if sortkey == 'name':
+    # Mapping from dropdown values to Django ORM ordering
+    sort_map = {
+        'name_asc': 'lower_name',
+        'name_desc': '-lower_name',
+        'price_asc': 'price',
+        'price_desc': '-price',
+        'category_asc': 'category__name',
+        'category_desc': '-category__name',
+    }
+
+    # Apply sorting
+    if sort_param in sort_map:
+        sort_key = sort_map[sort_param]
+        if 'lower_name' in sort_key:
             products = products.annotate(lower_name=Lower('name'))
-            sortkey = 'lower_name'
-        elif sortkey == 'category':
-            sortkey = 'category__name'
-        if direction == 'desc':
-            sortkey = f'-{sortkey}'
-        products = products.order_by(sortkey)
+        products = products.order_by(sort_key)
+    else:
+        sort_param = 'None_None'
 
+    # Apply category filtering
     if category_names:
         category_list = category_names.split(',')
         products = products.filter(category__name__in=category_list)
         current_categories = Category.objects.filter(name__in=category_list)
 
-        # Use first category for active display
-        if current_categories:
-            selected_category = current_categories[0].friendly_name
-            category_key = current_categories[0].name  # match lowercase slug name
-            category_button_class = CATEGORY_BUTTON_CLASSES.get(category_key, 'btn-outline-dark')
-    else:
-        current_categories = None
+        if current_categories.exists():
+            selected_category = current_categories.first().friendly_name
+            category_button_class = CATEGORY_BUTTON_CLASSES.get(
+                current_categories.first().name, 'btn-outline-dark'
+            )
 
+    # Apply search filtering
     if query:
         queries = Q(name__icontains=query) | Q(description__icontains=query)
         products = products.filter(queries)
@@ -55,17 +64,16 @@ def all_products(request):
         messages.error(request, "You didn't enter any search criteria!")
         return redirect(reverse('products'))
 
-    current_sorting = f'{sort}_{direction}'
-
     context = {
         'products': products,
         'search_term': query,
         'current_categories': current_categories,
-        'current_sorting': current_sorting,
+        'current_sorting': sort_param,
         'selected_category': selected_category,
         'category_button_class': category_button_class,
         'category_button_classes': CATEGORY_BUTTON_CLASSES,
     }
+
     return render(request, 'products/products.html', context)
 
 
