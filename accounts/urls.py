@@ -14,6 +14,7 @@ urlpatterns = [
     path('dashboard/', views.dashboard_view, name='dashboard'),
     path('signup/', SignupView.as_view(), name='signup'),
     path('login/', CustomLoginView.as_view(), name='login'),
+    path('login-update-measurements/', views.login_update_measurements, name='login_update_measurements'),
     path('update-measurements/', update_measurements, name='update_measurements'),
     path('delete-measurements/', views.delete_measurements, name='delete_measurements'),
     path('logout/', custom_logout, name='logout'),

@@ -67,11 +67,20 @@
   {% if show_modal %}
   <script>
     window.onload = function () {
-      const modal = new bootstrap.Modal(document.getElementById('measurementModal'));
+      const modal = new bootstrap.Modal(document.getElementById('loginMeasurementModal'));
       modal.show();
     }
   </script>
   {% endif %}
+
+  {% if redirect_modal %}
+  <script>
+    window.onload = function () {
+      const redirectModal = new bootstrap.Modal(document.getElementById('redirectModal'));
+      redirectModal.show();
+    };
+  </script>
+{% endif %}
 
   {% if show_profile_updated_modal %}
 <script>
@@ -93,6 +102,21 @@
 <script>
   window.onload = function () {
     const measureModalEl = document.getElementById('measurementsUpdatedModal');
+    const measureModal = new bootstrap.Modal(measureModalEl);
+    measureModal.show();
+
+    // Auto-dismiss after 2 seconds
+    setTimeout(() => {
+      measureModal.hide();
+    }, 2000);
+  }
+</script>
+{% endif %}
+
+{% if show_measurements_deleted_modal %}
+<script>
+  window.onload = function () {
+    const measureModalEl = document.getElementById('measurementsDeletedModal');
     const measureModal = new bootstrap.Modal(measureModalEl);
     measureModal.show();
 

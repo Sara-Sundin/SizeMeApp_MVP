@@ -17,11 +17,29 @@ def dashboard_view(request):
     show_modal = not all([user.chest, user.waist, user.hips, user.shoulders])
     show_profile_updated_modal = request.session.pop("show_profile_updated_modal", False)
     show_measurements_updated_modal = request.session.pop("show_measurements_updated_modal", False)
+    show_measurements_deleted_modal = request.session.pop("show_measurements_deleted_modal", False)
+    show_redirect_modal = request.session.pop("show_redirect_modal", False)
     return render(request, 'accounts/dashboard.html', {
         "show_modal": show_modal,
         "show_profile_updated_modal": show_profile_updated_modal,
         "show_measurements_updated_modal": show_measurements_updated_modal,
+        "show_measurements_deleted_modal": show_measurements_deleted_modal,
+        "redirect_modal": show_redirect_modal,
     })
+
+
+@login_required
+def login_update_measurements(request):
+    if request.method == "POST":
+        user = request.user
+        user.chest = request.POST.get("chest")
+        user.waist = request.POST.get("waist")
+        user.hips = request.POST.get("hips")
+        user.shoulders = request.POST.get("shoulders")
+        user.save()
+
+        request.session["show_redirect_modal"] = True  # <-- unique flag
+        return redirect("dashboard")
 
 
 @login_required
@@ -47,7 +65,7 @@ def delete_measurements(request):
         user.shoulders = None
         user.save()
 
-        request.session["show_measurements_updated_modal"] = True  # flag
+        request.session["show_measurements_deleted_modal"] = True 
     return redirect("dashboard")
 
 @login_required

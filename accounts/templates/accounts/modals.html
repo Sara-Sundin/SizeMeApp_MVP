@@ -92,8 +92,89 @@
       </div>
     </div>
   </div>
+
+  <!-- Login/Signup Measurement Modal -->
+<div class="modal fade" id="loginMeasurementModal" tabindex="-1" aria-labelledby="measurementsEntryLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="post" action="{% url 'login_update_measurements' %}">
+        {% csrf_token %}
+        <div class="modal-header">
+          <h5 class="modal-title" id="measurementsEntryLabel">Before You Begin</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <p class="mb-3">To personalize your experience, please add your measurements.</p>
+
+          <div class="form-group mb-3">
+            <label for="chest">Chest (cm)</label>
+            <input type="number" name="chest" id="chest" class="form-control" required value="{{ user.chest|default_if_none:'' }}">
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="waist">Waist (cm)</label>
+            <input type="number" name="waist" id="waist" class="form-control" required value="{{ user.waist|default_if_none:'' }}">
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="hips">Hips (cm)</label>
+            <input type="number" name="hips" id="hips" class="form-control" required value="{{ user.hips|default_if_none:'' }}">
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="shoulders">Shoulders (cm)</label>
+            <input type="number" name="shoulders" id="shoulders" class="form-control" required value="{{ user.shoulders|default_if_none:'' }}">
+          </div>
+
+          <div class="modal-footer">
+            <a id="skip-measurements-link" href="#" class="text-muted small px-5" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#redirectModal">
+              Skip for now
+            </a>
+            <button id="save-and-continue-btn" type="submit" class="btn btn-primary">Save & Continue</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Enter Application Modal -->
+<div class="modal fade" id="redirectModal" tabindex="-1" aria-labelledby="redirectModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="redirectModalLabel">Ready to Enter the Application?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body text-center">
+        <p>
+          You will now be redirected to our prototype webshop for browsing.
+        </p>
+        <p class="small text-muted">
+          Don’t worry if you didn’t enter your measurements—you can always return to your account to update them and enter the webshop again.
+        </p>
+
+        <!-- Logo Placeholder -->
+        <div class="my-4">
+          <div class="border rounded p-3 d-inline-block">
+            <span class="text-muted">[ SizeMeApp Logo ]</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer justify-content-center">
+        <a href="{% url 'webshop' %}" class="btn btn-primary">Enter Webshop</a>
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
   
-<!-- Modal Measurements -->
+<!-- Update Modal Measurements -->
 <div class="modal fade" id="measurementModal" tabindex="-1" aria-labelledby="measurementsLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -173,6 +254,22 @@
     </div>
   </div>
 </div>
+
+
+  <!-- Measurements Delete Confirmation Modal -->
+  <div class="modal fade" id="measurementsDeletedModal" tabindex="-1" aria-labelledby="measurementsDeletedLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title" id="measurementsDeletedLabel">Success</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Your measurements were deleted!
+        </div>
+      </div>
+    </div>
+  </div>
   
   <!-- Logout Confirmation Modal -->
 <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
