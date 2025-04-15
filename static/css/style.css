@@ -19,15 +19,19 @@
 
 body {
     font-family: var(--tertiary-font);
-    display: flex;
-    flex-direction: column;
     min-height: 100vh;
-    margin-top: 50px;
+    margin-top: 39.33px;
+    overflow-x: hidden;
 }
 
 main {
     flex: 1;
-}
+} 
+ 
+.row {
+    margin-right: 0;
+    margin-left: 0;
+  }
 
 /* Headings */
 h1 {
@@ -38,6 +42,11 @@ h2,
 h3,
 h4 {
     font-family: var(--secondary-font);   
+}
+
+.sizeup-heading {
+    width: 260px;
+    display: inline;     
 }
 
 /* Buttons */
@@ -121,7 +130,6 @@ h4 {
     height: 700px;
     width: auto;
     background: linear-gradient(to bottom, black, white);
-    margin-top: 56px;
 }
 
 /* Add background image behind content only */
@@ -168,8 +176,9 @@ h4 {
 }
 
 #plans h3 {
-    font-size: 80px;
+    font-size: 70px;
     color: var(--secondary-color);
+    font-family: var(--primary-font);
 }
 
 .plan-heading {
@@ -356,8 +365,13 @@ footer p {
 
     #hero::before {
         background-size: 60%;
+        margin-top: 40px;
     }
 
+    #plans h3 {
+        font-size: 90px;
+    }
+    
     .plan-heading {
         width: 300px;
     }
@@ -382,6 +396,10 @@ footer p {
 
 /* Desktop (lg) */
 @media (min-width: 1024px) {
+
+    #plans h3 {
+        font-size: 110px;
+    }
 
     .plan-info {
         max-width: 300px; 
