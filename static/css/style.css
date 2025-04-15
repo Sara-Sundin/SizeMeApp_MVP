@@ -71,6 +71,7 @@ h4 {
 
 .cta-btn--black {
     background-color: black;
+    border: solid 1px white;
     color: white;
 }
 

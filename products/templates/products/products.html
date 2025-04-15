@@ -22,11 +22,10 @@
         </div>
         {% endif %}
         
-
             <div class="product-container col-10 offset-1">
                 <div class="row mt-1 mb-2">
-                    <div class="col-12 col-md-6 my-auto order-md-last d-flex justify-content-center justify-content-md-end">
-                        <div class="sort-select-wrapper w-50">
+                    <div class="col-6 order-last d-flex justify-content-center justify-content-md-end">
+                        <div class="sort-select-wrapper">
                             <select id="sort-selector" class="custom-select custom-select-sm rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}">
                                 <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
                                 <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
@@ -40,11 +39,8 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6 order-md-first">
-                        <p class="mt-3 text-center text-md-left text-white">
-                            {% if search_term or current_categories or current_sorting != 'None_None' %}
-                                <span class="small"><a href="{% url 'products' %}">Products Home</a> | </span>
-                            {% endif %}
+                    <div class="col-6 order-md-first">
+                        <p class="text-left text-white">
                             {{ products|length }} Products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
                         </p>
                     </div>
@@ -69,17 +65,42 @@
                                     <div class="row">
                                         <div class="col">
                                             <p class="lead mb-0 text-left font-weight-bold">${{ product.price }}</p>
-                                            {% if product.category %}
-                                            <p class="small mt-1 mb-0">
-                                                <a class="text-muted" href="{% url 'products' %}?category={{ product.category.name }}">
-                                                    <i class="fas fa-tag mr-1"></i>{{ product.category.friendly_name }}
-                                                </a>
-                                            </p>
-                                            {% endif %}
-                                            {% if product.rating %}
-                                                <small class="text-muted"><i class="fas fa-star mr-1"></i>{{ product.rating }} / 5</small>
-                                            {% else %}
-                                                <small class="text-muted">No Rating</small>
+                                                {% if product.category %}
+                                                {% with product.category.friendly_name as cat %}
+                                                    {% if cat == "Crew Necks" %}
+                                                        {% with "cta-btn--primary" as btn_class %}
+                                                            <p class="small mt-1 mb-0">
+                                                                <a class="btn {{ btn_class }} btn-sm px-4" href="{% url 'products' %}?category={{ product.category.name }}">
+                                                                    {{ product.category.friendly_name }}
+                                                                </a>
+                                                            </p>
+                                                        {% endwith %}
+                                                    {% elif cat == "Shirts" %}
+                                                        {% with "cta-btn--tertiary" as btn_class %}
+                                                            <p class="small mt-1 mb-0">
+                                                                <a class="btn {{ btn_class }} btn-sm px-4" href="{% url 'products' %}?category={{ product.category.name }}">
+                                                                    {{ product.category.friendly_name }}
+                                                                </a>
+                                                            </p>
+                                                        {% endwith %}
+                                                    {% elif cat == "Hats" %}
+                                                        {% with "cta-btn--black" as btn_class %}
+                                                            <p class="small mt-1 mb-0">
+                                                                <a class="btn {{ btn_class }} btn-sm px-4" href="{% url 'products' %}?category={{ product.category.name }}">
+                                                                    {{ product.category.friendly_name }}
+                                                                </a>
+                                                            </p>
+                                                        {% endwith %}
+                                                    {% else %}
+                                                        {% with "btn-outline-dark" as btn_class %}
+                                                            <p class="small mt-1 mb-0">
+                                                                <a class="btn {{ btn_class }} btn-sm px-4" href="{% url 'products' %}?category={{ product.category.name }}">
+                                                                    {{ product.category.friendly_name }}
+                                                                </a>
+                                                            </p>
+                                                        {% endwith %}
+                                                    {% endif %}
+                                                {% endwith %}
                                             {% endif %}
                                         </div>
                                     </div>

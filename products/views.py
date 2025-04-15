@@ -7,6 +7,13 @@ from django.db.models.functions import Lower
 from .models import Product, Category
 from .forms import ProductForm
 
+
+CATEGORY_BUTTON_CLASSES = {
+    'tshirts': 'cta-btn--primary',
+    'shirts': 'cta-btn--tertiary',
+    'hats': 'cta-btn--black',
+}
+
 def all_products(request):
     products = Product.objects.all()
     query = request.GET.get('q')
@@ -36,13 +43,8 @@ def all_products(request):
         # Use first category for active display
         if current_categories:
             selected_category = current_categories[0].friendly_name
-            # Optional: map name to color class
-            class_map = {
-                'Crew Necks': 'cta-btn--primary',
-                'Shirts': 'cta-btn--tertiary',
-                'Hats': 'cta-btn--black',
-            }
-            category_button_class = class_map.get(selected_category, 'btn-outline-dark')
+            category_key = current_categories[0].name  # match lowercase slug name
+            category_button_class = CATEGORY_BUTTON_CLASSES.get(category_key, 'btn-outline-dark')
     else:
         current_categories = None
 
@@ -62,8 +64,10 @@ def all_products(request):
         'current_sorting': current_sorting,
         'selected_category': selected_category,
         'category_button_class': category_button_class,
+        'category_button_classes': CATEGORY_BUTTON_CLASSES,
     }
     return render(request, 'products/products.html', context)
+
 
 def product_detail(request, product_id):
     """ Show individual product details """
