@@ -33,13 +33,14 @@ class CustomSignupForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Remove password2 from the inherited form
         if "password2" in self.fields:
             del self.fields["password2"]
 
     def save(self, commit=True):
         user = super().save(commit=False)
         user.full_name = self.cleaned_data.get("full_name")
+        # Ensure username is populated with email to avoid unique constraint error
+        user.username = self.cleaned_data.get("email")
         if commit:
             user.save()
         return user
@@ -59,6 +60,7 @@ class CustomLoginForm(AuthenticationForm):
             "class": "form-control",
             "placeholder": "Password",
         })
+
 
 class CustomUserUpdateForm(UserChangeForm):
     password = None  # hide password field
