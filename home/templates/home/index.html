@@ -7,13 +7,12 @@
     <div class="container">
         <div class="row justify-content-center justify-content-lg-start">
             <div class="col-12 col-md-10 col-lg-8 text-center text-lg-start">
-                <h1 class="hero-heading">Seamless Sizing for Smarter Shopping.</h1> 
-                <p class="hero-subtext">Reduce returns. Boost confidence. Keep customers coming back.</p> 
-
-                <div class="d-flex flex-column flex-md-row justify-content-center justify-content-lg-start gap-3 mt-4">
-                    <a class="cta-btn cta-btn--primary" href="{% url 'signup' %}">Try out the app.</a> 
-                    <a class="cta-btn cta-btn--secondary" href="{% url 'home' %}#plans">Find your plan.</a>  
-                </div>
+                <h1 class="hero-heading">Seamless Sizing for Smarter Shopping.</h1>
+                <div class="d-flex flex-column flex-md-row justify-content-center justify-content-lg-start gap-3 mt-4 py-5">
+                    <a class="cta-btn cta-btn--primary" href="{% url 'signup' %}">Try the SizeMeApp tool.</a> 
+                    <a class="cta-btn cta-btn--secondary" href="{% url 'home' %}#plans">Monthly plans.</a>  
+                </div> 
+                <p class="hero-subtext text-black">Reduce returns. Boost confidence. Keep your customers coming back with the SizeMeApp sizing tool.</p> 
             </div>
         </div>
     </div>
@@ -21,25 +20,22 @@
 
 <!-- Info Section -->
 <section id="info">
-    <div class="container">
+    <div class="container px-5-md m-5-md">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h2>
-                    Sign up in minutes, personalize your fit, and see how SizeMeApp transforms the way you shop.
-                </h2>
             </div>
-            <div class="col-md-6 text-center py-4">
-                Say goodbye to sizing struggles. With just a few clicks, you can build your profile and start exploring how better fit means better business.
+            <div class="col-md-6 text-center pb-4 px-4">
+                Say goodbye to sizing struggles. With just a few clicks, your customers can build their profile and start exploring. Find out how better fit means better business.
             </div> 
-            <div class="col-md-6 py-4">   
+            <div class="col-md-6 pb-4">   
                 <ul class="text-start">
-                    <li>Create your free account and join the SizeMeApp platform.</li>
-                    <li>Add your measurements - it only takes a few minutes.</li>
+                    <li>Create a free account and join the SizeMeApp platform.</li>
+                    <li>Enter suitable measurements - it only takes a few minutes.</li>
                     <li>Explore how smart sizing improves the shopping experience.</li>
                 </ul>                                
             </div> 
             <div class="col-md-12">  
-                <a class="cta-btn cta-btn--tertiary" href="{% url 'signup' %}">Sign Up Now.</a> 
+                <a class="cta-btn cta-btn--tertiary" href="{% url 'signup' %}">Start Exploring.</a> 
             </div> 
         </div>
     </div>
@@ -48,8 +44,8 @@
     <!-- Business Plan Section -->
 <section id="plans" class="text-center">
     <div class="container py-4">
-        <h3 class="py-2">Size Up Your Business</h3>
-        <div>
+        <h3 class="py-4">Size Up Your Business</h3>
+        <div id="plans-info" class="px-5-md">
             Whether you're a growing startup or a global retailer, 
             SizeMeApp offers flexible plans to fit your goals. Start 
             small and scale seamlessly with tools that help you reduce 
@@ -61,7 +57,7 @@
     <div class="container-fluid px-0">
         <div class="plan-container py-4">
             <div class="container">
-                <div class="row g-4">
+                <div class="row g-4 py-5">
     
                     <!-- Starter Plan -->
                     <div class="col-12 col-lg-4">
