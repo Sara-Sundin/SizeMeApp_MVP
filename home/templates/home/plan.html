@@ -11,108 +11,24 @@
         <div class="container py-4">
             <div class="row mb-5">
                 {% for plan in plans %}
-                    {% if plan.plan_type == "starter" %}
-                    <div class="col-12">
-                        <div class="plan-box">
-                            <div class="plan-heading text-center my-4">
-                                <h2>{{ plan.name }}</h2>
-                                {% if plan.icon_class %}
-                                <i class="fa-solid {{ plan.icon_class }} lg-icon"></i>
-                                {% endif %}
-                            </div>
-
-                            <div>
-                                <a class="cta-btn cta-btn--primary" href="#">From {{ plan.monthly_price }} USD/month.</a>
-                            </div>
-
-                            <div class="plan-info text-start my-3 p-4">
-                                <h3>{{ plan.short_description }}</h3>
-                                <p>{{ plan.long_description }}</p>
-
-                                <h3>What's included:</h3>
-                                <ul>
-                                    {% for feature in plan.feature_list %}
-                                    <li>{{ feature }}</li>
-                                    {% endfor %}
-                                </ul>
-
-                                {% if plan.perfect_for %}
-                                <h3>Perfect for:</h3>
-                                <p>{{ plan.perfect_for }}</p>
-                                {% endif %}
-
-                                <p>Setup cost {{ plan.setup_cost }} USD.</p>
-
-                                {% if plan.contact_cta_label %}
-                                <div>
-                                    <a class="cta-btn cta-btn--border" href="#">{{ plan.contact_cta_label }}</a>
-                                </div>
-                                {% endif %}
-
-                                <div>
-                                    <a class="cta-btn checkout-btn" href="#">{{ plan.cta_label }}
-                                        <i class="fa-solid fa-cart-shopping"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                    {% if plan.plan_type == focus %}
+                    <div class="col-12" id="{{ plan.plan_type }}">
+                        {% include "home/plan_card.html" with plan=plan %}
                     </div>
                     {% endif %}
                 {% endfor %}
             </div>
-
             <div class="row g-4">
                 {% for plan in plans %}
-                    {% if plan.plan_type != "starter" %}
-                    <div class="col-12 col-md-6">
-                        <div class="plan-box">
-                            <div class="plan-heading text-center my-4">
-                                <h2>{{ plan.name }}</h2>
-                                {% if plan.icon_class %}
-                                <i class="fa-solid {{ plan.icon_class }} lg-icon"></i>
-                                {% endif %}
-                            </div>
-
-                            <div>
-                                <a class="cta-btn cta-btn--primary" href="#">From {{ plan.monthly_price }} USD/month.</a>
-                            </div>
-
-                            <div class="plan-info text-start my-3 p-4">
-                                <h3>{{ plan.short_description }}</h3>
-                                <p>{{ plan.long_description }}</p>
-
-                                <h3>What's included:</h3>
-                                <ul>
-                                    {% for feature in plan.feature_list %}
-                                    <li>{{ feature }}</li>
-                                    {% endfor %}
-                                </ul>
-
-                                {% if plan.perfect_for %}
-                                <h3>Perfect for:</h3>
-                                <p>{{ plan.perfect_for }}</p>
-                                {% endif %}
-
-                                <p>Setup cost {{ plan.setup_cost }} USD.</p>
-
-                                {% if plan.contact_cta_label %}
-                                <div>
-                                    <a class="cta-btn cta-btn--border" href="#">{{ plan.contact_cta_label }}</a>
-                                </div>
-                                {% endif %}
-
-                                <div>
-                                    <a class="cta-btn checkout-btn" href="#">{{ plan.cta_label }}
-                                        <i class="fa-solid fa-cart-shopping"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                  {% if plan.plan_type != focus %}
+                  <div class="col-12 col-md-6">
+                    <div class="plan-box" id="{{ plan.plan_type }}">
+                      {% include "home/plan_card_small.html" with plan=plan %}
                     </div>
-                    {% endif %}
+                  </div>
+                  {% endif %}
                 {% endfor %}
-            </div>
-
+              </div>                          
         </div>
     </div>
 </section>

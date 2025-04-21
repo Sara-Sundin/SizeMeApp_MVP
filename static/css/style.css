@@ -181,11 +181,15 @@ h4 {
 }
 
 .plan-heading {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: white;     
-    border-radius: 8px;            /* Rounded corners */
-    padding: 0 1rem;
-    width: 200px;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
 }
 
 .heading-wrapper {
@@ -218,7 +222,6 @@ h4 {
 .plan-info {
     background-color: white;     
     border-radius: 8px; 
-    display: inline-block;
     margin: 1rem auto; 
 }
 
@@ -363,18 +366,6 @@ footer p {
 
     #plans h3 {
         font-size: 90px;
-    }
-    
-    .plan-heading {
-        width: 300px;
-    }
-
-    .extra-plan-info {
-        background-color: white;     
-        border-radius: 8px; 
-        display: inline-block;
-        margin: 1rem auto; 
-        width: 300px;
     }
 
     #dashboard h1 {

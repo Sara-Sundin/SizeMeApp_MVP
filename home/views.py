@@ -14,8 +14,12 @@ def home_view(request):
     })
 
 def plan_view(request):
+    focus = request.GET.get('focus', 'starter')  # fallback to starter
     plans = Plan.objects.all()
-    return render(request, 'home/plan.html', {'plans': plans})
+    return render(request, 'home/plan.html', {
+        'plans': plans,
+        'focus': focus,
+    })
 
 
 

@@ -12,7 +12,6 @@
                     <a class="cta-btn cta-btn--primary" href="{% url 'signup' %}">Try the SizeMeApp tool.</a> 
                     <a class="cta-btn cta-btn--secondary" href="{% url 'home' %}#plans">Monthly plans.</a>  
                 </div> 
-                <p class="hero-subtext text-black">Reduce returns. Boost confidence. Keep your customers coming back with the SizeMeApp sizing tool.</p> 
             </div>
         </div>
     </div>
@@ -23,6 +22,7 @@
     <div class="container px-5-md m-5-md">
         <div class="row">
             <div class="col-md-12 text-center">
+                <p class="hero-subtext text-black">Reduce returns. Boost confidence. Keep your customers coming back with the SizeMeApp sizing tool.</p> 
             </div>
             <div class="col-md-6 text-center pb-4 px-4">
                 Say goodbye to sizing struggles. With just a few clicks, your customers can build their profile and start exploring. Find out how better fit means better business.
@@ -79,7 +79,7 @@
                                     <i class="fa-solid fa-hourglass-start lg-icon"></i>
                                 </div>
                                 <div>
-                                    <a class="cta-btn cta-btn--primary" href="{% url 'starter_plan' %}">From 500 Usd/month.</a> 
+                                    <a class="cta-btn cta-btn--primary" href="{% url 'plan' %}?focus=starter">From 500 USD/month.</a> 
                                 </div>
                             </div>  
                         </div>
@@ -106,7 +106,7 @@
                                     <i class="fa-solid fa-seedling lg-icon"></i>
                                 </div>
                                 <div>
-                                    <a class="cta-btn cta-btn--secondary" href="#">From 1000 Usd/month.</a> 
+                                    <a class="cta-btn cta-btn--secondary" href="{% url 'plan' %}?focus=growth">From 1000 Usd/month.</a> 
                                 </div>
                             </div> 
                         </div>
@@ -133,7 +133,7 @@
                                     <i class="fa-solid fa-arrow-up-right-dots lg-icon"></i>
                                 </div>
                                 <div>
-                                    <a class="cta-btn cta-btn--tertiary" href="#">From 1500 Usd/month.</a> 
+                                    <a class="cta-btn cta-btn--tertiary" href="{% url 'plan' %}?focus=enterprise">From 1500 Usd/month.</a> 
                                 </div>
                             </div> 
                         </div>
