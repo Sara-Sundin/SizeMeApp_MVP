@@ -15,14 +15,7 @@ class Plan(models.Model):
     long_description = models.TextField()
     features = models.TextField(help_text="Separate features with a newline")
     perfect_for = models.TextField(blank=True, null=True)
-    icon_class = models.CharField(max_length=100, help_text="Font Awesome icon class", blank=True)
-    cta_label = models.CharField(max_length=100, default="Pay Now")
-    contact_cta_label = models.CharField(max_length=100, blank=True, null=True)
-    order = models.PositiveIntegerField(default=0, help_text="Lower number = higher display priority")
-
-    class Meta:
-        ordering = ['order']
-
+   
     def feature_list(self):
         return self.features.splitlines()
 

@@ -4,9 +4,7 @@ from .models import Plan
 
 @admin.register(Plan)
 class PlanAdmin(admin.ModelAdmin):
-    list_display = ('name', 'plan_type', 'monthly_price', 'setup_cost', 'order')
-    list_editable = ('order',)
-    ordering = ('order',)
+    list_display = ('name', 'plan_type', 'monthly_price', 'setup_cost')
     search_fields = ('name', 'short_description')
     list_filter = ('plan_type',)
     fieldsets = (
@@ -21,14 +19,5 @@ class PlanAdmin(admin.ModelAdmin):
                 'features',
                 'perfect_for',
             )
-        }),
-        ('Visual & CTA Settings', {
-            'fields': (
-                'icon_class',
-                'cta_label',
-                'contact_cta_label',
-                'order',
-            ),
-            'classes': ('collapse',),
         }),
     )
