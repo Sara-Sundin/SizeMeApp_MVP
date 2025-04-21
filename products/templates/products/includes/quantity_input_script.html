@@ -1,43 +1,57 @@
 <script type="text/javascript">
     // Disable +/- buttons outside 1-99 range
     function handleEnableDisable(itemId) {
-        var currentValue = parseInt($(`#id_qty_${itemId}`).val());
-        var minusDisabled = currentValue < 2;
-        var plusDisabled = currentValue > 98;
-        $(`#decrement-qty_${itemId}`).prop('disabled', minusDisabled);
-        $(`#increment-qty_${itemId}`).prop('disabled', plusDisabled);
+        const qtyInput = document.getElementById(`id_qty_${itemId}`);
+        const currentValue = parseInt(qtyInput.value);
+        const minusBtn = document.getElementById(`decrement-qty_${itemId}`);
+        const plusBtn = document.getElementById(`increment-qty_${itemId}`);
+
+        minusBtn.disabled = currentValue < 2;
+        plusBtn.disabled = currentValue > 98;
     }
 
-    // Ensure proper enabling/disabling of all inputs on page load
-    var allQtyInputs = $('.qty_input');
-    for(var i = 0; i < allQtyInputs.length; i++){
-        var itemId = $(allQtyInputs[i]).data('item_id');
-        handleEnableDisable(itemId);
-    }
+    // Wait until the DOM is fully loaded
+    document.addEventListener("DOMContentLoaded", function () {
+        const allQtyInputs = document.querySelectorAll('.qty_input');
 
-    // Check enable/disable every time the input is changed
-    $('.qty_input').change(function() {
-        var itemId = $(this).data('item_id');
-        handleEnableDisable(itemId);
-    });
+        // Initial setup
+        allQtyInputs.forEach((input) => {
+            const itemId = input.dataset.item_id;
+            handleEnableDisable(itemId);
+        });
 
-    // Increment quantity
-    $('.increment-qty').click(function(e) {
-       e.preventDefault();
-       var closestInput = $(this).closest('.input-group').find('.qty_input')[0];
-       var currentValue = parseInt($(closestInput).val());
-       $(closestInput).val(currentValue + 1);
-       var itemId = $(this).data('item_id');
-       handleEnableDisable(itemId);
-    });
-    
-    // Decrement quantity
-    $('.decrement-qty').click(function(e) {
-       e.preventDefault();
-       var closestInput = $(this).closest('.input-group').find('.qty_input')[0];
-       var currentValue = parseInt($(closestInput).val());
-       $(closestInput).val(currentValue - 1);
-       var itemId = $(this).data('item_id');
-       handleEnableDisable(itemId);
+        // When input changes
+        allQtyInputs.forEach((input) => {
+            input.addEventListener('change', function () {
+                const itemId = this.dataset.item_id;
+                handleEnableDisable(itemId);
+            });
+        });
+
+        // Increment buttons
+        const incrementBtns = document.querySelectorAll('.increment-qty');
+        incrementBtns.forEach((btn) => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const itemId = this.dataset.item_id;
+                const input = document.getElementById(`id_qty_${itemId}`);
+                let value = parseInt(input.value) || 0;
+                input.value = value + 1;
+                handleEnableDisable(itemId);
+            });
+        });
+
+        // Decrement buttons
+        const decrementBtns = document.querySelectorAll('.decrement-qty');
+        decrementBtns.forEach((btn) => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const itemId = this.dataset.item_id;
+                const input = document.getElementById(`id_qty_${itemId}`);
+                let value = parseInt(input.value) || 0;
+                input.value = value - 1;
+                handleEnableDisable(itemId);
+            });
+        });
     });
 </script>
