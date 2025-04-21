@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .forms import ContactForm
+from .models import Plan
 
 
 def home_view(request):
@@ -12,10 +13,10 @@ def home_view(request):
         "show_logged_out_modal": show_logged_out_modal,
     })
 
-def starter_plan(request):
-    """
-    Display the Starter Plan page.
-    """
-    return render(request, "home/starter_plan.html")
+def plan_view(request):
+    plans = Plan.objects.all()
+    return render(request, 'home/plan.html', {'plans': plans})
+
+
 
 
