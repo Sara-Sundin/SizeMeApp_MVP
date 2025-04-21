@@ -6,7 +6,7 @@ from django.conf import settings
 
 from django_countries.fields import CountryField
 
-from products.models import Product
+from home.models import Plan
 
 
 class Order(models.Model):
@@ -68,18 +68,25 @@ class Order(models.Model):
 
 class OrderLineItem(models.Model):
     order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
-    product = models.ForeignKey(Product, null=False, blank=False, on_delete=models.CASCADE)
-    product_size = models.CharField(max_length=2, null=True, blank=True)  # XS, S, M, L, XL
-    quantity = models.IntegerField(null=False, blank=False, default=0)
-    lineitem_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)
+
+    plan = models.ForeignKey(Plan, null=True, blank=True, on_delete=models.CASCADE)
+
+    quantity = models.IntegerField(null=False, blank=False, default=1)
+
+    lineitem_total = models.DecimalField(max_digits=8, decimal_places=2, null=False, blank=False, editable=False)
 
     def save(self, *args, **kwargs):
         """
-        Override the original save method to set the lineitem total
-        and update the order total.
+        Set the line item total from product or plan.
         """
-        self.lineitem_total = self.product.price * self.quantity
+        if self.plan:
+            self.lineitem_total = self.plan.setup_cost + self.plan.monthly_price * self.quantity
+        elif self.product:
+            self.lineitem_total = self.product.price * self.quantity
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'SKU {self.product.sku} on order {self.order.order_number}'
+        if self.plan:
+            return f'Plan {self.plan.name} on order {self.order.order_number}'
+        else:
+            return f'SKU {self.product.sku} on order {self.order.order_number}'

@@ -28,16 +28,10 @@
   
       <p>Setup cost {{ plan.setup_cost }} USD.</p>
   
-      {% if plan.contact_cta_label %}
       <div>
-        <a class="cta-btn cta-btn--border" href="#">{{ plan.contact_cta_label }}</a>
-      </div>
-      {% endif %}
-  
-      <div>
-        <a class="cta-btn checkout-btn" href="#">{{ plan.cta_label }}
-          <i class="fa-solid fa-cart-shopping"></i>
-        </a>
+        <a class="cta-btn checkout-btn" href="{% url 'checkout_plan' plan.id %}">
+          Secure Checkout <i class="fa-solid fa-cart-shopping"></i>
+        </a> 
       </div>
     </div>
   </div>
