@@ -13,6 +13,7 @@ class CustomSignupForm(UserCreationForm):
         widget=forms.TextInput(attrs={
             "class": "form-control",
             "placeholder": "Enter your full name",
+            "autofocus": "autofocus",  # This sets the focus on load
         }),
     )
 
