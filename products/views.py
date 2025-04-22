@@ -7,6 +7,8 @@ from django.db.models.functions import Lower
 from .models import Product, Category
 from .forms import ProductForm
 
+from sizemeapp.utils.recommendations import get_size_recommendations
+
 
 CATEGORY_BUTTON_CLASSES = {
     'tshirts': 'cta-btn--primary',
@@ -78,9 +80,33 @@ def all_products(request):
 
 
 def product_detail(request, product_id):
-    """ Show individual product details """
     product = get_object_or_404(Product, pk=product_id)
-    return render(request, 'products/product_detail.html', {'product': product})
+    recommendations = []
+
+    # Check if size mode is on
+    size_mode = request.session.get('size_mode', False)
+
+    if size_mode and request.user.is_authenticated and hasattr(request.user, 'chest') and request.user.chest:
+        recommendations = get_size_recommendations(request.user.chest, product)
+
+    CATEGORY_BUTTON_CLASSES = {
+        'tshirts': 'cta-btn--primary',
+        'shirts': 'cta-btn--tertiary',
+        'hats': 'cta-btn--black',
+    }
+
+    category_button_class = CATEGORY_BUTTON_CLASSES.get(
+        product.category.name.lower(), 'btn-outline-dark'
+    )
+
+    context = {
+        'product': product,
+        'recommendations': recommendations,
+        'category_button_class': category_button_class,
+        'size_mode': size_mode,  # pass this if you want to show a badge or info
+    }
+
+    return render(request, 'products/product_detail.html', context)
 
 
 @login_required

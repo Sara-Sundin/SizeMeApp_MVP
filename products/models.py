@@ -2,12 +2,31 @@ from django.db import models
 
 
 class Category(models.Model):
-
     class Meta:
         verbose_name_plural = 'Categories'
-        
+
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254, null=True, blank=True)
+
+    # Separate stretch factors for each fit
+    slim_factor = models.DecimalField(
+        max_digits=4,
+        decimal_places=2,
+        default=1.00,
+        help_text="Stretch factor for slim fit"
+    )
+    regular_factor = models.DecimalField(
+        max_digits=4,
+        decimal_places=2,
+        default=1.10,
+        help_text="Stretch factor for regular fit"
+    )
+    loose_factor = models.DecimalField(
+        max_digits=4,
+        decimal_places=2,
+        default=1.20,
+        help_text="Stretch factor for loose fit"
+    )
 
     def __str__(self):
         return self.name
