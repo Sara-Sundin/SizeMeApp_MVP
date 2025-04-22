@@ -1,107 +1,101 @@
-from django.shortcuts import render, redirect, reverse, HttpResponse, get_object_or_404
+from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.http import HttpResponse, HttpResponseNotAllowed
 from django.contrib import messages
 
-from products.models import Product
+from home.models import Plan
 
-# Create your views here.
 
 def view_bag(request):
-    """ A view that renders the bag contents page """
+    """A view that renders the bag contents page with plan data."""
+    bag = request.session.get('bag', {})
+    bag_items = []
+    total = 0
 
-    return render(request, 'bag/bag.html')
+    for plan_id_str, quantity in bag.items():
+        try:
+            plan = Plan.objects.get(pk=int(plan_id_str))
+            subtotal = plan.setup_cost * quantity
+            bag_items.append({
+                'plan': plan,
+                'quantity': quantity,
+                'subtotal': subtotal,
+                'item_id': plan_id_str,
+            })
+            total += subtotal
+        except Plan.DoesNotExist:
+            continue
+
+    context = {
+        'bag_items': bag_items,
+        'total': total,
+        'grand_total': total,  # No delivery cost
+    }
+
+    return render(request, 'bag/bag.html', context)
 
 
 def add_to_bag(request, item_id):
-    """ Add a quantity of the specified product to the shopping bag """
+    """Add a quantity of the specified plan to the shopping bag."""
+    if request.method != 'POST':
+        return HttpResponseNotAllowed(['POST'])
 
-    product = get_object_or_404(Product, pk=item_id)
+    plan = get_object_or_404(Plan, pk=item_id)
 
-    quantity = int(request.POST.get('quantity'))
-    redirect_url = request.POST.get('redirect_url')
-    size = None
-    if 'product_size' in request.POST:
-        size = request.POST['product_size']
+    try:
+        quantity = int(request.POST.get('quantity'))
+    except (TypeError, ValueError):
+        messages.error(request, 'Invalid quantity submitted.')
+        return redirect('home')
+
+    redirect_url = request.POST.get('redirect_url', '/')
     bag = request.session.get('bag', {})
+    item_id_str = str(item_id)
 
-    if size:
-        if item_id in list(bag.keys()):
-            if size in bag[item_id]['items_by_size'].keys():
-                bag[item_id]['items_by_size'][size] += quantity
-                messages.success(request, f'Updated size {size.upper()} {product.name} quantity to {bag[item_id]["items_by_size"][size]}')
-            else:
-                bag[item_id]['items_by_size'][size] = quantity
-                messages.success(request, f'Added size {size.upper()} {product.name} to your bag')
-        else:
-            bag[item_id] = {'items_by_size': {size: quantity}}
-            messages.success(request, f'Added size {size.upper()} {product.name} to your bag')
+    if item_id_str in bag:
+        bag[item_id_str] += quantity
+        messages.success(request, f'Updated {plan.name} quantity to {bag[item_id_str]}')
     else:
-        if item_id in list(bag.keys()):
-            bag[item_id] += quantity
-            messages.success(request, f'Updated {product.name} quantity to {bag[item_id]}')
-        else:
-            bag[item_id] = quantity
-            messages.success(request, f'Added {product.name} to your bag')
+        bag[item_id_str] = quantity
+        messages.success(request, f'Added {plan.name} to your bag')
 
     request.session['bag'] = bag
     return redirect(redirect_url)
 
 
 def adjust_bag(request, item_id):
-    """ Adjust the quantity of the specified product to the specified amount """
+    """Adjust the quantity of the specified plan."""
+    plan = get_object_or_404(Plan, pk=item_id)
 
-    product = get_object_or_404(Product, pk=item_id)
+    try:
+        quantity = int(request.POST.get('quantity'))
+    except (TypeError, ValueError):
+        messages.error(request, 'Invalid quantity submitted.')
+        return redirect(reverse('view_bag'))
 
-    quantity = int(request.POST.get('quantity'))
-    size = None
-    if 'product_size' in request.POST:
-        size = request.POST['product_size']
     bag = request.session.get('bag', {})
+    item_id_str = str(item_id)
 
-    if size:
-        if quantity > 0:
-            bag[item_id]['items_by_size'][size] = quantity
-            messages.success(request, f'Updated size {size.upper()} {product.name} quantity to {bag[item_id]["items_by_size"][size]}')
-        else:
-            del bag[item_id]['items_by_size'][size]
-            if not bag[item_id]['items_by_size']:
-                bag.pop(item_id)
-            messages.success(request, f'Removed size {size.upper()} {product.name} from your bag')
+    if quantity > 0:
+        bag[item_id_str] = quantity
+        messages.success(request, f'Updated {plan.name} quantity to {bag[item_id_str]}')
     else:
-        if quantity > 0:
-            bag[item_id] = quantity
-            messages.success(request, f'Updated {product.name} quantity to {bag[item_id]}')
-        else:
-            bag.pop(item_id)
-            messages.success(request, f'Removed {product.name} from your bag')
+        bag.pop(item_id_str, None)
+        messages.success(request, f'Removed {plan.name} from your bag')
 
     request.session['bag'] = bag
     return redirect(reverse('view_bag'))
 
 
 def remove_from_bag(request, item_id):
-    """ Remove the item from the shopping bag """
-
-    product = get_object_or_404(Product, pk=item_id)
+    """Remove the plan from the shopping bag."""
+    plan = get_object_or_404(Plan, pk=item_id)
 
     try:
-        size = None
-        if 'product_size' in request.POST:
-            size = request.POST['product_size']
         bag = request.session.get('bag', {})
-
-        if size:
-            del bag[item_id]['items_by_size'][size]
-            if not bag[item_id]['items_by_size']:
-                bag.pop(item_id)
-            messages.success(request, f'Removed size {size.upper()} {product.name} from your bag')
-        else:
-            bag.pop(item_id)
-            messages.success(request, f'Removed {product.name} from your bag')
-
+        bag.pop(str(item_id), None)
         request.session['bag'] = bag
+        messages.success(request, f'Removed {plan.name} from your bag')
         return HttpResponse(status=200)
-    
     except Exception as e:
-
         messages.error(request, f'Error removing item: {e}')
         return HttpResponse(status=500)

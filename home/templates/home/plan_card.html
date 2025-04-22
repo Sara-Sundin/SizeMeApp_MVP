@@ -29,9 +29,14 @@
       <p>Setup cost {{ plan.setup_cost }} USD.</p>
   
       <div>
-        <a class="cta-btn checkout-btn" href="{% url 'checkout_plan' plan.id %}">
-          Secure Checkout <i class="fa-solid fa-cart-shopping"></i>
-        </a> 
+        <form method="POST" action="{% url 'add_to_bag' plan.id %}">
+          {% csrf_token %}
+          <input type="hidden" name="quantity" value="1">
+          <input type="hidden" name="redirect_url" value="{{ request.path }}">
+          <button type="submit" class="cta-btn checkout-btn">
+              Add to Cart <i class="fa-solid fa-cart-shopping"></i>
+          </button>
+        </form>      
       </div>
     </div>
   </div>
