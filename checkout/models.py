@@ -42,16 +42,13 @@ class Order(models.Model):
 
     def update_total(self):
         """
-        Update grand total each time a line item is added,
-        accounting for delivery costs.
+        Update grand total each time a line item is added.
         """
         self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
-        if self.order_total < settings.FREE_DELIVERY_THRESHOLD:
-            self.delivery_cost = self.order_total * settings.STANDARD_DELIVERY_PERCENTAGE / 100
-        else:
-            self.delivery_cost = 0
-        self.grand_total = self.order_total + self.delivery_cost
+        self.delivery_cost = 0  # No delivery for plans
+        self.grand_total = self.order_total
         self.save()
+
 
     def save(self, *args, **kwargs):
         """
@@ -68,25 +65,17 @@ class Order(models.Model):
 
 class OrderLineItem(models.Model):
     order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
-
     plan = models.ForeignKey(Plan, null=True, blank=True, on_delete=models.CASCADE)
-
     quantity = models.IntegerField(null=False, blank=False, default=1)
-
     lineitem_total = models.DecimalField(max_digits=8, decimal_places=2, null=False, blank=False, editable=False)
 
     def save(self, *args, **kwargs):
         """
-        Set the line item total from product or plan.
+        Set the line item total from plan.
         """
         if self.plan:
             self.lineitem_total = self.plan.setup_cost + self.plan.monthly_price * self.quantity
-        elif self.product:
-            self.lineitem_total = self.product.price * self.quantity
         super().save(*args, **kwargs)
 
     def __str__(self):
-        if self.plan:
-            return f'Plan {self.plan.name} on order {self.order.order_number}'
-        else:
-            return f'SKU {self.product.sku} on order {self.order.order_number}'
+        return f'Plan {self.plan.name} on order {self.order.order_number}' if self.plan else f'Item on {self.order.order_number}'
