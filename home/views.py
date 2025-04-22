@@ -3,7 +3,7 @@ from .forms import ContactForm
 from .models import Plan
 
 
-def home_view(request):
+def index(request):
     form = ContactForm()
     show_account_deleted_modal = request.session.pop("show_account_deleted_modal", False)
     show_logged_out_modal = request.session.pop("show_logged_out_modal", False)
