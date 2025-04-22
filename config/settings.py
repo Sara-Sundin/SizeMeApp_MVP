@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Secret key & debug
 SECRET_KEY = config('SECRET_KEY')
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'sizemeapp-mvp-f444c8498547.herokuapp.com',
@@ -22,7 +22,6 @@ INSTALLED_APPS = [
     'accounts',
     'products',
     'sizemeapp',
-    'orders',
     'home',
     'webshop',
     'bag',
