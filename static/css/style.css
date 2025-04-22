@@ -124,7 +124,6 @@ h4 {
     position: relative;
     overflow: hidden;
     z-index: 1; /* Keep it above the pseudo-element background */
-    min-height: 90vh;
     height: auto; /* let it grow if needed */
     background: linear-gradient(to bottom, black, white);
 }
@@ -153,6 +152,11 @@ h4 {
     font-family: var(--secondary-font);
     color: var(--primary-color);
     font-size: 25px;
+}
+
+.hero-subtext {
+    font-family: var(--primary-font);
+    font-size: 30px;
 }
 
 /* Info Section */
@@ -266,6 +270,11 @@ h4 {
     border-radius: 8px; 
 }
 
+.list-recommendations {
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+}
+
 /* Footer */
 
 footer {
@@ -345,7 +354,7 @@ footer p {
 /* Tablet (md) */
 @media (min-width: 768px) {
     #hero {
-        height: 1000px;
+        height: 800px;
     }
 
     #hero h1 {
@@ -360,7 +369,7 @@ footer p {
     }
 
     .hero-bg {
-        background-size: 36%;
+        background-size: 50%;
         margin-top: 40px;
     }
 
@@ -385,6 +394,10 @@ footer p {
         width: 400px;
     }
 
+    #hero {
+        height: 650px;
+    }
+
     #hero p {
         font-size: 45px;
         line-height: 1.4;
@@ -396,7 +409,8 @@ footer p {
     }
 
     #hero h1 {
-        padding-top: 30px;
+        padding-top: 80px;
+        font-size: 100px;
        
     }
 
