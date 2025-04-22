@@ -48,6 +48,12 @@
                     <a class="nav-link {% if request.path == '/accounts/login/' %}active{% endif %}" href="{% url 'login' %}">Login</a>
                 </li>
                 {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'view_bag' %}">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>(${{ total|floatformat:2 }})</span>
+                    </a>
+                </li>                
             </ul>
         </div>
     </div>

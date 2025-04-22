@@ -32,4 +32,58 @@
         </div>
     </div>
 </section>
+
+<!-- Mini Cart Dropdown (styled as attached to navbar) -->
+<div id="miniCartDropdown" class="card shadow-sm border-0 position-absolute d-none" style="top: 60px; right: 20px; width: 300px; z-index: 1055;">
+  <div class="card-header bg-white border-bottom text-center">
+    <strong>🛒 Your Cart</strong>
+  </div>
+  <div class="card-body p-3">
+    {% if bag_items %}
+      <table class="table table-sm mb-2">
+        <tbody>
+          {% for item in bag_items %}
+          <tr>
+            <td class="small">{{ item.plan.name }}</td>
+            <td class="text-center small">x{{ item.quantity }}</td>
+            <td class="text-end small">${{ item.subtotal|floatformat:2 }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-between border-top pt-2">
+        <strong>Total:</strong>
+        <strong>${{ total|floatformat:2 }}</strong>
+      </div>
+      <div class="mt-3 d-flex justify-content-between">
+        <a href="{% url 'view_bag' %}" class="btn btn-outline-dark btn-sm w-50 me-1">View Bag</a>
+        <a href="{% url 'checkout' %}" class="btn btn-success btn-sm w-50 ms-1">Checkout</a>
+      </div>
+    {% else %}
+      <p class="text-center mb-0 small">Your cart is empty.</p>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+<script>
+  // Show mini cart if added=true in URL
+  document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("added") === "true") {
+      const miniCart = document.getElementById("miniCartDropdown");
+      if (miniCart) {
+        miniCart.classList.remove("d-none");
+
+        // Optional: auto-hide after 4 seconds
+        setTimeout(() => {
+          miniCart.classList.add("d-none");
+        }, 4000);
+      }
+    }
+  });
+</script>
 {% endblock %}

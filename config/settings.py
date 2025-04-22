@@ -15,6 +15,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
 ]
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
 # Apps
 INSTALLED_APPS = [
     'accounts',
@@ -63,6 +65,7 @@ LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/accounts/dashboard/'
 
 # Templates
+# Templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -74,6 +77,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'home.context_processors.contact_form',
+                'bag.context_processors.bag_contents',  # ← Added this line
             ],
         },
     },
