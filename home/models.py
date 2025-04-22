@@ -16,8 +16,10 @@ class Plan(models.Model):
     features = models.TextField(help_text="Separate features with a newline")
     perfect_for = models.TextField(blank=True, null=True)
    
+    @property
     def feature_list(self):
         return self.features.splitlines()
+
 
     def __str__(self):
         return f"{self.name} Plan"
