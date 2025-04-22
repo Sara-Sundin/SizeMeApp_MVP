@@ -3,7 +3,7 @@
     <div class="form-group">
         <div class="input-group">
             <div class="input-group-prepend">
-                <button class="decrement-qty btn btn-sm btn-black rounded-0" 
+                <button type="submit" class="decrement-qty btn btn-sm btn-black rounded-0" 
                     data-item_id="{{ item.plan.id }}" id="decrement-qty_{{ item.plan.id }}">
                     <span><i class="fas fa-minus fa-sm"></i></span>
                 </button>
@@ -13,7 +13,7 @@
                 data-item_id="{{ item.plan.id }}"
                 id="id_qty_{{ item.plan.id }}">
             <div class="input-group-append">
-                <button class="increment-qty btn btn-sm btn-black rounded-0"
+                <button type="submit" class="increment-qty btn btn-sm btn-black rounded-0"
                     data-item_id="{{ item.plan.id }}" id="increment-qty_{{ item.plan.id }}">
                     <span><i class="fas fa-plus fa-sm"></i></span>
                 </button>
@@ -21,5 +21,8 @@
         </div>
     </div>
 </form>
+
 <a class="update-link text-info"><small>Update</small></a>
-<a class="remove-item text-danger float-right" id="remove_{{ item.plan.id }}"><small>Remove</small></a>
+<a class="remove-item text-danger float-right" id="remove_{{ item.plan.id }}">
+    <small>Remove</small>
+</a>

@@ -3,159 +3,161 @@
 {% load bag_tools %}
 
 {% block page_header %}
-    <div class="container header-container">
-        <div class="row">
-            <div class="col"></div>
-        </div>
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
     </div>
+</div>
 {% endblock %}
 
 {% block content %}
-    <div class="overlay"></div>
-    <div class="container mb-2">
-        <div class="row">
-            <div class="col">
-                <hr>
-                <h2 class="logo-font mb-4">Shopping Bag</h2>
-                <hr>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                {% if bag_items %}
-                <div class="d-block d-md-none">
-                    <div class="row">
-                        <div class="col">
-                            {% include "bag/bag-total.html" %}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            {% include "bag/checkout-buttons.html" %}
-                            <p class="text-muted mb-5">A summary of your bag contents is below</p>
-                        </div>
-                    </div>
-                    {% for item in bag_items %}
-                        <div class="row">
-                            <div class="col-12 col-sm-6 mb-2">
-                                {% include "bag/product-info.html" %}
-                            </div>
-                            <div class="col-12 col-sm-6 order-sm-last">
-                                <p class="my-0">Price Each: ${{ item.plan.setup_cost }}</p>
-                                <p><strong>Subtotal: </strong>${{ item.plan.setup_cost | calc_subtotal:item.quantity }}</p>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                {% include "bag/quantity-form.html" %}
-                            </div>
-                        </div>
-                        <div class="row"><div class="col"><hr></div></div>
-                    {% endfor %}
-                    <div class="btt-button shadow-sm rounded-0 border border-black">
-                        <a class="btt-link d-flex h-100">
-                            <i class="fas fa-arrow-up text-black mx-auto my-auto"></i>
-                        </a>	
-                    </div>
-                </div>
-                <div class="table-responsive rounded d-none d-md-block">
-                        <table class="table table-sm table-borderless">
-                            <thead class="text-black">
-                                <tr>
-                                    <th scope="col">Product Info</th>
-                                    <th scope="col"></th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col">Qty</th>
-                                    <th scope="col">Subtotal</th>
-                                </tr>
-                            </thead>
-
-                            {% for item in bag_items %}
-                                <tr>
-                                    <td class="py-3">
-                                        {% include "bag/product-info.html" %}
-                                    </td>
-                                    <td class="py-3">
-                                        <p class="my-0">${{ item.plan.setup_cost }}</p>
-                                    </td>
-                                    <td class="py-3 w-25">
-                                        {% include "bag/quantity-form.html" %}
-                                    </td>
-                                    <td class="py-3">
-                                        <p class="my-0">${{ item.plan.setup_cost | calc_subtotal:item.quantity }}</p>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            <tr>
-                                <td colspan="5" class="pt-5 text-right">
-                                    {% include "bag/bag-total.html" %}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="5" class="text-right">
-                                    {% include "bag/checkout-buttons.html" %}
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                {% else %}
-                    <p class="lead mb-5">Your bag is empty.</p>
-                    <a href="{% url 'plan' %}" class="btn btn-outline-black rounded-0 btn-lg">
-                        <span class="icon">
-                            <i class="fas fa-chevron-left"></i>
-                        </span>
-                        <span class="text-uppercase">Keep Shopping</span>
-                    </a>
-                {% endif %}
-            </div>
+<div class="overlay"></div>
+<div class="container mb-2">
+    <div class="row">
+        <div class="col">
+            <hr>
+            <h2 class="logo-font mb-4">Shopping Bag</h2>
+            <hr>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col">
+            {% if bag_items %}
+            <div class="d-block d-md-none">
+                {% for item in bag_items %}
+                <div class="row">
+                    <div class="col-12 col-sm-6 mb-2">
+                        {% include "bag/product-info.html" %}
+                    </div>
+                    <div class="col-12 col-sm-6 order-sm-last">
+                        <p class="my-0">Price Each: ${{ item.plan.setup_cost }}</p>
+                        <p><strong>Subtotal: </strong>${{ item.plan.setup_cost | calc_subtotal:item.quantity }}</p>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        {% include "bag/quantity-form.html" %}
+                    </div>
+                </div>
+                <div class="row"><div class="col"><hr></div></div>
+                {% endfor %}
+                {% include "bag/bag-total.html" %}
+                {% include "bag/checkout-buttons.html" %}
+                <p class="text-muted mb-5">A summary of your bag contents is below</p>
+            </div>
+
+            <div class="table-responsive rounded d-none d-md-block">
+                <table class="table table-sm table-borderless">
+                    <thead class="text-black">
+                        <tr>
+                            <th scope="col">Product Info</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Qty</th>
+                            <th scope="col">Subtotal</th>
+                        </tr>
+                    </thead>
+                    {% for item in bag_items %}
+                    <tr>
+                        <td class="py-3">{% include "bag/product-info.html" %}</td>
+                        <td class="py-3">${{ item.plan.setup_cost }}</td>
+                        <td class="py-3 w-25">{% include "bag/quantity-form.html" %}</td>
+                        <td class="py-3">${{ item.plan.setup_cost | calc_subtotal:item.quantity }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="4" class="pt-5 text-right">{% include "bag/bag-total.html" %}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="text-right">{% include "bag/checkout-buttons.html" %}</td>
+                    </tr>
+                </table>
+            </div>
+            {% else %}
+            <p class="lead mb-5">Your bag is empty.</p>
+            <a href="{% url 'plan' %}" class="btn btn-outline-black rounded-0 btn-lg">
+                <span class="icon"><i class="fas fa-chevron-left"></i></span>
+                <span class="text-uppercase">Keep Shopping</span>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block postloadjs %}
 {{ block.super }}
 
 <script type="text/javascript">
-  // Back to top
-  document.querySelectorAll('.btt-link').forEach(link => {
-    link.addEventListener('click', function (e) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Enable/disable +/- buttons based on quantity
+    function handleEnableDisable(itemId) {
+        const qtyInput = document.getElementById(`id_qty_${itemId}`);
+        const value = parseInt(qtyInput.value);
+        const minus = document.getElementById(`decrement-qty_${itemId}`);
+        const plus = document.getElementById(`increment-qty_${itemId}`);
+        minus.disabled = value <= 1;
+        plus.disabled = value >= 99;
+    }
+
+    // Init
+    document.addEventListener("DOMContentLoaded", function () {
+        const qtyInputs = document.querySelectorAll('.qty_input');
+        qtyInputs.forEach(input => {
+            const itemId = input.dataset.item_id;
+            handleEnableDisable(itemId);
+        });
+
+        // Update form on button clicks
+        document.querySelectorAll('.increment-qty').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const itemId = this.dataset.item_id;
+                const input = document.getElementById(`id_qty_${itemId}`);
+                input.value = Math.min(99, parseInt(input.value) + 1);
+                handleEnableDisable(itemId);
+                input.closest('form').submit(); // submit form
+            });
+        });
+
+        document.querySelectorAll('.decrement-qty').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const itemId = this.dataset.item_id;
+                const input = document.getElementById(`id_qty_${itemId}`);
+                input.value = Math.max(1, parseInt(input.value) - 1);
+                handleEnableDisable(itemId);
+                input.closest('form').submit(); // submit form
+            });
+        });
+
+        // Manual update
+        document.querySelectorAll('.update-link').forEach(link => {
+            link.addEventListener('click', function () {
+                const form = this.previousElementSibling;
+                if (form.classList.contains('update-form')) {
+                    form.submit();
+                }
+            });
+        });
+
+        // Remove item
+        document.querySelectorAll('.remove-item').forEach(link => {
+            link.addEventListener('click', function () {
+                const itemId = this.id.split('remove_')[1];
+                const csrfToken = "{{ csrf_token }}";
+                fetch(`/bag/remove/${itemId}/`, {
+                    method: 'POST',
+                    headers: { 'X-CSRFToken': csrfToken }
+                })
+                .then(response => response.ok && location.reload())
+                .catch(error => console.error("Remove failed:", error));
+            });
+        });
+
+        // Back to top
+        document.querySelectorAll('.btt-link').forEach(link => {
+            link.addEventListener('click', e => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
     });
-  });
-
-  // Update quantity on click
-  document.querySelectorAll('.update-link').forEach(link => {
-    link.addEventListener('click', function (e) {
-      const form = this.previousElementSibling;
-      if (form && form.classList.contains('update-form')) {
-        form.submit();
-      }
-    });
-  });
-
-  // Remove item and reload on click
-  document.querySelectorAll('.remove-item').forEach(link => {
-    link.addEventListener('click', function (e) {
-      const itemId = this.id.split('remove_')[1];
-      const csrfToken = "{{ csrf_token }}";
-      const url = `/bag/remove/${itemId}/`;
-
-      const formData = new FormData();
-      formData.append('csrfmiddlewaretoken', csrfToken);
-
-      fetch(url, {
-        method: 'POST',
-        body: formData,
-      })
-      .then(response => {
-        if (response.ok) {
-          location.reload();
-        } else {
-          console.error("Failed to remove item from bag");
-        }
-      })
-      .catch(error => console.error("Error:", error));
-    });
-  });
 </script>
-
 {% endblock %}
