@@ -29,9 +29,9 @@
 
         {% if product.category %}
           <p class="small mt-1 mb-0">
-            <a class="btn btn-outline-dark btn-sm px-4" href="{% url 'products' %}?category={{ product.category.name }}">
+            <a class="btn {{ category_button_class }} btn-sm px-4" href="{% url 'products' %}?category={{ product.category.name }}">
               {{ product.category.friendly_name }}
-            </a>
+            </a>          
           </p>
         {% endif %}
 
@@ -40,6 +40,26 @@
         <form id="add-to-cart-form" class="form" action="{% url 'add_to_bag' product.id %}" method="POST">
           {% csrf_token %}
           <div class="form-row">
+            {% if size_mode and recommendations %}
+    <div class="my-4 p-2 list-recommendations">
+        <h5>Recommended Sizes for You</h5>
+        <ul>
+            {% for rec in recommendations %}
+                <li>
+                    {{ rec.fit }} Fit:
+                    <strong>{{ rec.size_label }}</strong>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+      {% elif size_mode %}
+          {% if user.is_authenticated %}
+              <p class="text-muted">No size recommendation available for your measurements.</p>
+          {% else %}
+              <p class="text-muted">Log in to see size recommendations.</p>
+          {% endif %}
+      {% endif %}
+
             {% if product.has_sizes %}
             <div class="col-12">
               <p><strong>Size:</strong></p>
