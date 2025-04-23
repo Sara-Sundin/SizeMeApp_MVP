@@ -26,24 +26,45 @@
         <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'products' %}">Shop</a>
+                    <a class="nav-link" href="{% url 'webshop' %}">Shop</a>
                 </li>
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link {% if request.path == '/accounts/dashboard/' %}active{% endif %}" href="{% url 'dashboard' %}">Account</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link {% if request.path == '/accounts/signup/' %}active{% endif %}" href="{% url 'signup' %}">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {% if request.path == '/accounts/login/' %}active{% endif %}" href="{% url 'login' %}">Login</a>
-                </li>
-                {% endif %}
-            </ul>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="plansDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Plans
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="plansDropdown">
+                        <li><a class="dropdown-item" href="{% url 'home' %}#plans">Overview</a></li>
+                        <li><a class="dropdown-item" href="{% url 'plan' %}?focus=starter">Starter Plan</a></li>
+                        <li><a class="dropdown-item" href="{% url 'plan' %}?focus=growth">Growth Plan</a></li>
+                        <li><a class="dropdown-item" href="{% url 'plan' %}?focus=enterprise">Enterprise Plan</a></li>
+                      </ul>                      
+                  </li>                  
+                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#contact">Contact</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle {% if request.path == '/accounts/dashboard/' %}active{% endif %}" 
+                       href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                       <i class="fas fa-user pe-1"></i>Account 
+                    </a>
+                
+                    <ul class="dropdown-menu" aria-labelledby="accountDropdown">
+                        {% if user.is_authenticated %}
+                            <li>
+                                <a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a class="dropdown-item" href="{% url 'signup' %}">Register</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </li>                                                
+            </ul>        
         </div>
     </div>
 </nav>
