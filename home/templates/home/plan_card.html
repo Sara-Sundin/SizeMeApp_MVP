@@ -1,43 +1,43 @@
 <div class="plan-box">
-    <div class="plan-heading text-center my-4">
-      <h2>{{ plan.name }}</h2>
-      {% if plan.icon_class %}
-      <i class="fa-solid {{ plan.icon_class }} lg-icon"></i>
-      {% endif %}
-    </div>
-  
-    <div>
-      <a class="cta-btn cta-btn--primary" href="#">From {{ plan.monthly_price }} USD/month.</a>
-    </div>
-  
-    <div class="plan-info text-start my-3 p-4">
-      <h3>{{ plan.short_description }}</h3>
-      <p>{{ plan.long_description }}</p>
-  
-      <h3>What's included:</h3>
-      <ul>
-        {% for feature in plan.feature_list %}
+  <div class="plan-heading text-center my-4">
+    <h2>{{ plan.name }}</h2>
+  </div>
+
+  <div>
+    <a class="cta-btn cta-btn--primary" href="#">
+      From {{ plan.monthly_price }} USD/month.
+    </a>
+  </div>
+
+  <div class="plan-info text-start my-3 p-4">
+    <h3>{{ plan.short_description }}</h3>
+    <p>{{ plan.long_description }}</p>
+
+    <h3>What's included:</h3>
+    <ul>
+      {% for feature in plan.feature_list %}
         <li>{{ feature }}</li>
-        {% endfor %}
-      </ul>
-  
-      {% if plan.perfect_for %}
+      {% endfor %}
+    </ul>
+
+    {% if plan.perfect_for %}
       <h3>Perfect for:</h3>
-      <p>{{ plan.perfect_for }}</p>
-      {% endif %}
-  
-      <p>Setup cost {{ plan.setup_cost }} USD.</p>
-  
-      <div>
-        <form method="POST" action="{% url 'add_to_bag' plan.id %}">
-          {% csrf_token %}
-          <input type="hidden" name="quantity" value="1">
-          <input type="hidden" name="redirect_url" value="{{ request.path }}">
-          <button type="submit" class="cta-btn checkout-btn">
-              Add to Cart <i class="fa-solid fa-cart-shopping"></i>
-          </button>
-        </form>      
+      <div class="d-flex align-items-center gap-3">
+        <p class="mb-0">{{ plan.perfect_for }}</p>
       </div>
+    {% endif %}
+
+    <p>Setup cost {{ plan.setup_cost }} USD.</p>
+
+    <div>
+      <form method="POST" action="{% url 'add_to_bag' plan.id %}">
+        {% csrf_token %}
+        <input type="hidden" name="quantity" value="1">
+        <input type="hidden" name="redirect_url" value="{{ request.path }}">
+        <button type="submit" class="cta-btn checkout-btn">
+          Add to Cart <i class="fa-solid fa-cart-shopping"></i>
+        </button>
+      </form>
     </div>
   </div>
-  
+</div>

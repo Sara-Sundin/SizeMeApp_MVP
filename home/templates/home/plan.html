@@ -18,7 +18,8 @@
                     {% endif %}
                 {% endfor %}
             </div>
-            <div class="row g-4">
+
+              <div class="row g-4">
                 {% for plan in plans %}
                   {% if plan.plan_type != focus %}
                   <div class="col-12 col-md-6">
@@ -28,9 +29,21 @@
                   </div>
                   {% endif %}
                 {% endfor %}
-              </div>                          
-        </div>
-    </div>
+              </div> 
+
+              <div class="col-12 p-4">
+                 <!-- CTA to Try the Application -->
+                 <a class="cta-btn cta-btn--secondary"
+                 {% if user.is_authenticated %}
+                 href="{% url 'webshop' %}"
+                 {% else %}
+                   href="{% url 'signup' %}"
+                 {% endif %}>
+                 Try the application in our prototype webshop.
+               </a>
+              </div>
+          </div>
+      </div>
 </section>
 
 <!-- Mini Cart Dropdown (styled as attached to navbar) -->
