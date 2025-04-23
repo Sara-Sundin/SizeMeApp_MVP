@@ -58,79 +58,89 @@
         <div class="plan-container py-4">
             <div class="container">
                 <div class="row g-4 py-5">
-    
-                    <!-- Starter Plan -->
-                    <div class="col-12 col-lg-4">
-                        <div class="plan-box">
-                            <div class="plan-heading text-center">
-                                <div class="heading-wrapper">
-                                    <h4>Starter<br>Plan</h4>
-                                    <i class="fa-solid fa-hourglass-start mobile-icon icon-starter"></i>           
+                        <!-- Starter Plan -->
+                    <div class="col-12 col-lg-4 d-flex">
+                        <div class="plan-box d-flex flex-column w-100">
+                        <div class="plan-heading text-center">
+                            <div class="heading-wrapper">
+                            <h4>Starter<br>Plan</h4>
+                            <i class="fa-solid fa-hourglass-start mobile-icon icon-starter"></i>
+                            </div>
+                        </div>
+                        <a href="{% url 'plan' %}?focus=starter" class="text-decoration-none text-dark flex-grow-1 d-flex flex-column">
+                            <div class="plan-info text-start my-3 py-2 d-flex flex-column flex-grow-1">
+                            <ul class="mb-4">
+                                <li>Up to 500 customer profiles/month.</li>
+                                <li>Basic fit algorithm access.</li>
+                                <li>Brand dashboard & analytics.</li>
+                                <li>Email support.</li>
+                                <li>Basic garment dashboard.</li>
+                            </ul>
+                            <div class="mt-auto">
+                                <div class="cta-btn cta-btn--primary text-center">
+                                From 500 USD/month.
                                 </div>
-                            </div>                
-                            <div class="plan-info text-start my-3 py-2">
-                                <ul>
-                                    <li>Up to 500 customer profiles/month.</li>
-                                    <li>Basic fit algorithm access.</li>
-                                    <li>Brand dashboard & analytics.</li>
-                                    <li>Email support.</li>
-                                    <li>Basic garment dashboard.</li>
-                                </ul>
-                                <div>
-                                    <a class="cta-btn cta-btn--primary" href="{% url 'plan' %}?focus=starter">From 500 USD/month.</a> 
-                                </div>
-                            </div>  
+                            </div>
+                            </div>
+                        </a>
                         </div>
                     </div>
-    
+                    
                     <!-- Growth Plan -->
-                    <div class="col-12 col-lg-4">
-                        <div class="plan-box">
-                            <div class="plan-heading">
-                                <div class="heading-wrapper">
-                                    <h4>Growth<br>Plan</h4>
-                                    <i class="fa-solid fa-seedling mobile-icon icon-growth"></i>           
+                    <div class="col-12 col-lg-4 d-flex">
+                        <div class="plan-box d-flex flex-column w-100">
+                        <div class="plan-heading">
+                            <div class="heading-wrapper">
+                            <h4>Growth<br>Plan</h4>
+                            <i class="fa-solid fa-seedling mobile-icon icon-growth"></i>
+                            </div>
+                        </div>
+                        <a href="{% url 'plan' %}?focus=growth" class="text-decoration-none text-dark flex-grow-1 d-flex flex-column">
+                            <div class="plan-info text-start my-3 py-2 d-flex flex-column flex-grow-1">
+                            <ul class="mb-4">
+                                <li>Up to 5,000 customer profiles/month.</li>
+                                <li>Advanced sizing recommendations.</li>
+                                <li>Custom brand integration.</li>
+                                <li>Priority email & chat support.</li>
+                                <li>Monthly insights report.</li>
+                            </ul>
+                            <div class="mt-auto">
+                                <div class="cta-btn cta-btn--secondary text-center">
+                                From 1000 USD/month.
                                 </div>
-                            </div>                
-                            <div class="plan-info text-start my-3 py-2">
-                                <ul>
-                                    <li>Up to 5,000 customer profiles/month.</li>
-                                    <li>Advanced sizing recommendations.</li>
-                                    <li>Custom brand integration.</li>
-                                    <li>Priority email & chat support.</li>
-                                    <li>Monthly insights report.</li>
-                                </ul>
-                                <div>
-                                    <a class="cta-btn cta-btn--secondary" href="{% url 'plan' %}?focus=growth">From 1000 Usd/month.</a> 
-                                </div>
-                            </div> 
+                            </div>
+                            </div>
+                        </a>
                         </div>
                     </div>
-    
+                    
                     <!-- Enterprise Plan -->
-                    <div class="col-12 col-lg-4">
-                        <div class="plan-box">
-                            <div class="plan-heading">
-                                <div class="heading-wrapper">
-                                    <h4>Enterprise<br>Plan</h4>
-                                    <i class="fa-solid fa-arrow-up-right-dots mobile-icon icon-enterprise"></i>           
+                    <div class="col-12 col-lg-4 d-flex">
+                        <div class="plan-box d-flex flex-column w-100">
+                        <div class="plan-heading">
+                            <div class="heading-wrapper">
+                            <h4>Enterprise<br>Plan</h4>
+                            <i class="fa-solid fa-arrow-up-right-dots mobile-icon icon-enterprise"></i>
+                            </div>
+                        </div>
+                        <a href="{% url 'plan' %}?focus=enterprise" class="text-decoration-none text-dark flex-grow-1 d-flex flex-column">
+                            <div class="plan-info text-start my-3 py-2 d-flex flex-column flex-grow-1">
+                            <ul class="mb-4">
+                                <li>Unlimited customer profiles.</li>
+                                <li>AI-powered sizing engine.</li>
+                                <li>API access & custom onboarding.</li>
+                                <li>Dedicated success manager.</li>
+                                <li>Integration with internal systems.</li>
+                            </ul>
+                            <div class="mt-auto">
+                                <div class="cta-btn cta-btn--tertiary text-center">
+                                From 1500 USD/month.
                                 </div>
-                            </div>                
-                            <div class="plan-info text-start my-3 py-2">
-                                <ul>
-                                    <li>Unlimited customer profiles.</li>
-                                    <li>AI-powered sizing engine.</li>
-                                    <li>API access & custom onboarding.</li>
-                                    <li>Dedicated success manager.</li>
-                                    <li>Integration with internal systems.</li>
-                                </ul>
-                                <div>
-                                    <a class="cta-btn cta-btn--tertiary" href="{% url 'plan' %}?focus=enterprise">From 1500 Usd/month.</a> 
-                                </div>
-                            </div> 
+                            </div>
+                            </div>
+                        </a>
                         </div>
                     </div>
-    
                 </div>
             </div>
         </div>

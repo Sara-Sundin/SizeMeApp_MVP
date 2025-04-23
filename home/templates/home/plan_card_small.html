@@ -6,7 +6,7 @@
       {% endif %}
     </div>
   
-    <div class="plan-info text-start px-3 pb-3">
+    <div class="plan-info-plan text-start p-4">
       <p>{{ plan.short_description }}</p>
       <p><strong>From {{ plan.monthly_price }} USD/month</strong></p>
   
@@ -14,6 +14,16 @@
         <a class="cta-btn cta-btn--primary" href="{% url 'plan' %}?focus={{ plan.plan_type }}">
           View Plan
         </a>
+      </div>
+      <div class="py-4">
+        <form method="POST" action="{% url 'add_to_bag' plan.id %}">
+          {% csrf_token %}
+          <input type="hidden" name="quantity" value="1">
+          <input type="hidden" name="redirect_url" value="{{ request.path }}">
+          <button type="submit" class="cta-btn checkout-btn">
+            Add to Cart <i class="fa-solid fa-cart-shopping"></i>
+          </button>
+        </form>
       </div>
     </div>
   </div>
