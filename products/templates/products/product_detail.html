@@ -52,13 +52,17 @@
             {% endfor %}
         </ul>
     </div>
-      {% elif size_mode %}
-          {% if user.is_authenticated %}
-              <p class="text-muted">No size recommendation available for your measurements.</p>
+    {% elif size_mode %}
+    {% if user.is_authenticated %}
+        <p class="text-muted">No size recommendation available. Did you add your measurements?
+        <br><a href="{% url 'dashboard' %}" class="btn btn-sm cta-btn--secondary mt-2">
+            Go to Dashboard to Add Measurements
+        </a></p>
           {% else %}
               <p class="text-muted">Log in to see size recommendations.</p>
           {% endif %}
       {% endif %}
+
 
             {% if product.has_sizes %}
             <div class="col-12">
