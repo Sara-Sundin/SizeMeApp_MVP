@@ -137,22 +137,23 @@
   </div>
 </div>
 
-<!-- Enter Application Modal -->
+<!-- Welcome Modal -->
 <div class="modal fade" id="redirectModal" tabindex="-1" aria-labelledby="redirectModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
 
       <div class="modal-header">
-        <h5 class="modal-title px-5" id="redirectModalLabel">Ready to Enter the Application?</h5>
+        <h5 class="modal-title px-4 text-center w-100" id="redirectModalLabel">Welcome to SizeMeApp</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
       <div class="modal-body text-center">
-        <p>
-          You will now be redirected to our prototype webshop for browsing.
+        <p class="mb-3">
+          SizeMeApp helps fashion brands offer better sizing experiences for their customers. 
+          You can either explore how it works, or check out the plans to see how it fits your business.
         </p>
         <p class="small text-muted">
-          Don’t worry if you didn’t enter your measurements—you can always return to your account to update them and enter the webshop again.
+          If you didn’t enter your measurements, no worries—you can do it later in your account.
         </p>
 
         <!-- Logo Placeholder -->
@@ -163,15 +164,15 @@
         </div>
       </div>
 
-      <div class="modal-footer justify-content-center">
-        <a href="{% url 'webshop' %}" class="btn btn-dark">Enter Webshop</a>
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
+      <div class="modal-footer flex-column gap-2">
+         <a href="{% url 'home' %}#plans" class="btn cta-btn--primary w-100">Check out our Plans</a>
+         <a href="{% url 'webshop' %}" class="btn btn-dark w-100">Try the Application</a>
+        </div>
 
     </div>
   </div>
 </div>
-  
+ 
 <!-- Update Modal Measurements -->
 <div class="modal fade" id="measurementModal" tabindex="-1" aria-labelledby="measurementsLabel" aria-hidden="true">
   <div class="modal-dialog">
