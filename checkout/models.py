@@ -74,7 +74,7 @@ class OrderLineItem(models.Model):
         Set the line item total from plan.
         """
         if self.plan:
-            self.lineitem_total = self.plan.setup_cost + self.plan.monthly_price * self.quantity
+            self.lineitem_total = self.plan.setup_cost * self.quantity
         super().save(*args, **kwargs)
 
     def __str__(self):
