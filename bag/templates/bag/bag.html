@@ -70,6 +70,10 @@
                         <td colspan="4" class="text-right">{% include "bag/checkout-buttons.html" %}</td>
                     </tr>
                 </table>
+                <a href="{% url 'plan' %}" class="btn btn-outline-black rounded-0 btn-lg">
+                    <span class="icon"><i class="fas fa-chevron-left"></i></span>
+                    <span class="text-uppercase">Keep Shopping</span>
+                </a>
             </div>
             {% else %}
             <p class="lead mb-5">Your bag is empty.</p>
