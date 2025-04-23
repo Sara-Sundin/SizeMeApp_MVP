@@ -226,7 +226,7 @@ h4 {
 .plan-info {
     background-color: white;     
     border-radius: 8px; 
-    margin: 1rem auto; 
+    margin: 1rem auto;
 }
 
 /* Plan Pages */
@@ -279,7 +279,7 @@ h4 {
 
 footer {
     background-color: black;
-    color: var(--secondary-color);
+    color: white;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -317,7 +317,7 @@ footer p {
 
 .social-icons a {
     font-size: 35px; /* Adjust icon size */
-    color: var(--secondary-color);
+    color: white;
     transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
@@ -333,7 +333,8 @@ footer p {
 }
 
 .contact-form-container h2 {
-    font-size: 40px;
+    font-size: 25px;
+    font-family: var(--secondary-font);
 }
 
 .contact-form .form-group label {
