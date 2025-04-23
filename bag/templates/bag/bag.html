@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col">
             <hr>
-            <h2 class="logo-font mb-4">Shopping Bag</h2>
+            <h2 class="logo-font my-5">Shopping Bag</h2>
             <hr>
         </div>
     </div>
@@ -33,6 +33,7 @@
                     <div class="col-12 col-sm-6 order-sm-last">
                         <p class="my-0">Price Each: ${{ item.plan.setup_cost }}</p>
                         <p><strong>Subtotal: </strong>${{ item.plan.setup_cost | calc_subtotal:item.quantity }}</p>
+                        <p class="text-muted small">Monthly fee: ${{ item.plan.monthly_price|floatformat:2 }} billed monthly after setup</p>
                     </div>
                     <div class="col-12 col-sm-6">
                         {% include "bag/quantity-form.html" %}
@@ -57,8 +58,13 @@
                     </thead>
                     {% for item in bag_items %}
                     <tr>
-                        <td class="py-3">{% include "bag/product-info.html" %}</td>
-                        <td class="py-3">${{ item.plan.setup_cost }}</td>
+                        <td class="py-3">
+                            {% include "bag/product-info.html" %}
+                            <small class="text-muted">Monthly: ${{ item.plan.monthly_price|floatformat:2 }}</small>
+                        </td>
+                        <td class="py-3">
+                            ${{ item.plan.setup_cost }}<br>
+                        </td>
                         <td class="py-3 w-25">{% include "bag/quantity-form.html" %}</td>
                         <td class="py-3">${{ item.plan.setup_cost | calc_subtotal:item.quantity }}</td>
                     </tr>
