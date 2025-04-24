@@ -318,6 +318,10 @@ footer p {
     font-size: 25px;
 }
 
+#contact {
+    scroll-margin-top: 100px; /* To adjust for fixed navbar*/
+}
+
 /* Social Icons Container */
 .social-icons {
     display: flex;

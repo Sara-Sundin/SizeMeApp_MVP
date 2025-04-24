@@ -33,10 +33,10 @@
 
 <footer class="footer text-start pt-5">
 
-  <section class="contact-wrapper container px-4">
+  <section id="contact" class="contact-wrapper container px-4">
     <div class="px-md-4 row align-items-start">
       <!-- Contact Form (appears first in markup = top on mobile) -->
-      <div id="contact" class="contact-form-container col-12 col-md-6 mb-5 mb-md-0">
+      <div class="contact-form-container col-12 col-md-6 mb-5 mb-md-0">
         <h2 class="pb-2">Send us a message!</h2>
         <form method="post" action="{% url 'contact' %}" class="contact-form">
           {% csrf_token %}
