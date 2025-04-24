@@ -62,13 +62,15 @@
     </div>
     {% elif size_mode %}
     {% if user.is_authenticated %}
-        <p class="text-muted">No size recommendation available. Did you add your measurements?
-        <br><button 
-        class="btn btn-sm btn-dark mt-2" 
-        data-bs-toggle="modal" 
-        data-bs-target="#loginMeasurementModal">
-        Add Measurements
-      </button></p>
+        <p class="text-black">No size recommendation available. Did you add your measurements?
+        <br>
+      <button 
+          type="button" 
+          class="btn btn-sm cta-btn--secondary mt-2" 
+          data-bs-toggle="modal" 
+          data-bs-target="#UpdateMeasurementsModal">
+          Add Measurements
+        </button></p>
           {% else %}
               <p class="text-muted">Log in to see size recommendations.</p>
           {% endif %}
