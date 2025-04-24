@@ -35,13 +35,11 @@ def checkout(request):
     if request.method == "POST":
         order_form = OrderForm(request.POST)
         save_info = request.POST.get('save_info') == 'on'
-        print("POST request received. Save info:", save_info)
 
         if order_form.is_valid():
             order = order_form.save(commit=False)
             order.original_bag = str(bag)
             order.save()
-            print("Order saved:", order)
 
             for item in bag_items:
                 OrderLineItem.objects.create(
@@ -49,11 +47,8 @@ def checkout(request):
                     plan=item['plan'],
                     quantity=item['quantity']
                 )
-            print("Order line items saved.")
 
             if request.user.is_authenticated and save_info:
-                print("✅ User is authenticated and chose to save info")
-
                 user = request.user
                 user.full_name = order.full_name
                 user.phone_number = order.phone_number
@@ -65,17 +60,11 @@ def checkout(request):
                 user.county = order.county
                 user.save()
 
-                print(f"✅ Saved user profile: {user}")
-            else:
-                print("⚠️ Save block not triggered. Authenticated:", request.user.is_authenticated, "| Save Info:", save_info)
-
             request.session['bag'] = {}
             return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
             messages.error(request, "There was an error with your form. Please check your information.")
-            print("Form errors:", order_form.errors)
 
-            # Create a new PaymentIntent if form is invalid
             intent = stripe.PaymentIntent.create(
                 amount=int(total * 100),
                 currency='usd',
@@ -105,7 +94,6 @@ def checkout(request):
                 'street_address2': user.street_address2,
                 'county': user.county,
             }
-            print("Prefilling form with user data:", initial_data)
             order_form = OrderForm(initial=initial_data)
         else:
             order_form = OrderForm()
