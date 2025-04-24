@@ -1,5 +1,5 @@
 #shop-hero h1 {
-    font-size: 50px;
+    font-size: 25px;
 }
 
 #shop-hero {
@@ -12,9 +12,34 @@
 
 #shop-hero-content {
     text-align: center;
-    width: 70%;
     background-color: rgba(255, 255, 255, 0.8); /* 80% white opacity */
     border-radius: 10px;
-    font-size: 25px;
+    font-size: 14
+    px;
 }
 
+/* Tablet (md) */
+@media (min-width: 768px) {
+
+    #shop-hero h1 {
+        font-size: 35px;
+    }
+
+    #shop-hero-content {
+        width: 700px;
+        font-size: 18px;
+    }
+}
+
+/* Desktop (md) */
+@media (min-width: 1024px) {
+
+    #shop-hero h1 {
+        font-size: 50px;
+    }
+
+    #shop-hero-content {
+        width: 800px;
+        font-size: 25px;
+    }
+}

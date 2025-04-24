@@ -58,7 +58,9 @@ h4 {
     text-align: center;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    height: 50px;
+    white-space: normal;    /* Allow line breaks */
+    line-height: 1.4;        /* Better spacing for wrapped text */
+    min-height: 50px;       
 }
 
 /* Color variants cta-buttons */
