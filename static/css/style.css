@@ -222,7 +222,7 @@ h4 {
     font-size: 40px;
 }
 
-.lg-icon {
+.responsive-icon {
     font-size: 80px
 }
 
@@ -391,6 +391,10 @@ footer p {
     .plan-info {
         width: 670px;
         font-size: 20px;
+    }
+
+    .responsive-icon {
+        font-size: 120px
     }
 
     #dashboard h1 {

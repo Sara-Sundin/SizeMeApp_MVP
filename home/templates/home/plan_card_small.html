@@ -2,7 +2,7 @@
     <div class="plan-heading text-center my-3">
       <h3>{{ plan.name }}</h3>
       {% if plan.icon_class %}
-      <i class="fa-solid {{ plan.icon_class }} mobile-icon"></i>
+      <i class=" px-2 fa-solid {{ plan.icon_class }} mobile-icon {{ plan.icon_color_class }}"></i>
       {% endif %}
     </div>
   
@@ -11,9 +11,9 @@
       <p><strong>From {{ plan.monthly_price }} USD/month</strong></p>
   
       <div class="text-center mt-3">
-        <a class="cta-btn cta-btn--primary" href="{% url 'plan' %}?focus={{ plan.plan_type }}">
+        <a class="cta-btn {{ plan.button_class }}" href="{% url 'plan' %}?focus={{ plan.plan_type }}">
           View Plan
-        </a>
+        </a>        
       </div>
       <div class="py-4">
         <form method="POST" action="{% url 'add_to_bag' plan.id %}">

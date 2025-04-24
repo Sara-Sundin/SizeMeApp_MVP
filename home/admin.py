@@ -18,6 +18,9 @@ class PlanAdmin(admin.ModelAdmin):
                 'long_description',
                 'features',
                 'perfect_for',
+                'icon_class', 
+                'button_class',
+                'icon_color_class',
             )
         }),
     )

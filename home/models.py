@@ -15,11 +15,27 @@ class Plan(models.Model):
     long_description = models.TextField()
     features = models.TextField(help_text="Separate features with a newline")
     perfect_for = models.TextField(blank=True, null=True)
-   
-    @property
+
+    icon_class = models.CharField(
+        max_length=50,
+        help_text="Font Awesome class",
+        blank=True
+    )
+
+    icon_color_class = models.CharField(
+    max_length=50,
+    help_text="CSS class for icon color",
+    blank=True
+)
+
+    button_class = models.CharField(
+        max_length=50,
+        help_text="Button CSS class for styling",
+        blank=True
+    )
+
     def feature_list(self):
         return self.features.splitlines()
 
-
     def __str__(self):
-        return f"{self.name} Plan"
+        return self.name
