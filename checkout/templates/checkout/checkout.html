@@ -51,6 +51,23 @@
             </div>
         </div>
 
+        {% if order_form.errors %}
+        <div class="alert alert-danger">
+            <strong>There were errors in your form:</strong>
+            <ul class="mb-0">
+            {% for field in order_form %}
+                {% for error in field.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+            {% for error in order_form.non_field_errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+
         <!-- Checkout Form Column -->
         <div class="col-12 col-lg-6">
             <p class="text-muted">Please fill out the form below to complete your order</p>
