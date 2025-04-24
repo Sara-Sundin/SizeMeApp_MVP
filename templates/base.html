@@ -33,44 +33,47 @@
 
 <footer class="footer text-start pt-5">
 
-    <section class="contact-wrapper container px-4">
-        <div class="row">
-            <!-- Contact Info -->
-            <div class="contact-details col-12 col-md-6 pb-5 mb-md-0">
-                <h2 class="contact-sub-heading pb-2">Contact Details</h2>
-                <div class="details">
-                    <p><i class="fa-solid fa-envelope"></i> Email: <a class="text-white" href="mailto:sara@sizemeapp.se">sara@sizemeapp.se</a></p>
-                    <p><i class="fa-solid fa-mobile-screen-button"></i> Phone: +46 (0) 700 630 492</p>
-                    <p><i class="fa-solid fa-location-dot"></i> Address: Thors väg 24, Lindome, Sweden</p>
-                </div>
-                <!-- Social -->
-                <div class="social-icons mt-3">
-                    <a href="https://www.instagram.com/sizemeapp__/" target="_blank" aria-label="Instagram" rel="noopener">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/sara-sundin-b2833890/" target="_blank" aria-label="LinkedIn" rel="noopener">
-                        <i class="fa-brands fa-linkedin"></i>
-                    </a>
-                    <a href="https://wa.me/46700630492" target="_blank" aria-label="WhatsApp" rel="noopener">
-                        <i class="fa-brands fa-whatsapp"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Contact Form -->
-            <div id="contact" class="contact-form-container col-12 col-md-6">
-                <h2 class="pb-2">Send us a message!</h2>
-                <form method="post" class="contact-form">
-                    {% csrf_token %}
-                    {{ form|crispy }}
-                    <button type="submit" class="cta-btn cta-btn--secondary">Send Message</button>
-                </form>
-            </div>
+  <section class="contact-wrapper container px-4">
+    <div class="px-md-4 row align-items-start">
+      <!-- Contact Form (appears first in markup = top on mobile) -->
+      <div id="contact" class="contact-form-container col-12 col-md-6 mb-5 mb-md-0">
+        <h2 class="pb-2">Send us a message!</h2>
+        <form method="post" class="contact-form">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <button type="submit" class="cta-btn cta-btn--secondary mt-3">Send Message</button>
+        </form>
+      </div>
+  
+      <!-- Contact Info (sits below on mobile, side by side on md+) -->
+      <div class=" px-md-4 contact-details col-12 col-md-6">
+        <h2 class="pb-5 contact-sub-heading pb-2">Contact Details</h2>
+        <div class="details">
+          <p><i class="fa-solid fa-envelope"></i> Email: 
+            <a class="text-white" href="mailto:sara@sizemeapp.se">sara@sizemeapp.se</a>
+          </p>
+          <p><i class="fa-solid fa-mobile-screen-button"></i> Phone: +46 (0) 700 630 492</p>
+          <p><i class="fa-solid fa-location-dot"></i> Address: Thors väg 24, Lindome, Sweden</p>
         </div>
-
-        <hr class="custom-separator">
-    </section>
-
+  
+        <!-- Social Icons -->
+        <div class="social-icons mt-3">
+          <a href="https://www.instagram.com/sizemeapp__/" target="_blank" aria-label="Instagram" rel="noopener">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/sara-sundin-b2833890/" target="_blank" aria-label="LinkedIn" rel="noopener">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+          <a href="https://wa.me/46700630492" target="_blank" aria-label="WhatsApp" rel="noopener">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  
+    <hr class="custom-separator">
+  </section>
+  
     <div class="text-center px-3 pb-4">
         {% block copyright %}
         <p>&copy; 2025 TechFit Solutions. All rights reserved.</p>
