@@ -1,6 +1,7 @@
 from .forms import ContactForm
 
-def contact_form(request):
+def global_context(request):
     return {
-        "form": ContactForm()
+        "form": ContactForm(),
+        "show_success_modal": request.session.pop("show_success_modal", False),
     }
