@@ -17,6 +17,6 @@ def update_measurements_from_webshop(request):
         user.hips = request.POST.get('hips')
         user.shoulders = request.POST.get('shoulders')
         user.save()
-        request.session['show_measurements_success'] = True
+        request.session['show_webshop_measurements_success'] = True
     return redirect(request.META.get('HTTP_REFERER', 'products'))
 

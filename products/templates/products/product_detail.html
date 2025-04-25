@@ -200,12 +200,12 @@
   </div>
 </div>
 
- <!-- Measurements Updated Confirmation Modal -->
- <div class="modal fade" id="measurementsUpdatedModal" tabindex="-1" aria-labelledby="measurementsUpdatedLabel" aria-hidden="true">
+ <!-- Measurements Updated Confirmation Modal (Webshop-specific) -->
+<div class="modal fade" id="measurementsUpdatedModalWebshop" tabindex="-1" aria-labelledby="measurementsUpdatedLabelWebshop" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-dark border border-white text-white">
-        <h5 class="modal-title" id="measurementsUpdatedLabel">Success</h5>
+        <h5 class="modal-title" id="measurementsUpdatedLabelWebshop">Success</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -250,12 +250,9 @@
 
 {% if request.session.show_webshop_measurements_success %}
 <script>
-  const successModal = new bootstrap.Modal(document.getElementById('measurementsUpdatedModal'));
+  const successModal = new bootstrap.Modal(document.getElementById('measurementsUpdatedModalWebshop'));
   successModal.show();
-
-  setTimeout(() => {
-    successModal.hide();
-  }, 2000);
+  setTimeout(() => successModal.hide(), 2000);
 </script>
 {% endif %}
 
