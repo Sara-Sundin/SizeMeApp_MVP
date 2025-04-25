@@ -106,7 +106,7 @@ h4 {
 /* Hover styles for buttons */
 .cta-btn:hover,
 .cta-btn--primary:hover,
-.cta-btn--secondary:hover,
+.btn.cta-btn--secondary:hover,
 .cta-btn--tertiary:hover,
 .cta-btn--black:hover,
 .cta-btn--border:hover,
@@ -117,6 +117,14 @@ h4 {
     transform: scale(1.02);
     transition: all 0.3s ease-in-out;
 }
+  
+.btn:hover,
+.btn:focus,
+.btn:active {
+    background-color: gray;
+    color: black;
+}
+
 
 /* Navbar */
 .navbar {
