@@ -258,6 +258,7 @@ h4 {
     background-color: white;     
     border-radius: 8px; 
     margin: 1rem auto;
+    scroll-margin-top: 70px; /* To adjust for fixed navbar*/
 }
 
 /* Plan Pages */
