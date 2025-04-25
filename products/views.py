@@ -113,6 +113,7 @@ def product_detail(request, product_id):
         'show_webshop_measurements_success': show_webshop_measurements_success,
         'show_size_mode_entered_modal': show_size_mode_entered_modal,
         'show_size_mode_exited_modal': show_size_mode_exited_modal,
+        'show_size_mode_toggle': True,
     }
 
     return render(request, 'products/product_detail.html', context)
