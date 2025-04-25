@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
-from django.contrib import messages
 
 def webshop_view(request):
     if 'size_mode' not in request.session:
@@ -18,6 +17,6 @@ def update_measurements_from_webshop(request):
         user.hips = request.POST.get('hips')
         user.shoulders = request.POST.get('shoulders')
         user.save()
-        messages.success(request, "Measurements updated.")
+        request.session['show_measurements_success'] = True
     return redirect(request.META.get('HTTP_REFERER', 'products'))
 
