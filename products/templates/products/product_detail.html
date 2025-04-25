@@ -215,6 +215,26 @@
   </div>
 </div>
 
+<!-- Size Mode Entered Modal -->
+<div class="modal fade" id="sizeModeEnteredModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content text-center p-4 bg-black border border-white text-white">
+      <h5 class="modal-title">Size Mode Activated</h5>
+      <div class="modal-body">You are now browsing in size mode!</div>
+    </div>
+  </div>
+</div>
+
+<!-- Size Mode Exited Modal -->
+<div class="modal fade" id="sizeModeExitedModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content text-center p-4 bg-black border border-white text-white">
+      <h5 class="modal-title">Size Mode Exited</h5>
+      <div class="modal-body">You have exited size mode.</div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
 
 {% block postloadjs %}
@@ -254,6 +274,24 @@
     const successModal = new bootstrap.Modal(document.getElementById('measurementsUpdatedModalWebshop'));
     successModal.show();
     setTimeout(() => successModal.hide(), 2000);
+  }
+</script>
+{% endif %}
+
+{% if show_size_mode_entered_modal %}
+<script>
+  window.onload = function() {
+    const enteredModal = new bootstrap.Modal(document.getElementById('sizeModeEnteredModal'));
+    enteredModal.show();
+  }
+</script>
+{% endif %}
+
+{% if show_size_mode_exited_modal %}
+<script>
+  window.onload = function() {
+    const exitedModal = new bootstrap.Modal(document.getElementById('sizeModeExitedModal'));
+    exitedModal.show();
   }
 </script>
 {% endif %}

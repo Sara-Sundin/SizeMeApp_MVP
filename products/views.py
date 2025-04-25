@@ -98,8 +98,12 @@ def product_detail(request, product_id):
         product.category.name.lower(), 'btn-outline-dark'
     )
 
-    # Check and clear the success modal flag
+    # Measurement success modal
     show_webshop_measurements_success = request.session.pop('show_webshop_measurements_success', False)
+
+    # Size mode success modals
+    show_size_mode_entered_modal = request.session.pop('size_mode_entered', False)
+    show_size_mode_exited_modal = request.session.pop('size_mode_exited', False)
 
     context = {
         'product': product,
@@ -107,6 +111,8 @@ def product_detail(request, product_id):
         'category_button_class': category_button_class,
         'size_mode': size_mode,
         'show_webshop_measurements_success': show_webshop_measurements_success,
+        'show_size_mode_entered_modal': show_size_mode_entered_modal,
+        'show_size_mode_exited_modal': show_size_mode_exited_modal,
     }
 
     return render(request, 'products/product_detail.html', context)

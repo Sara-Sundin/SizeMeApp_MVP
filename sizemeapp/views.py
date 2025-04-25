@@ -18,6 +18,13 @@ def size_recommendation_view(request, product_id):
 
 
 def toggle_size_mode(request):
-    current = request.session.get('size_mode', False)
-    request.session['size_mode'] = not current
-    return redirect(request.META.get('HTTP_REFERER', '/'))
+    current_mode = request.session.get('size_mode', False)
+    request.session['size_mode'] = not current_mode
+
+    # Set a flag to trigger a success modal message
+    if request.session['size_mode']:
+        request.session['size_mode_entered'] = True
+    else:
+        request.session['size_mode_exited'] = True
+
+    return redirect(request.META.get('HTTP_REFERER', 'webshop'))
