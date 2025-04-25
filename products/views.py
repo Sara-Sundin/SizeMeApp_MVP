@@ -83,7 +83,6 @@ def product_detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     recommendations = []
 
-    # Check if size mode is on
     size_mode = request.session.get('size_mode', False)
 
     if size_mode and request.user.is_authenticated and hasattr(request.user, 'chest') and request.user.chest:
@@ -99,11 +98,15 @@ def product_detail(request, product_id):
         product.category.name.lower(), 'btn-outline-dark'
     )
 
+    # Check and clear the success modal flag
+    show_webshop_measurements_success = request.session.pop('show_webshop_measurements_success', False)
+
     context = {
         'product': product,
         'recommendations': recommendations,
         'category_button_class': category_button_class,
-        'size_mode': size_mode,  # pass this if you want to show a badge or info
+        'size_mode': size_mode,
+        'show_webshop_measurements_success': show_webshop_measurements_success,
     }
 
     return render(request, 'products/product_detail.html', context)

@@ -248,11 +248,13 @@
     });
   </script>
 
-{% if request.session.show_webshop_measurements_success %}
+{% if show_webshop_measurements_success %}
 <script>
-  const successModal = new bootstrap.Modal(document.getElementById('measurementsUpdatedModalWebshop'));
-  successModal.show();
-  setTimeout(() => successModal.hide(), 2000);
+  window.onload = function () {
+    const successModal = new bootstrap.Modal(document.getElementById('measurementsUpdatedModalWebshop'));
+    successModal.show();
+    setTimeout(() => successModal.hide(), 2000);
+  }
 </script>
 {% endif %}
 
