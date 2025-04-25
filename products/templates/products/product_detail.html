@@ -283,6 +283,7 @@
   window.onload = function() {
     const enteredModal = new bootstrap.Modal(document.getElementById('sizeModeEnteredModal'));
     enteredModal.show();
+    setTimeout(() => enteredModal.hide(), 1500);
   }
 </script>
 {% endif %}
@@ -292,6 +293,7 @@
   window.onload = function() {
     const exitedModal = new bootstrap.Modal(document.getElementById('sizeModeExitedModal'));
     exitedModal.show();
+    setTimeout(() => exitedModal.hide(), 1500);
   }
 </script>
 {% endif %}
