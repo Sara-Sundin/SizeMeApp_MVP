@@ -57,8 +57,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         card.update({ 'disabled': true });
         submitBtn.disabled = true;
-        form.classList.toggle('d-none');
-        if (overlay) overlay.classList.toggle('d-none');
+
+        form.classList.add('d-none');
+        if (overlay) overlay.classList.remove('d-none');
 
         const saveInfo = document.getElementById('id-save-info')?.checked || false;
         const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
@@ -113,8 +114,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     `;
                 }
 
-                form.classList.toggle('d-none');
-                if (overlay) overlay.classList.toggle('d-none');
+                form.classList.remove('d-none');
+                if (overlay) overlay.classList.add('d-none');
                 card.update({ 'disabled': false });
                 submitBtn.disabled = false;
             } else {

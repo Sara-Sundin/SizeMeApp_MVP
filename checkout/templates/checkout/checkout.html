@@ -129,6 +129,18 @@
     </div>
 </div>
 
+<!-- Loading Spinner -->
+<div id="loading-overlay" class="d-none">
+    <div class="spinner-container">
+      <div class="orbit-wrapper">
+        <div class="orbiting-dot"></div>
+      </div>
+      <div class="spinner-logo">
+        <img src="{% static 'images/logo_icon.png' %}" alt="SizeMeApp Logo">
+      </div>
+    </div>
+  </div>      
+
 {% endblock %}
 
 {% block postloadjs %}
