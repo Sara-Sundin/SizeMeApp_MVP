@@ -165,6 +165,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     const loggedOutModal = new bootstrap.Modal(document.getElementById("loggedOutModal"));
     loggedOutModal.show();
+    setTimeout(() => loggedOutModal.hide(), 2000);
   });
 </script>
 {% endif %}
