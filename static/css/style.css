@@ -94,15 +94,6 @@ h4 {
     font-size: 14px;
 }
 
-.cta-btn--small {
-    padding: 12px 24px;
-    font-size: 14px;
-    border-radius: 6px;
-    line-height: 1.2;
-    color: black;
-    text-decoration: none; 
-}
-
 /* Hover styles for buttons */
 .cta-btn:hover,
 .cta-btn--primary:hover,
@@ -124,7 +115,6 @@ h4 {
     background-color: gray;
     color: black;
 }
-
 
 /* Navbar */
 .navbar {
@@ -152,7 +142,6 @@ h4 {
     font-weight: bold;
 }
 
-
 /* Hero Section Styling */
 
 #hero { /* Main content container holds the background image */
@@ -163,7 +152,7 @@ h4 {
     background: linear-gradient(to bottom, black, white);
 }
 
-  .hero-bg {
+.hero-bg {
     position: absolute;
     top: 20px;
     left: 0;
@@ -174,7 +163,7 @@ h4 {
     opacity: 0.5;
     z-index: -1;
     pointer-events: none; /* optional: make sure it's not clickable */
-  }  
+}  
 
 #hero h1 {
     font-size: 60px;
@@ -359,6 +348,7 @@ footer p {
 }
 
 /* Social Icons Container */
+
 .social-icons {
     display: flex;
     justify-content: left; /* Centers icons */
@@ -371,7 +361,8 @@ footer p {
     transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
-/* Hover Effect */
+/* Hover Effect social icons */
+
 .social-icons a:hover {
     color: var(--primary-color); /* Change color on hover */
     transform: scale(1.2); /* Slightly enlarge on hover */
