@@ -4,9 +4,9 @@
   </div>
 
   <div>
-    <a class="cta-btn {{ plan.button_class }}" href="{% url 'plan' %}#plan-info-plan">
+    <a class="cta-btn {{ plan.button_class }}" href="{% url 'plan' %}?focus={{ plan.plan_type }}#plan-info-plan">
       From {{ plan.monthly_price }} USD/month
-  </a>  
+  </a>   
   </div>
 
   <div id="plan-info-plan" class="plan-info-plan my-3 p-4">
