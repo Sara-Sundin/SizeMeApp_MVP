@@ -29,26 +29,32 @@ def plan_view(request):
 
 
 def contact(request):
-    form = ContactForm(request.POST or None)
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
 
-    if request.method == "POST" and form.is_valid():
-        name = form.cleaned_data['name']
-        email = form.cleaned_data['email']
-        message = form.cleaned_data['message']
+            try:
+                send_mail(
+                    subject=f"New Contact Form Submission from {name}",
+                    message=f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}",
+                    from_email="noreply@sizemeapp.se",
+                    recipient_list=["sara@sizemeapp.se"],
+                    fail_silently=False,
+                )
+                request.session['show_success_modal'] = True
+            except BadHeaderError:
+                messages.error(request, "Invalid header found.")
+            except Exception:
+                messages.error(request, "Something went wrong. Please try again later.")
 
-        try:
-            send_mail(
-                subject=f"New Contact Form Submission from {name}",
-                message=f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}",
-                from_email="noreply@sizemeapp.se",
-                recipient_list=["sara@sizemeapp.se"],
-                fail_silently=False,
-            )
-            request.session['show_success_modal'] = True
-        except BadHeaderError:
-            messages.error(request, "Invalid header found.")
-        except Exception:
-            messages.error(request, "Something went wrong. Please try again later.")
-
-        return redirect(request.META.get('HTTP_REFERER', '/'))
-
+            return redirect(request.META.get('HTTP_REFERER', '/'))
+        else:
+            # Form is invalid: re-render the page with the invalid form
+            return render(request, 'your_template.html', {
+                'contact_form': form,  # Important: pass the invalid form
+            })
+    else:
+        return redirect('/')
