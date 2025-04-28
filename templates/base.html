@@ -40,7 +40,7 @@
         <h2 class="pb-2">Send us a message!</h2>
         <form method="post" action="{% url 'contact' %}" class="contact-form">
           {% csrf_token %}
-          {{ form|crispy }}
+          {{ contact_form|crispy }}
           <button type="submit" class="cta-btn cta-btn--secondary mt-3">Send Message</button>
         </form>
       </div>
