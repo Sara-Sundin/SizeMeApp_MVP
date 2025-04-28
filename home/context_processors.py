@@ -2,6 +2,7 @@ from .forms import ContactForm
 
 def global_context(request):
     return {
-        "form": ContactForm(),
+        "contact_form": ContactForm(),
         "show_success_modal": request.session.pop("show_success_modal", False),
     }
+

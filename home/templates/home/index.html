@@ -9,8 +9,10 @@
             <div class="col-12 col-md-10 col-lg-8 text-center text-lg-start">
                 <h1 class="hero-heading">Seamless Sizing for Smarter Shopping.</h1>
                 <div class="d-flex flex-column flex-md-row justify-content-center justify-content-lg-start gap-3 mt-4 py-5">
-                    <a class="cta-btn cta-btn--primary" href="{% url 'signup' %}">Try the SizeMeApp tool.</a> 
-                    <a class="cta-btn cta-btn--secondary" href="{% url 'home' %}#plans">Monthly plans.</a>  
+                    <a class="cta-btn cta-btn--primary" href="{% if user.is_authenticated %}{% url 'webshop' %}{% else %}{% url 'signup' %}{% endif %}">
+                        Try the SizeMeApp tool.
+                    </a>                    
+                    <a class="cta-btn cta-btn--secondary" href="{% url 'home' %}#plan-container">Monthly plans.</a>  
                 </div> 
             </div>
         </div>
