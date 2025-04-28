@@ -1,15 +1,21 @@
 Hello {{ order.full_name }}!
 
-This is a confirmation of your order at SizeMeApp Your order information is below:
+This is a confirmation of your order at SizeMeApp. 
+Your order information is below:
 
 Order Number: {{ order.order_number }}
 Order Date: {{ order.date }}
 
 Order Total: ${{ order.order_total }}
-Delivery: ${{ order.delivery_cost }}
+
+Items:
+{% for item in order_items %}
+- {{ item.quantity }} x {{ item.plan.name }} Setup Cost ${{ item.plan.setup_cost }}
+Monthly: ${{ item.plan.monthly_price }}
+{% endfor %}                                 
 Grand Total: ${{ order.grand_total }}
 
-Your order will be shipped to {{ order.street_address1 }} in {{ order.town_or_city }}, {{ order.country }}.
+We will contact you as soon as possible to get started with your monthly subscription.
 
 We've got your phone number on file as {{ order.phone_number }}.
 

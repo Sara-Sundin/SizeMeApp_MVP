@@ -12,6 +12,8 @@ from .forms import OrderForm
 stripe.api_key = settings.STRIPE_SECRET_KEY
 User = get_user_model()
 
+from .utils import send_order_confirmation_email
+
 
 def checkout(request):
     bag = request.session.get('bag', {})
@@ -117,5 +119,12 @@ def checkout(request):
 
 def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
+
+    # Send confirmation email
+    send_order_confirmation_email(order)
+
     messages.success(request, f"Order successfully processed! Your order number is {order.order_number}.")
     return render(request, 'checkout/checkout_success.html', {'order': order})
+
+
+
