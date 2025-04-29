@@ -59,9 +59,9 @@ Improvement messages:
 ### Checkout Page
 
 #### First run with Lighthouse (Checkout page)
+Overall Stripe gave me warnings and third party cookies I could not remove so I included one run with Lighthouse where Stripe is disabled.
 
 ![Lighthouse Checkout 1st run](assets/images_readme/lighthouse_checkout_first.jpg)
-!!!!!!!!!!!!!!!!
 
 Improvement messages: 
 - Stripe inserts aria-hidden = true on card field.
@@ -71,7 +71,9 @@ Improvement messages:
   
 #### Second run with Lighthouse (Checkout page) - after fixing the issues.
 
-![Lighthouse Checkout 2nd run](#)
+![Lighthouse Checkout 2nd run -no stripe](assets/images_readme/lighthouse_checkout_final_no-stripe.jpg)
+
+![Lighthouse Checkout 2nd run -stripe](assets/images_readme/lighthouse_checkout_final_stripe.jpg)
 
 ### Signup Page
 
