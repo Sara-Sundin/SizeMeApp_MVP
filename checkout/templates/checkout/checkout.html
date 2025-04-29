@@ -32,7 +32,7 @@
             {% for item in bag_items %}
             <div class="row mb-3">
                 <div class="col-9">
-                    <h5>{{ item.plan.name }}</h5>
+                    <h3>{{ item.plan.name }}</h3>
                     <p class="mb-0 small">{{ item.plan.short_description }}</p>
                     <p class="mb-0">Setup cost: ${{ item.plan.setup_cost|floatformat:2 }}</p>
                     <p class="mb-0">Monthly: ${{ item.plan.monthly_price|floatformat:2 }}</p>
@@ -103,12 +103,17 @@
                     </div>                    
                     {% endif %}
                 </fieldset>
+                
                 <fieldset class="px-3">
-                    <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
-                    <div class="mb-3" id="card-element"></div>
+                    <legend id="payment-label" class="fieldset-label small text-black px-2 w-auto">Payment</legend>
+                    
+                    <div role="group" aria-labelledby="payment-label">
+                        <div class="mb-3" id="card-element"></div>
+                    </div>
+                
                     <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
                     <input type="hidden" value="{{ client_secret }}" name="client_secret">
-                </fieldset>
+                </fieldset>                
 
                 <div class="submit-button text-right mt-5 mb-2">
                     <a href="{% url 'view_bag' %}" class="btn btn-outline-black rounded-0">

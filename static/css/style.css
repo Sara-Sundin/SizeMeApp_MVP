@@ -198,7 +198,7 @@ h4 {
     justify-content: center;
 }
 
-#plans h3 {
+#plans h2 {
     font-size: 70px;
     color: var(--secondary-color);
     font-family: var(--primary-font);
@@ -473,7 +473,7 @@ footer p {
         margin-top: 40px;
     }
 
-    #plans h3 {
+    #plans h2 {
         font-size: 90px;
     }
 
@@ -494,7 +494,7 @@ footer p {
 /* Desktop (lg) */
 @media (min-width: 1024px) {
 
-    #plans h3 {
+    #plans h2 {
         font-size: 110px;
     }
 

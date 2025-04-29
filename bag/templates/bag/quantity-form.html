@@ -4,19 +4,25 @@
         <div class="input-group">
             <div class="input-group-prepend">
                 <button type="submit" class="decrement-qty btn btn-sm btn-black rounded-0" 
-                    data-item_id="{{ item.plan.id }}" id="decrement-qty_{{ item.plan.id }}">
-                    <span><i class="fas fa-minus fa-sm"></i></span>
+                    data-item_id="{{ item.plan.id }}" id="decrement-qty_{{ item.plan.id }}"
+                    aria-label="Decrease quantity">
+                    <span><i class="fas fa-minus fa-sm" aria-hidden="true"></i></span>
                 </button>
-            </div>
-            <input class="form-control form-control-sm qty_input" type="number"
-                name="quantity" value="{{ item.quantity }}" min="1" max="99"
-                data-item_id="{{ item.plan.id }}"
-                id="id_qty_{{ item.plan.id }}">
-            <div class="input-group-append">
-                <button type="submit" class="increment-qty btn btn-sm btn-black rounded-0"
-                    data-item_id="{{ item.plan.id }}" id="increment-qty_{{ item.plan.id }}">
-                    <span><i class="fas fa-plus fa-sm"></i></span>
-                </button>
+
+                <label for="id_qty_{{ item.plan.id }}" class="visually-hidden">Quantity</label>
+                <input class="form-control form-control-sm qty_input" type="number"
+                    name="quantity" value="{{ item.quantity }}" min="1" max="99"
+                    data-item_id="{{ item.plan.id }}"
+                    id="id_qty_{{ item.plan.id }}">
+
+
+                <div class="input-group-append">
+                    <button type="submit" class="increment-qty btn btn-sm btn-black rounded-0"
+                        data-item_id="{{ item.plan.id }}" id="increment-qty_{{ item.plan.id }}"
+                        aria-label="Increase quantity">
+                        <span><i class="fas fa-plus fa-sm" aria-hidden="true"></i></span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>

@@ -2,29 +2,29 @@
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top">
     <div class="container">
-        <!-- Brand logo / link -->
+        <!-- Brand logo -->
         <a class="navbar-brand" href="{% url 'home' %}">
             <img src="{% static 'images/logo_icon.png' %}" alt="SizeMeApp Logo" width="50">
         </a>
+
+        <!-- Size Mode Button -->
         {% if show_size_mode_toggle %}
-        <li>
-            <a href="{% url 'toggle_size_mode' %}" class="btn cta-btn--secondary btn-sm px-4">
+            <a href="{% url 'toggle_size_mode' %}" class="btn cta-btn--secondary btn-sm px-4 me-3">
                 {% if request.session.size_mode %}
                     Exit size mode
                 {% else %}
                     Enter size mode
                 {% endif %}
             </a>
-        </li>
         {% endif %}
-          
-        <!-- TOGGLE BUTTON - visible only on mobile -->
-        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+
+        <!-- Navbar toggler (mobile) -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Collapsible content -->
+        <!-- Collapsible content (menu links) -->
         <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
@@ -32,22 +32,23 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="plansDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Plans
+                        Plans
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="plansDropdown">
                         <li><a class="dropdown-item" href="{% url 'home' %}#plan-container">Overview</a></li>
                         <li><a class="dropdown-item" href="{% url 'plan' %}?focus=starter">Starter Plan</a></li>
                         <li><a class="dropdown-item" href="{% url 'plan' %}?focus=growth">Growth Plan</a></li>
                         <li><a class="dropdown-item" href="{% url 'plan' %}?focus=enterprise">Enterprise Plan</a></li>
-                      </ul>                      
-                  </li>                  
-                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#contact">Contact</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}#contact">Contact</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {% if request.path == '/accounts/dashboard/' %}active{% endif %}" 
                        href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                        <i class="fas fa-user pe-1"></i>Account 
                     </a>
-                
                     <ul class="dropdown-menu" aria-labelledby="accountDropdown">
                         {% if user.is_authenticated %}
                             <li>
@@ -61,17 +62,17 @@
                                 <a class="dropdown-item" href="{% url 'signup' %}">Register</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+                                <a class="dropdown-item" href="{% url 'login' %}?next={{ request.path }}">Login</a>
                             </li>
                         {% endif %}
                     </ul>
-                </li>                                                
-            </ul>        
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
 
-<!--Category Filter Buttons -->
+<!-- Category Filter Buttons -->
 <div class="d-flex flex-wrap justify-content-center gap-2 py-4 bg-white">
     <a href="{% url 'products' %}?category=tshirts" class="btn cta-btn--primary btn-sm px-4">Crew Necks</a>
     <a href="{% url 'products' %}?category=shirts" class="btn cta-btn--tertiary btn-sm px-4">Shirts</a>
