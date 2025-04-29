@@ -33,13 +33,19 @@ I have recorded the first and final run with Lighthouse for all pages with image
 
 #### First run with Lighthouse - Home page
 
-![Lighthouse Home 1st run](#)
+![Lighthouse Home 1st run](assets/images_readme/lighthouse_home_first.jpg)
+
+### Plan Page
+
+#### First run with Lighthouse - Plan page
+
+![Lighthouse Plan 1st run](assets/images_readme/lighthouse_plans_first.jpg)
 
 ### Bag Page
 
 #### First run with Lighthouse (Bag page)
 
-![Lighthouse Bag 1st run](#)
+![Lighthouse Bag 1st run](assets/images_readme/lighthouse_bag_first.jpg)
 
 Improvement messages: 
 - Buttons do not have accessible names.
@@ -48,13 +54,14 @@ Improvement messages:
   
 #### Second run with Lighthouse (Bag page) - after fixing the issues.
 
-![Lighthouse Bag 2nd run](#)
+![Lighthouse Bag 2nd run](assets/images_readme/lighthouse_bag_final.jpg)
 
 ### Checkout Page
 
 #### First run with Lighthouse (Checkout page)
 
-![Lighthouse Checkout 1st run](#)
+![Lighthouse Checkout 1st run](assets/images_readme/lighthouse_checkout_first.jpg)
+!!!!!!!!!!!!!!!!
 
 Improvement messages: 
 - Stripe inserts aria-hidden = true on card field.
@@ -70,44 +77,44 @@ Improvement messages:
 
 #### First run with Lighthouse - Signup page
 
-![Lighthouse Signup 1st run](#)
+![Lighthouse Signup 1st run](assets/images_readme/lighthouse_signup_first.jpg)
 
 ### Login Page
 
 #### First run with Lighthouse - Login page
 
-![Lighthouse Login 1st run](#)
+![Lighthouse Login 1st run](assets/images_readme/lighthouse_login_first.jpg)
 
 ### Dashboard Page
 
 #### First run with Lighthouse - Dashboard page
 
-![Lighthouse Dashboard 1st run](#)
+![Lighthouse Dashboard 1st run](assets/images_readme/lighthouse_dashboard_first.jpg)
 
 ### Shop Page
 
 #### First run with Lighthouse - Shop page
 
-![Lighthouse Shop 1st run](#)
+![Lighthouse Shop 1st run](assets/images_readme/lighthouse_shop_first.jpg)
 
 ### Products Page
 
 #### First run with Lighthouse (Products page)
 
-![Lighthouse Products 1st run](#)
+![Lighthouse Products 1st run](assets/images_readme/lighthouse_shop_products_first.jpg)
 
 Improvement messages: 
 - Select sorting field missing label.
   
 #### Second run with Lighthouse (Products page) - after fixing the issues.
 
-![Lighthouse Products 2nd run](#)
+![Lighthouse Products 2nd run](assets/images_readme/lighthouse_shop_products_final.jpg)
 
 ### Product Detail Page
 
 #### First run with Lighthouse (Product Detail page)
 
-![Lighthouse Product Detail 1st run](#)
+![Lighthouse Product Detail 1st run](assets/images_readme/lighthouse_product_detail_first.jpg)
 
 Improvement messages: 
 - Buttons do not have accessible names.
@@ -117,7 +124,7 @@ Improvement messages:
   
 #### Second run with Lighthouse (Product Detail page) - after fixing the issues.
 
-![Lighthouse Product Detail 2nd run](#)
+![Lighthouse Product Detail 2nd run](assets/images_readme/lighthouse_product_detail_final.jpg)
 
 ## Validation
 
