@@ -73,8 +73,6 @@ Improvement messages:
 
 ![Lighthouse Checkout 2nd run -no stripe](assets/images_readme/lighthouse_checkout_final_no-stripe.jpg)
 
-![Lighthouse Checkout 2nd run -stripe](assets/images_readme/lighthouse_checkout_final_stripe.jpg)
-
 ### Signup Page
 
 #### First run with Lighthouse - Signup page
