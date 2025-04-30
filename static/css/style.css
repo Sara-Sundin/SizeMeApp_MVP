@@ -17,11 +17,13 @@
 }
 
 body {
-    font-family: var(--secondary-font);
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
+    font-family: var(--secondary-font);
     margin-top: 39.33px;
     overflow-x: hidden;
-}
+} 
 
 main {
     flex: 1;

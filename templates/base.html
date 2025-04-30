@@ -31,18 +31,22 @@
     {% block content %}{% endblock %}
 </main>
 
-<footer class="footer text-start pt-5">
 
+<footer class="footer text-start pt-5">
+  {% block footer %}
   <section id="contact" class="contact-wrapper container px-4">
     <div class="px-md-4 row align-items-start">
       <!-- Contact Form (appears first in markup = top on mobile) -->
       <div class="contact-form-container col-12 col-md-6 mb-5 mb-md-0">
         <h2 class="pb-2">Send us a message!</h2>
+        {% if contact_form %}
         <form method="post" action="{% url 'contact' %}" class="contact-form">
           {% csrf_token %}
           {{ contact_form|crispy }}
           <button type="submit" class="cta-btn cta-btn--secondary mt-3">Send Message</button>
         </form>
+      {% endif %}
+      
       </div>
   
       <!-- Contact Info (sits below on mobile, side by side on md+) -->
@@ -73,13 +77,15 @@
   
     <hr class="custom-separator">
   </section>
+  {% endblock %}
   
-    <div class="text-center px-3 pb-4">
+    <div class="text-center bg-black text-white ">
         {% block copyright %}
         <p>&copy; 2025 TechFit Solutions. All rights reserved.</p>
         {% endblock %}
     </div>
 </footer>
+
 
 <!-- Hidden logout form -->
 <form id="logout-form" method="post" action="{% url 'logout' %}" style="display: none;">
