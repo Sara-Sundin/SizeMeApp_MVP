@@ -172,7 +172,7 @@
 <div class="modal fade" id="UpdateMeasurementsModal" tabindex="-1" aria-labelledby="updateMeasurementsLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form id="updateMeasurementsForm" method="post" action="{% url 'update_measurements_from_webshop' %}">
+      <form id="updateMeasurementsForm" class="needs-validation" novalidate method="post" action="{% url 'update_measurements_from_webshop' %}">
         {% csrf_token %}
         <div class="modal-header">
           <h5 class="modal-title" id="updateMeasurementsLabel">Update Your Measurements</h5>
@@ -182,22 +182,26 @@
         <div class="modal-body">
           <div class="form-group mb-3">
             <label for="chest">Chest (cm)</label>
-            <input type="number" name="chest" id="chest" class="form-control" value="{{ user.chest|default_if_none:'' }}">
+            <input type="number" name="chest" id="chest" class="form-control" required value="{{ user.chest|default_if_none:'' }}">
+            <div class="invalid-feedback">Please enter your chest measurement.</div>
           </div>
 
           <div class="form-group mb-3">
             <label for="waist">Waist (cm)</label>
-            <input type="number" name="waist" id="waist" class="form-control" value="{{ user.waist|default_if_none:'' }}">
+            <input type="number" name="waist" id="waist" class="form-control" required value="{{ user.waist|default_if_none:'' }}">
+            <div class="invalid-feedback">Please enter your waist measurement.</div>
           </div>
 
           <div class="form-group mb-3">
             <label for="hips">Hips (cm)</label>
-            <input type="number" name="hips" id="hips" class="form-control" value="{{ user.hips|default_if_none:'' }}">
+            <input type="number" name="hips" id="hips" class="form-control" required value="{{ user.hips|default_if_none:'' }}">
+            <div class="invalid-feedback">Please enter your hips measurement.</div>
           </div>
 
           <div class="form-group mb-3">
             <label for="shoulders">Shoulders (cm)</label>
-            <input type="number" name="shoulders" id="shoulders" class="form-control" value="{{ user.shoulders|default_if_none:'' }}">
+            <input type="number" name="shoulders" id="shoulders" class="form-control" required value="{{ user.shoulders|default_if_none:'' }}">
+            <div class="invalid-feedback">Please enter your shoulders measurement.</div>
           </div>
         </div>
 
@@ -277,6 +281,22 @@
       }
     });
   </script>
+
+<script>
+  (function () {
+    'use strict';
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.from(forms).forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+</script>
 
 {% if show_webshop_measurements_success %}
 <script>
