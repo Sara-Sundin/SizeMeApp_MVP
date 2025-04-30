@@ -451,7 +451,15 @@ footer p {
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-  }  
+  } 
+  
+/* 404 */
+
+.logo-404 {
+    width: 200px;
+    height: auto;
+}
+
 
 /* Tablet (md) */
 @media (min-width: 768px) {

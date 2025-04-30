@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container text-center py-5">
+    <img src="{% static 'images/logo_icon_blk.png' %}" alt="SizeMeApp Logo" class="logo-404 mb-4">
+    <h1 class="display-4">Oops! Page Not Found</h1>
+    <p class="lead">The page you're looking for doesn't exist or has been moved.</p>
+    <a href="{% url 'home' %}" class="btn btn-dark mt-4">Go Home</a>
+</div>
+
+{% block footer %}
+<!-- Empty block to skip the footer (no contact form) -->
+{% endblock %}
+
+{% endblock %}
