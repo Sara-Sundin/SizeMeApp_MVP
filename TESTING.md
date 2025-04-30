@@ -134,21 +134,55 @@ Improvement messages:
 I have included screenprints of the first and final validation of the HTML with W3C validation.
 <br>
 
+#### Home Page HTML- Initial Check
+
+  ![Validation HTML Home 1st](assets/images_readme/home_html_check_first.jpg)
+  
+#### Home Page HTML- Final Check
+
+  ![Validation HTML Home Final](assets/images_readme/home_html_check_final.jpg)
+
+
+#### Plans Page HTML- Initial Check
+
+  ![Validation HTML Plans 1st](assets/images_readme/plans_html_check_first.jpg)
+
 #### Signup Page HTML- Initial Check
 
-  ![Validation HTML Signup 1st](#)
+  ![Validation HTML Signup 1st](assets/images_readme/signup_html_check_first.jpg)
   
 #### Signup Page HTML- Final Check
 
-  ![Validation HTML Signup Final](#)
+  ![Validation HTML Signup Final](assets/images_readme/signup_html_check_final.jpg)
 
 #### Login Page HTML- Initial Check
 
-  ![Validation HTML Login 1st](#)
-  
-#### Login Page HTML- Final Check
+  ![Validation HTML Login 1st](assets/images_readme/login_html_check_first.jpg)
 
-  ![Validation HTML Login Final](#)
+#### Dashboard Page HTML- Initial Check
+
+  ![Validation HTML Dashboard 1st](assets/images_readme/dashboard_html_check_first.jpg)
+
+#### Shop Page HTML- Initial Check
+
+  ![Validation HTML Shop 1st](assets/images_readme/shop_html_check_first.jpg)
+  
+#### Shop Page HTML- Final Check
+
+  ![Validation HTML Shop Final](assets/images_readme/shop_html_check_final.jpg)
+
+#### Products Page HTML- Initial Check
+
+  ![Validation HTML Products 1st](assets/images_readme/products_html_check_first.jpg)
+
+
+#### Product Detail Page HTML- Initial Check
+
+  ![Validation HTML Detail 1st](assets/images_readme/product-detail_html_check_first.jpg)
+  
+#### Product Detail Page HTML- Final Check
+
+  ![Validation HTML Detail Final](assets/images_readme/product-detail_html_check_final.jpg)
 
 ### W3C CSS Validator
 The CSS was succesfully validated for all pages.
