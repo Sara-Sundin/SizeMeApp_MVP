@@ -187,7 +187,7 @@ I have included screenprints of the first and final validation of the HTML with 
 ### W3C CSS Validator
 The CSS was succesfully validated for all pages.
 
-![Screenshot of the CSS Validation](#)
+![Screenshot of the CSS Validation](assets/images_readme/w3c-css.jpg)
 
 ### JSHint Validator
 I have included screenprints of the first and final validation for each script validated with JSHint.
