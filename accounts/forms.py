@@ -13,19 +13,14 @@ class CustomSignupForm(UserCreationForm):
         widget=forms.TextInput(attrs={
             "class": "form-control",
             "placeholder": "Enter your full name",
-            "autofocus": "autofocus",  # This sets the focus on load
+            "autofocus": "autofocus",  # Keep focus here
         }),
     )
 
     class Meta:
         model = CustomUser
         fields = ("full_name", "email", "password1")
-
         widgets = {
-            "email": forms.EmailInput(attrs={
-                "class": "form-control",
-                "placeholder": "Enter your email",
-            }),
             "password1": forms.PasswordInput(attrs={
                 "class": "form-control",
                 "placeholder": "Password",
@@ -34,8 +29,24 @@ class CustomSignupForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         if "password2" in self.fields:
             del self.fields["password2"]
+
+        self.fields["email"].widget.attrs.update({
+            "class": "form-control",
+            "placeholder": "Enter your email",
+        })
+
+        self.fields["password1"].widget.attrs.update({
+            "class": "form-control",
+            "placeholder": "Password (min. 8 characters)",
+        })
+
+        # Remove unwanted autofocus
+        self.fields["email"].widget.attrs.pop("autofocus", None)
+        self.fields["password1"].widget.attrs.pop("autofocus", None)
+
 
     def save(self, commit=True):
         user = super().save(commit=False)

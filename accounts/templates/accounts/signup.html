@@ -22,40 +22,31 @@
         {% csrf_token %}
 
         {% if form.non_field_errors %}
-        <div class="alert alert-danger">
-          {{ form.non_field_errors.0 }}
-        </div>
+          <div class="alert alert-danger">
+            {{ form.non_field_errors.0 }}
+          </div>
         {% endif %}
 
-        <!-- Full Name Field -->
         {{ form.full_name|as_crispy_field }}
-
-        <!-- Email Field -->
         {{ form.email|as_crispy_field }}
+        {{ form.password1|as_crispy_field }}
 
-        <!-- Password Field with Manual Toggle Below -->
-        <div class="form-group mb-3">
-          {{ form.password1.label_tag }}
-          <input type="password" name="{{ form.password1.name }}" id="{{ form.password1.id_for_label }}"
-                 class="form-control" placeholder="Password (min. 8 characters)" required>
-
-          <div class="mt-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary toggle-password"
-                    onclick="togglePassword('{{ form.password1.id_for_label }}')">
-              <i class="fa fa-eye"></i>
-              <span class="toggle-text">Show Password</span>
-            </button>
-          </div>
-
-          {% if form.password1.errors %}
-          <small class="text-danger">{{ form.password1.errors.0 }}</small>
-          {% endif %}
+        <div class="my-2">
+          <button type="button" class="btn btn-sm btn-outline-secondary toggle-password"
+                  onclick="togglePassword('{{ form.password1.id_for_label }}')">
+            <i class="fa fa-eye"></i>
+            <span class="toggle-text">Show Password</span>
+          </button>
         </div>
 
         <button class="cta-btn cta-btn--primary mb-3" type="submit">
           Sign Up &raquo;
         </button>
       </form>
+
+      {% if form.password1.errors %}
+        <small class="text-danger">{{ form.password1.errors.0 }}</small>
+      {% endif %}
     </div>
   </div>
 </div>
@@ -79,4 +70,8 @@
     }
   }
 </script>
+{% block footer %}
+<!-- Empty block to skip the footer (no contact form) -->
+{% endblock %}
+
 {% endblock %}

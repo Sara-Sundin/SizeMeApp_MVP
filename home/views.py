@@ -6,13 +6,13 @@ from django.contrib import messages
 
 
 def index(request):
-    form = ContactForm()
+    contact_form = ContactForm(prefix='contact')
     show_account_deleted_modal = request.session.pop("show_account_deleted_modal", False)
     show_logged_out_modal = request.session.pop("show_logged_out_modal", False)
     show_success_modal = request.session.pop("show_success_modal", False)
 
     return render(request, 'home/index.html', {
-        "form": form,
+        "contact_form": contact_form,
         "show_account_deleted_modal": show_account_deleted_modal,
         "show_logged_out_modal": show_logged_out_modal,
         "show_success_modal": show_success_modal,
@@ -53,8 +53,8 @@ def contact(request):
             return redirect(request.META.get('HTTP_REFERER', '/'))
         else:
             # Form is invalid: re-render the page with the invalid form
-            return render(request, 'your_template.html', {
-                'contact_form': form,  # Important: pass the invalid form
+            return render(request, 'base.html', {
+                'contact_form': ContactForm(request.POST, prefix='contact'),
             })
     else:
         return redirect('/')
