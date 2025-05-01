@@ -13,7 +13,7 @@ from sizemeapp.utils.recommendations import get_size_recommendations
 CATEGORY_BUTTON_CLASSES = {
     'tshirts': 'cta-btn--primary',
     'shirts': 'cta-btn--tertiary',
-    'hats': 'cta-btn--black',
+    'sweatshirts': 'cta-btn--black',
 }
 
 
@@ -91,7 +91,7 @@ def product_detail(request, product_id):
     CATEGORY_BUTTON_CLASSES = {
         'tshirts': 'cta-btn--primary',
         'shirts': 'cta-btn--tertiary',
-        'hats': 'cta-btn--black',
+        'sweatshirts': 'cta-btn--black',
     }
 
     category_button_class = CATEGORY_BUTTON_CLASSES.get(

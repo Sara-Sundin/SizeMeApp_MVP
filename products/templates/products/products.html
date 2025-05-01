@@ -64,7 +64,7 @@
                                             <p class="lead mb-0 text-left font-weight-bold">${{ product.price }}</p>
                                                 {% if product.category %}
                                                 {% with product.category.friendly_name as cat %}
-                                                    {% if cat == "Crew Necks" %}
+                                                    {% if cat == "T Shirts" %}
                                                         {% with "cta-btn--primary" as btn_class %}
                                                             <p class="small mt-1 mb-0">
                                                                 <a class="btn {{ btn_class }} btn-sm px-4" href="{% url 'products' %}?category={{ product.category.name }}">
@@ -80,7 +80,7 @@
                                                                 </a>
                                                             </p>
                                                         {% endwith %}
-                                                    {% elif cat == "Hats" %}
+                                                    {% elif cat == "Sweatshirts" %}
                                                         {% with "cta-btn--black" as btn_class %}
                                                             <p class="small mt-1 mb-0">
                                                                 <a class="btn {{ btn_class }} btn-sm px-4" href="{% url 'products' %}?category={{ product.category.name }}">
