@@ -1,7 +1,9 @@
+<!-- Form for adjusting the quantity of a specific plan in the bag -->
 <form class="form update-form" method="POST" action="{% url 'adjust_bag' item.plan.id %}">
     {% csrf_token %}
     <div class="form-group">
         <div class="input-group">
+            <!-- Decrement button -->
             <div class="input-group-prepend">
                 <button type="submit" class="decrement-qty btn btn-sm btn-black rounded-0" 
                     data-item_id="{{ item.plan.id }}" id="decrement-qty_{{ item.plan.id }}"
@@ -9,13 +11,14 @@
                     <span><i class="fas fa-minus fa-sm" aria-hidden="true"></i></span>
                 </button>
 
+                <!-- Quantity input field -->
                 <label for="id_qty_{{ item.plan.id }}" class="visually-hidden">Quantity</label>
                 <input class="form-control form-control-sm qty_input" type="number"
                     name="quantity" value="{{ item.quantity }}" min="1" max="99"
                     data-item_id="{{ item.plan.id }}"
                     id="id_qty_{{ item.plan.id }}">
 
-
+                <!-- Increment button -->
                 <div class="input-group-append">
                     <button type="submit" class="increment-qty btn btn-sm btn-black rounded-0"
                         data-item_id="{{ item.plan.id }}" id="increment-qty_{{ item.plan.id }}"
@@ -28,6 +31,7 @@
     </div>
 </form>
 
+<!-- Link to remove the item entirely from the bag -->
 <a class="remove-item text-danger float-right" id="remove_{{ item.plan.id }}">
     <small>Remove</small>
 </a>

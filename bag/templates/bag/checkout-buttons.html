@@ -1,4 +1,5 @@
 {% if bag_items %}
+    <!-- Show checkout button only if there are items in the bag -->
     <div class="mt-3">
         <a href="{% url 'checkout' %}" class="btn btn-dark btn-lg">
             <span class="icon">
