@@ -3,6 +3,7 @@ from .forms import ContactForm
 from .models import Plan
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib import messages
+from urllib.parse import urlparse
 
 
 def index(request):
@@ -31,6 +32,9 @@ def plan_view(request):
 def contact(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
+        referer = request.META.get('HTTP_REFERER', '/')
+        path = urlparse(referer).path
+
         if form.is_valid():
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
@@ -50,14 +54,15 @@ def contact(request):
             except Exception:
                 messages.error(request, "Something went wrong. Please try again later.")
 
-            return redirect(request.META.get('HTTP_REFERER', '/'))
+            return redirect(referer)
         else:
-            # Form is invalid: re-render the page with the invalid form
-            return render(request, 'base.html', {
-                'contact_form': ContactForm(request.POST, prefix='contact'),
+            # Re-render the original page with the invalid form
+            template_name = 'home/index.html' if path == '/' else path.strip('/') + '.html'
+            return render(request, template_name, {
+                'contact_form': form
             })
-    else:
-        return redirect('/')
+
+    return redirect('/')
     
 
 def custom_404(request, exception):
