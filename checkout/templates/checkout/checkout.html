@@ -6,17 +6,10 @@
 <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
 
-{% block page_header %}
-<div class="container header-container">
-    <div class="row">
-        <div class="col"></div>
-    </div>
-</div>
-{% endblock %}
-
 {% block content %}
 <div class="overlay"></div>
 <div class="container">
+    <!-- Page Heading -->
     <div class="row">
         <div class="col">
             <hr>
@@ -26,9 +19,11 @@
     </div>
 
     <div class="row">
-        <!-- Summary Column -->
+        <!-- Right Column: Order Summary -->
         <div class="col-12 col-lg-6 order-lg-last mb-5">
             <p class="text-muted">You're about to purchase:</p>
+
+            <!-- Loop through all bag items -->
             {% for item in bag_items %}
             <div class="row mb-3">
                 <div class="col-9">
@@ -44,6 +39,8 @@
                 </div>
             </div>
             {% endfor %}
+
+            <!-- Total Cost -->
             <div class="text-right">
                 <hr>
                 <p class="h5">Total: ${{ total|floatformat:2 }}</p>
@@ -51,6 +48,7 @@
             </div>
         </div>
 
+        <!-- Form Errors (if any) -->
         {% if order_form.errors %}
         <div class="alert alert-danger">
             <strong>There were errors in your form:</strong>
@@ -67,17 +65,20 @@
         </div>
         {% endif %}
 
-
-        <!-- Checkout Form Column -->
+        <!-- Left Column: Checkout Form -->
         <div class="col-12 col-lg-6">
             <p class="text-muted">Please fill out the form below to complete your order</p>
             <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                 {% csrf_token %}
+
+                <!-- Customer Info -->
                 <fieldset class="rounded px-3 mb-5">
                     <legend class="fieldset-label small text-black px-2 w-auto">Details</legend>
                     {{ order_form.full_name | as_crispy_field }}
                     {{ order_form.email | as_crispy_field }}
                 </fieldset>
+
+                <!-- Delivery Info -->
                 <fieldset class="rounded px-3 mb-5">
                     <legend class="fieldset-label small text-black px-2 w-auto">Delivery</legend>
                     {{ order_form.phone_number|as_crispy_field }}
@@ -86,11 +87,12 @@
                     {{ order_form.town_or_city|as_crispy_field }}
                     {{ order_form.postcode|as_crispy_field }}
                     {{ order_form.county|as_crispy_field }}
-                    
+
                     <!-- Manual label for accessibility -->
                     <label for="{{ order_form.country.id_for_label }}" class="fieldset-label small text-black px-2 w-auto">Country</label>
                     {{ order_form.country|as_crispy_field }}
-                                         
+
+                    <!-- Save Info Toggle -->
                     {% if user.is_authenticated %}
                     <div class="form-check form-check-inline float-right mr-0">
                         <label class="form-check-label" for="id-save-info">
@@ -108,17 +110,22 @@
                     {% endif %}
                 </fieldset>
                 
+                <!-- Stripe Payment Info -->
                 <fieldset class="px-3">
                     <legend id="payment-label" class="fieldset-label small text-black px-2 w-auto">Payment</legend>
                     
                     <div role="group" aria-labelledby="payment-label">
                         <div class="mb-3" id="card-element"></div>
                     </div>
-                
+
+                    <!-- Stripe Error Display -->
                     <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+
+                    <!-- Hidden client secret -->
                     <input type="hidden" value="{{ client_secret }}" name="client_secret">
                 </fieldset>                
 
+                <!-- Submit / Back to Bag -->
                 <div class="submit-button text-right mt-5 mb-2">
                     <a href="{% url 'view_bag' %}" class="btn btn-outline-black rounded-0">
                         <span class="icon"><i class="fas fa-chevron-left"></i></span>
@@ -138,24 +145,28 @@
     </div>
 </div>
 
-<!-- Loading Spinner -->
+<!-- Loading Overlay with Spinner -->
 <div id="loading-overlay" class="d-none">
     <div class="spinner-container">
-      <div class="orbit-wrapper">
-        <div class="orbiting-dot"></div>
-      </div>
-      <div class="spinner-logo">
-        <img src="{% static 'images/logo_icon.png' %}" alt="SizeMeApp Logo">
-      </div>
+        <div class="orbit-wrapper">
+            <div class="orbiting-dot"></div>
+        </div>
+        <div class="spinner-logo">
+            <img src="{% static 'images/logo_icon.png' %}" alt="SizeMeApp Logo">
+        </div>
     </div>
-  </div>   
+</div>
 {% endblock %}
 
 {% block postloadjs %}
-  {{ block.super }}
- <script src="https://js.stripe.com/v3/"></script>
-  {{ stripe_public_key|json_script:"id_stripe_public_key" }}
-  {{ client_secret|json_script:"id_client_secret" }}
-  <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+    {{ block.super }}
+    <!-- Load Stripe JS -->
+    <script src="https://js.stripe.com/v3/"></script>
 
+    <!-- Inject Stripe keys into JS -->
+    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+    {{ client_secret|json_script:"id_client_secret" }}
+
+    <!-- Stripe Elements logic -->
+    <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
 {% endblock %}
