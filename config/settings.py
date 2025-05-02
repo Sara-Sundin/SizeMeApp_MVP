@@ -75,7 +75,7 @@ TEMPLATES = [
             'django.template.context_processors.request',
             'django.contrib.auth.context_processors.auth',
             'django.contrib.messages.context_processors.messages',
-            'home.context_processors.global_context',  # ← Updated this line
+            'home.context_processors.global_context',
             'bag.context_processors.bag_contents',
         ],
 
@@ -152,6 +152,8 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 STRIPE_PUBLIC_KEY = config('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
+STRIPE_WH_SECRET = config('STRIPE_WH_SECRET')
+
 
 # I18n
 LANGUAGE_CODE = 'en-us'
