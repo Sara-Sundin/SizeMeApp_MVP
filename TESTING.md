@@ -2,6 +2,7 @@
 - [User Story Testing](#user-story-testing)
 - [Lighthouse](#lighthouse)
 - [Validation](#validation)
+- [Bugs and Fixes](#bugs-and-fixes)
 
 ## User Story Testing
 
@@ -188,15 +189,39 @@ The CSS was succesfully validated for all pages.
 ![Screenshot of the CSS Validation](assets/images_readme/w3c-css.jpg)
 
 ### JSHint Validator
-I have included screenprints of the first and final validation for each script validated with JSHint.
+I have included screenprints of all final validation for each script validated with JSHint.
 
-#### Script- Initial Check
+#### Base.js - JSHint Check
 
-![Script JSHint First Check](#)
-  
-#### Script- Final Check
+![Base JSHint Final Check](assets/images_readme/base_js_check_JSHint_final.jpg)
 
-![Script JSHint Final Check](#)
+#### Accounts - JSHint Check
+
+![Accounts JSHint Final Check](assets/images_readme/accounts_dashboard_js_check_JSHint_final.jpg)
+
+#### Delete Account - JSHint Check
+
+![Delete Account JSHint Final Check](assets/images_readme/delete_account_js_check_JSHint_final.jpg)
+
+#### Mini Cart - JSHint Check
+
+![Mini Cart JSHint Final Check](assets/images_readme/minicart_js_check_JSHint_final.jpg)
+
+#### Products - JSHint Check
+
+![Products JSHint Final Check](assets/images_readme/products_js_check_JSHint_final.jpg)
+
+#### Shopping Bag - JSHint Check
+
+![Bag JSHint Final Check](assets/images_readme/scripts_bag_js_check_JSHint_final.jpg)
+
+#### Checkout Stripe - JSHint Check
+
+![Stripe JSHint Final Check](assets/images_readme/stripe_elements_js_check_JSHint_final.jpg)
+
+#### Toggle Password - JSHint Check
+
+![Toggle JSHint Final Check](assets/images_readme/toggle_password_js_check_JSHint_final.jpg)
 
 ### CI Python Linter
 The CI Python Linter helps ensure that our code is clean, maintainable, and error-free, improving the overall development workflow and reducing potential bugs before deployment.
@@ -220,3 +245,14 @@ I ran all my Python code through the Python Linter with the following results. T
 
 #### Home forms.py- Final Check
 ![Validation CI Python Linter Final Check](#)
+
+## Bugs and Fixes
+Here I have recorded some issues that I spent excessive time solving with the solutions indicated below.
+
+### Bug: ?
+
+![Bug 1](#)
+
+#### Solution
+
+[Back to Content Table](#content)
