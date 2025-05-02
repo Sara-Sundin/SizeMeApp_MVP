@@ -1,47 +1,55 @@
+/* Base styles for Stripe input elements */
 .StripeElement,
 .stripe-style-input {
-  box-sizing: border-box;
+  box-sizing: border-box; /* Ensures padding doesn't affect total width/height */
   height: 40px;
   padding: 10px 12px;
   border: 1px solid transparent;
-  border-radius: 0px;
+  border-radius: 0px; /* No rounded corners */
   background-color: white;
-  box-shadow: 0 1px 3px 0 #e6ebf1;
-  -webkit-transition: box-shadow 150ms ease;
-  transition: box-shadow 150ms ease;
+  box-shadow: 0 1px 3px 0 #e6ebf1; /* Subtle outer shadow */
+  -webkit-transition: box-shadow 150ms ease; /* Smooth shadow transition on focus (Safari) */
+  transition: box-shadow 150ms ease; /* Smooth shadow transition on focus */
 }
 
+/* Add a darker shadow when the field is focused or active */
 .StripeElement--focus,
 .stripe-style-input:focus,
 .stripe-style-input:active {
   box-shadow: 0 1px 3px 0 #cfd7df;
 }
 
+/* Custom background for webkit autofill */
 .StripeElement--webkit-autofill {
-  background-color: #fefde5 !important;
+  background-color: #fefde5 !important; /* Yellowish highlight */
 }
 
+/* Placeholder styling */
 .stripe-style-input::placeholder {
-    color: #aab7c4;
+  color: #aab7c4; /* Light gray placeholder text */
 }
 
+/* Slightly reposition fieldset labels */
 .fieldset-label {
-    position: relative;
-    right: .5rem;
+  position: relative;
+  right: 0.5rem;
 }
 
+/* Ensure form fields and Stripe card input have dark borders and black text */
 #payment-form .form-control,
 #card-element {
-    color: #000;
-    border: 1px solid #000;
+  color: #000;
+  border: 1px solid #000;
 }
 
-select, 
+/* Set select input and option text color to black */
+select,
 select option {
-    color: #000000;
+  color: #000000;
 }
 
+/* Style for invalid select (placeholder-like options) */
 select:invalid,
 select option[value=""] {
-    color: #aab7c4 !important;
+  color: #aab7c4 !important; /* Match placeholder color */
 }
