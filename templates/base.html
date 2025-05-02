@@ -10,33 +10,27 @@
     <link rel="icon" type="image/png" href="{% static 'images/favicon_rings_32x32.png' %}">
     <title>{% block title %}SizeMeApp{% endblock %}</title>
 
-    <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/a5fcd56e22.js" crossorigin="anonymous"></script>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/webshop.css' %}">
 </head>
-
 <body class="{% block body_class %}{% endblock %}">
 
 <header>
   {% block navbar %}
-  {% include "includes/navbar_default.html" %}
+    {% include "includes/navbar_default.html" %}
   {% endblock %}
 </header>
 
 <main class="main-content">
-    {% block content %}{% endblock %}
+  {% block content %}{% endblock %}
 </main>
-
 
 <footer class="footer text-start pt-5">
   {% block footer %}
   <section id="contact" class="contact-wrapper container px-4">
     <div class="px-md-4 row align-items-start">
-      <!-- Contact Form (appears first in markup = top on mobile) -->
       <div class="contact-form-container col-12 col-md-6 mb-5 mb-md-0">
         <h2 class="pb-2">Send us a message!</h2>
         {% if contact_form %}
@@ -45,54 +39,35 @@
           {{ contact_form|crispy }}
           <button type="submit" class="cta-btn cta-btn--secondary mt-3">Send Message</button>
         </form>
-      {% endif %}
-      
+        {% endif %}
       </div>
-  
-      <!-- Contact Info (sits below on mobile, side by side on md+) -->
-      <div class=" px-md-4 contact-details col-12 col-md-6">
+      <div class="px-md-4 contact-details col-12 col-md-6">
         <h2 class="pb-5 contact-sub-heading">Contact Details</h2>
         <div class="details">
-          <p><i class="fa-solid fa-envelope"></i> Email: 
-            <a class="text-white" href="mailto:sara@sizemeapp.se">sara@sizemeapp.se</a>
-          </p>
+          <p><i class="fa-solid fa-envelope"></i> Email: <a class="text-white" href="mailto:sara@sizemeapp.se">sara@sizemeapp.se</a></p>
           <p><i class="fa-solid fa-mobile-screen-button"></i> Phone: +46 (0) 700 630 492</p>
           <p><i class="fa-solid fa-location-dot"></i> Address: Thors väg 24, Lindome, Sweden</p>
         </div>
-  
-        <!-- Social Icons -->
         <div class="social-icons mt-3">
           <a href="https://www.instagram.com/sizemeapp__/" target="_blank" aria-label="Instagram" rel="noopener">
-            <i class="fa-brands fa-instagram"></i>
-          </a>
+            <i class="fa-brands fa-instagram"></i></a>
           <a href="https://www.linkedin.com/in/sara-sundin-b2833890/" target="_blank" aria-label="LinkedIn" rel="noopener">
-            <i class="fa-brands fa-linkedin"></i>
-          </a>
+            <i class="fa-brands fa-linkedin"></i></a>
           <a href="https://wa.me/46700630492" target="_blank" aria-label="WhatsApp" rel="noopener">
-            <i class="fa-brands fa-whatsapp"></i>
-          </a>
+            <i class="fa-brands fa-whatsapp"></i></a>
         </div>
       </div>
     </div>
-  
     <hr class="custom-separator">
   </section>
   {% endblock %}
-  
-    <div class="text-center bg-black text-white ">
-        {% block copyright %}
-        <p>&copy; 2025 TechFit Solutions. All rights reserved.</p>
-        {% endblock %}
-    </div>
+  <div class="text-center bg-black text-white">
+    {% block copyright %}<p>&copy; 2025 TechFit Solutions. All rights reserved.</p>{% endblock %}
+  </div>
 </footer>
 
+<form id="logout-form" method="post" action="{% url 'logout' %}" style="display: none;">{% csrf_token %}</form>
 
-<!-- Hidden logout form -->
-<form id="logout-form" method="post" action="{% url 'logout' %}" style="display: none;">
-    {% csrf_token %}
-</form>
-
-<!-- Logout Confirmation Modal -->
 <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -100,9 +75,7 @@
         <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        Are you sure you want to log out?
-      </div>
+      <div class="modal-body">Are you sure you want to log out?</div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
         <button type="button" class="btn btn-danger" id="confirmLogoutBtn">Log Out</button>
@@ -125,93 +98,29 @@
   </div>
 </div>
 
-{% if show_success_modal %}
+<div class="modal fade" id="loggedOutModal" tabindex="-1" aria-labelledby="loggedOutLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center p-4">
+      <div class="modal-header border-0">
+        <h5 class="modal-title w-100" id="loggedOutLabel">Logged out</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-0">You have been successfully logged out.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if show_success_modal or show_logged_out_modal %}
 <script>
-  window.onload = function () {
-    const modal = new bootstrap.Modal(document.getElementById('contactSuccessModal'));
-    modal.show();
-  }
+  window.showContactModal = {{ show_success_modal|yesno:'true,false' }};
+  window.showLogoutModal = {{ show_logged_out_modal|yesno:'true,false' }};
 </script>
 {% endif %}
 
-<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- Logout modal handling -->
-<script>
-    const confirmLogoutBtn = document.getElementById("confirmLogoutBtn");
-    const logoutForm = document.getElementById("logout-form");
-    if (confirmLogoutBtn && logoutForm) {
-      confirmLogoutBtn.addEventListener("click", function () {
-        logoutForm.submit();
-      });
-    }
-</script>
-
-   <!-- Script for closing mobile toggle when clicking outside navbar-->
-   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const navbarCollapse = document.getElementById("navbarNav"); 
-        const navbarToggler = document.querySelector(".navbar-toggler"); 
-    
-        document.addEventListener("click", function (event) {
-            const isClickInsideNavbar = navbarCollapse.contains(event.target);
-            const isClickOnToggle = navbarToggler.contains(event.target);
-    
-            // Close navbar if clicking outside and it's open
-            if (!isClickInsideNavbar && !isClickOnToggle && navbarCollapse.classList.contains("show")) {
-                navbarToggler.click(); // Simulate click to close it
-            }
-        });
-    });
-  </script>
-
-{% if show_logged_out_modal %}
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const loggedOutModal = new bootstrap.Modal(document.getElementById("loggedOutModal"));
-    loggedOutModal.show();
-    setTimeout(() => loggedOutModal.hide(), 2000);
-  });
-</script>
-{% endif %}
-
-<!-- Scroll to #anchor and close navbar for both dropdown and top-level links -->
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const navbarCollapse = document.getElementById("navbarNav");
-    const navbarToggler = document.querySelector(".navbar-toggler");
-
-    // Target all navbar links that include an in-page anchor (#)
-    const anchorLinks = document.querySelectorAll('.nav-link[href*="#"], .dropdown-item[href*="#"]');
-
-    anchorLinks.forEach(link => {
-      link.addEventListener("click", function (e) {
-        const href = this.getAttribute("href");
-
-        // Only act if the link is to the current page and includes an anchor
-        if (href.includes("#") && window.location.pathname === new URL(href, window.location).pathname) {
-          const anchor = href.split("#")[1];
-          const target = document.getElementById(anchor);
-
-          if (target) {
-            e.preventDefault();
-
-            // Scroll to anchor
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-
-            // Collapse navbar if it's open
-            if (navbarCollapse.classList.contains("show")) {
-              navbarToggler.click();
-            }
-          }
-        }
-      });
-    });
-  });
-</script>
-
+<script src="{% static 'js/base.js' %}"></script>
 {% block postloadjs %}{% endblock %}
-
 </body>
 </html>
