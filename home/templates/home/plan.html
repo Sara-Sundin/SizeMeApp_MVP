@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+<!-- Main Plan Section -->
 <section id="plan" class="text-center">
     <div class="container py-4">
         <h1 class="py-2">Size Up Your Business</h1>
@@ -9,6 +10,8 @@
 
     <div class="container-fluid px-0">
         <div class="container py-4">
+
+            <!-- Highlighted Plan Section (based on focus) -->
             <div class="row mb-1">
                 {% for plan in plans %}
                     {% if plan.plan_type == focus %}
@@ -19,40 +22,43 @@
                 {% endfor %}
             </div>
 
+            <!-- CTA Button to Try the Application -->
             <div class="col-12 p-4">
-              <!-- CTA to Try the Application -->
-              <a class="cta-btn cta-btn--secondary"
-              {% if user.is_authenticated %}
-              href="{% url 'webshop' %}"
-              {% else %}
+                <a class="cta-btn cta-btn--secondary"
+                {% if user.is_authenticated %}
+                href="{% url 'webshop' %}"
+                {% else %}
                 href="{% url 'signup' %}"
-              {% endif %}>
-              Try the application in our prototype webshop.
-            </a>
-           </div>
+                {% endif %}>
+                    Try the application in our prototype webshop.
+                </a>
+            </div>
 
-              <div class="row g-4">
+            <!-- Other Plans Displayed as Smaller Cards -->
+            <div class="row g-4">
                 {% for plan in plans %}
-                  {% if plan.plan_type != focus %}
-                  <div class="col-12 col-md-6">
-                    <div class="plan-box" id="{{ plan.plan_type }}">
-                      {% include "home/plan_card_small.html" with plan=plan %}
+                    {% if plan.plan_type != focus %}
+                    <div class="col-12 col-md-6">
+                        <div class="plan-box" id="{{ plan.plan_type }}">
+                            {% include "home/plan_card_small.html" with plan=plan %}
+                        </div>
                     </div>
-                  </div>
-                  {% endif %}
+                    {% endif %}
                 {% endfor %}
-              </div> 
-          </div>
-      </div>
+            </div> 
+
+        </div>
+    </div>
 </section>
 
-<!-- Mini Cart Dropdown (styled as attached to navbar) -->
+<!-- Mini Cart Dropdown (shown if item was just added) -->
 <div id="miniCartDropdown" class="card shadow-sm border-0 position-absolute d-none" style="top: 60px; right: 20px; width: 300px; z-index: 1055;">
   <div class="card-header bg-white border-bottom text-center">
     <strong>🛒 Your Cart</strong>
   </div>
   <div class="card-body p-3">
     {% if bag_items %}
+      <!-- Table of Cart Items -->
       <table class="table table-sm mb-2">
         <tbody>
           {% for item in bag_items %}
@@ -64,6 +70,8 @@
           {% endfor %}
         </tbody>
       </table>
+
+      <!-- Total and Action Buttons -->
       <div class="d-flex justify-content-between border-top pt-2">
         <strong>Total:</strong>
         <strong>${{ total|floatformat:2 }}</strong>
@@ -73,17 +81,17 @@
         <a href="{% url 'checkout' %}" class="btn btn-dark btn-sm w-50 ms-1">Checkout</a>
       </div>
     {% else %}
+      <!-- Message for Empty Cart -->
       <p class="text-center mb-0 small">Your cart is empty.</p>
     {% endif %}
   </div>
 </div>
-
 {% endblock %}
 
 {% block postloadjs %}
 {{ block.super }}
 <script>
-  // Show mini cart if added=true in URL
+  // Show mini cart if URL contains ?added=true
   document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     if (params.get("added") === "true") {
@@ -91,7 +99,7 @@
       if (miniCart) {
         miniCart.classList.remove("d-none");
 
-        // Optional: auto-hide after 4 seconds
+        // Optional: auto-hide mini cart after 4 seconds
         setTimeout(() => {
           miniCart.classList.add("d-none");
         }, 4000);

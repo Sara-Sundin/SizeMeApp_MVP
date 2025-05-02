@@ -2,12 +2,16 @@
 {% load static %}
 
 {% block content %}
+
+<!-- Hero Section -->
 <section id="hero">
     <div class="hero-bg"></div>
     <div class="container">
         <div class="row justify-content-center justify-content-lg-start">
             <div class="col-12 col-md-10 col-lg-8 text-center text-lg-start">
                 <h1 class="hero-heading">Seamless Sizing for Smarter Shopping.</h1>
+                
+                <!-- Call-to-action buttons -->
                 <div class="d-flex flex-column flex-md-row justify-content-center justify-content-lg-start gap-3 mt-4 py-5">
                     <a class="cta-btn cta-btn--primary" href="{% if user.is_authenticated %}{% url 'webshop' %}{% else %}{% url 'signup' %}{% endif %}">
                         Try the SizeMeApp tool.
@@ -24,11 +28,17 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h2 class="text-black p-md-4">Reduce returns. Boost confidence. Keep your customers coming back.</h2> 
+                <h2 class="text-black p-md-4">
+                    Reduce returns. Boost confidence. Keep your customers coming back.
+                </h2> 
             </div>
+
+            <!-- Benefits text -->
             <div class="col-md-6 text-center pb-4 px-4">
                 Say goodbye to sizing struggles. With just a few clicks, your customers can build their profile and start exploring. Find out how better fit means better business.
             </div> 
+
+            <!-- Steps list -->
             <div class="col-md-6 pb-4">   
                 <ul class="text-start">
                     <li>Create a free account and join the SizeMeApp platform.</li>
@@ -36,14 +46,16 @@
                     <li>Explore how smart sizing improves the shopping experience.</li>
                 </ul>                                
             </div> 
+
+            <!-- Call-to-action -->
             <div class="col-md-12">  
                 <a class="cta-btn cta-btn--tertiary" href="{% url 'signup' %}">Start Exploring.</a> 
             </div> 
         </div>
     </div>
 </section>   
-           
-    <!-- Business Plan Section -->
+
+<!-- Business Plan Section -->
 <section id="plans" class="text-center">
     <div class="container py-4">
         <h2 class="py-4">Size Up Your Business</h2>
@@ -56,106 +68,109 @@
         </div>
     </div>
 
+    <!-- Plan Cards -->
     <div class="container-fluid px-0">
         <div id="plan-container" class="plan-container py-4">
             <div class="container">
                 <div class="row g-4 py-5">
-                        <!-- Starter Plan -->
+                    
+                    <!-- Starter Plan -->
                     <div class="col-12 col-lg-4 d-flex">
                         <div class="plan-box d-flex flex-column w-100">
-                        <div class="plan-heading text-center">
-                            <div class="heading-wrapper">
-                            <h3>Starter<br>Plan</h3>
-                            <i class="fa-solid fa-hourglass-start mobile-icon icon-starter"></i>
-                            </div>
-                        </div>
-                        <a href="{% url 'plan' %}?focus=starter" class="text-decoration-none text-dark flex-grow-1 d-flex flex-column">
-                            <div class="plan-info text-start my-3 py-2 d-flex flex-column flex-grow-1">
-                            <ul class="mb-4">
-                                <li>Up to 500 customer profiles/month.</li>
-                                <li>Basic fit algorithm access.</li>
-                                <li>Brand dashboard & analytics.</li>
-                                <li>Email support.</li>
-                                <li>Basic garment dashboard.</li>
-                            </ul>
-                            <div class="mt-auto">
-                                <div class="cta-btn cta-btn--primary text-center">
-                                From 500 USD/month.
+                            <div class="plan-heading text-center">
+                                <div class="heading-wrapper">
+                                    <h3>Starter<br>Plan</h3>
+                                    <i class="fa-solid fa-hourglass-start mobile-icon icon-starter"></i>
                                 </div>
                             </div>
-                            </div>
-                        </a>
+                            <a href="{% url 'plan' %}?focus=starter" class="text-decoration-none text-dark flex-grow-1 d-flex flex-column">
+                                <div class="plan-info text-start my-3 py-2 d-flex flex-column flex-grow-1">
+                                    <ul class="mb-4">
+                                        <li>Up to 500 customer profiles/month.</li>
+                                        <li>Basic fit algorithm access.</li>
+                                        <li>Brand dashboard & analytics.</li>
+                                        <li>Email support.</li>
+                                        <li>Basic garment dashboard.</li>
+                                    </ul>
+                                    <div class="mt-auto">
+                                        <div class="cta-btn cta-btn--primary text-center">
+                                            From 500 USD/month.
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     
                     <!-- Growth Plan -->
                     <div class="col-12 col-lg-4 d-flex">
                         <div class="plan-box d-flex flex-column w-100">
-                        <div class="plan-heading">
-                            <div class="heading-wrapper">
-                            <h3>Growth<br>Plan</h3>
-                            <i class="fa-solid fa-seedling mobile-icon icon-growth"></i>
-                            </div>
-                        </div>
-                        <a href="{% url 'plan' %}?focus=growth" class="text-decoration-none text-dark flex-grow-1 d-flex flex-column">
-                            <div class="plan-info text-start my-3 py-2 d-flex flex-column flex-grow-1">
-                            <ul class="mb-4">
-                                <li>Up to 5,000 customer profiles/month.</li>
-                                <li>Advanced sizing recommendations.</li>
-                                <li>Custom brand integration.</li>
-                                <li>Priority email & chat support.</li>
-                                <li>Monthly insights report.</li>
-                            </ul>
-                            <div class="mt-auto">
-                                <div class="cta-btn cta-btn--secondary text-center">
-                                From 1000 USD/month.
+                            <div class="plan-heading">
+                                <div class="heading-wrapper">
+                                    <h3>Growth<br>Plan</h3>
+                                    <i class="fa-solid fa-seedling mobile-icon icon-growth"></i>
                                 </div>
                             </div>
-                            </div>
-                        </a>
+                            <a href="{% url 'plan' %}?focus=growth" class="text-decoration-none text-dark flex-grow-1 d-flex flex-column">
+                                <div class="plan-info text-start my-3 py-2 d-flex flex-column flex-grow-1">
+                                    <ul class="mb-4">
+                                        <li>Up to 5,000 customer profiles/month.</li>
+                                        <li>Advanced sizing recommendations.</li>
+                                        <li>Custom brand integration.</li>
+                                        <li>Priority email & chat support.</li>
+                                        <li>Monthly insights report.</li>
+                                    </ul>
+                                    <div class="mt-auto">
+                                        <div class="cta-btn cta-btn--secondary text-center">
+                                            From 1000 USD/month.
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     
                     <!-- Enterprise Plan -->
                     <div class="col-12 col-lg-4 d-flex">
                         <div class="plan-box d-flex flex-column w-100">
-                        <div class="plan-heading">
-                            <div class="heading-wrapper">
-                            <h3>Enterprise<br>Plan</h3>
-                            <i class="fa-solid fa-arrow-up-right-dots mobile-icon icon-enterprise"></i>
-                            </div>
-                        </div>
-                        <a href="{% url 'plan' %}?focus=enterprise" class="text-decoration-none text-dark flex-grow-1 d-flex flex-column">
-                            <div class="plan-info text-start my-3 py-2 d-flex flex-column flex-grow-1">
-                            <ul class="mb-4">
-                                <li>Unlimited customer profiles.</li>
-                                <li>AI-powered sizing engine.</li>
-                                <li>API access & custom onboarding.</li>
-                                <li>Dedicated success manager.</li>
-                                <li>Integration with internal systems.</li>
-                            </ul>
-                            <div class="mt-auto">
-                                <div class="cta-btn cta-btn--tertiary text-center">
-                                From 1500 USD/month.
+                            <div class="plan-heading">
+                                <div class="heading-wrapper">
+                                    <h3>Enterprise<br>Plan</h3>
+                                    <i class="fa-solid fa-arrow-up-right-dots mobile-icon icon-enterprise"></i>
                                 </div>
                             </div>
-                            </div>
-                        </a>
+                            <a href="{% url 'plan' %}?focus=enterprise" class="text-decoration-none text-dark flex-grow-1 d-flex flex-column">
+                                <div class="plan-info text-start my-3 py-2 d-flex flex-column flex-grow-1">
+                                    <ul class="mb-4">
+                                        <li>Unlimited customer profiles.</li>
+                                        <li>AI-powered sizing engine.</li>
+                                        <li>API access & custom onboarding.</li>
+                                        <li>Dedicated success manager.</li>
+                                        <li>Integration with internal systems.</li>
+                                    </ul>
+                                    <div class="mt-auto">
+                                        <div class="cta-btn cta-btn--tertiary text-center">
+                                            From 1500 USD/month.
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                     </div>
-                </div>
+                </div> <!-- end row -->
             </div>
         </div>
     </div>    
 </section>
 
+<!-- Modal trigger if account was recently deleted -->
 {% if show_account_deleted_modal %}
 <script>
   window.onload = function () {
     const goodbyeModal = new bootstrap.Modal(document.getElementById('accountDeletedModal'));
     goodbyeModal.show();
 
-    // Optional: auto-dismiss after 3s
+    // Auto-dismiss modal after 3 seconds
     setTimeout(() => {
       goodbyeModal.hide();
     }, 3000);
@@ -163,6 +178,7 @@
 </script>
 {% endif %}
 
+<!-- Include the delete account modal markup -->
 {% include "home/delete_account_modal.html" %}
 
 {% endblock %}

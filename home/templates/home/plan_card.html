@@ -1,18 +1,23 @@
 <div class="plan-box">
+  <!-- Plan heading with name -->
   <div class="plan-heading text-center my-4">
     <h2 class="text-sm-center text-md-start">{{ plan.name }}</h2>
   </div>
 
+  <!-- CTA button linking to plan section -->
   <div>
     <a class="cta-btn {{ plan.button_class }}" href="{% url 'plan' %}?focus={{ plan.plan_type }}#plan-info-plan">
       From {{ plan.monthly_price }} USD/month
-  </a>   
+    </a>   
   </div>
 
+  <!-- Full plan info section -->
   <div id="plan-info-plan" class="plan-info-plan my-3 p-4">
+    <!-- Plan short and long description -->
     <h3 class="text-sm-center text-md-start">{{ plan.short_description }}</h3>
     <p class="text-sm-center text-md-start">{{ plan.long_description }}</p>
   
+    <!-- Feature list and optional icon -->
     <div class="row align-items-start">
       <div class="col-12 col-md-6 p-0">
         <h3 class="text-sm-center text-md-start">What's included:</h3>
@@ -24,13 +29,14 @@
       </div>
   
       {% if plan.icon_class %}
+        <!-- Optional icon for visual branding -->
         <div class="p-4 mt-2 col-12 col-md-6 d-flex justify-content-center align-items-center">
           <i class="fa-solid {{ plan.icon_class }} responsive-icon {{ plan.icon_color_class }}"></i>
         </div>
       {% endif %}
-
     </div>
   
+    <!-- Target audience info -->
     {% if plan.perfect_for %}
       <h3 class="text-sm-center text-md-start">Perfect for:</h3>
       <div class="text-sm-center text-md-start d-flex align-items-center gap-3">
@@ -38,8 +44,10 @@
       </div>
     {% endif %}
   
+    <!-- Setup cost -->
     <p class="mt-3"><strong>Setup cost {{ plan.setup_cost }} USD.</strong></p>
   
+    <!-- Add to Cart form -->
     <div>
       <form method="POST" action="{% url 'add_to_bag' plan.id %}">
         {% csrf_token %}
