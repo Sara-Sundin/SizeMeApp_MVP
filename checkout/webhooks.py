@@ -6,50 +6,54 @@ from django.views.decorators.csrf import csrf_exempt
 
 from checkout.webhook_handler import StripeWH_Handler
 
+
 @require_POST
 @csrf_exempt
 def webhook(request):
-    """Listen for webhooks from Stripe"""
-    # Setup
+    """
+    Listen for webhooks from Stripe, verify their signature,
+    and delegate the handling to appropriate methods.
+    """
+    # --- Setup Stripe ---
     wh_secret = settings.STRIPE_WH_SECRET
     stripe.api_key = settings.STRIPE_SECRET_KEY
 
-    # get the webhook data and verify its signature
+    # --- Retrieve and verify the webhook payload and signature ---
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
     event = None
 
     try:
         event = stripe.Webhook.construct_event(
-            payload, sig_header, settings.STRIPE_WH_SECRET
+            payload, sig_header, wh_secret
         )
-    except ValueError as e:
+    except ValueError:
         # Invalid payload
         return HttpResponse(status=400)
-    
-    except stripe.error.SignatureVerificationError as e:
+
+    except stripe.error.SignatureVerificationError:
         # Invalid signature
         return HttpResponse(status=400)
-    
+
     except Exception as e:
+        # Any other unexpected error
         return HttpResponse(content=e, status=400)
-    
-    # Set up a webhook handler
+
+    # --- Initialize custom webhook handler ---
     handler = StripeWH_Handler(request)
 
-    # Map webhook events to relevant handler functions
+    # --- Map Stripe event types to handler methods ---
     event_map = {
         'payment_intent.succeeded': handler.handle_payment_intent_succeeded,
         'payment_intent.payment_failed': handler.handle_payment_intent_payment_failed,
     }
 
-    # Get the webhook type from Stripe
+    # --- Identify the type of event ---
     event_type = event['type']
 
-    # If there's a handler for it, get it from the event map
-    # Use the generic one by default
+    # --- Get the appropriate handler function (or default to generic) ---
     event_handler = event_map.get(event_type, handler.handle_event)
-    
-    # Call the event handler with the event
+
+    # --- Call the handler and return the response ---
     response = event_handler(event)
     return response

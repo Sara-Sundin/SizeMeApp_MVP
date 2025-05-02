@@ -8,14 +8,22 @@ import stripe
 from home.models import Plan
 from checkout.models import Order, OrderLineItem
 from .forms import OrderForm
+from .utils import send_order_confirmation_email
 
+# Set Stripe API key
 stripe.api_key = settings.STRIPE_SECRET_KEY
 User = get_user_model()
 
-from .utils import send_order_confirmation_email
-
-
 def checkout(request):
+    """
+    Handle the checkout process including:
+    - Displaying the order summary
+    - Validating and saving order form data
+    - Creating Stripe payment intent
+    - Creating the order and line items
+    - Saving delivery info to user profile if requested
+    - Redirecting to checkout success page
+    """
     bag = request.session.get('bag', {})
     if not bag:
         messages.error(request, "Your bag is empty.")
@@ -24,6 +32,7 @@ def checkout(request):
     bag_items = []
     total = 0
 
+    # Build bag items and calculate total
     for plan_id, quantity in bag.items():
         plan = get_object_or_404(Plan, pk=int(plan_id))
         subtotal = plan.setup_cost * quantity
@@ -39,10 +48,12 @@ def checkout(request):
         save_info = request.POST.get('save_info') == 'on'
 
         if order_form.is_valid():
+            # Save order, but not committing to DB yet
             order = order_form.save(commit=False)
             order.original_bag = str(bag)
             order.save()
 
+            # Create line items for this order
             for item in bag_items:
                 OrderLineItem.objects.create(
                     order=order,
@@ -50,6 +61,7 @@ def checkout(request):
                     quantity=item['quantity']
                 )
 
+            # Optionally save delivery info to user profile
             if request.user.is_authenticated and save_info:
                 user = request.user
                 user.full_name = order.full_name
@@ -62,16 +74,18 @@ def checkout(request):
                 user.county = order.county
                 user.save()
 
+            # Clear shopping bag
             request.session['bag'] = {}
+
+            # Redirect to checkout success page
             return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
+            # If form is invalid, show error and recreate payment intent
             messages.error(request, "There was an error with your form. Please check your information.")
-
             intent = stripe.PaymentIntent.create(
                 amount=int(total * 100),
                 currency='usd',
             )
-
             context = {
                 'order_form': order_form,
                 'bag_items': bag_items,
@@ -83,6 +97,7 @@ def checkout(request):
             return render(request, 'checkout/checkout.html', context)
 
     else:
+        # If GET request, prefill form if user is logged in
         if request.user.is_authenticated:
             user = request.user
             initial_data = {
@@ -100,6 +115,7 @@ def checkout(request):
         else:
             order_form = OrderForm()
 
+        # Create Stripe payment intent
         intent = stripe.PaymentIntent.create(
             amount=int(total * 100),
             currency='usd',
@@ -118,13 +134,20 @@ def checkout(request):
 
 
 def checkout_success(request, order_number):
+    """
+    Handle successful checkouts:
+    - Retrieve the order by order number
+    - Send order confirmation email
+    - Display confirmation page to user
+    """
     order = get_object_or_404(Order, order_number=order_number)
 
     # Send confirmation email
     send_order_confirmation_email(order)
 
-    messages.success(request, f"Order successfully processed! Your order number is {order.order_number}.")
+    messages.success(
+        request,
+        f"Order successfully processed! Your order number is {order.order_number}."
+    )
+
     return render(request, 'checkout/checkout_success.html', {'order': order})
-
-
-

@@ -12,35 +12,57 @@ import time
 
 
 class StripeWH_Handler:
-    """Handle Stripe webhooks"""
+    """
+    Handle Stripe webhooks related to payment events.
+    This includes creating orders after successful payment
+    and sending confirmation emails to users.
+    """
 
     def __init__(self, request):
         self.request = request
 
     def _send_confirmation_email(self, order):
-        """Send the user a confirmation email"""
+        """
+        Send a confirmation email to the customer after successful checkout.
+        """
         cust_email = order.email
         subject = render_to_string(
             'checkout/confirmation_emails/confirmation_email_subject.txt',
-            {'order': order})
+            {'order': order}
+        ).strip()
         body = render_to_string(
             'checkout/confirmation_emails/confirmation_email_body.txt',
-            {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL})
-        
+            {
+                'order': order,
+                'contact_email': settings.DEFAULT_FROM_EMAIL
+            }
+        )
         send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [cust_email])
 
     def handle_event(self, event):
-        """Handle a generic or unknown webhook event"""
+        """
+        Handle a generic, unknown, or unexpected webhook event.
+        """
         print(f"Unhandled event type: {event['type']}")
-        return HttpResponse(content=f'Unhandled webhook received: {event["type"]}', status=200)
+        return HttpResponse(
+            content=f'Unhandled webhook received: {event["type"]}',
+            status=200
+        )
 
     def handle_payment_intent_succeeded(self, event):
-        """Handle the payment_intent.succeeded webhook from Stripe"""
+        """
+        Handle the payment_intent.succeeded webhook from Stripe.
+        This method:
+        - Looks for an existing order matching the data.
+        - If not found, creates a new order and line items.
+        - Sends a confirmation email to the customer.
+        """
         print("Webhook received: payment_intent.succeeded")
 
         intent = event.data.object
         pid = intent.id
 
+        # Get metadata safely
         metadata = getattr(intent, "metadata", {})
         bag = getattr(metadata, "bag", "{}")
         save_info = getattr(metadata, "save_info", "off") == "on"
@@ -50,15 +72,18 @@ class StripeWH_Handler:
         shipping_details = intent.shipping
         grand_total = round(intent.charges.data[0].amount / 100, 2)
 
+        # Replace blank address fields with None
         for field, value in shipping_details.address.items():
             if value == "":
                 shipping_details.address[field] = None
 
+        # Get user profile if authenticated
         profile = None
         if username != 'AnonymousUser':
             try:
                 profile = CustomUser.objects.get(username=username)
                 if save_info:
+                    # Save delivery info to profile
                     profile.phone_number = shipping_details.phone
                     profile.country = shipping_details.address.country
                     profile.postcode = shipping_details.address.postal_code
@@ -70,6 +95,7 @@ class StripeWH_Handler:
             except CustomUser.DoesNotExist:
                 print(f"User {username} not found")
 
+        # Try to find existing matching order
         order_exists = False
         attempt = 1
         order = None
@@ -96,6 +122,7 @@ class StripeWH_Handler:
                 time.sleep(1)
 
         if order_exists:
+            # Send email if order already exists
             self._send_confirmation_email(order)
             return HttpResponse(
                 content=f'Webhook received: {event["type"]} | SUCCESS: Order already exists',
@@ -103,6 +130,7 @@ class StripeWH_Handler:
             )
         else:
             try:
+                # Create a new order
                 order = Order.objects.create(
                     full_name=shipping_details.name,
                     user=profile,
@@ -118,6 +146,8 @@ class StripeWH_Handler:
                     original_bag=bag,
                     stripe_pid=pid,
                 )
+
+                # Create line items for the order
                 for item_id, item_data in json.loads(bag).items():
                     try:
                         product = Product.objects.get(id=item_id)
@@ -137,6 +167,7 @@ class StripeWH_Handler:
                     status=500
                 )
 
+        # Send confirmation email
         self._send_confirmation_email(order)
         return HttpResponse(
             content=f'Webhook received: {event["type"]} | SUCCESS: Order created',
@@ -144,34 +175,11 @@ class StripeWH_Handler:
         )
 
     def handle_payment_intent_payment_failed(self, event):
+        """
+        Handle the payment_intent.payment_failed webhook from Stripe.
+        """
         print("Webhook received: payment_intent.payment_failed")
         return HttpResponse(
             content=f'Webhook received: {event["type"]}',
             status=200
         )
-    
-    def handle_payment_intent_succeeded(self, event):
-        intent = event.data.object
-        pid = intent.id
-        bag = getattr(intent.metadata, 'bag', '{}')
-        save_info = getattr(intent.metadata, 'save_info', False)
-        username = getattr(intent.metadata, 'username', 'AnonymousUser')
-
-        # Safe access to charge data
-        charge_data = None
-        try:
-            charge_data = intent.charges.data[0]
-        except (AttributeError, IndexError, KeyError):
-            pass
-
-        billing_details = getattr(charge_data, 'billing_details', {}) if charge_data else {}
-        shipping_details = getattr(intent, 'shipping', {}) or {}
-        address = getattr(shipping_details, 'address', {}) if shipping_details else {}
-        grand_total = round(getattr(charge_data, 'amount', 0) / 100, 2) if charge_data else 0
-
-        # Early return to avoid DB logic during webhook testing
-        return HttpResponse(
-            content=f"Webhook received: {event['type']} | Successfully handled (mock)",
-            status=200
-        )
-
