@@ -1,6 +1,7 @@
-/*
-    Stripe payment logic with vanilla JavaScript
-*/
+/* global Stripe */
+/* jshint esversion: 11 */
+
+/*  Stripe payment logic with vanilla JavaScript */
 
 document.addEventListener('DOMContentLoaded', function () {
     const stripePublicKey = document.getElementById('id_stripe_public_key')?.textContent.replace(/['"]+/g, '');
