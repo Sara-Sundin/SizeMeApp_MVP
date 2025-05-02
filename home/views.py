@@ -4,10 +4,16 @@ from .models import Plan
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib import messages
 from urllib.parse import urlparse
+from django.http import HttpResponse
 
+
+
+from .forms import ContactForm
 
 def index(request):
-    contact_form = ContactForm(prefix='contact')
+    contact_data = request.session.pop('contact_form_data', None)
+    contact_form = ContactForm(contact_data, prefix='contact') if contact_data else ContactForm(prefix='contact')
+
     show_account_deleted_modal = request.session.pop("show_account_deleted_modal", False)
     show_logged_out_modal = request.session.pop("show_logged_out_modal", False)
     show_success_modal = request.session.pop("show_success_modal", False)
@@ -31,9 +37,8 @@ def plan_view(request):
 
 def contact(request):
     if request.method == "POST":
-        form = ContactForm(request.POST)
+        form = ContactForm(request.POST, prefix='contact')
         referer = request.META.get('HTTP_REFERER', '/')
-        path = urlparse(referer).path
 
         if form.is_valid():
             name = form.cleaned_data['name']
@@ -53,16 +58,19 @@ def contact(request):
                 messages.error(request, "Invalid header found.")
             except Exception:
                 messages.error(request, "Something went wrong. Please try again later.")
-
-            return redirect(referer)
         else:
-            # Re-render the original page with the invalid form
-            template_name = 'home/index.html' if path == '/' else path.strip('/') + '.html'
-            return render(request, template_name, {
-                'contact_form': form
-            })
+            # Store form data in session to re-populate after redirect if needed
+            request.session['contact_form_data'] = request.POST
+            messages.error(request, "Please correct the errors in the form.")
+
+        return redirect(referer)
 
     return redirect('/')
+
+
+def clear_success_flag(request):
+    request.session.pop('show_success_modal', None)
+    return HttpResponse(status=204)
     
 
 def custom_404(request, exception):
