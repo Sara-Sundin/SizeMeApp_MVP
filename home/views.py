@@ -7,10 +7,12 @@ from urllib.parse import urlparse
 from django.http import HttpResponse
 
 
-
-from .forms import ContactForm
-
 def index(request):
+    """
+    Home page view:
+    - Loads the contact form (repopulated if session data is stored)
+    - Displays modals based on session flags
+    """
     contact_data = request.session.pop('contact_form_data', None)
     contact_form = ContactForm(contact_data, prefix='contact') if contact_data else ContactForm(prefix='contact')
 
@@ -27,7 +29,11 @@ def index(request):
 
 
 def plan_view(request):
-    focus = request.GET.get('focus', 'starter')  # fallback to starter
+    """
+    Display the pricing plans page.
+    - Optionally focuses a specific plan based on GET param `focus`.
+    """
+    focus = request.GET.get('focus', 'starter')  # Default to 'starter' plan
     plans = Plan.objects.all()
     return render(request, 'home/plan.html', {
         'plans': plans,
@@ -36,9 +42,15 @@ def plan_view(request):
 
 
 def contact(request):
+    """
+    Handle contact form submissions:
+    - Validate form
+    - Send email to internal recipient
+    - Set success or error messages
+    """
     if request.method == "POST":
         form = ContactForm(request.POST, prefix='contact')
-        referer = request.META.get('HTTP_REFERER', '/')
+        referer = request.META.get('HTTP_REFERER', '/')  # Fallback to homepage
 
         if form.is_valid():
             name = form.cleaned_data['name']
@@ -59,7 +71,7 @@ def contact(request):
             except Exception:
                 messages.error(request, "Something went wrong. Please try again later.")
         else:
-            # Store form data in session to re-populate after redirect if needed
+            # Persist form data in session to repopulate after redirect
             request.session['contact_form_data'] = request.POST
             messages.error(request, "Please correct the errors in the form.")
 
@@ -69,10 +81,15 @@ def contact(request):
 
 
 def clear_success_flag(request):
+    """
+    Clears the 'show_success_modal' session flag without refreshing the page.
+    """
     request.session.pop('show_success_modal', None)
     return HttpResponse(status=204)
-    
+
 
 def custom_404(request, exception):
+    """
+    Custom 404 error handler view.
+    """
     return render(request, "404.html", status=404)
-
