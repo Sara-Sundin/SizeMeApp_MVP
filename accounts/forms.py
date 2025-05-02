@@ -1,11 +1,19 @@
+"""
+Forms for user creation, authentication, and update using the CustomUser model.
+"""
+
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from .models import CustomUser
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.forms import UserChangeForm
 
 
 class CustomSignupForm(UserCreationForm):
+    """
+    A custom user signup form that includes only full_name, email, and password1.
+
+    This form excludes the password2 field and ensures the username is set to the email
+    to comply with unique constraints on username.
+    """
     full_name = forms.CharField(
         max_length=255,
         required=True,
@@ -13,7 +21,7 @@ class CustomSignupForm(UserCreationForm):
         widget=forms.TextInput(attrs={
             "class": "form-control",
             "placeholder": "Enter your full name",
-            "autofocus": "autofocus",  # Keep focus here
+            "autofocus": "autofocus",
         }),
     )
 
@@ -43,15 +51,15 @@ class CustomSignupForm(UserCreationForm):
             "placeholder": "Password (min. 8 characters)",
         })
 
-        # Remove unwanted autofocus
         self.fields["email"].widget.attrs.pop("autofocus", None)
         self.fields["password1"].widget.attrs.pop("autofocus", None)
 
-
     def save(self, commit=True):
+        """
+        Save the user, assigning full_name and setting username to email.
+        """
         user = super().save(commit=False)
         user.full_name = self.cleaned_data.get("full_name")
-        # Ensure username is populated with email to avoid unique constraint error
         user.username = self.cleaned_data.get("email")
         if commit:
             user.save()
@@ -59,6 +67,9 @@ class CustomSignupForm(UserCreationForm):
 
 
 class CustomLoginForm(AuthenticationForm):
+    """
+    A customized login form that uses email instead of username.
+    """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -75,7 +86,10 @@ class CustomLoginForm(AuthenticationForm):
 
 
 class CustomUserUpdateForm(UserChangeForm):
-    password = None  # hide password field
+    """
+    A form for updating user fields, excluding password.
+    """
+    password = None  # Hide password field
 
     class Meta:
         model = CustomUser

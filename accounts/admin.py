@@ -1,9 +1,22 @@
+"""
+Admin configuration for the CustomUser model.
+
+This module defines a custom admin interface for the CustomUser model,
+including how user fields are grouped and displayed in the Django admin.
+"""
+
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser
 
 
 class CustomUserAdmin(UserAdmin):
+    """
+    Custom admin configuration for the CustomUser model.
+
+    Organizes fields into logical sections including personal info,
+    measurements, permissions, and important dates.
+    """
     model = CustomUser
 
     list_display = ["email", "full_name", "is_staff", "is_active"]
