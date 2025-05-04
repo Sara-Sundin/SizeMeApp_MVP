@@ -9,7 +9,7 @@ from .forms import ProductForm
 
 from sizemeapp.utils.recommendations import get_size_recommendations
 
-
+# Mapping category names to CSS classes for button styling
 CATEGORY_BUTTON_CLASSES = {
     'tshirts': 'cta-btn--primary',
     'shirts': 'cta-btn--tertiary',
@@ -18,6 +18,10 @@ CATEGORY_BUTTON_CLASSES = {
 
 
 def all_products(request):
+    """
+    Display all products with optional sorting, filtering by category,
+    and search by name or description.
+    """
     products = Product.objects.all()
     query = request.GET.get('q')
     category_names = request.GET.get('category')
@@ -27,7 +31,7 @@ def all_products(request):
     category_button_class = None
     current_categories = None
 
-    # Mapping from dropdown values to Django ORM ordering
+    # Mapping from sort dropdown values to ORM sort expressions
     sort_map = {
         'name_asc': 'lower_name',
         'name_desc': '-lower_name',
@@ -37,7 +41,7 @@ def all_products(request):
         'category_desc': '-category__name',
     }
 
-    # Apply sorting
+    # Apply sorting logic
     if sort_param in sort_map:
         sort_key = sort_map[sort_param]
         if 'lower_name' in sort_key:
@@ -46,7 +50,7 @@ def all_products(request):
     else:
         sort_param = 'None_None'
 
-    # Apply category filtering
+    # Filter by category if provided
     if category_names:
         category_list = category_names.split(',')
         products = products.filter(category__name__in=category_list)
@@ -55,10 +59,10 @@ def all_products(request):
         if current_categories.exists():
             selected_category = current_categories.first().friendly_name
             category_button_class = CATEGORY_BUTTON_CLASSES.get(
-                current_categories.first().name, 'btn-outline-dark'
+                current_categories.first().name.lower(), 'btn-outline-dark'
             )
 
-    # Apply search filtering
+    # Filter by search query
     if query:
         queries = Q(name__icontains=query) | Q(description__icontains=query)
         products = products.filter(queries)
@@ -80,28 +84,25 @@ def all_products(request):
 
 
 def product_detail(request, product_id):
+    """
+    Display a single product detail page.
+    Includes size recommendations if size mode is active.
+    """
     product = get_object_or_404(Product, pk=product_id)
     recommendations = []
 
     size_mode = request.session.get('size_mode', False)
 
+    # Only fetch recommendations if user is authenticated and has chest measurement
     if size_mode and request.user.is_authenticated and hasattr(request.user, 'chest') and request.user.chest:
         recommendations = get_size_recommendations(request.user.chest, product)
-
-    CATEGORY_BUTTON_CLASSES = {
-        'tshirts': 'cta-btn--primary',
-        'shirts': 'cta-btn--tertiary',
-        'sweatshirts': 'cta-btn--black',
-    }
 
     category_button_class = CATEGORY_BUTTON_CLASSES.get(
         product.category.name.lower(), 'btn-outline-dark'
     )
 
-    # Measurement success modal
+    # Check for success modal flags in session (set elsewhere in the app)
     show_webshop_measurements_success = request.session.pop('show_webshop_measurements_success', False)
-
-    # Size mode success modals
     show_size_mode_entered_modal = request.session.pop('size_mode_entered', False)
     show_size_mode_exited_modal = request.session.pop('size_mode_exited', False)
 
@@ -121,7 +122,10 @@ def product_detail(request, product_id):
 
 @login_required
 def add_product(request):
-    """ Add a product to the store """
+    """
+    View for superusers to add a new product.
+    Handles both displaying the form and processing the POST request.
+    """
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('webshop'))
@@ -141,7 +145,10 @@ def add_product(request):
 
 @login_required
 def edit_product(request, product_id):
-    """ Edit a product in the store """
+    """
+    View for superusers to edit an existing product.
+    Prefills the form with the current product data.
+    """
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('webshop'))
@@ -163,7 +170,9 @@ def edit_product(request, product_id):
 
 @login_required
 def delete_product(request, product_id):
-    """ Delete a product from the store """
+    """
+    View for superusers to delete an existing product.
+    """
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('webshop'))
