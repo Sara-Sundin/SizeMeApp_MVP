@@ -76,11 +76,18 @@ class Product(models.Model):
     )
 
     # Sorting and tracking
-    sort_order = models.PositiveIntegerField(default=0, help_text="Manual sort order for product")
-    created_at = models.DateTimeField(auto_now_add=True, help_text="When this product was created")
+    sort_order = models.PositiveIntegerField(
+        default=0,
+        help_text="Manual sort order for product (used in drag-and-drop in admin)"
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        help_text="When this product was created"
+    )
 
     class Meta:
-        ordering = ['sort_order']  # Default ordering used in queries
+        ordering = ['sort_order']  # Enables drag-and-drop sorting in admin with django-admin-sortable2
+        verbose_name_plural = 'Products'
 
     def __str__(self):
         return self.name
