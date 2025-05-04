@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django_countries',
 
     # Django core apps
+    'adminsortable2',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
