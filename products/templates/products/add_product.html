@@ -3,13 +3,16 @@
 {% load crispy_forms_tags %}
 
 {% block navbar %}
+  <!-- Include custom navbar for the webshop -->
   {% include "includes/navbar_webshop.html" %}
 {% endblock %}
 
 {% block content %}
+  <!-- Page overlay for design consistency -->
   <div class="overlay"></div>
 
   <div class="container">
+    <!-- Header Section -->
     <div class="row">
       <div class="col-12 col-md-6">
         <hr>
@@ -19,11 +22,14 @@
       </div>
     </div>
 
+    <!-- Product Form Section -->
     <div class="row">
       <div class="col-12 col-md-6">
+        <!-- Form for adding new products -->
         <form method="POST" action="{% url 'add_product' %}" class="form mb-2" enctype="multipart/form-data">
           {% csrf_token %}
           {{ form|crispy }}
+          <!-- Form buttons -->
           <div class="text-end">
             <a class="btn btn-outline-black rounded-0" href="{% url 'products' %}">Cancel</a>
             <button class="btn btn-black rounded-0" type="submit">Add Product</button>
@@ -36,6 +42,7 @@
 
 {% block postloadjs %}
   {{ block.super }}
+  <!-- Show selected image file name when a file is chosen -->
   <script type="text/javascript">
     document.getElementById('new-image')?.addEventListener('change', function () {
       const file = this.files[0];

@@ -3,12 +3,15 @@
 {% load crispy_forms_tags %}
 
 {% block navbar %}
+  <!-- Use custom navbar for the webshop interface -->
   {% include "includes/navbar_webshop.html" %}
 {% endblock %}
 
 {% block content %}
+    <!-- Background overlay for visual consistency -->
     <div class="overlay"></div>
     <div class="container">
+        <!-- Header Section -->
         <div class="row">
             <div class="col-12 col-md-6">
                 <hr>
@@ -18,17 +21,25 @@
             </div>
         </div>
 
+        <!-- Product Edit Form Section -->
         <div class="row">
             <div class="col-12 col-md-6">
+                <!-- Form for editing existing product -->
                 <form method="POST" action="{% url 'edit_product' product.id %}" class="form mb-2" enctype="multipart/form-data">
                     {% csrf_token %}
+
+                    <!-- Loop through all fields in the form -->
                     {% for field in form %}
                         {% if field.name != 'image' %}
+                            <!-- Render other fields using crispy styling -->
                             {{ field | as_crispy_field }}
                         {% else %}
+                            <!-- Render image field using custom widget template -->
                             {{ field }}
                         {% endif %}
                     {% endfor %}
+
+                    <!-- Form Actions -->
                     <div class="text-right">
                         <a class="btn btn-outline-black rounded-0" href="{% url 'products' %}">Cancel</a>
                         <button class="btn btn-black rounded-0" type="submit">Update Product</button>
@@ -41,6 +52,7 @@
 
 {% block postloadjs %}
     {{ block.super }}
+    <!-- JS to display selected image filename after choosing a new file -->
     <script type="text/javascript">
         $('#new-image').change(function() {
             var file = $('#new-image')[0].files[0];
