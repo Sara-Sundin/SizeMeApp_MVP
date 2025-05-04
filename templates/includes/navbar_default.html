@@ -1,48 +1,65 @@
 {% load static %}
 
+<!-- Navbar -->
 <nav class="navbar navbar-expand-md navbar-dark fixed-top">
     <div class="container">
+        <!-- Brand logo linking to home -->
         <a class="navbar-brand" href="{% url 'home' %}">
             <img src="{% static 'images/logo_icon.png' %}" alt="SizeMeApp Logo" width="50">
         </a>
 
+        <!-- Hamburger menu toggler for small screens -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        <!-- Collapsible navbar content -->
         <div class="collapse navbar-collapse" id="navbarNav">
+
+            <!-- Display active user if logged in -->
             {% if user.is_authenticated %}
             <p class="m-3 active-user">Logged in as {{ user.get_short_name }}</p>
             {% endif %}
 
+            <!-- Right-aligned navigation items -->
             <ul class="navbar-nav ms-auto">
+
+                <!-- Shopping cart link with total price -->
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'view_bag' %}">
                         <i class="fas fa-shopping-cart"></i>
                         <span>(${{ total|floatformat:2 }})</span>
                     </a>
                 </li> 
+
+                <!-- Plans dropdown menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="plansDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Plans
+                        Plans
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="plansDropdown">
                         <li><a class="dropdown-item" href="{% url 'home' %}#plan-container">Overview</a></li>
                         <li><a class="dropdown-item" href="{% url 'plan' %}?focus=starter">Starter Plan</a></li>
                         <li><a class="dropdown-item" href="{% url 'plan' %}?focus=growth">Growth Plan</a></li>
                         <li><a class="dropdown-item" href="{% url 'plan' %}?focus=enterprise">Enterprise Plan</a></li>
-                      </ul>                      
-                  </li>                  
-                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}#contact">Contact</a></li>
+                    </ul>                      
+                </li>                  
+
+                <!-- Contact link (scrolls to contact section) -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}#contact">Contact</a>
+                </li>
+
+                <!-- Account dropdown (register/login or dashboard/logout) -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {% if request.path == '/accounts/dashboard/' %}active{% endif %}" 
                        href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                        <i class="fas fa-user pe-1"></i>Account 
                     </a>
-                
                     <ul class="dropdown-menu" aria-labelledby="accountDropdown">
                         {% if user.is_authenticated %}
+                            <!-- Authenticated user menu -->
                             <li>
                                 <a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a>
                             </li>
@@ -50,6 +67,7 @@
                                 <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>
                             </li>
                         {% else %}
+                            <!-- Guest user menu -->
                             <li>
                                 <a class="dropdown-item" href="{% url 'signup' %}">Register</a>
                             </li>
@@ -59,6 +77,8 @@
                         {% endif %}
                     </ul>
                 </li>  
+
+                <!-- Link to main webshop -->
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'webshop' %}">Shop</a>
                 </li>                                             

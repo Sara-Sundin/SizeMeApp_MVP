@@ -1,13 +1,14 @@
 {% load static %}
 
+<!-- Main Navigation Bar -->
 <nav class="navbar navbar-expand-md navbar-dark fixed-top">
     <div class="container">
-        <!-- Brand logo -->
+        <!-- Brand logo linking to homepage -->
         <a class="navbar-brand" href="{% url 'home' %}">
             <img src="{% static 'images/logo_icon.png' %}" alt="SizeMeApp Logo" width="50">
         </a>
 
-        <!-- Size Mode Button -->
+        <!-- Size Mode toggle button -->
         {% if show_size_mode_toggle %}
             <a href="{% url 'toggle_size_mode' %}" class="btn cta-btn--secondary btn-sm px-4 me-3">
                 {% if request.session.size_mode %}
@@ -18,18 +19,22 @@
             </a>
         {% endif %}
 
-        <!-- Navbar toggler (mobile) -->
+        <!-- Hamburger toggler button for mobile navigation -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Collapsible content (menu links) -->
+        <!-- Collapsible navigation menu (desktop & mobile) -->
         <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNav">
             <ul class="navbar-nav ms-auto">
+                
+                <!-- Shop link -->
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'webshop' %}">Shop</a>
                 </li>
+
+                <!-- Plans dropdown menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="plansDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Plans
@@ -41,9 +46,13 @@
                         <li><a class="dropdown-item" href="{% url 'plan' %}?focus=enterprise">Enterprise Plan</a></li>
                     </ul>
                 </li>
+
+                <!-- Contact link -->
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'home' %}#contact">Contact</a>
                 </li>
+
+                <!-- Account dropdown (login/logout/register/dashboard) -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {% if request.path == '/accounts/dashboard/' %}active{% endif %}" 
                        href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -51,6 +60,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="accountDropdown">
                         {% if user.is_authenticated %}
+                            <!-- Authenticated user options -->
                             <li>
                                 <a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a>
                             </li>
@@ -58,6 +68,7 @@
                                 <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>
                             </li>
                         {% else %}
+                            <!-- Guest user options -->
                             <li>
                                 <a class="dropdown-item" href="{% url 'signup' %}">Register</a>
                             </li>
@@ -72,7 +83,7 @@
     </div>
 </nav>
 
-<!-- Category Filter Buttons -->
+<!-- Category Filter Buttons (visible below navbar) -->
 <div class="d-flex flex-wrap justify-content-center gap-2 py-4 bg-white">
     <a href="{% url 'products' %}?category=tshirts" class="btn cta-btn--primary btn-sm px-4">T Shirts</a>
     <a href="{% url 'products' %}?category=shirts" class="btn cta-btn--tertiary btn-sm px-4">Shirts</a>
