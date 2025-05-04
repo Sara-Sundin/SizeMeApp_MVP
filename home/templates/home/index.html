@@ -4,7 +4,7 @@
 {% block content %}
 
 <!-- Hero Section -->
-<section id="hero">
+<section id="hero" class="fade-in">
     <div class="hero-bg"></div>
     <div class="container">
         <div class="row justify-content-center justify-content-lg-start">
@@ -24,7 +24,7 @@
 </section>
 
 <!-- Info Section -->
-<section id="info">
+<section id="info" class="scroll-fade">
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
@@ -56,7 +56,7 @@
 </section>   
 
 <!-- Business Plan Section -->
-<section id="plans" class="text-center">
+<section id="plans" class="text-center scroll-fade">
     <div class="container py-4">
         <h2 class="py-4">Size Up Your Business</h2>
         <div id="plans-info" class="px-5-md">
@@ -157,7 +157,7 @@
                             </a>
                         </div>
                     </div>
-                </div> <!-- end row -->
+                </div>
             </div>
         </div>
     </div>    
@@ -182,3 +182,25 @@
 {% include "home/delete_account_modal.html" %}
 
 {% endblock %}
+
+{% block postloadjs %}
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const elements = document.querySelectorAll(".scroll-fade");
+  
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);  // Animate only once
+          }
+        });
+      }, {
+        threshold: 0.1  // Trigger when 10% visible
+      });
+  
+      elements.forEach(el => observer.observe(el));
+    });
+  </script>
+  
+  {% endblock %}

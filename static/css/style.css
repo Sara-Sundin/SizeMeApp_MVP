@@ -34,6 +34,35 @@ main {
     margin-left: 0;
 }
 
+/* === Fade Effects === */
+/* Fade-in from transparency on page load */
+.fade-in {
+    opacity: 0;
+    animation: fadeInUp 1.2s ease-out forwards;
+    animation-delay: 0.3s;
+  }
+  
+  /* Keyframes for animation */
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  } 
+  
+/* Hidden by default */
+.scroll-fade {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  
+  /* Visible when in viewport */
+  .scroll-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
 /* === Typography === */
 h1, h2, h3, h4 {
     font-family: var(--primary-font);
@@ -149,7 +178,7 @@ h1, h2, h3, h4 {
     overflow: hidden;
     z-index: 1;
     height: auto;
-    background: linear-gradient(to bottom, black, white);
+    background: linear-gradient(to bottom, black 50%, white 100%);
 }
 
 /* Background image inside hero */
