@@ -1,22 +1,21 @@
 from django.contrib import admin
+from adminsortable2.admin import SortableAdminMixin
 from .models import Product, Category
 
-# Register the Product model with custom admin configuration
-@admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
-    """
-    Admin configuration for Product model.
-    Displays key fields in list view and adds search/filter functionality.
-    """
-    list_display = ('name', 'category', 'price')  # Fields shown in the product list view
-    search_fields = ('name', 'description')       # Enables search by name and description
-    list_filter = ('category',)                   # Adds a sidebar filter by category
 
-# Register the Category model with basic admin configuration
+@admin.register(Product)
+class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
+    """
+    Product admin using drag-and-drop sorting with adminsortable2.
+    Note: Remove 'sort_order' from list_editable to enable drag handle.
+    """
+    list_display = ('name', 'category', 'price')  # Exclude sort_order to allow drag handle
+    ordering = ('sort_order',)  # Sort by the custom field used for ordering
+
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     """
-    Admin configuration for Category model.
-    Displays name and friendly name in the list view.
+    Simple admin configuration for Category.
     """
-    list_display = ('name', 'friendly_name')      # Fields shown in the category list view
+    list_display = ('name', 'friendly_name')

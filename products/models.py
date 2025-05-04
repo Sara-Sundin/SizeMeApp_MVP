@@ -8,12 +8,12 @@ class Category(models.Model):
     """
 
     class Meta:
-        verbose_name_plural = 'Categories'  # Displayed name in Django admin
+        verbose_name_plural = 'Categories'
 
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254, null=True, blank=True)
 
-    # Stretch factors for size recommendations based on fit type
+    # Stretch factors for size recommendations
     slim_factor = models.DecimalField(
         max_digits=4,
         decimal_places=2,
@@ -34,15 +34,9 @@ class Category(models.Model):
     )
 
     def __str__(self):
-        """
-        String representation shown in Django admin and elsewhere.
-        """
         return self.name
 
     def get_friendly_name(self):
-        """
-        Returns the display-friendly version of the category name.
-        """
         return self.friendly_name
 
 
@@ -81,8 +75,12 @@ class Product(models.Model):
         help_text="Image uploaded directly to media storage"
     )
 
+    # Sorting and tracking
+    sort_order = models.PositiveIntegerField(default=0, help_text="Manual sort order for product")
+    created_at = models.DateTimeField(auto_now_add=True, help_text="When this product was created")
+
+    class Meta:
+        ordering = ['sort_order']  # Default ordering used in queries
+
     def __str__(self):
-        """
-        String representation for the product.
-        """
         return self.name
