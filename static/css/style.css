@@ -1,7 +1,7 @@
-/* Google fonts import */
+/* === Google Fonts === */
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* CSS Variables Color and Fonts */
+/* === Root Variables: Colors & Fonts === */
 :root {
     --primary-font: "Abril Fatface", sans-serif;
     --secondary-font: "Raleway", sans-serif;
@@ -10,8 +10,8 @@
     --tertiary-color: #c3b3d6;
 }
 
-/* General Styling */  
-  html, body {
+/* === Base Layout === */
+html, body {
     height: 100%;
     margin: 0;
 }
@@ -21,33 +21,30 @@ body {
     flex-direction: column;
     min-height: 100vh;
     font-family: var(--secondary-font);
-    margin-top: 39.33px;
+    margin-top: 39.33px; /* Likely for fixed navbar space */
     overflow-x: hidden;
-} 
+}
 
 main {
-    flex: 1;
-} 
- 
+    flex: 1; /* Push footer to bottom */
+}
+
 .row {
     margin-right: 0;
     margin-left: 0;
-  }
+}
 
-/* Headings */
-h1,
-h2,
-h3,
-h4 {
-    font-family: var(--primary-font);   
+/* === Typography === */
+h1, h2, h3, h4 {
+    font-family: var(--primary-font);
 }
 
 .sizeup-heading {
     width: 260px;
-    display: inline;     
+    display: inline;
 }
 
-/* Buttons */
+/* === Button Styles === */
 .cta-btn {
     color: black;
     text-decoration: none;
@@ -60,12 +57,12 @@ h4 {
     text-align: center;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    white-space: normal;    /* Allow line breaks */
-    line-height: 1.4;        /* Better spacing for wrapped text */
-    min-height: 50px;       
+    white-space: normal;
+    line-height: 1.4;
+    min-height: 50px;
 }
 
-/* Color variants cta-buttons */
+/* === Button Color Variants === */
 .cta-btn--primary {
     background-color: var(--primary-color);
 }
@@ -90,13 +87,14 @@ h4 {
     font-size: 1rem;
 }
 
+/* Special case button, overrides cta styles */
 .checkout-btn {
     background-color: black;
     color: white;
     font-size: 14px;
 }
 
-/* Hover styles for buttons */
+/* === Button Hover Effects === */
 .cta-btn:hover,
 .cta-btn--primary:hover,
 .btn.cta-btn--secondary:hover,
@@ -110,7 +108,8 @@ h4 {
     transform: scale(1.02);
     transition: all 0.3s ease-in-out;
 }
-  
+
+/* Additional button states */
 .btn:hover,
 .btn:focus,
 .btn:active {
@@ -118,10 +117,10 @@ h4 {
     color: black;
 }
 
-/* Navbar */
+/* === Navbar === */
 .navbar {
     background-color: black;
-   } 
+}
 
 .navbar p {
     color: white;
@@ -144,16 +143,16 @@ h4 {
     font-weight: bold;
 }
 
-/* Hero Section Styling */
-
-#hero { /* Main content container holds the background image */
+/* === Hero Section === */
+#hero {
     position: relative;
     overflow: hidden;
-    z-index: 1; /* Keep it above the pseudo-element background */
-    height: auto; /* let it grow if needed */
+    z-index: 1;
+    height: auto;
     background: linear-gradient(to bottom, black, white);
 }
 
+/* Background image inside hero */
 .hero-bg {
     position: absolute;
     top: 20px;
@@ -164,8 +163,8 @@ h4 {
     background-size: 80%;
     opacity: 0.5;
     z-index: -1;
-    pointer-events: none; /* optional: make sure it's not clickable */
-}  
+    pointer-events: none;
+}
 
 #hero h1 {
     font-size: 60px;
@@ -185,14 +184,12 @@ h4 {
     font-size: 30px;
 }
 
-/* Info Section */
-
+/* === Info Section === */
 #info h2 {
     font-size: 40px;
 }
 
-/* Business Plan Sections*/
-
+/* === Plan Section Layout === */
 .plan-container {
     background: black;
     display: flex;
@@ -210,11 +207,12 @@ h4 {
     font-size: 25px;
 }
 
+/* Plan card headings */
 .plan-heading {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: white;     
+    background-color: white;
     border-radius: 8px;
     padding: 0.5rem 1rem;
     width: 100%;
@@ -229,6 +227,7 @@ h4 {
     gap: 0.5rem;
 }
 
+/* Plan icon color variants */
 .icon-starter {
     color: var(--primary-color);
 }
@@ -246,27 +245,25 @@ h4 {
 }
 
 .responsive-icon {
-    font-size: 80px
+    font-size: 80px;
 }
 
-.plan-info {
-    background-color: white;     
-    border-radius: 8px; 
+/* Plan cards */
+.plan-info,
+.plan-info-plan {
+    background-color: white;
+    border-radius: 8px;
     margin: 1rem auto;
     min-height: 250px;
 }
 
 .plan-info-plan {
-    background-color: white;     
-    border-radius: 8px; 
-    margin: 1rem auto;
-    scroll-margin-top: 70px; /* To adjust for fixed navbar*/
+    scroll-margin-top: 70px; /* Adjust for sticky nav */
 }
 
-/* Plan Pages */
-
+/* === Individual Plan Page === */
 #plan-description {
-    scroll-margin-top: 70px; /* To adjust for fixed navbar*/
+    scroll-margin-top: 70px;
 }
 
 #plan {
@@ -284,14 +281,13 @@ h4 {
     color: var(--tertiary-color);
 }
 
-.starter-heading {    
-    background-color: white;     
-    border-radius: 8px;            /* Rounded corners */
+.starter-heading {
+    background-color: white;
+    border-radius: 8px;
     padding: 0 1rem;
 }
 
-/* Dashboard */
-
+/* === Dashboard === */
 #dashboard {
     background: linear-gradient(to bottom, black, white);
 }
@@ -305,7 +301,7 @@ h4 {
 
 #profile {
     background-color: white;
-    border-radius: 8px; 
+    border-radius: 8px;
 }
 
 .list-recommendations {
@@ -313,8 +309,7 @@ h4 {
     border-radius: 8px;
 }
 
-/* Footer */
-
+/* === Footer === */
 footer {
     background-color: black;
     color: white;
@@ -324,21 +319,22 @@ footer {
 }
 
 footer p {
-    margin: 0 auto 2rem auto; /* Spacing at the bottom */
+    margin: 0 auto 2rem auto;
 }
 
+/* Custom horizontal line */
 .custom-separator {
-    border: none; /* removes default gray border */
-    height: 1px;                 
-    background-color: #fff;      
-    width: 80%;                  
-    margin: 2rem auto; /* centers it */
-    opacity: 1; /* overrides transparency*/
+    border: none;
+    height: 1px;
+    background-color: #fff;
+    width: 80%;
+    margin: 2rem auto;
+    opacity: 1;
 }
 
-/* Contact Details */
+/* === Contact === */
 .contact-details {
-    text-align: left;;
+    text-align: left;
 }
 
 .contact-sub-heading {
@@ -347,31 +343,28 @@ footer p {
 }
 
 #contact {
-    scroll-margin-top: 100px; /* To adjust for fixed navbar*/
+    scroll-margin-top: 100px;
 }
 
-/* Social Icons Container */
-
+/* === Social Icons === */
 .social-icons {
     display: flex;
-    justify-content: left; /* Centers icons */
-    gap: 50px; /* Space between icons */
+    justify-content: left;
+    gap: 50px;
 }
 
 .social-icons a {
-    font-size: 35px; /* Adjust icon size */
+    font-size: 35px;
     color: white;
     transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
-/* Hover Effect social icons */
-
 .social-icons a:hover {
-    color: var(--primary-color); /* Change color on hover */
-    transform: scale(1.2); /* Slightly enlarge on hover */
+    color: var(--primary-color);
+    transform: scale(1.2);
 }
 
-/* Contact Form */
+/* === Contact Form === */
 .contact-form-container {
     flex: 1;
 }
@@ -383,10 +376,10 @@ footer p {
 
 .contact-form .form-group label {
     text-align: left;
-    display: block; /* Ensures the label takes up full width */
+    display: block;
 }
 
-/* Autofill Fixes (matching SizeMeApp styles) */
+/* Autofill Fix (ensures matching design) */
 .contact-form input:-webkit-autofill,
 .contact-form input:-moz-autofill,
 .contact-form input:-ms-autofill {
@@ -396,8 +389,7 @@ footer p {
     box-shadow: 0 0 0px 1000px white inset !important;
 }
 
-/* Spinner Overlay at checkout*/
-
+/* === Checkout Loading Spinner === */
 #loading-overlay {
     position: fixed;
     top: 0;
@@ -409,40 +401,39 @@ footer p {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .spinner-container {
+}
+
+.spinner-container {
     position: relative;
     text-align: center;
     color: white;
-  }
-  
-  .spinner-logo img {
+}
+
+.spinner-logo img {
     max-width: 200px;
     height: auto;
     display: block;
     margin: 0 auto;
-    position: relative; /* Needed to position orbit relative to this if needed */
     z-index: 1;
-  }
-  
-  .orbit-wrapper {
+}
+
+.orbit-wrapper {
     position: absolute;
     top: 50%;
     left: 50%;
     width: 200px;
     height: 200px;
-    transform: translate(-50%, -50%); /* Center orbit */
+    transform: translate(-50%, -50%);
     animation: spin 2s linear infinite;
     z-index: 0;
-  }
-  
-  @keyframes spin {
+}
+
+@keyframes spin {
     0%   { transform: translate(-50%, -50%) rotate(0deg); }
     100% { transform: translate(-50%, -50%) rotate(360deg); }
-  }  
-  
-  .orbiting-dot {
+}
+
+.orbiting-dot {
     width: 12px;
     height: 12px;
     background-color: var(--primary-color, #94e6ed);
@@ -451,16 +442,17 @@ footer p {
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-  } 
-  
-/* 404 */
+}
 
+/* === 404 Styling === */
 .logo-404 {
     width: 200px;
     height: auto;
 }
 
-/* Tablet (md) */
+/* === Media Queries === */
+
+/* Tablet */
 @media (min-width: 768px) {
     #hero {
         height: 800px;
@@ -492,7 +484,7 @@ footer p {
     }
 
     .responsive-icon {
-        font-size: 120px
+        font-size: 120px;
     }
 
     #dashboard h1 {
@@ -500,9 +492,8 @@ footer p {
     }
 }
 
-/* Desktop (lg) */
+/* Desktop */
 @media (min-width: 1024px) {
-
     #plans h2 {
         font-size: 110px;
     }
@@ -523,6 +514,7 @@ footer p {
     #hero p {
         font-size: 45px;
         line-height: 1.4;
+        padding-top: 30px;
     }
 
     .hero-bg {
@@ -533,12 +525,6 @@ footer p {
     #hero h1 {
         padding-top: 80px;
         font-size: 100px;
-       
-    }
-
-    #hero p {
-        padding-top: 30px;
-       
     }
 
     #dashboard h1 {
