@@ -60,7 +60,20 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-GRAPPELLI_ADMIN_TITLE = "SizeMeApp Admin"
+JAZZMIN_SETTINGS = {
+    "site_title": "SizeMeApp Admin",
+      "icons": {
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "home.Plan": "fas fa-clipboard",
+        "products.Product": "fas fa-tshirt",
+        "products.Category": "fas fa-tags",
+        "accounts.CustomUser": "fas fa-id-card",
+        "sizemeapp.GarmentFit": "fas fa-ruler-combined",
+        "checkout.Order": "fas fa-shopping-cart",
+    }
+}
+
 
 # <!-- Crispy Forms config -->
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
