@@ -22,7 +22,6 @@ class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
     ordering = ('sort_order',)
     inlines = [GarmentFitInline]
 
-    # Fields shown in the product detail view
     fields = (
         'name', 'category', 'sku', 'description', 'has_sizes',
         'price', 'image', 'image_url', 'image_preview', 'sort_order'
@@ -39,3 +38,8 @@ class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
             return format_html('<img src="{}" style="max-height: 200px;" />', obj.image.url)
         return "No image uploaded"
     image_preview.short_description = "Preview"
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'friendly_name')
