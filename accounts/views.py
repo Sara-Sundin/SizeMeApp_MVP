@@ -7,7 +7,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 
-from .forms import CustomSignupForm, CustomLoginForm, CustomUserUpdateForm
+from .forms import CustomSignupForm, CustomLoginForm, CustomUserUpdateForm, MeasurementUpdateForm
 from .models import CustomUser
 
 
@@ -36,35 +36,27 @@ def dashboard_view(request):
 @login_required
 def login_update_measurements(request):
     """
-    Update user measurements upon login and set a session flag to trigger
+    Update user measurements upon login using a form and set a session flag to trigger
     a redirect modal in the dashboard.
     """
     if request.method == "POST":
-        user = request.user
-        user.chest = request.POST.get("chest")
-        user.waist = request.POST.get("waist")
-        user.hips = request.POST.get("hips")
-        user.shoulders = request.POST.get("shoulders")
-        user.save()
-
-        request.session["show_redirect_modal"] = True
-        return redirect("dashboard")
+        form = MeasurementUpdateForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            request.session["show_redirect_modal"] = True
+    return redirect("dashboard")
 
 
 @login_required
 def update_measurements(request):
     """
-    Save new measurement values from the dashboard and set a success modal flag.
+    Save new measurement values from the dashboard using a form and set a success modal flag.
     """
     if request.method == "POST":
-        user = request.user
-        user.chest = request.POST.get("chest")
-        user.waist = request.POST.get("waist")
-        user.hips = request.POST.get("hips")
-        user.shoulders = request.POST.get("shoulders")
-        user.save()
-
-        request.session["show_measurements_updated_modal"] = True
+        form = MeasurementUpdateForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            request.session["show_measurements_updated_modal"] = True
     return redirect("dashboard")
 
 

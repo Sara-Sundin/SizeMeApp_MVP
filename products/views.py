@@ -8,6 +8,8 @@ from .models import Product, Category
 from .forms import ProductForm
 
 from sizemeapp.utils.recommendations import get_size_recommendations
+from accounts.forms import MeasurementUpdateForm
+
 
 # Mapping category names to CSS classes for button styling
 CATEGORY_BUTTON_CLASSES = {
@@ -101,10 +103,13 @@ def product_detail(request, product_id):
         product.category.name.lower(), 'btn-outline-dark'
     )
 
-    # Check for success modal flags in session (set elsewhere in the app)
+    # Modal flags from session
     show_webshop_measurements_success = request.session.pop('show_webshop_measurements_success', False)
     show_size_mode_entered_modal = request.session.pop('size_mode_entered', False)
     show_size_mode_exited_modal = request.session.pop('size_mode_exited', False)
+
+    # Use the same measurement form as the dashboard
+    measurement_form = MeasurementUpdateForm(instance=request.user) if request.user.is_authenticated else None
 
     context = {
         'product': product,
@@ -115,6 +120,7 @@ def product_detail(request, product_id):
         'show_size_mode_entered_modal': show_size_mode_entered_modal,
         'show_size_mode_exited_modal': show_size_mode_exited_modal,
         'show_size_mode_toggle': True,
+        'measurement_form': measurement_form,
     }
 
     return render(request, 'products/product_detail.html', context)

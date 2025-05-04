@@ -97,3 +97,44 @@ class CustomUserUpdateForm(UserChangeForm):
             "full_name",
             "email",
         ]
+
+
+class MeasurementUpdateForm(forms.ModelForm):
+    """
+    A form for updating the user's body measurements.
+    """
+
+    class Meta:
+        model = CustomUser
+        fields = ['chest', 'waist', 'hips', 'shoulders']
+        widgets = {
+            'chest': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': 20,
+                'max': 200,
+                'step': 0.1,
+                'required': 'required',
+            }),
+            'waist': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': 20,
+                'max': 200,
+                'step': 0.1,
+                'required': 'required',
+            }),
+            'hips': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': 20,
+                'max': 200,
+                'step': 0.1,
+                'required': 'required',
+            }),
+            'shoulders': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': 10,
+                'max': 70,
+                'step': 0.1,
+                'required': 'required',
+            }),
+        }
+
