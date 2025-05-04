@@ -94,49 +94,58 @@
   </div>
 
   <!-- Login/Signup Measurement Modal -->
-<div class="modal fade" id="loginMeasurementModal" tabindex="-1" aria-labelledby="measurementsEntryLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form method="post" action="{% url 'login_update_measurements' %}">
-        {% csrf_token %}
-        <div class="modal-header">
-          <h5 class="modal-title" id="measurementsEntryLabel">For a personalized experience, please add your measurements.</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-
-        <div class="modal-body">
-          <div class="form-group mb-3">
-            <label for="chest">Chest (cm)</label>
-            <input type="number" name="chest" id="chest" class="form-control" required value="{{ user.chest|default_if_none:'' }}">
+  <div class="modal fade" id="loginMeasurementModal" tabindex="-1" aria-labelledby="measurementsEntryLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form method="post" action="{% url 'login_update_measurements' %}">
+          {% csrf_token %}
+          <div class="modal-header">
+            <h5 class="modal-title" id="measurementsEntryLabel">For a personalized experience, please add your measurements.</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-
-          <div class="form-group mb-3">
-            <label for="waist">Waist (cm)</label>
-            <input type="number" name="waist" id="waist" class="form-control" required value="{{ user.waist|default_if_none:'' }}">
+  
+          <div class="modal-body">
+            <div class="form-group mb-3">
+              <label for="chest">Chest (cm)</label>
+              <input type="number" name="chest" id="chest" class="form-control" required
+                     min="20" max="200" step="0.1"
+                     value="{{ user.chest|default_if_none:'' }}">
+            </div>
+  
+            <div class="form-group mb-3">
+              <label for="waist">Waist (cm)</label>
+              <input type="number" name="waist" id="waist" class="form-control" required
+                     min="20" max="200" step="0.1"
+                     value="{{ user.waist|default_if_none:'' }}">
+            </div>
+  
+            <div class="form-group mb-3">
+              <label for="hips">Hips (cm)</label>
+              <input type="number" name="hips" id="hips" class="form-control" required
+                     min="20" max="200" step="0.1"
+                     value="{{ user.hips|default_if_none:'' }}">
+            </div>
+  
+            <div class="form-group mb-3">
+              <label for="shoulders">Shoulders (cm)</label>
+              <input type="number" name="shoulders" id="shoulders" class="form-control" required
+                     min="10" max="70" step="0.1"
+                     value="{{ user.shoulders|default_if_none:'' }}">
+            </div>
           </div>
-
-          <div class="form-group mb-3">
-            <label for="hips">Hips (cm)</label>
-            <input type="number" name="hips" id="hips" class="form-control" required value="{{ user.hips|default_if_none:'' }}">
-          </div>
-
-          <div class="form-group mb-3">
-            <label for="shoulders">Shoulders (cm)</label>
-            <input type="number" name="shoulders" id="shoulders" class="form-control" required value="{{ user.shoulders|default_if_none:'' }}">
-          </div>
-
+  
           <div class="modal-footer">
-            <a id="skip-measurements-link" href="#" class="text-muted small px-5" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#redirectModal">
+            <a id="skip-measurements-link" href="#" class="text-muted small px-5"
+               data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#redirectModal">
               Skip for now
             </a>
             <button id="save-and-continue-btn" type="submit" class="btn btn-dark">Save & Continue</button>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
-</div>
-
+  
 <!-- Welcome Modal -->
 <div class="modal fade" id="redirectModal" tabindex="-1" aria-labelledby="redirectModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -187,24 +196,28 @@
           <div class="form-group mb-3">
             <label for="chest">Chest (cm)</label>
             <input type="number" name="chest" id="chest" class="form-control" required
+                   min="20" max="200" step="0.1"
                    value="{{ user.chest|default_if_none:'' }}">
           </div>
 
           <div class="form-group mb-3">
             <label for="waist">Waist (cm)</label>
             <input type="number" name="waist" id="waist" class="form-control" required
+                   min="20" max="200" step="0.1"
                    value="{{ user.waist|default_if_none:'' }}">
           </div>
 
           <div class="form-group mb-3">
             <label for="hips">Hips (cm)</label>
             <input type="number" name="hips" id="hips" class="form-control" required
+                   min="20" max="200" step="0.1"
                    value="{{ user.hips|default_if_none:'' }}">
           </div>
 
           <div class="form-group mb-3">
             <label for="shoulders">Shoulders (cm)</label>
             <input type="number" name="shoulders" id="shoulders" class="form-control" required
+                   min="10" max="70" step="0.1"
                    value="{{ user.shoulders|default_if_none:'' }}">
           </div>
         </div>
