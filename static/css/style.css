@@ -1,9 +1,9 @@
 /* === Google Fonts === */
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cal+Sans&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 
 /* === Root Variables: Colors & Fonts === */
 :root {
-    --primary-font: "Abril Fatface", sans-serif;
+    --primary-font: "Cal Sans", sans-serif;
     --secondary-font: "Raleway", sans-serif;
     --primary-color: #94e6ed; 
     --secondary-color: #f8b133; 
@@ -77,7 +77,7 @@ h1, h2, h3, h4 {
 .cta-btn {
     color: black;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 16px;
     padding: 12px 24px;
     border: none;
     border-radius: 8px;
