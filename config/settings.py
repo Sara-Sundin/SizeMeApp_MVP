@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'storages',
     'django_countries',
 
-    # Django core apps
+    # Django core appsY
+    'jazzmin',
     'adminsortable2',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -58,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+GRAPPELLI_ADMIN_TITLE = "SizeMeApp Admin"
 
 # <!-- Crispy Forms config -->
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
