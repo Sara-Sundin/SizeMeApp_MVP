@@ -1,44 +1,55 @@
-#shop-hero h1 {
-    font-size: 35px;
-}
-
+/* --------------------------------------
+   Hero Section Container Styles
+----------------------------------------- */
 #shop-hero {
-    background: url('/static/images/shop-hero.jpg') center/cover no-repeat;
-    min-height: 80vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: url('/static/images/shop-hero.jpg') center/cover no-repeat; /* Set background image centered and covering the section */
+    min-height: 80vh; /* Ensure hero section takes up at least 80% of the viewport height */
+    display: flex; /* Use flexbox to center content */
+    align-items: center; /* Vertically center content */
+    justify-content: center; /* Horizontally center content */
 }
 
+/* --------------------------------------
+   Hero Heading Styling (Default)
+----------------------------------------- */
+#shop-hero h1 {
+    font-size: 35px; /* Base font size for small screens */
+}
+
+/* --------------------------------------
+   Hero Content Box Styling
+----------------------------------------- */
 #shop-hero-content {
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.8); /* 80% white opacity */
-    border-radius: 10px;
-    font-size: 14px;
+    text-align: center; /* Center the text inside */
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for readability */
+    border-radius: 10px; /* Slightly rounded corners */
+    font-size: 14px; /* Smaller base font for mobile */
 }
 
-/* Tablet (md) */
+/* --------------------------------------
+   Tablet Styles (≥ 768px)
+----------------------------------------- */
 @media (min-width: 768px) {
-
     #shop-hero h1 {
-        font-size: 35px;
+        font-size: 35px; /* Maintain heading size on tablet */
     }
 
     #shop-hero-content {
-        width: 700px;
-        font-size: 18px;
+        width: 700px; /* Increase width for better layout on tablets */
+        font-size: 18px; /* Slightly larger text for readability */
     }
 }
 
-/* Desktop (md) */
+/* --------------------------------------
+   Desktop Styles (≥ 1024px)
+----------------------------------------- */
 @media (min-width: 1024px) {
-
     #shop-hero h1 {
-        font-size: 50px;
+        font-size: 50px; /* Larger heading on desktops */
     }
 
     #shop-hero-content {
-        width: 800px;
-        font-size: 25px;
+        width: 800px; /* Wider content container */
+        font-size: 25px; /* Larger font for large screens */
     }
 }

@@ -1,24 +1,31 @@
 {% extends "base.html" %} 
 {% load static %}
 
+<!-- Include custom CSS for the webshop -->
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/webshop.css' %}">
 {% endblock %}
 
+<!-- Use the webshop-specific navbar -->
 {% block navbar %}
   {% include "includes/navbar_webshop.html" %}
 {% endblock %}
 
 {% block content %}
+<!-- Hero section for the webshop -->
 <section id="shop-hero" class="px-4">
   <div class="container p-4 my-4" id="shop-hero-content">
+    
+    <!-- Section heading -->
     <h1 class="text-center">Step Into the Experience</h1>
+
+    <!-- Intro text -->
     <p class="text-center">
       Welcome to our prototype webshop — designed to give you a hands-on feel of the <strong>SizeMeApp</strong> sizing journey. 
       See real-time fit suggestions, and discover what works for you.
     </p>
 
-    <!-- Main CTA -->
+    <!-- Call to action button -->
     <div class="text-center mt-4">
       <a href="{% url 'products' %}" class="cta-btn cta-btn--secondary">
         Start exploring with <br>
