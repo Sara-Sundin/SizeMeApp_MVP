@@ -1,0 +1,116 @@
+{% comment %}Product Detail Modals for measurements, size mode, and prototype info{% endcomment %}
+
+<!-- Modal to update body measurements -->
+<div class="modal fade" id="UpdateMeasurementsModal" tabindex="-1" aria-labelledby="updateMeasurementsLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="post" action="{% url 'update_measurements_from_webshop' %}">
+        <input type="hidden" name="product_id" value="{{ product.id }}">
+        {% csrf_token %}
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateMeasurementsLabel">Update Your Measurements</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Chest -->
+          <div class="form-group mb-3">
+            {{ measurement_form.chest.label_tag }}
+            {{ measurement_form.chest }}
+            {% if measurement_form.chest.errors %}
+              <div class="text-danger small">{{ measurement_form.chest.errors|striptags }}</div>
+            {% endif %}
+          </div>
+
+          <!-- Waist -->
+          <div class="form-group mb-3">
+            {{ measurement_form.waist.label_tag }}
+            {{ measurement_form.waist }}
+            {% if measurement_form.waist.errors %}
+              <div class="text-danger small">{{ measurement_form.waist.errors|striptags }}</div>
+            {% endif %}
+          </div>
+
+          <!-- Hips -->
+          <div class="form-group mb-3">
+            {{ measurement_form.hips.label_tag }}
+            {{ measurement_form.hips }}
+            {% if measurement_form.hips.errors %}
+              <div class="text-danger small">{{ measurement_form.hips.errors|striptags }}</div>
+            {% endif %}
+          </div>
+
+          <!-- Shoulders -->
+          <div class="form-group mb-3">
+            {{ measurement_form.shoulders.label_tag }}
+            {{ measurement_form.shoulders }}
+            {% if measurement_form.shoulders.errors %}
+              <div class="text-danger small">{{ measurement_form.shoulders.errors|striptags }}</div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-dark">Save Measurements</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Measurements Updated Confirmation Modal -->
+<div class="modal fade" id="measurementsUpdatedModalWebshop" tabindex="-1" aria-labelledby="measurementsUpdatedLabelWebshop" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-dark border border-white text-white">
+        <h5 class="modal-title" id="measurementsUpdatedLabelWebshop">Success</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Your measurements were saved successfully!
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Size Mode Entered Modal -->
+<div class="modal fade" id="sizeModeEnteredModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content text-center p-4 bg-black border border-white text-white">
+      <h5 class="modal-title">Size Mode Activated</h5>
+      <div class="modal-body">You are now browsing in size mode!</div>
+    </div>
+  </div>
+</div>
+
+<!-- Size Mode Exited Modal -->
+<div class="modal fade" id="sizeModeExitedModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content text-center p-4 bg-black border border-white text-white">
+      <h5 class="modal-title">Size Mode Exited</h5>
+      <div class="modal-body">You have exited size mode.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Prototype Info Modal -->
+<div class="modal fade" id="prototypeModal" tabindex="-1" aria-labelledby="prototypeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center p-4">
+      <div class="modal-header border-0">
+        <h5 class="modal-title w-100" id="prototypeModalLabel">Just a Heads-Up!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-3">This webshop is a <strong>prototype</strong> built to demonstrate the <strong>SizeMeApp</strong> experience.</p>
+        <p class="text-muted mb-4">If you're interested in working with us or want to see what plan fits your business, we’ve got you covered.</p>
+        <div class="d-grid gap-2">
+          <a href="{% url 'home' %}#contact" class="btn btn-dark">Contact Us</a>
+          <a href="{% url 'home' %}#plan-container" class="btn cta-btn--primary">View Plans</a>
+          <button type="button" class="btn cta-btn--secondary" data-bs-dismiss="modal">Continue Browsing</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
