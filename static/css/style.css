@@ -287,6 +287,24 @@ h1, h2, h3, h4 {
     padding: 0 1rem;
 }
 
+/* === Shopping bag === */
+.remove-item {
+    background: transparent;
+    border: 1px solid #ccc;
+    color: #555;
+    padding: 4px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .remove-item:hover {
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+    color: #b02a37;
+  }  
+
 /* === Dashboard === */
 #dashboard {
     background: linear-gradient(to bottom, black, white);
