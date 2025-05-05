@@ -16,8 +16,8 @@ def webshop_view(request):
     """
     Render the main webshop landing page.
 
-    If 'size_mode' is not already set in the user's session, 
-    it will default to True. This is used to enable size-related 
+    If 'size_mode' is not already set in the user's session,
+    it will default to True. This is used to enable size-related
     features in the frontend.
     """
     if 'size_mode' not in request.session:
@@ -28,8 +28,10 @@ def webshop_view(request):
 @login_required
 def update_measurements_from_webshop(request):
     """
-    Handle measurement update submission from the modal in the product detail view.
-    Validates using Django form. If invalid, re-renders the product page with error messages.
+    Handle measurement update submission from the modal
+    in the product detail view.
+    Validates using Django form. If invalid, re-renders
+    the product page with error messages.
     """
     if request.method == 'POST':
         form = MeasurementUpdateForm(request.POST, instance=request.user)
@@ -44,8 +46,15 @@ def update_measurements_from_webshop(request):
 
         size_mode = request.session.get('size_mode', False)
         recommendations = []
-        if size_mode and request.user.chest:
-            recommendations = get_size_recommendations(request.user.chest, product)
+
+        if (
+            size_mode
+            and request.user
+            and hasattr(request.user, 'chest')
+            and request.user.chest
+        ):
+            user_chest = request.user.chest
+            recommendations = get_size_recommendations(user_chest, product)
 
         category_button_class = CATEGORY_BUTTON_CLASSES.get(
             product.category.name.lower(), 'btn-outline-dark'
