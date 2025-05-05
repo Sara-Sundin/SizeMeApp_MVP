@@ -351,6 +351,11 @@ h1, h2, h3, h4 {
     border-radius: 8px;
 }
 
+.profile-picture-placeholder {
+    color: grey;
+    font-size: 65px;
+}
+
 .list-recommendations {
     background-color: var(--secondary-color);
     border-radius: 8px;
