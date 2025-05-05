@@ -7,7 +7,8 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 
-from .forms import CustomSignupForm, CustomLoginForm, CustomUserUpdateForm, MeasurementUpdateForm
+from .forms import CustomSignupForm, CustomLoginForm
+from .forms import CustomUserUpdateForm, MeasurementUpdateForm
 from .models import CustomUser
 
 
@@ -19,9 +20,12 @@ def dashboard_view(request):
     """
     user = request.user
     show_modal = not all([user.chest, user.waist, user.hips, user.shoulders])
-    show_profile_updated_modal = request.session.pop("show_profile_updated_modal", False)
-    show_measurements_updated_modal = request.session.pop("show_measurements_updated_modal", False)
-    show_measurements_deleted_modal = request.session.pop("show_measurements_deleted_modal", False)
+    show_profile_updated_modal = request.session.pop
+    ("show_profile_updated_modal", False)
+    show_measurements_updated_modal = request.session.pop
+    ("show_measurements_updated_modal", False)
+    show_measurements_deleted_modal = request.session.pop
+    ("show_measurements_deleted_modal", False)
     show_redirect_modal = request.session.pop("show_redirect_modal", False)
 
     return render(request, 'accounts/dashboard.html', {
@@ -36,8 +40,8 @@ def dashboard_view(request):
 @login_required
 def login_update_measurements(request):
     """
-    Update user measurements upon login using a form and set a session flag to trigger
-    a redirect modal in the dashboard.
+    Update user measurements upon login using a form and set a session
+    flag to trigger a redirect modal in the dashboard.
     """
     if request.method == "POST":
         form = MeasurementUpdateForm(request.POST, instance=request.user)
@@ -50,7 +54,8 @@ def login_update_measurements(request):
 @login_required
 def update_measurements(request):
     """
-    Save new measurement values from the dashboard using a form and set a success modal flag.
+    Save new measurement values from the dashboard using a form and
+    set a success modal flag.
     """
     if request.method == "POST":
         form = MeasurementUpdateForm(request.POST, instance=request.user)
@@ -63,7 +68,8 @@ def update_measurements(request):
 @login_required
 def delete_measurements(request):
     """
-    Remove all measurement values for the current user and set a deleted modal flag.
+    Remove all measurement values for the current user and
+    set a deleted modal flag.
     """
     if request.method == "POST":
         user = request.user
@@ -80,7 +86,8 @@ def delete_measurements(request):
 @login_required
 def delete_account(request):
     """
-    Permanently delete the user account and set a session flag to show a farewell modal.
+    Permanently delete the user account and set a session
+    flag to show a farewell modal.
     """
     if request.method == "POST":
         request.user.delete()
@@ -91,7 +98,8 @@ def delete_account(request):
 
 def custom_logout(request):
     """
-    Log the user out and set a flag to trigger a logged-out modal on the homepage.
+    Log the user out and set a flag to trigger a
+    logged-out modal on the homepage.
     """
     logout(request)
     request.session["show_logged_out_modal"] = True

@@ -3,16 +3,18 @@ Forms for user creation, authentication, and update using the CustomUser model.
 """
 
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserChangeForm
 from .models import CustomUser
 
 
 class CustomSignupForm(UserCreationForm):
     """
-    A custom user signup form that includes only full_name, email, and password1.
+    A custom user signup form that includes only full_name, email, and
+    password1.
 
-    This form excludes the password2 field and ensures the username is set to the email
-    to comply with unique constraints on username.
+    This form excludes the password2 field and ensures the username is set
+    to the email to comply with unique constraints on username.
     """
     full_name = forms.CharField(
         max_length=255,
@@ -137,4 +139,4 @@ class MeasurementUpdateForm(forms.ModelForm):
                 'required': 'required',
             }),
         }
-
+        

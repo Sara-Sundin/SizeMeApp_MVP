@@ -37,7 +37,8 @@ class CustomUserAdmin(UserAdmin):
             )
         }),
         ("Measurements", {"fields": ("chest", "waist", "hips", "shoulders")}),
-        ("Permissions", {"fields": ("is_active", "is_staff", "is_superuser", "groups", "user_permissions")}),
+        ("Permissions", {"fields": ("is_active", "is_staff", "is_superuser",
+         "groups", "user_permissions")}),
         ("Important Dates", {"fields": ("last_login", "date_joined")}),
     )
 

@@ -1,12 +1,14 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+
 class CustomUser(AbstractUser):
     """
     Custom user model that uses email instead of username for authentication.
 
-    Includes additional fields for full name, body measurements (chest, waist, hips, shoulders),
-    and contact/address details (phone number, country, city, etc.).
+    Includes additional fields for full name, body measurements (chest, waist,
+    hips, shoulders), and contact/address details (phone number, country, city,
+    etc.).
     """
 
     # Authentication
@@ -36,7 +38,8 @@ class CustomUser(AbstractUser):
         return self.full_name or self.email
 
     def get_short_name(self):
-        """Return the first part of the user's full name or email if not set."""
+        """Return the first part of the user's full name or
+        email if not set."""
         return self.full_name.split()[0] if self.full_name else self.email
 
     def __str__(self):
