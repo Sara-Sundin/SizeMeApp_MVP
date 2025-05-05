@@ -6,7 +6,8 @@ from .utils.recommendations import get_size_recommendations
 
 def size_recommendation_view(request, product_id):
     """
-    Returns size recommendations for a given product and authenticated user as JSON.
+    Returns size recommendations for a given product
+    and authenticated user as JSON.
 
     Expected to be used in AJAX calls or API requests.
 
@@ -21,7 +22,11 @@ def size_recommendation_view(request, product_id):
     recommendations = []
 
     # Ensure user is logged in and has a chest measurement stored
-    if request.user.is_authenticated and hasattr(request.user, 'chest') and request.user.chest:
+    if (
+        request.user.is_authenticated
+        and hasattr(request.user, 'chest')
+        and request.user.chest
+    ):
         user_chest = request.user.chest
         recommendations = get_size_recommendations(user_chest, product)
 

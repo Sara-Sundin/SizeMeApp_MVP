@@ -35,4 +35,7 @@ class GarmentFit(models.Model):
         """
         String representation for admin and shell display.
         """
-        return f"{self.product.name} - {self.size_label} (Chest: {self.chest}cm)"
+        return (
+            f"{self.product.name} - {self.size_label} "
+            f"(Chest: {self.chest}cm)"
+        )
