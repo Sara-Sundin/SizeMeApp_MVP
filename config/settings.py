@@ -62,6 +62,10 @@ MIDDLEWARE = [
 
 JAZZMIN_SETTINGS = {
     "site_title": "SizeMeApp Admin",
+    "site_header": "SizeMeApp Admin",
+    "site_brand": "SizeMeApp",
+    "welcome_sign": "Welcome to SizeMeApp Admin",
+    "copyright": "SizeMeApp © 2025",
       "icons": {
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-users",
