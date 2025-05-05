@@ -47,7 +47,7 @@
       
       <!-- Contact Form -->
       <div class="contact-form-container col-12 col-md-6 mb-5 mb-md-0">
-        <h2 class="pb-2">Send us a message!</h2>
+        <h2 class="pb-2 contact-sub-heading">Send us a message!</h2>
         {% if contact_form %}
         <form method="post" action="{% url 'contact' %}" class="contact-form">
           {% csrf_token %}

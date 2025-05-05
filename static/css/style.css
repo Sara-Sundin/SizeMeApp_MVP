@@ -385,8 +385,7 @@ footer p {
 }
 
 .contact-sub-heading {
-    font-family: var(--secondary-font);
-    font-size: 25px;
+    font-size: 30px;
 }
 
 #contact {
@@ -414,11 +413,6 @@ footer p {
 /* === Contact Form === */
 .contact-form-container {
     flex: 1;
-}
-
-.contact-form-container h2 {
-    font-size: 25px;
-    font-family: var(--secondary-font);
 }
 
 .contact-form .form-group label {
