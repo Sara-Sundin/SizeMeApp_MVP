@@ -14,8 +14,6 @@ import time
 class StripeWH_Handler:
     """
     Handle Stripe webhooks related to payment events.
-    This includes creating orders after successful payment
-    and sending confirmation emails to users.
     """
 
     def __init__(self, request):
@@ -52,17 +50,12 @@ class StripeWH_Handler:
     def handle_payment_intent_succeeded(self, event):
         """
         Handle the payment_intent.succeeded webhook from Stripe.
-        This method:
-        - Looks for an existing order matching the data.
-        - If not found, creates a new order and line items.
-        - Sends a confirmation email to the customer.
         """
         print("Webhook received: payment_intent.succeeded")
 
         intent = event.data.object
         pid = intent.id
 
-        # Get metadata safely
         metadata = getattr(intent, "metadata", {})
         bag = getattr(metadata, "bag", "{}")
         save_info = getattr(metadata, "save_info", "off") == "on"
@@ -72,18 +65,15 @@ class StripeWH_Handler:
         shipping_details = intent.shipping
         grand_total = round(intent.charges.data[0].amount / 100, 2)
 
-        # Replace blank address fields with None
         for field, value in shipping_details.address.items():
             if value == "":
                 shipping_details.address[field] = None
 
-        # Get user profile if authenticated
         profile = None
         if username != 'AnonymousUser':
             try:
                 profile = CustomUser.objects.get(username=username)
                 if save_info:
-                    # Save delivery info to profile
                     profile.phone_number = shipping_details.phone
                     profile.country = shipping_details.address.country
                     profile.postcode = shipping_details.address.postal_code
@@ -95,7 +85,6 @@ class StripeWH_Handler:
             except CustomUser.DoesNotExist:
                 print(f"User {username} not found")
 
-        # Try to find existing matching order
         order_exists = False
         attempt = 1
         order = None
@@ -122,15 +111,16 @@ class StripeWH_Handler:
                 time.sleep(1)
 
         if order_exists:
-            # Send email if order already exists
             self._send_confirmation_email(order)
             return HttpResponse(
-                content=f'Webhook received: {event["type"]} | SUCCESS: Order already exists',
+                content=(
+                    f'Webhook received: {event["type"]} | '
+                    'SUCCESS: Order already exists'
+                ),
                 status=200
             )
         else:
             try:
-                # Create a new order
                 order = Order.objects.create(
                     full_name=shipping_details.name,
                     user=profile,
@@ -147,7 +137,6 @@ class StripeWH_Handler:
                     stripe_pid=pid,
                 )
 
-                # Create line items for the order
                 for item_id, item_data in json.loads(bag).items():
                     try:
                         product = Product.objects.get(id=item_id)
@@ -163,14 +152,18 @@ class StripeWH_Handler:
                     order.delete()
                 print(f"Error creating order: {e}")
                 return HttpResponse(
-                    content=f'Webhook received: {event["type"]} | ERROR: {e}',
+                    content=(
+                        f'Webhook received: {event["type"]} | ERROR: {e}'
+                    ),
                     status=500
                 )
 
-        # Send confirmation email
         self._send_confirmation_email(order)
         return HttpResponse(
-            content=f'Webhook received: {event["type"]} | SUCCESS: Order created',
+            content=(
+                f'Webhook received: {event["type"]} | '
+                'SUCCESS: Order created'
+            ),
             status=200
         )
 

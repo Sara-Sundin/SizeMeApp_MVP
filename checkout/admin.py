@@ -4,7 +4,7 @@ from .models import Order, OrderLineItem
 
 class OrderLineItemAdminInline(admin.TabularInline):
     """
-    Inline admin class to allow editing of order line items directly 
+    Inline admin class to allow editing of order line items directly
     within the Order admin interface.
     """
     model = OrderLineItem
