@@ -4,6 +4,8 @@ from django.contrib import messages
 
 from home.models import Plan
 
+from urllib.parse import urlparse, urlencode, parse_qs, urlunparse
+
 
 def view_bag(request):
     """
@@ -42,9 +44,7 @@ def view_bag(request):
 def add_to_bag(request, item_id):
     """
     Add a specified quantity of a plan to the shopping bag.
-
-    Expects a POST request with 'quantity' and optional 'redirect_url'.
-    Updates session and returns to the provided redirect URL.
+    Preserves the redirect URL and adds ?added=true without overwriting existing query parameters.
     """
     if request.method != 'POST':
         return HttpResponseNotAllowed(['POST'])
@@ -69,7 +69,15 @@ def add_to_bag(request, item_id):
         messages.success(request, f'Added {plan.name} to your bag')
 
     request.session['bag'] = bag
-    return redirect(f"{redirect_url}?added=true")
+
+    # Append or merge ?added=true
+    parsed_url = urlparse(redirect_url)
+    query_params = parse_qs(parsed_url.query)
+    query_params['added'] = 'true'
+    new_query = urlencode(query_params, doseq=True)
+    updated_url = urlunparse(parsed_url._replace(query=new_query))
+
+    return redirect(updated_url)
 
 
 def adjust_bag(request, item_id):

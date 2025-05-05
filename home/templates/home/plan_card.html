@@ -52,7 +52,7 @@
       <form method="POST" action="{% url 'add_to_bag' plan.id %}">
         {% csrf_token %}
         <input type="hidden" name="quantity" value="1">
-        <input type="hidden" name="redirect_url" value="{{ request.path }}">
+        <input type="hidden" name="redirect_url" value="{% url 'plan' %}?focus={{ plan.plan_type }}">
         <button type="submit" class="cta-btn checkout-btn">
           Add to Cart <i class="fa-solid fa-cart-shopping"></i>
         </button>
