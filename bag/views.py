@@ -35,7 +35,7 @@ def view_bag(request):
     context = {
         'bag_items': bag_items,
         'total': total,
-        'grand_total': total,  # Placeholder for future additions (e.g., delivery)
+        'grand_total': total,
     }
 
     return render(request, 'bag/bag.html', context)
@@ -44,7 +44,8 @@ def view_bag(request):
 def add_to_bag(request, item_id):
     """
     Add a specified quantity of a plan to the shopping bag.
-    Preserves the redirect URL and adds ?added=true without overwriting existing query parameters.
+    Preserves the redirect URL and adds ?added=true without
+    overwriting existing query parameters.
     """
     if request.method != 'POST':
         return HttpResponseNotAllowed(['POST'])
@@ -63,7 +64,8 @@ def add_to_bag(request, item_id):
 
     if item_id_str in bag:
         bag[item_id_str] += quantity
-        messages.success(request, f'Updated {plan.name} quantity to {bag[item_id_str]}')
+        messages.success
+        (request, f'Updated {plan.name}quantity to {bag[item_id_str]}')
     else:
         bag[item_id_str] = quantity
         messages.success(request, f'Added {plan.name} to your bag')
@@ -100,7 +102,8 @@ def adjust_bag(request, item_id):
 
     if quantity > 0:
         bag[item_id_str] = quantity
-        messages.success(request, f'Updated {plan.name} quantity to {bag[item_id_str]}')
+        messages.success
+        (request, f'Updated {plan.name} quantity to {bag[item_id_str]}')
     else:
         bag.pop(item_id_str, None)
         messages.success(request, f'Removed {plan.name} from your bag')
