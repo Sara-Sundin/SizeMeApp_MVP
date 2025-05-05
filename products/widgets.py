@@ -18,4 +18,7 @@ class CustomClearableFileInput(ClearableFileInput):
     input_text = _('')
 
     # Path to the custom template for rendering the file input
-    template_name = 'products/custom_widget_templates/custom_clearable_file_input.html'
+    template_name = (
+            'products/custom_widget_templates/'
+            'custom_clearable_file_input.html'
+            )

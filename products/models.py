@@ -42,7 +42,9 @@ class Category(models.Model):
 
 class Product(models.Model):
     """
-    Represents a product in the webshop. Belongs to a category and can have images, sizes, and a price.
+    Represents a product in the webshop.
+    Belongs to a category and can have images,
+    sizes, and a price.
     """
 
     category = models.ForeignKey(
@@ -78,7 +80,7 @@ class Product(models.Model):
     # Sorting and tracking
     sort_order = models.PositiveIntegerField(
         default=0,
-        help_text="Manual sort order for product (used in drag-and-drop in admin)"
+        help_text="Manual sort order for product(used in drag-and-drop)"
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
@@ -86,7 +88,7 @@ class Product(models.Model):
     )
 
     class Meta:
-        ordering = ['sort_order']  # Enables drag-and-drop sorting in admin with django-admin-sortable2
+        ordering = ['sort_order']  # Enables drag-and-drop sorting in admin
         verbose_name_plural = 'Products'
 
     def __str__(self):

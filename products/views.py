@@ -95,21 +95,32 @@ def product_detail(request, product_id):
 
     size_mode = request.session.get('size_mode', False)
 
-    # Only fetch recommendations if user is authenticated and has chest measurement
-    if size_mode and request.user.is_authenticated and hasattr(request.user, 'chest') and request.user.chest:
-        recommendations = get_size_recommendations(request.user.chest, product)
+    if (
+        size_mode and request.user.is_authenticated and
+        hasattr(request.user, 'chest') and request.user.chest
+    ):
+        recommendations = get_size_recommendations(
+            request.user.chest, product
+        )
 
     category_button_class = CATEGORY_BUTTON_CLASSES.get(
         product.category.name.lower(), 'btn-outline-dark'
     )
 
-    # Modal flags from session
-    show_webshop_measurements_success = request.session.pop('show_webshop_measurements_success', False)
-    show_size_mode_entered_modal = request.session.pop('size_mode_entered', False)
-    show_size_mode_exited_modal = request.session.pop('size_mode_exited', False)
+    show_webshop_measurements_success = request.session.pop(
+        'show_webshop_measurements_success', False
+    )
+    show_size_mode_entered_modal = request.session.pop(
+        'size_mode_entered', False
+    )
+    show_size_mode_exited_modal = request.session.pop(
+        'size_mode_exited', False
+    )
 
-    # Use the same measurement form as the dashboard
-    measurement_form = MeasurementUpdateForm(instance=request.user) if request.user.is_authenticated else None
+    measurement_form = (
+        MeasurementUpdateForm(instance=request.user)
+        if request.user.is_authenticated else None
+    )
 
     context = {
         'product': product,
@@ -142,7 +153,8 @@ def add_product(request):
             product = form.save()
             messages.success(request, 'Successfully added product!')
             return redirect(reverse('product_detail', args=[product.id]))
-        messages.error(request, 'Failed to add product. Please ensure the form is valid.')
+        messages.error
+        (request, 'Failed to add product. Please ensure the form is valid.')
     else:
         form = ProductForm()
 
@@ -160,18 +172,23 @@ def edit_product(request, product_id):
         return redirect(reverse('webshop'))
 
     product = get_object_or_404(Product, pk=product_id)
+
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             form.save()
             messages.success(request, 'Successfully updated product!')
             return redirect(reverse('product_detail', args=[product.id]))
-        messages.error(request, 'Failed to update product. Please ensure the form is valid.')
+        messages.error
+        (request, 'Failed to update product. Please ensure the form is valid.')
     else:
         form = ProductForm(instance=product)
         messages.info(request, f'You are editing {product.name}')
 
-    return render(request, 'products/edit_product.html', {'form': form, 'product': product})
+    return render(request, 'products/edit_product.html', {
+        'form': form,
+        'product': product
+    })
 
 
 @login_required
