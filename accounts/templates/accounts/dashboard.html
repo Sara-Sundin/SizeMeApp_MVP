@@ -11,27 +11,40 @@
         <h1>Welcome to your account, {{ user.get_short_name }}!</h1>
     </div>
 
-      <!-- Profile Section -->
     <div id="profile" class="container p-4">
       <div class="row align-items-center mb-5">
-        
-        <!-- Profile Picture + Info -->
-        <div class="col-12 col-md-6 d-flex align-items-center mb-4 mb-md-0">
-          <!-- Profile Picture -->
-          <div class="me-3">
-            <div class="profile-picture-placeholder rounded-circle bg-secondary" style="width: 120px; height: 120px;"></div>
-          </div>
-          <!-- User Info -->
-          <div class="text-start">
-            <div class="mb-2">
-              <strong>Name:</strong> {{ user.full_name }}
+    
+            <!-- Profile Picture + Info -->
+            <div class="col-12 col-md-6 px-lg-5 d-flex flex-column flex-md-row align-items-center mb-4 mb-md-0">
+              <!-- Avatar -->
+              <div class="me-md-3 text-center mb-3 mb-md-0">
+                {% if user.avatar_number %}
+                  <img src="{% static 'images/avatars/' %}{{ user.avatar_number }}.png"
+                      alt="Your Avatar"
+                      class="img-fluid rounded-circle"
+                      width="90">
+                {% else %}
+                  <div class="profile-picture-placeholder rounded-circle bg-secondary"
+                      style="width: 80px; height: 80px;"></div>
+                {% endif %}
+              </div>
+            
+              <!-- User Info -->
+              <div class="text-start">
+                <div class="mb-2">
+                  <strong>Name:</strong> {{ user.full_name }}
+                </div>
+                <div>
+                  <strong>Email:</strong> {{ user.email }}
+                </div>
+                <!-- Text link to update avatar -->
+                <a href="#" class="d-block mt-2 small text-decoration-underline text-primary text-center"
+                   data-bs-toggle="modal" data-bs-target="#avatarModal">
+                  Change Avatar
+                </a>
+              </div>
             </div>
-            <div>
-              <strong>Email:</strong> {{ user.email }}
-            </div>
-          </div>
-        </div>
-
+            
         <!-- Update Button -->
         <div class="col-12 col-md-6 text-center">
           <a href="#" class="cta-btn cta-btn--primary" data-bs-toggle="modal" data-bs-target="#profileModal">
@@ -65,5 +78,38 @@
 </section>
 
   {% include "accounts/dashboard_modals.html" %}
+
+<!-- Avatar Modal -->
+<div class="modal fade" id="avatarModal" tabindex="-1" aria-labelledby="avatarModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-fullscreen-sm-down modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <h2 class="modal-title w-100 text-center">Choose Your Cosmic Identity</h2>
+        <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <p class="text-center text-muted mb-4">
+          Select the star sign that reflects your inner self. Your avatar, your vibe.
+        </p>
+        <div class="row g-3 justify-content-center">
+          {% for i in avatar_range %}
+            <div class="col-4 col-sm-3 col-md-2 text-center">
+              <form method="POST" action="{% url 'update_avatar' %}">
+                {% csrf_token %}
+                <input type="hidden" name="avatar_number" value="{{ i }}">
+                <button type="submit" class="border-0 bg-transparent">
+                  <img src="{% static 'images/avatars/' %}{{ i }}.png"
+                    alt="Avatar {{ i }}"
+                    class="img-fluid rounded shadow w-100">
+                </button>
+              </form>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

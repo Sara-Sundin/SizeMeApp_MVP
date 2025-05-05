@@ -8,6 +8,8 @@ from .views import (
     CustomLoginView,
     ProfileUpdateView,
 )
+from .views import update_avatar
+
 
 urlpatterns = [
     path('dashboard/', views.dashboard_view, name='dashboard'),
@@ -35,4 +37,5 @@ urlpatterns = [
         name='update_profile'
         ),
     path('delete-account/', delete_account, name='delete_account'),
+    path('update-avatar/', update_avatar, name='update_avatar'),
 ]

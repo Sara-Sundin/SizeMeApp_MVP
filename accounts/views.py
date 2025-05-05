@@ -11,6 +11,9 @@ from .forms import CustomSignupForm, CustomLoginForm
 from .forms import CustomUserUpdateForm, MeasurementUpdateForm
 from .models import CustomUser
 
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+
 
 @login_required
 def dashboard_view(request):
@@ -20,21 +23,20 @@ def dashboard_view(request):
     """
     user = request.user
     show_modal = not all([user.chest, user.waist, user.hips, user.shoulders])
-    show_profile_updated_modal = request.session.pop
-    ("show_profile_updated_modal", False)
-    show_measurements_updated_modal = request.session.pop
-    ("show_measurements_updated_modal", False)
-    show_measurements_deleted_modal = request.session.pop
-    ("show_measurements_deleted_modal", False)
+    show_profile_updated_modal = request.session.pop("show_profile_updated_modal", False)
+    show_measurements_updated_modal = request.session.pop("show_measurements_updated_modal", False)
+    show_measurements_deleted_modal = request.session.pop("show_measurements_deleted_modal", False)
     show_redirect_modal = request.session.pop("show_redirect_modal", False)
 
-    return render(request, 'accounts/dashboard.html', {
+    context = {
         "show_modal": show_modal,
         "show_profile_updated_modal": show_profile_updated_modal,
         "show_measurements_updated_modal": show_measurements_updated_modal,
         "show_measurements_deleted_modal": show_measurements_deleted_modal,
         "redirect_modal": show_redirect_modal,
-    })
+        "avatar_range": range(1, 13),
+    }
+    return render(request, 'accounts/dashboard.html', context)
 
 
 @login_required
@@ -157,3 +159,19 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
         user.save()
         self.request.session["show_profile_updated_modal"] = True
         return redirect(self.success_url)
+
+
+@require_POST
+@login_required
+def update_avatar(request):
+    """
+    Handle POST request to update avatar number.
+    """
+    avatar_number = request.POST.get('avatar_number')
+    if avatar_number and avatar_number.isdigit() and 1 <= int(avatar_number) <= 12:
+        request.user.avatar_number = int(avatar_number)
+        request.user.save()
+        messages.success(request, "Your avatar has been updated!")
+    else:
+        messages.error(request, "Invalid avatar selection.")
+    return redirect('dashboard')
