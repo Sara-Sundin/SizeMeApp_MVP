@@ -14,11 +14,18 @@ def index(request):
     - Displays modals based on session flags
     """
     contact_data = request.session.pop('contact_form_data', None)
-    contact_form = ContactForm(contact_data, prefix='contact') if contact_data else ContactForm(prefix='contact')
+    contact_form = ContactForm(contact_data, prefix='contact')
+    if contact_data:
+        contact_form = ContactForm(contact_data, prefix='contact')
+    else:
+        contact_form = ContactForm(prefix='contact')
 
-    show_account_deleted_modal = request.session.pop("show_account_deleted_modal", False)
-    show_logged_out_modal = request.session.pop("show_logged_out_modal", False)
-    show_success_modal = request.session.pop("show_success_modal", False)
+    show_account_deleted_modal = request.session.pop(
+        "show_account_deleted_modal", False)
+    show_logged_out_modal = request.session.pop(
+        "show_logged_out_modal", False)
+    show_success_modal = request.session.pop(
+        "show_success_modal", False)
 
     return render(request, 'home/index.html', {
         "contact_form": contact_form,
@@ -60,7 +67,9 @@ def contact(request):
             try:
                 send_mail(
                     subject=f"New Contact Form Submission from {name}",
-                    message=f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}",
+                    message=(
+                        f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
+                    ),
                     from_email="noreply@sizemeapp.se",
                     recipient_list=["sara@sizemeapp.se"],
                     fail_silently=False,
@@ -69,7 +78,10 @@ def contact(request):
             except BadHeaderError:
                 messages.error(request, "Invalid header found.")
             except Exception:
-                messages.error(request, "Something went wrong. Please try again later.")
+                messages.error(
+                    request,
+                    "Something went wrong. Please try again later."
+                )
         else:
             # Persist form data in session to repopulate after redirect
             request.session['contact_form_data'] = request.POST

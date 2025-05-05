@@ -1,9 +1,10 @@
 from django.db import models
 
+
 class Plan(models.Model):
     """
     Model representing a subscription plan for SizeMeApp.
-    Each plan includes pricing, features, and optional styling data 
+    Each plan includes pricing, features, and optional styling data
     used in the frontend for icon and button customization.
     """
 

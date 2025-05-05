@@ -1,6 +1,7 @@
 from django import forms
 import re
 
+
 # Contact form displayed in the site footer
 class ContactForm(forms.Form):
     """
@@ -17,7 +18,7 @@ class ContactForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         """
-        Custom initialization to remove the default colon (:) 
+        Custom initialization to remove the default colon (:)
         or asterisk (*) label suffix for required fields.
         """
         super().__init__(*args, **kwargs)
@@ -28,7 +29,8 @@ class ContactForm(forms.Form):
         """
         Additional validation for the email field:
         - Ensures the field is not empty.
-        - Performs a basic structural check for '@' and a dot in the domain part.
+        - Performs a basic structural check for '@' and
+        a dot in the domain part.
         """
         email = self.cleaned_data.get('email')
 

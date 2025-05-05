@@ -1,11 +1,13 @@
 from django.contrib import admin
 from .models import Plan
 
+
 @admin.register(Plan)
 class PlanAdmin(admin.ModelAdmin):
     """
     Admin configuration for the Plan model.
-    Customizes how Plan instances are displayed and managed in the Django admin interface.
+    Customizes how Plan instances are displayed and
+    managed in the Django admin interface.
     """
 
     # Fields to display in the list view

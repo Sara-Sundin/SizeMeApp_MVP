@@ -6,5 +6,9 @@ urlpatterns = [
     path('', index, name='home'),
     path('plan/', views.plan_view, name='plan'),
     path('contact/', views.contact, name='contact'),
-    path('clear-success-flag/', views.clear_success_flag, name='clear_success_flag')
+    path(
+        'clear-success-flag/',
+        views.clear_success_flag,
+        name='clear_success_flag'
+        )
 ]
