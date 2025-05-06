@@ -71,7 +71,10 @@
                 </button>
               </p>
               {% else %}
-              <p class="text-muted">Log in to see size recommendations.</p>
+              <a class="btn cta-btn--primary btn-sm py-2 mb-4" 
+                href="{% url 'login' %}?next={{ request.path }}">
+                Log in to see size recommendations.
+              </a>
               {% endif %}
             {% endif %}
 
