@@ -197,7 +197,7 @@ h1, h2, h3, h4 {
     right: 0;
     height: 850px;
     background: url("../images/body_male.gif") no-repeat top center;
-    background-size: 75%;
+    background-size: 71%;
     opacity: 0.5;
     z-index: -1;
     pointer-events: none;
