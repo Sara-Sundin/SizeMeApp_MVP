@@ -95,19 +95,19 @@
         </p>
         <div class="row g-3 justify-content-center">
           {% for i in avatar_range %}
-            <div class="col-4 col-sm-3 col-md-2 text-center">
+            <div class="col-4 col-sm-3 col-md-3 col-lg-2 text-center">
               <form method="POST" action="{% url 'update_avatar' %}">
                 {% csrf_token %}
                 <input type="hidden" name="avatar_number" value="{{ i }}">
-                <button type="submit" class="border-0 bg-transparent">
+                <button type="submit" class="border-0 bg-transparent avatar-btn">
                   <img src="{% static 'images/avatars/' %}{{ i }}.png"
                     alt="Avatar {{ i }}"
-                    class="img-fluid rounded shadow w-100">
+                    class="img-fluid rounded shadow avatar-img">
                 </button>
               </form>
             </div>
           {% endfor %}
-        </div>
+        </div>        
       </div>
     </div>
   </div>
