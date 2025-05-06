@@ -19,7 +19,7 @@ class CustomUserAdmin(UserAdmin):
     """
     model = CustomUser
 
-    list_display = ["email", "full_name", "is_staff", "is_active"]
+    list_display = ["email", "full_name", "avatar_number", "is_staff", "is_active"]
     ordering = ["email"]
 
     fieldsets = (
@@ -27,6 +27,7 @@ class CustomUserAdmin(UserAdmin):
         ("Personal Info", {
             "fields": (
                 "full_name",
+                "avatar_number", 
                 "phone_number",
                 "country",
                 "postcode",
@@ -48,6 +49,7 @@ class CustomUserAdmin(UserAdmin):
             "fields": (
                 "email",
                 "full_name",
+                "avatar_number", 
                 "password1",
                 "password2",
                 "is_staff",
