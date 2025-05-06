@@ -34,19 +34,19 @@ I have recorded the first and final run with Lighthouse for all pages with image
 
 #### First run with Lighthouse - Home page
 
-![Lighthouse Home 1st run](assets/images_readme/lighthouse_home_first.jpg)
+![Lighthouse Home 1st run](documents/images_readme/lighthouse_home_first.jpg)
 
 ### Plan Page
 
 #### First run with Lighthouse - Plan page
 
-![Lighthouse Plan 1st run](assets/images_readme/lighthouse_plans_first.jpg)
+![Lighthouse Plan 1st run](documents/images_readme/lighthouse_plans_first.jpg)
 
 ### Bag Page
 
 #### First run with Lighthouse (Bag page)
 
-![Lighthouse Bag 1st run](assets/images_readme/lighthouse_bag_first.jpg)
+![Lighthouse Bag 1st run](documents/images_readme/lighthouse_bag_first.jpg)
 
 Improvement messages: 
 - Buttons do not have accessible names.
@@ -55,14 +55,14 @@ Improvement messages:
   
 #### Second run with Lighthouse (Bag page) - after fixing the issues.
 
-![Lighthouse Bag 2nd run](assets/images_readme/lighthouse_bag_final.jpg)
+![Lighthouse Bag 2nd run](documents/images_readme/lighthouse_bag_final.jpg)
 
 ### Checkout Page
 
 #### First run with Lighthouse (Checkout page)
 Overall Stripe gave me warnings and third party cookies I could not remove so I included one run with Lighthouse where Stripe is disabled.
 
-![Lighthouse Checkout 1st run](assets/images_readme/lighthouse_checkout_first.jpg)
+![Lighthouse Checkout 1st run](documents/images_readme/lighthouse_checkout_first.jpg)
 
 Improvement messages: 
 - Stripe inserts aria-hidden = true on card field.
@@ -72,50 +72,50 @@ Improvement messages:
   
 #### Second run with Lighthouse (Checkout page) - after fixing the issues.
 
-![Lighthouse Checkout 2nd run -no stripe](assets/images_readme/lighthouse_checkout_final_no-stripe.jpg)
+![Lighthouse Checkout 2nd run -no stripe](documents/images_readme/lighthouse_checkout_final_no-stripe.jpg)
 
 ### Signup Page
 
 #### First run with Lighthouse - Signup page
 
-![Lighthouse Signup 1st run](assets/images_readme/lighthouse_signup_first.jpg)
+![Lighthouse Signup 1st run](documents/images_readme/lighthouse_signup_first.jpg)
 
 ### Login Page
 
 #### First run with Lighthouse - Login page
 
-![Lighthouse Login 1st run](assets/images_readme/lighthouse_login_first.jpg)
+![Lighthouse Login 1st run](documents/images_readme/lighthouse_login_first.jpg)
 
 ### Dashboard Page
 
 #### First run with Lighthouse - Dashboard page
 
-![Lighthouse Dashboard 1st run](assets/images_readme/lighthouse_dashboard_first.jpg)
+![Lighthouse Dashboard 1st run](documents/images_readme/lighthouse_dashboard_first.jpg)
 
 ### Shop Page
 
 #### First run with Lighthouse - Shop page
 
-![Lighthouse Shop 1st run](assets/images_readme/lighthouse_shop_first.jpg)
+![Lighthouse Shop 1st run](documents/images_readme/lighthouse_shop_first.jpg)
 
 ### Products Page
 
 #### First run with Lighthouse (Products page)
 
-![Lighthouse Products 1st run](assets/images_readme/lighthouse_shop_products_first.jpg)
+![Lighthouse Products 1st run](documents/images_readme/lighthouse_shop_products_first.jpg)
 
 Improvement messages: 
 - Select sorting field missing label.
   
 #### Second run with Lighthouse (Products page) - after fixing the issues.
 
-![Lighthouse Products 2nd run](assets/images_readme/lighthouse_shop_products_final.jpg)
+![Lighthouse Products 2nd run](documents/images_readme/lighthouse_shop_products_final.jpg)
 
 ### Product Detail Page
 
 #### First run with Lighthouse (Product Detail page)
 
-![Lighthouse Product Detail 1st run](assets/images_readme/lighthouse_product_detail_first.jpg)
+![Lighthouse Product Detail 1st run](documents/images_readme/lighthouse_product_detail_first.jpg)
 
 Improvement messages: 
 - Buttons do not have accessible names.
@@ -125,7 +125,7 @@ Improvement messages:
   
 #### Second run with Lighthouse (Product Detail page) - after fixing the issues.
 
-![Lighthouse Product Detail 2nd run](assets/images_readme/lighthouse_product_detail_final.jpg)
+![Lighthouse Product Detail 2nd run](documents/images_readme/lighthouse_product_detail_final.jpg)
 
 ## Validation
 
@@ -135,93 +135,93 @@ I have included screenprints of the first and final validation of the HTML with 
 
 #### Home Page HTML- Initial Check
 
-  ![Validation HTML Home 1st](assets/images_readme/home_html_check_first.jpg)
+  ![Validation HTML Home 1st](documents/images_readme/home_html_check_first.jpg)
   
 #### Home Page HTML- Final Check
 
-  ![Validation HTML Home Final](assets/images_readme/home_html_check_final.jpg)
+  ![Validation HTML Home Final](documents/images_readme/home_html_check_final.jpg)
 
 
 #### Plans Page HTML- Initial Check
 
-  ![Validation HTML Plans 1st](assets/images_readme/plans_html_check_first.jpg)
+  ![Validation HTML Plans 1st](documents/images_readme/plans_html_check_first.jpg)
 
 #### Signup Page HTML- Initial Check
 
-  ![Validation HTML Signup 1st](assets/images_readme/signup_html_check_first.jpg)
+  ![Validation HTML Signup 1st](documents/images_readme/signup_html_check_first.jpg)
   
 #### Signup Page HTML- Final Check
 
-  ![Validation HTML Signup Final](assets/images_readme/signup_html_check_final.jpg)
+  ![Validation HTML Signup Final](documents/images_readme/signup_html_check_final.jpg)
 
 #### Login Page HTML- Initial Check
 
-  ![Validation HTML Login 1st](assets/images_readme/login_html_check_first.jpg)
+  ![Validation HTML Login 1st](documents/images_readme/login_html_check_first.jpg)
 
 #### Dashboard Page HTML- Initial Check
 
-  ![Validation HTML Dashboard 1st](assets/images_readme/dashboard_html_check_first.jpg)
+  ![Validation HTML Dashboard 1st](documents/images_readme/dashboard_html_check_first.jpg)
 
 #### Shop Page HTML- Initial Check
 
-  ![Validation HTML Shop 1st](assets/images_readme/shop_html_check_first.jpg)
+  ![Validation HTML Shop 1st](documents/images_readme/shop_html_check_first.jpg)
   
 #### Shop Page HTML- Final Check
 
-  ![Validation HTML Shop Final](assets/images_readme/shop_html_check_final.jpg)
+  ![Validation HTML Shop Final](documents/images_readme/shop_html_check_final.jpg)
 
 #### Products Page HTML- Initial Check
 
-  ![Validation HTML Products 1st](assets/images_readme/products_html_check_first.jpg)
+  ![Validation HTML Products 1st](documents/images_readme/products_html_check_first.jpg)
 
 
 #### Product Detail Page HTML- Initial Check
 
-  ![Validation HTML Detail 1st](assets/images_readme/product-detail_html_check_first.jpg)
+  ![Validation HTML Detail 1st](documents/images_readme/product-detail_html_check_first.jpg)
   
 #### Product Detail Page HTML- Final Check
 
-  ![Validation HTML Detail Final](assets/images_readme/product-detail_html_check_final.jpg)
+  ![Validation HTML Detail Final](documents/images_readme/product-detail_html_check_final.jpg)
 
 ### W3C CSS Validator
 The CSS was succesfully validated for all pages.
 
-![Screenshot of the CSS Validation](assets/images_readme/w3c-css.jpg)
+![Screenshot of the CSS Validation](documents/images_readme/w3c-css.jpg)
 
 ### JSHint Validator
 I have included screenprints of all final validation for each script validated with JSHint.
 
 #### Base.js - JSHint Check
 
-![Base JSHint Final Check](assets/images_readme/base_js_check_JSHint_final.jpg)
+![Base JSHint Final Check](documents/images_readme/base_js_check_JSHint_final.jpg)
 
 #### Accounts - JSHint Check
 
-![Accounts JSHint Final Check](assets/images_readme/accounts_dashboard_js_check_JSHint_final.jpg)
+![Accounts JSHint Final Check](documents/images_readme/accounts_dashboard_js_check_JSHint_final.jpg)
 
 #### Delete Account - JSHint Check
 
-![Delete Account JSHint Final Check](assets/images_readme/delete_account_js_check_JSHint_final.jpg)
+![Delete Account JSHint Final Check](documents/images_readme/delete_account_js_check_JSHint_final.jpg)
 
 #### Mini Cart - JSHint Check
 
-![Mini Cart JSHint Final Check](assets/images_readme/minicart_js_check_JSHint_final.jpg)
+![Mini Cart JSHint Final Check](documents/images_readme/minicart_js_check_JSHint_final.jpg)
 
 #### Products - JSHint Check
 
-![Products JSHint Final Check](assets/images_readme/products_js_check_JSHint_final.jpg)
+![Products JSHint Final Check](documents/images_readme/products_js_check_JSHint_final.jpg)
 
 #### Shopping Bag - JSHint Check
 
-![Bag JSHint Final Check](assets/images_readme/scripts_bag_js_check_JSHint_final.jpg)
+![Bag JSHint Final Check](documents/images_readme/scripts_bag_js_check_JSHint_final.jpg)
 
 #### Checkout Stripe - JSHint Check
 
-![Stripe JSHint Final Check](assets/images_readme/stripe_elements_js_check_JSHint_final.jpg)
+![Stripe JSHint Final Check](documents/images_readme/stripe_elements_js_check_JSHint_final.jpg)
 
 #### Toggle Password - JSHint Check
 
-![Toggle JSHint Final Check](assets/images_readme/toggle_password_js_check_JSHint_final.jpg)
+![Toggle JSHint Final Check](documents/images_readme/toggle_password_js_check_JSHint_final.jpg)
 
 ### CI Python Linter
 The CI Python Linter helps ensure that our code is clean, maintainable, and error-free, improving the overall development workflow and reducing potential bugs before deployment.
@@ -237,14 +237,14 @@ Tools used:
 - Black – Automatically formats code to follow best practices.
 - Pylint – Provides detailed code analysis and improvement suggestions.
 
-I ran all my Python code through the Python Linter with the following results. The final check for all code files were without errors. For more images tested on all apps see the [Read Me Images](assets/images_readme) folder.
+I ran all my Python code through the Python Linter with the following results. The final check for all code files were without errors. For more images tested on all apps see the [Read Me Images](documents/images_readme) folder.
 
 ### Account App
 #### Account forms.py- Initial Check
-![Validation CI Python Linter First Check](assets/images_readme/accounts_forms_linting_test_first.jpg)
+![Validation CI Python Linter First Check](documents/images_readme/accounts_forms_linting_test_first.jpg)
 
 #### Account forms.py- Final Check
-![Validation CI Python Linter Final Check](assets/images_readme/accounts_forms_linting_test_final.jpg)
+![Validation CI Python Linter Final Check](documents/images_readme/accounts_forms_linting_test_final.jpg)
 
 ## Bugs and Fixes
 Here I have recorded some issues that I spent excessive time solving with the solutions indicated below.
