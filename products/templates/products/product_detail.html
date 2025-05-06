@@ -29,18 +29,16 @@
     <!-- Right column: product details and form -->
     <div class="col-12 col-md-6 col-lg-4">
       <div class="product-details-container mb-5 mt-md-5">
-        <p class="mb-0">{{ product.name }}</p>
-        <p class="lead mb-0 text-left font-weight-bold">${{ product.price }}</p>
-
-        <!-- Category tag button -->
+          <!-- Category tag button -->
         {% if product.category %}
-        <p class="small mt-1 mb-0">
+        <p class="small my-2">
           <a class="btn {{ category_button_class }} btn-sm px-4" href="{% url 'products' %}?category={{ product.category.name }}">
             {{ product.category.friendly_name }}
           </a>          
         </p>
         {% endif %}
-
+        <p class="mb-0">{{ product.name }}</p>
+        <p class="lead mb-0 text-left font-weight-bold">${{ product.price }}</p>
         <p class="mt-3">{{ product.description }}</p>
 
         <!-- Add-to-cart form -->
