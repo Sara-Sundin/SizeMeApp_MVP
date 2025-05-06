@@ -9,6 +9,9 @@ from home.models import Plan
 from checkout.models import Order, OrderLineItem
 from .forms import OrderForm
 from .utils import send_order_confirmation_email
+from django.http import HttpResponseForbidden
+
+from django.contrib.auth.decorators import login_required
 
 # Set Stripe API key
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -49,6 +52,11 @@ def checkout(request):
         if order_form.is_valid():
             order = order_form.save(commit=False)
             order.original_bag = str(bag)
+
+            # Link user to the order if logged in
+            if request.user.is_authenticated:
+                order.user = request.user
+
             order.save()
 
             for item in bag_items:
@@ -71,6 +79,10 @@ def checkout(request):
                 user.save()
 
             request.session['bag'] = {}
+
+            # Set session flag for secure success access
+            request.session['just_ordered'] = True
+
             return redirect(
                 reverse('checkout_success', args=[order.order_number])
             )
@@ -130,12 +142,31 @@ def checkout(request):
 
 def checkout_success(request, order_number):
     """
-    Handle successful checkouts:
-    - Retrieve order by number
-    - Send confirmation email
-    - Show confirmation page
+    Secure successful checkout:
+    - Allow access only right after an order (via session flag)
+    - If authenticated, make sure user owns the order
+    - Clear session flag to prevent reuse
     """
     order = get_object_or_404(Order, order_number=order_number)
+
+    session_flag = request.session.get('just_ordered')
+
+    # Only allow if session flag exists (order just placed)
+    if not session_flag:
+        return HttpResponseForbidden("You cannot access this page directly.")
+
+    # If user is authenticated, make sure it's their order
+    if (
+        request.user.is_authenticated
+        and order.user
+        and order.user != request.user
+    ):
+        return HttpResponseForbidden
+        ("You do not have permission to view this order.")
+
+    # Clean up session
+    request.session.pop('just_ordered', None)
+
     send_order_confirmation_email(order)
     messages.success(
         request,
@@ -143,3 +174,27 @@ def checkout_success(request, order_number):
         f"Your order number is {order.order_number}."
     )
     return render(request, 'checkout/checkout_success.html', {'order': order})
+
+
+@login_required
+def order_history(request):
+    """
+    Show all orders placed by the logged-in user
+    """
+    orders = Order.objects.filter(user=request.user).order_by('-date')
+    return render(request, 'checkout/order_history.html', {'orders': orders})
+
+
+@login_required
+def order_detail(request, order_number):
+    """
+    View details of a past order from order history.
+    Only the user who placed the order can view it.
+    """
+    order = get_object_or_404(Order, order_number=order_number)
+
+    if order.user != request.user:
+        return HttpResponseForbidden
+        ("You do not have permission to view this order.")
+
+    return render(request, 'checkout/order_detail.html', {'order': order})
