@@ -23,10 +23,14 @@ def dashboard_view(request):
     """
     user = request.user
     show_modal = not all([user.chest, user.waist, user.hips, user.shoulders])
-    show_profile_updated_modal = request.session.pop("show_profile_updated_modal", False)
-    show_measurements_updated_modal = request.session.pop("show_measurements_updated_modal", False)
-    show_measurements_deleted_modal = request.session.pop("show_measurements_deleted_modal", False)
-    show_redirect_modal = request.session.pop("show_redirect_modal", False)
+    show_profile_updated_modal = request.session.pop
+    ("show_profile_updated_modal", False)
+    show_measurements_updated_modal = request.session.pop
+    ("show_measurements_updated_modal", False)
+    show_measurements_deleted_modal = request.session.pop
+    ("show_measurements_deleted_modal", False)
+    show_redirect_modal = request.session.pop
+    ("show_redirect_modal", False)
 
     context = {
         "show_modal": show_modal,
@@ -168,10 +172,17 @@ def update_avatar(request):
     Handle POST request to update avatar number.
     """
     avatar_number = request.POST.get('avatar_number')
-    if avatar_number and avatar_number.isdigit() and 1 <= int(avatar_number) <= 12:
+
+    is_valid = (
+        avatar_number and avatar_number.isdigit() and
+        1 <= int(avatar_number) <= 12
+    )
+
+    if is_valid:
         request.user.avatar_number = int(avatar_number)
         request.user.save()
         messages.success(request, "Your avatar has been updated!")
     else:
         messages.error(request, "Invalid avatar selection.")
+
     return redirect('dashboard')

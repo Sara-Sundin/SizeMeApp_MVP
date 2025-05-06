@@ -17,10 +17,10 @@ class CustomUser(AbstractUser):
 
     # Avatar
     avatar_number = models.PositiveIntegerField(
-    null=True,
-    blank=True,
-    help_text="Selected avatar image number"
-)
+        null=True,
+        blank=True,
+        help_text="Selected avatar image number"
+    )
 
     # Measurement fields (optional, used for size recommendations)
     chest = models.FloatField(blank=True, null=True)

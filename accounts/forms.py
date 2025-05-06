@@ -139,4 +139,3 @@ class MeasurementUpdateForm(forms.ModelForm):
                 'required': 'required',
             }),
         }
-        
