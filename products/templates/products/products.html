@@ -57,94 +57,87 @@
                 {% for product in products %}
                 <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                     <div class="card h-100 border-0">
-
-                        <!-- Product image -->
-                        {% if product.image %}
-                        <a href="{% url 'product_detail' product.id %}">
-                            <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
-                        </a>
-                        {% else %}
-                        <a href="{% url 'product_detail' product.id %}">
-                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
-                        </a>
-                        {% endif %}
-
-                        <!-- Product name -->
-                        <div class="card-body pb-0">
-                            <p class="mb-0">{{ product.name }}</p>
-                        </div>
-
-                        <!-- Price and category tag -->
-                        <div class="card-footer bg-white pt-0 border-0 text-left">
-                            <div class="row">
-                                <div class="col">
-                                    <p class="lead mb-0 text-left font-weight-bold">${{ product.price }}</p>
-
-                                    <!-- Category button with color logic -->
-                                    {% if product.category %}
-                                    {% with product.category.friendly_name as cat %}
-                                        {% if cat == "T Shirts" %}
-                                            {% with "cta-btn--primary" as btn_class %}
-                                                <p class="small mt-1 mb-0">
-                                                    <a class="btn {{ btn_class }} btn-sm px-4" href="{% url 'products' %}?category={{ product.category.name }}">
-                                                        {{ product.category.friendly_name }}
-                                                    </a>
-                                                </p>
-                                            {% endwith %}
-                                        {% elif cat == "Shirts" %}
-                                            {% with "cta-btn--tertiary" as btn_class %}
-                                                <p class="small mt-1 mb-0">
-                                                    <a class="btn {{ btn_class }} btn-sm px-4" href="{% url 'products' %}?category={{ product.category.name }}">
-                                                        {{ product.category.friendly_name }}
-                                                    </a>
-                                                </p>
-                                            {% endwith %}
-                                        {% elif cat == "Sweatshirts" %}
-                                            {% with "cta-btn--black" as btn_class %}
-                                                <p class="small mt-1 mb-0">
-                                                    <a class="btn {{ btn_class }} btn-sm px-4" href="{% url 'products' %}?category={{ product.category.name }}">
-                                                        {{ product.category.friendly_name }}
-                                                    </a>
-                                                </p>
-                                            {% endwith %}
-                                        {% else %}
-                                            {% with "btn-outline-dark" as btn_class %}
-                                                <p class="small mt-1 mb-0">
-                                                    <a class="btn {{ btn_class }} btn-sm px-4" href="{% url 'products' %}?category={{ product.category.name }}">
-                                                        {{ product.category.friendly_name }}
-                                                    </a>
-                                                </p>
-                                            {% endwith %}
-                                        {% endif %}
-                                    {% endwith %}
+                        <div class="position-relative">
+                            <!-- Category button -->
+                            {% if product.category %}
+                                {% with product.category.friendly_name as cat %}
+                                    {% if cat == "T Shirts" %}
+                                        {% with "cta-btn--primary" as btn_class %}
+                                            <a class="btn {{ btn_class }} btn-sm position-absolute top-0 start-0 m-2 px-3"
+                                               href="{% url 'products' %}?category={{ product.category.name }}"
+                                               onclick="event.stopPropagation();">
+                                                {{ product.category.friendly_name }}
+                                            </a>
+                                        {% endwith %}
+                                    {% elif cat == "Shirts" %}
+                                        {% with "cta-btn--tertiary" as btn_class %}
+                                            <a class="btn {{ btn_class }} btn-sm position-absolute top-0 start-0 m-2 px-3"
+                                               href="{% url 'products' %}?category={{ product.category.name }}"
+                                               onclick="event.stopPropagation();">
+                                                {{ product.category.friendly_name }}
+                                            </a>
+                                        {% endwith %}
+                                    {% elif cat == "Sweatshirts" %}
+                                        {% with "cta-btn--black" as btn_class %}
+                                            <a class="btn {{ btn_class }} btn-sm position-absolute top-0 start-0 m-2 px-3"
+                                               href="{% url 'products' %}?category={{ product.category.name }}"
+                                               onclick="event.stopPropagation();">
+                                                {{ product.category.friendly_name }}
+                                            </a>
+                                        {% endwith %}
+                                    {% else %}
+                                        {% with "btn-outline-dark" as btn_class %}
+                                            <a class="btn {{ btn_class }} btn-sm position-absolute top-0 start-0 m-2 px-3"
+                                               href="{% url 'products' %}?category={{ product.category.name }}"
+                                               onclick="event.stopPropagation();">
+                                                {{ product.category.friendly_name }}
+                                            </a>
+                                        {% endwith %}
                                     {% endif %}
+                                {% endwith %}
+                            {% endif %}
+                        </div>
+                
+                        <!-- Entire card content inside the link -->
+                        <a href="{% url 'product_detail' product.id %}" class="stretched-link text-decoration-none text-dark d-block h-100 px-3 pt-2 pb-3">
+                            <!-- Product image -->
+                            {% if product.image %}
+                                <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
+                            {% else %}
+                                <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                            {% endif %}
+                
+                            <!-- Product name -->
+                            <div class="card-body pb-0">
+                                <p class="mb-0">{{ product.name }}</p>
+                            </div>
+                
+                            <!-- Price -->
+                            <div class="card-footer bg-white pt-0 border-0 text-left">
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="lead mb-0 text-left font-weight-bold">${{ product.price }}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
+                
 
-                <!-- Responsive HR between product cards depending on layout -->
-                {% if forloop.counter|divisibleby:1 %}
-                <div class="col-12 d-sm-none mb-5">
-                    <hr>
-                </div>
-                {% endif %}                        
-                {% if forloop.counter|divisibleby:2 %}
-                <div class="col-12 d-none d-sm-block d-md-block d-lg-none mb-5">
-                    <hr>
-                </div>
-                {% endif %}
-                {% if forloop.counter|divisibleby:3 %}
-                <div class="col-12 d-none d-lg-block d-xl-none mb-5">
-                    <hr>
-                </div>
-                {% endif %}
-                {% if forloop.counter|divisibleby:4 %}
-                <div class="col-12 d-none d-xl-block mb-5">
-                    <hr>
-                </div>
-                {% endif %}
+                    <!-- Responsive HR between product cards -->
+                    {% if forloop.counter|divisibleby:1 %}
+                        <div class="col-12 d-sm-none mb-5"><hr></div>
+                    {% endif %}
+                    {% if forloop.counter|divisibleby:2 %}
+                        <div class="col-12 d-none d-sm-block d-md-block d-lg-none mb-5"><hr></div>
+                    {% endif %}
+                    {% if forloop.counter|divisibleby:3 %}
+                        <div class="col-12 d-none d-lg-block d-xl-none mb-5"><hr></div>
+                    {% endif %}
+                    {% if forloop.counter|divisibleby:4 %}
+                        <div class="col-12 d-none d-xl-block mb-5"><hr></div>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>
@@ -158,33 +151,22 @@
 <!-- Sort selector logic using JS -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        console.log("DOM fully loaded");
-
         const sortSelector = document.getElementById('sort-selector');
-        console.log("sortSelector:", sortSelector);
-
         if (sortSelector) {
             sortSelector.addEventListener('change', function () {
-                console.log("Sort selector triggered");
-
                 const selectedValue = this.value;
                 const currentUrl = new URL(window.location.href);
                 const params = new URLSearchParams(currentUrl.search);
 
-                // Set or remove sorting parameter
                 if (selectedValue !== 'reset') {
                     params.set('sort', selectedValue);
                 } else {
                     params.delete('sort');
                 }
 
-                // Redirect to updated URL
                 const newUrl = `${currentUrl.pathname}?${params.toString()}`;
-                console.log("Redirecting to:", newUrl);
                 window.location.href = newUrl;
             });
-        } else {
-            console.log("Sort selector NOT found");
         }
     });
 </script>
