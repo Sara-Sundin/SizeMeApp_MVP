@@ -1,10 +1,9 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseNotAllowed
 from django.contrib import messages
+from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 
 from home.models import Plan
-
-from urllib.parse import urlparse, urlencode, parse_qs, urlunparse
 
 
 def view_bag(request):
@@ -43,9 +42,9 @@ def view_bag(request):
 
 def add_to_bag(request, item_id):
     """
-    Add a specified quantity of a plan to the shopping bag.
-    Preserves the redirect URL and adds ?added=true without
-    overwriting existing query parameters.
+    Adds a plan to the bag.
+    Replace the shopping bag with a single selected plan.
+    Appends ?added=true to trigger the minicart.
     """
     if request.method != 'POST':
         return HttpResponseNotAllowed(['POST'])
@@ -53,26 +52,15 @@ def add_to_bag(request, item_id):
     plan = get_object_or_404(Plan, pk=item_id)
 
     try:
-        quantity = int(request.POST.get('quantity'))
+        quantity = int(request.POST.get('quantity', 1))
     except (TypeError, ValueError):
-        messages.error(request, 'Invalid quantity submitted.')
         return redirect('home')
 
+    # Replace the bag with just this plan
+    request.session['bag'] = {str(item_id): quantity}
+
+    # Append or merge ?added=true to redirect URL
     redirect_url = request.POST.get('redirect_url', '/')
-    bag = request.session.get('bag', {})
-    item_id_str = str(item_id)
-
-    if item_id_str in bag:
-        bag[item_id_str] += quantity
-        messages.success
-        (request, f'Updated {plan.name}quantity to {bag[item_id_str]}')
-    else:
-        bag[item_id_str] = quantity
-        messages.success(request, f'Added {plan.name} to your bag')
-
-    request.session['bag'] = bag
-
-    # Append or merge ?added=true
     parsed_url = urlparse(redirect_url)
     query_params = parse_qs(parsed_url.query)
     query_params['added'] = 'true'
