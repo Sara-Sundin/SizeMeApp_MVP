@@ -50,9 +50,12 @@ class Order(models.Model):
 
     def _generate_order_number(self):
         """
-        Generate a unique, random order number using UUID4
+        Generate a unique, 8-character uppercase order number
         """
-        return uuid.uuid4().hex.upper()
+        while True:
+            order_number = uuid.uuid4().hex[:8].upper()
+            if not Order.objects.filter(order_number=order_number).exists():
+                return order_number
 
     def update_total(self):
         """
