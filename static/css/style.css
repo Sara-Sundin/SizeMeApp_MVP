@@ -34,6 +34,14 @@ main {
     margin-left: 0;
 }
 
+/* === IOS Style === */
+/* Remove iOS default styling for phone/email links */
+.no-ios-link-style, .no-ios-link-style a {
+    color: white !important;
+    text-decoration: none !important;
+    -webkit-touch-callout: none;
+  }
+
 /* === Fade Effects === */
 /* Fade-in from transparency on page load */
 .fade-in {
