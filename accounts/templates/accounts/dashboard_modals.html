@@ -51,6 +51,40 @@
     </div>
   </div>
 
+  
+<!-- Avatar Modal -->
+<div class="modal fade" id="avatarModal" tabindex="-1" aria-labelledby="avatarModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-fullscreen-sm-down modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <h2 class="modal-title w-100 text-center">Choose Your Cosmic Identity</h2>
+        <button type="button" class="btn-close position-absolute end-0 me-3" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <p class="text-center text-muted mb-4">
+          Select the star sign that reflects your inner self. Your avatar, your vibe.
+        </p>
+        <div class="row g-3 justify-content-center">
+          {% for i in avatar_range %}
+            <div class="col-4 col-sm-3 col-md-3 col-lg-2 text-center">
+              <form method="POST" action="{% url 'update_avatar' %}">
+                {% csrf_token %}
+                <input type="hidden" name="avatar_number" value="{{ i }}">
+                <button type="submit" class="border-0 bg-transparent avatar-btn">
+                  <img src="{% static 'images/avatars/' %}{{ i }}.png"
+                    alt="Avatar {{ i }}"
+                    class="img-fluid rounded shadow avatar-img">
+                </button>
+              </form>
+            </div>
+          {% endfor %}
+        </div>        
+      </div>
+    </div>
+  </div>
+</div>
+
   <!-- Delete Account Confirmation Modal -->
 <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
     <div class="modal-dialog">
