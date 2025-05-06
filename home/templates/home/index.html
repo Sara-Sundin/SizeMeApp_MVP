@@ -12,7 +12,7 @@
                 <h1 class="hero-heading">Seamless Sizing for Smarter Shopping.</h1>
                 
                 <!-- Call-to-action buttons -->
-                <div class="d-flex flex-column flex-md-row justify-content-center justify-content-lg-start gap-3 mt-4 py-5">
+                <div class="col-lg-10 d-flex flex-column flex-md-row justify-content-center justify-content-lg-start gap-3 mt-4 py-5">
                     <a class="cta-btn cta-btn--primary" href="{% if user.is_authenticated %}{% url 'webshop' %}{% else %}{% url 'signup' %}{% endif %}">
                         Try the SizeMeApp tool.
                     </a>                    
@@ -28,7 +28,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h2 class="text-black p-md-4">
+                <h2 class="text-black p-md-4 mt-lg-4">
                     Reduce returns. Boost confidence. Keep your customers coming back.
                 </h2> 
             </div>

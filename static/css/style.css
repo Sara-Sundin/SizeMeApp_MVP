@@ -195,7 +195,7 @@ h1, h2, h3, h4 {
     top: 20px;
     left: 0;
     right: 0;
-    height: 800px;
+    height: 850px;
     background: url("../images/body_male.gif") no-repeat top center;
     background-size: 80%;
     opacity: 0.5;
@@ -204,16 +204,10 @@ h1, h2, h3, h4 {
 }
 
 #hero h1 {
-    font-size: 60px;
+    font-size: 65px;
     color: var(--primary-color);
     padding-top: 120px;
     line-height: 1.5;
-}
-
-#hero p {
-    font-family: var(--secondary-font);
-    color: var(--primary-color);
-    font-size: 25px;
 }
 
 .hero-subtext {
@@ -509,11 +503,11 @@ footer p {
 /* Tablet */
 @media (min-width: 768px) {
     #hero {
-        height: 800px;
+        height: 900px;
     }
 
     #hero h1 {
-        font-size: 100px;
+        font-size: 120px;
         padding-top: 200px;
         line-height: 1;
     }
@@ -524,7 +518,7 @@ footer p {
     }
 
     .hero-bg {
-        background-size: 50%;
+        background-size: 40%;
         margin-top: 40px;
     }
 
@@ -578,7 +572,7 @@ footer p {
 
     #hero h1 {
         padding-top: 80px;
-        font-size: 100px;
+        font-size: 110px;
     }
 
     #dashboard h1 {
