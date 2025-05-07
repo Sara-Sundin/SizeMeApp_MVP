@@ -239,12 +239,15 @@ Tools used:
 
 I ran all my Python code through the Python Linter with the following results. The final check for all code files were without errors. For more images tested on all apps see the [Read Me Images](documents/images_readme) folder.
 
-### Account App
-#### Account forms.py- Initial Check
-![Validation CI Python Linter First Check](documents/images_readme/accounts_forms_linting_test_first.jpg)
+### Example Testing - Accounts App
 
-#### Account forms.py- Final Check
-![Validation CI Python Linter Final Check](documents/images_readme/accounts_forms_linting_test_final.jpg)
+#### Accounts forms.py- Initial Check
+
+![Account forms.py first check](documents/images_readme/accounts_forms_linting_test_first.jpg)
+
+#### Accounts forms.py- Final Check
+
+![Account forms.py first check](documents/images_readme/accounts_forms_linting_test_final.jpg)
 
 ## Bugs and Fixes
 Here I have recorded some issues that I spent excessive time solving with the solutions indicated below.
