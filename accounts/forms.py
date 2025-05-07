@@ -6,6 +6,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.forms import UserChangeForm
 from .models import CustomUser
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 
 
 class CustomSignupForm(UserCreationForm):
@@ -66,6 +68,14 @@ class CustomSignupForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+    def clean_password1(self):
+        password = self.cleaned_data.get('password1')
+        try:
+            validate_password(password)
+        except ValidationError as e:
+            self.add_error('password1', e)
+        return password
 
 
 class CustomLoginForm(AuthenticationForm):
