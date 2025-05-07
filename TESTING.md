@@ -249,10 +249,59 @@ I ran all my Python code through the Python Linter with the following results. T
 ## Bugs and Fixes
 Here I have recorded some issues that I spent excessive time solving with the solutions indicated below.
 
-### Bug: ?
+### Bug: Multiple Modals Opened Simultaneously on ***product_detail*** Page
 
-![Bug 1](#)
+![Bug Modals](documents/images_readme/bug-modals.jpg)
 
-#### Solution
+#### Description
+When visiting the ***product_detail*** page, multiple Bootstrap modals (update size mode modal and prototype info modal) were opening at the same time when opening one or the other.
+
+#### Root Cause
+The bug was caused by multiple window.onload assignments in the postloadjs block of the template. Each modal trigger script defined its own window.onload function, which overwrote the others and led to unpredictable behavior where more than one modal could appear.
+
+#### Resolution
+The solution involved consolidating modal logic into a single window.onload function and using {% if %} / {% elif %}` logic to ensure only one modal is triggered based on context flags passed from the view.
+
+### Bug: AWS Storage Misconfigured
+
+#### Description  
+During setup of image uploads to Amazon S3, images were not being uploading at all, just the link to the bucket was cofigured.
+
+#### Root Cause  
+The problem was caused by the deprecation of the DEFAULT_FILE_STORAGE settings in versions Django 4.2 and newer. After this Django introduced the STORAGES setting for configuring storage backends. Continuing to use the old format led to Django falling back to default file storage or silently failing to connect to the S3 bucket.
+
+#### Resolution  
+The settings were updated to the new STORAGES format as recommended in the Django documentation:
+
+![Bug AWS Storage](documents/images_readme/bug-storages.jpg)
+
+### Bug: Checkout Fields Not Saving to CustomUser When "Save Info" Box Was Checked
+
+![Bug Save Info](documents/images_readme/bug-save_info.jpg)
+
+#### Description  
+After adding new fields (e.g. phone_number, address, city, postcode, country) to the CustomUser model, the checkout form did not save the details when the user checked the “Save this information for next time” box. The form submitted successfully, but the saved values were not persisted to the user profile.
+
+#### Root Cause  
+The checkout logic was originally designed for a default OrderProfile model. After extending CustomUser, the code handling the "save_info" flag was not updated to write to the corresponding fields in the custom user model. As a result, the posted data was ignored.
+
+#### Resolution  
+Updated the checkout view logic in checkout/views.py to correctly reference and save the new fields to the request.user instance when save_info is set to True.
+
+### Bug: `RecursionError` When Adding a Plan to the Bag
+
+![Bug Recursion](documents/images_readme/bug-error.jpg)
+
+#### Description  
+When a user attempted to add a Plan to the shopping bag, the app crashed with a RecursionError: maximum recursion depth exceeded. This occurred during rendering of the plan_detail page after the item was added to the bag.
+
+#### Root Cause  
+The error was caused by circular logic between the plan_detail view, the bag system, and the page rendering. A template tag {% url 'plan_detail' plan.id %} was triggering the view recursively during template evaluation.
+
+#### Resolution  
+The bug was resolved by identifying and removing the recursive call chain. This involved:
+- Reviewing all template tags and context variables that pointed to plan_detail.
+- Ensuring that redirects, reverse(), or includes did not re-invoke the view.
+- Refactoring plan_detail to avoid loading templates or partials that included self-referential links.
 
 [Back to Content Table](#content)
