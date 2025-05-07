@@ -103,8 +103,8 @@
                     {% else %}
                     <div class="form-check form-check-inline float-right mr-0">
                         <p class="form-check-label mb-0 small">
-                            <a class="text-info" href="{% url 'signup' %}">Create an account</a> or 
-                            <a class="text-info" href="{% url 'login' %}">login</a> to save this information
+                            <a class="text-info" href="{% url 'signup' %}?next={{ request.path }}">Create an account</a> or 
+                            <a class="text-info" href="{% url 'login' %}?next={{ request.path }}">login</a> to save this information
                         </p>
                     </div>                    
                     {% endif %}
