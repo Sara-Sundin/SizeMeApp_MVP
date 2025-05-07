@@ -29,17 +29,19 @@ class ProductAdmin(SortableAdminMixin, admin.ModelAdmin):
 
     def thumbnail(self, obj):
         if obj.image:
-            return format_html
-            ('<img src="{}" style="height: 50px;" />', obj.image.url)
+            return format_html(
+                '<img src="{}" style="height: 50px;" />',
+                obj.image.url
+            )
         return "-"
-    thumbnail.short_description = "Image"
 
     def image_preview(self, obj):
         if obj.image:
-            return format_html
-            ('<img src="{}" style="max-height: 200px;" />', obj.image.url)
+            return format_html(
+                '<img src="{}" style="max-height: 200px;" />',
+                obj.image.url
+            )
         return "No image uploaded"
-    image_preview.short_description = "Preview"
 
 
 @admin.register(Category)
