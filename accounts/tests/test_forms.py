@@ -3,6 +3,30 @@ from accounts.forms import CustomSignupForm, CustomLoginForm, CustomUserUpdateFo
 from django.contrib.auth import get_user_model
 
 
+class CustomSignupFormTests(TestCase):
+    def test_password_too_short_is_invalid(self):
+        form_data = {
+            'full_name': 'Short Password User',
+            'email': 'short@example.com',
+            'password1': 'short',  # Only 5 characters
+        }
+        form = CustomSignupForm(data=form_data)
+        self.assertFalse(form.is_valid())
+        self.assertIn('password1', form.errors)
+        self.assertTrue(
+            any('at least 8 characters' in str(msg).lower() for msg in form.errors['password1']),
+            msg="Expected password length error message not found."
+        )
+
+    def test_password_min_length_valid(self):
+        form_data = {
+            'full_name': 'Valid Password User',
+            'email': 'valid@example.com',
+            'password1': 'validpass',  # 9 characters
+        }
+        form = CustomSignupForm(data=form_data)
+        self.assertTrue(form.is_valid())
+
 class CustomSignupFormTest(TestCase):
 
     def test_valid_signup_form(self):
