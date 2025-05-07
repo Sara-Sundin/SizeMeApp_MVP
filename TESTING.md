@@ -251,10 +251,10 @@ Here I have recorded some issues that I spent excessive time solving with the so
 
 ### Bug: Multiple Modals Opened Simultaneously on ***product_detail*** Page
 
-![Bug Modals](documents/images_readme/bug-modals.jpg)
-
 #### Description
 When visiting the ***product_detail*** page, multiple Bootstrap modals (update size mode modal and prototype info modal) were opening at the same time when opening one or the other.
+
+![Bug Modals](documents/images_readme/bug-modals.jpg)
 
 #### Root Cause
 The bug was caused by multiple window.onload assignments in the postloadjs block of the template. Each modal trigger script defined its own window.onload function, which overwrote the others and led to unpredictable behavior where more than one modal could appear.
@@ -277,10 +277,10 @@ The settings were updated to the new STORAGES format as recommended in the Djang
 
 ### Bug: Checkout Fields Not Saving to CustomUser When "Save Info" Box Was Checked
 
-![Bug Save Info](documents/images_readme/bug-save_info.jpg)
-
 #### Description  
 After adding new fields (e.g. phone_number, address, city, postcode, country) to the CustomUser model, the checkout form did not save the details when the user checked the “Save this information for next time” box. The form submitted successfully, but the saved values were not persisted to the user profile.
+
+![Bug Save Info](documents/images_readme/bug-save_info.jpg)
 
 #### Root Cause  
 The checkout logic was originally designed for a default OrderProfile model. After extending CustomUser, the code handling the "save_info" flag was not updated to write to the corresponding fields in the custom user model. As a result, the posted data was ignored.
@@ -290,10 +290,10 @@ Updated the checkout view logic in checkout/views.py to correctly reference and 
 
 ### Bug: `RecursionError` When Adding a Plan to the Bag
 
-![Bug Recursion](documents/images_readme/bug-error.jpg)
-
 #### Description  
 When a user attempted to add a Plan to the shopping bag, the app crashed with a RecursionError: maximum recursion depth exceeded. This occurred during rendering of the plan_detail page after the item was added to the bag.
+
+![Bug Recursion](documents/images_readme/bug-error.jpg)
 
 #### Root Cause  
 The error was caused by circular logic between the plan_detail view, the bag system, and the page rendering. A template tag {% url 'plan_detail' plan.id %} was triggering the view recursively during template evaluation.
