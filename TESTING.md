@@ -508,4 +508,4 @@ The bug was resolved by identifying and removing the recursive call chain. This 
 - Ensuring that redirects, reverse(), or includes did not re-invoke the view.
 - Refactoring plan_detail to avoid loading templates or partials that included self-referential links.
 
-[Back to Content Table README](README.md)
+[Back to README](README.md)
