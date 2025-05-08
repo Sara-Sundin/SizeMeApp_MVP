@@ -22,15 +22,12 @@ def dashboard_view(request):
     profile updates, measurements, and redirect feedback.
     """
     user = request.user
+
     show_modal = not all([user.chest, user.waist, user.hips, user.shoulders])
-    show_profile_updated_modal = request.session.pop
-    ("show_profile_updated_modal", False)
-    show_measurements_updated_modal = request.session.pop
-    ("show_measurements_updated_modal", False)
-    show_measurements_deleted_modal = request.session.pop
-    ("show_measurements_deleted_modal", False)
-    show_redirect_modal = request.session.pop
-    ("show_redirect_modal", False)
+    show_profile_updated_modal = request.session.pop("show_profile_updated_modal", False)
+    show_measurements_updated_modal = request.session.pop("show_measurements_updated_modal", False)
+    show_measurements_deleted_modal = request.session.pop("show_measurements_deleted_modal", False)
+    show_redirect_modal = request.session.pop("show_redirect_modal", False)
 
     context = {
         "show_modal": show_modal,
@@ -40,6 +37,7 @@ def dashboard_view(request):
         "redirect_modal": show_redirect_modal,
         "avatar_range": range(1, 13),
     }
+
     return render(request, 'accounts/dashboard.html', context)
 
 
