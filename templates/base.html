@@ -153,10 +153,16 @@
 </div>
 
 <!-- JS: Pass flags from backend to JS window object -->
-{% if show_success_modal or show_logged_out_modal %}
+{% if show_success_modal%}
 <script>
-  window.showContactModal = {{ show_success_modal|yesno:'true,false' }};
-  window.showLogoutModal = {{ show_logged_out_modal|yesno:'true,false' }};
+  window.showContactModal = '{{ show_success_modal|yesno:"true,false" }}';
+</script>
+{% endif %}
+
+
+{% if show_logged_out_modal %}
+<script>
+  window.showLogoutModal = '{{ show_logged_out_modal|yesno:"true,false" }}';
 </script>
 {% endif %}
 
