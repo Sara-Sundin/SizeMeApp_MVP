@@ -29,10 +29,18 @@
         <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 
-                <!-- Shop link -->
+                <!-- Home link -->
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'home' %}">Home</a>
                 </li>
+
+                <!-- Shopping cart link with total price -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'view_bag' %}">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>(${{ total|floatformat:2 }})</span>
+                    </a>
+                </li> 
 
                 <!-- Plans dropdown menu -->
                 <li class="nav-item dropdown">
