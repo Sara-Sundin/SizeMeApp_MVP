@@ -140,6 +140,7 @@
 {% endblock %}
 
 {% block postloadjs %}
+{{ block.super }}
 
 {% if show_size_mode_entered_modal %}
 <script>
@@ -160,4 +161,24 @@
   }
 </script>
 {% endif %}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const incrementBtn = document.getElementById("increment-qty_{{ product.id }}");
+    const decrementBtn = document.getElementById("decrement-qty_{{ product.id }}");
+    const qtyInput = document.getElementById("id_qty_{{ product.id }}");
+
+    if (incrementBtn && decrementBtn && qtyInput) {
+      incrementBtn.addEventListener("click", () => {
+        let value = parseInt(qtyInput.value);
+        if (value < 99) qtyInput.value = value + 1;
+      });
+
+      decrementBtn.addEventListener("click", () => {
+        let value = parseInt(qtyInput.value);
+        if (value > 1) qtyInput.value = value - 1;
+      });
+    }
+  });
+</script>
 {% endblock %}
