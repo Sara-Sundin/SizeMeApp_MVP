@@ -3,7 +3,6 @@ from .forms import ContactForm
 from .models import Plan
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib import messages
-from urllib.parse import urlparse
 from django.http import HttpResponse
 
 
