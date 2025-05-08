@@ -62,10 +62,9 @@ class CheckoutViewsTest(TestCase):
     def test_checkout_redirects_if_bag_is_empty(self):
         session = self.client.session
         session['bag'] = {}  # Empty the bag
-        session.save()       # Critical: persist the change
+        session.save()
 
         response = self.client.get(reverse('checkout'))
-
         self.assertRedirects(response, reverse('view_bag'))
 
     @patch('checkout.views.send_order_confirmation_email')
@@ -81,6 +80,12 @@ class CheckoutViewsTest(TestCase):
             original_bag='{}',
             stripe_pid='abc123'
         )
+
+        # Set the session flag required by the view
+        session = self.client.session
+        session['just_ordered'] = True
+        session.save()
+
         url = reverse('checkout_success', args=[order.order_number])
         response = self.client.get(url)
 

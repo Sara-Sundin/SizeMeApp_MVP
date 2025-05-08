@@ -3,6 +3,7 @@ from products.forms import ProductForm
 from products.models import Category, Product
 from products.widgets import CustomClearableFileInput
 
+
 class ProductFormTest(TestCase):
 
     def setUp(self):
@@ -30,6 +31,23 @@ class ProductFormTest(TestCase):
             'description': 'A sample product.',
             'price': 49.99,
             'has_sizes': False,
+            'sort_order': 1, 
         }
         form = ProductForm(data=form_data)
         self.assertTrue(form.is_valid())
+
+    def test_missing_required_fields(self):
+        form = ProductForm(data={})  # Empty form
+        self.assertFalse(form.is_valid())
+        self.assertIn('name', form.errors)
+        self.assertIn('price', form.errors)
+
+    def test_meta_model_and_fields(self):
+        form = ProductForm()
+        expected_fields = [
+            'category', 'name', 'sku', 'description', 'price',
+            'has_sizes', 'image', 'image_url', 'sort_order'
+        ]
+        self.assertCountEqual(list(form.fields.keys()), expected_fields)
+
+

@@ -65,10 +65,11 @@ class ProductViewsTest(TestCase):
             'category': self.category.id,
             'has_sizes': False,
             'image': image,
+            'sort_order': 1,
         })
 
-        if response.status_code == 200:
-            print("Form errors:", response.context['form'].errors)
+        if response.status_code == 200 and 'form' in response.context:
+            print("Add Product Form errors:", response.context['form'].errors)
 
         self.assertEqual(response.status_code, 302)
         self.assertTrue(Product.objects.filter(name='New Product').exists())
@@ -77,6 +78,25 @@ class ProductViewsTest(TestCase):
         self.assertTrue(self.client.login(username='user@test.com', password='userpass'))
         response = self.client.get(reverse('edit_product', args=[self.product.id]))
         self.assertRedirects(response, reverse('webshop'))
+
+    def test_edit_product_as_superuser(self):
+        self.assertTrue(self.client.login(username='admin@test.com', password='adminpass'))
+
+        response = self.client.post(reverse('edit_product', args=[self.product.id]), {
+            'name': 'Updated Product',
+            'description': 'Updated desc.',
+            'price': 25.00,
+            'category': self.category.id,
+            'has_sizes': False,
+            'sort_order': 1,
+        })
+
+        if response.status_code == 200 and 'form' in response.context:
+            print("Edit Product Form errors:", response.context['form'].errors)
+
+        self.assertRedirects(response, reverse('product_detail', args=[self.product.id]))
+        self.product.refresh_from_db()
+        self.assertEqual(self.product.name, 'Updated Product')
 
     def test_delete_product(self):
         self.assertTrue(self.client.login(username='admin@test.com', password='adminpass'))

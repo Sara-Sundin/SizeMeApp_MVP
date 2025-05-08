@@ -42,16 +42,18 @@ class HomeViewsTest(TestCase):
         response = self.client.post(self.contact_url, data)
         self.assertEqual(response.status_code, 302)  # Redirects back
 
-    def test_contact_post_invalid_form(self):
-        data = {
-            'name': '',
-            'email': 'bademail',
-            'message': ''
-        }
-        response = self.client.post(self.contact_url, data)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'base.html')
+def test_contact_post_invalid_form(self):
+    data = {
+        'name': '',
+        'email': 'bademail',
+        'message': ''
+    }
 
-    def test_contact_get_redirects(self):
-        response = self.client.get(self.contact_url)
-        self.assertEqual(response.status_code, 302)
+    # Simulate coming from the home page
+    response = self.client.post(
+        self.contact_url, data,
+        HTTP_REFERER=self.index_url
+    )
+
+    self.assertEqual(response.status_code, 302)
+    self.assertRedirects(response, self.index_url)

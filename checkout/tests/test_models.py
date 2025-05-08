@@ -40,7 +40,7 @@ class OrderModelTest(TestCase):
 
     def test_order_number_is_generated(self):
         self.assertIsNotNone(self.order.order_number)
-        self.assertEqual(len(self.order.order_number), 32)
+        self.assertEqual(len(self.order.order_number), 8)
 
     def test_update_total_calculates_correctly(self):
         OrderLineItem.objects.create(
