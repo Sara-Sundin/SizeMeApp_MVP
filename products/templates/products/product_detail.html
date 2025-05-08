@@ -138,3 +138,26 @@
 
 {% include "products/includes/product_modals.html" %}
 {% endblock %}
+
+{% block postloadjs %}
+
+{% if show_size_mode_entered_modal %}
+<script>
+  window.onload = function () {
+    const enteredModal = new bootstrap.Modal(document.getElementById('sizeModeEnteredModal'));
+    enteredModal.show();
+    setTimeout(() => enteredModal.hide(), 1500);
+  }
+</script>
+{% endif %}
+
+{% if show_size_mode_exited_modal %}
+<script>
+  window.onload = function () {
+    const exitedModal = new bootstrap.Modal(document.getElementById('sizeModeExitedModal'));
+    exitedModal.show();
+    setTimeout(() => exitedModal.hide(), 1500);
+  }
+</script>
+{% endif %}
+{% endblock %}
