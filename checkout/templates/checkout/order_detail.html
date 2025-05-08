@@ -2,25 +2,35 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2>Order Details</h2>
-    <p><strong>Order Number:</strong> {{ order.order_number }}</p>
-    <p><strong>Date:</strong> {{ order.date }}</p>
-    <p><strong>Total:</strong> ${{ order.grand_total }}</p>
+  <div class="row">
+    <!-- Left Column: Order Info -->
+    <div class="col-12 col-md-6 mb-4">
+      <h2>Order Details</h2>
+      <p><strong>Order Number:</strong> {{ order.order_number }}</p>
+      <p><strong>Date:</strong> {{ order.date }}</p>
+      <p><strong>Total:</strong> ${{ order.grand_total }}</p>
+    </div>
 
-    <h4 class="mt-4">Items:</h4>
-    <ul class="list-unstyled">
+    <!-- Right Column: Items -->
+    <div class="col-12 col-md-6">
+      <h4 class="mb-3">Items:</h4>
+      <ul class="list-unstyled">
         {% for item in order.lineitems.all %}
-            <li class="mb-4">
-                <div>
-                    <strong>{{ item.plan.name }}</strong> × {{ item.quantity }}
+          <li class="mb-4">
+            <div class="text-start">
+              <div>
+                <strong>{{ item.plan.name }}</strong> × {{ item.quantity }}
+              </div>
+              {% if item.plan.icon_class %}
+                <div class="my-4">
+                  <i class="fa-solid {{ item.plan.icon_class }} fa-4x {{ item.plan.icon_color_class }}"></i>
                 </div>
-                {% if item.plan.icon_class %}
-                    <div class="mt-4">
-                        <i class="fa-solid {{ item.plan.icon_class }} responsive-icon {{ item.plan.icon_color_class }}"></i>
-                    </div>
-                {% endif %}
-            </li>
+              {% endif %}
+            </div>
+          </li>
         {% endfor %}
-    </ul>
+      </ul>
+    </div>
+  </div>
 </div>
 {% endblock %}
