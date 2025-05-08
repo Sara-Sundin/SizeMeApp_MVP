@@ -441,11 +441,11 @@ For my first run I received 83% coverage across all files.
 ![Testing with coverage first run](documents/images_readme/coverage-report-first.jpg)
 
 I decided to improve the coverage for below tests.
-![Test](documents\images_readme\coverage-accounts-first.jpg)
-![Test](documents\images_readme\coverage-products-first.jpg)
-![Test](documents\images_readme\coverage-product-forms-first.jpg)
-![Test](documents\images_readme\coverage-webhook_handler-first.jpg)
-![Test](documents\images_readme\coverage-webhooks-first.jpg)
+![Test](documents/images_readme/coverage-accounts-first.jpg)
+![Test](documents/images_readme/coverage-products-first.jpg)
+![Test](documents/images_readme/coverage-product-forms-first.jpg)
+![Test](documents/images_readme/coverage-webhook_handler-first.jpg)
+![Test](documents/images_readme/coverage-webhooks-first.jpg)
 
 My final run I received 93% coverage.
 ![Testing with coverage final run](documents/images_readme/coverage-report-final.jpg)
