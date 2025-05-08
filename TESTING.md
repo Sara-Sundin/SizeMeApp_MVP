@@ -9,6 +9,7 @@
 - [Validation](#validation)
 - [Webhooks](#webhooks)
 - [Testing with Django](#testing-with-django)
+- [Testing with Coverage](#testing-with-coverage)
 - [Bugs & Fixes](#bugs-and-fixes)
 
 <hr>
@@ -429,7 +430,25 @@ This project includes Stripe webhook integration to handle key payment events. T
 The webhook handler processes successful payments, handles failed transactions gracefully, and ensures robust communication between Stripe and the backend. All events were tested using the Stripe CLI for reliability in a real-world payment flow.
 
 ## Testing with Django
-I have implemented automated tests using Django’s built-in testing framework for models, views, forms, and utilities across all apps. Tests cover core functionality including user authentication, webshop behavior, product CRUD operations, size recommendation logic, and context processors. Custom logic like stretch factor calculations and webhook handling is also tested. The test suite ensures data integrity, proper redirects, and session behavior. All tests run in an isolated environment using Django’s test database and can be executed via python manage.py test for continuous development confidence.
+I have implemented automated tests using Django’s built-in testing framework for models, views, forms, and utilities across all apps. Tests cover core functionality including user authentication, webshop behavior, product CRUD operations, size recommendation logic, and context processors. Custom logic like stretch factor calculations and webhook handling is also tested. The test suite ensures data integrity, proper redirects, and session behavior. All tests run in an isolated environment using Django’s test database and can be executed via python manage.py test for continuous development confidence. All tests are passing OK.
+
+![Testing with django](documents/images_readme/testing-django.jpg)
+
+## Testing Code Coverage
+To ensure thoroughness for the tests across all apps using Django’s built-in testing framework, I have used the coverage tool to measure test coverage and identify untested logic. Coverage reports are generated in both terminal and HTML formats (coverage html), allowing visual inspection of missed branches and conditions. The suite runs in an isolated test database environment and can be executed using coverage run manage.py test, helping maintain a high level of confidence in code quality and regression safety throughout development.
+
+For my first run I received 83% coverage across all files.
+![Testing with coverage first run](documents/images_readme/coverage-report-first.jpg)
+
+I decided to improve the coverage for below tests.
+![Test](documents\images_readme\coverage-accounts-first.jpg)
+![Test](documents\images_readme\coverage-products-first.jpg)
+![Test](documents\images_readme\coverage-product-forms-first.jpg)
+![Test](documents\images_readme\coverage-webhook_handler-first.jpg)
+![Test](documents\images_readme\coverage-webhooks-first.jpg)
+
+My final run I received 93% coverage.
+![Testing with coverage final run](documents/images_readme/coverage-report-final.jpg)
 
 ## Bugs and Fixes
 Here I have recorded some issues that I spent excessive time solving with the solutions indicated below.
