@@ -1,10 +1,49 @@
 # TESTING
+- [Manual vs. Automated Testing](#manual-vs-automated-testing)
+- [Devices](#devices)
+- [Browsers](#browsers)
 - [User Story Testing](#user-story-testing)
+- [Testing Grid](#testing-grid)
+- [Chrome Dev Tools](#chrome-dev-tools)
 - [Lighthouse](#lighthouse)
 - [Validation](#validation)
-- [Bugs and Fixes](#bugs-and-fixes)
+- [Webhooks](#webhooks)
+- [Testing with Django](#testing-with-django)
+- [Bugs & Fixes](#bugs-and-fixes)
+
+<hr>
+
+## Manual vs Automated Testing
+Software testing ensures that applications work as expected, are free of critical bugs, and provide a good user experience. Testing can be done manually by human testers or automatically using scripts and testing frameworks. The choice between manual and automated testing depends on factors like project complexity, budget, and the need for speed and accuracy. Both manual and automated testing play crucial roles in software development. Manual testing is best for exploratory testing and user experience evaluation, while automated testing is essential for repetitive tasks and continuous testing in large projects. A combination of both approaches often provides the best results.
+
+The manual testing in this project has been done to check the responsiveness on different devices and browsers as well as the user experience both in terms of functionality and various workflows to find unexpected behavior. I have used a testing grid to make sure all components are being included.
+
+The automated testing have used frameworks and tools such as Lighthouse, W3C Validators, JSHint, and Django testing framework to run test cases, making it more efficient for large-scale and repetitive testing.
+
+<hr>
+
+## Devices
+
+### The testing on the site has been made on four different devices:
+Samsung Galaxy Mobile A25 <br>
+Apple IPad Mini <br>
+Apple IPad  <br>
+Lenovo Desktop 15"
+
+<hr>
+
+## Browsers
+### The different browsers used for testing:
+Google Chrome <br>
+Microsoft Edge <br>
+Safari <br>
+Firefox <br>
+Samsung Internet
+
+<hr>
 
 ## User Story Testing
+These tests ensure that the application meets user expectations by verifying functionality, usability, and responsiveness. Each user story is tested through real interactions, checking that the intended experience aligns with the actual behavior of the application. All user stories have been tested and below are some examples of the process.
 
 ### User Story – New Customer Account Registration  
 As a new customer, I want to register an account so that I can save my body measurements and try the application.
@@ -117,8 +156,22 @@ This feature successfully meets the user story criteria, giving users a complete
 ![Test User Story 5 Mobile](documents/images_readme/user_story-products-mobile.jpg)
 ![Test User Story 5 Desktop](documents/images_readme/user_story-products-desktop.jpg)
 
+<hr>
+
+## Testing grid
+I have used a grid for testing all components of the website. After testing I have fixed any issues arising and put a note in the grid what has been done. See below dropdown menu for the grid that I created in an excel spreadsheet using a free template as base. [Link to excel spreadsheet](#)
+
+![Testing Grid](#)
+
+<hr>
+
+## Chrome Dev Tools
+I have used Chrome Dev Tools throughout the development of the website to test for responsiveness and troubleshooting.
+
+<hr>
+
 ## Lighthouse
-I have recorded the first and final run with Lighthouse for all pages with images and warning messages below. 
+I used Chrome Dev Tools Lighthouse to help improve the website's performance, accessibility, SEO, and user experience. The first time I ran the testing I received messages for improvement. I have recorded the first and final run with Lighthouse for all pages with images and warning messages. The Lighthouse tool provided actionable insights to optimize speed and fix issues.
 
 ### Home Page
 
@@ -217,7 +270,32 @@ Improvement messages:
 
 ![Lighthouse Product Detail 2nd run](documents/images_readme/lighthouse_product_detail_final.jpg)
 
+### Lighthouse 3rd party cookies
+When running the lighthouse tests I received third party cookie warnings for Best Practices due to Stripe. When I disabled stripe there were no issues so I included a picture for testing both  with and without Stripe enabled in above documentation.
+
+![Image 3rd party cookies](documents/images_readme/best_practices_cookies_stripe.jpg)
+
+### Lighthouse warning aria label Stripe element
+I received a warning for the Stripe field for card. However after reading about Stripe I felt reassured Stripe handles its own labels so I decided to leave it since I could not solve it.
+
+![Stripe aria label](documents/images_readme/stripe-element-card-warning-lighthouse.jpg)
+
+### Lighthouse NO_LCP Error
+I received a NO_LCP error for performance at the checkout page. This page does not include any images, just a spinner that loads after the checkout button is clicked. I tried to set the opacity on the page to 0.0001 to give it something to detect but it did not work. I even tried to implement hidden images and implement javascript to solve it. Since the Ligthtouse testing gave good performance for mobile view and everything seemed to run smoothly I decided to leave the error and include the image for mobile view as above.
+
+![Lighthouse Checkout 1st run](documents/images_readme/lighthouse_checkout_first.jpg)
+
+<hr>
+
+
+
 ## Validation
+The HTML, CSS, Javascript and Python code has been validated on below editors. The issues arising has been documented below.
+
+- W3C HTML Validator
+- W3C CSS Validator
+- JSHint Validator
+- CI Python Linter
 
 ### W3C HTML Validator
 I have included screenprints of the first and final validation of the HTML with W3C validation.
@@ -338,6 +416,20 @@ I ran all my Python code through the Python Linter with the following results. T
 #### Accounts forms.py- Final Check
 
 ![Account forms.py first check](documents/images_readme/accounts_forms_linting_test_final.jpg)
+
+
+## Webhooks
+This project includes Stripe webhook integration to handle key payment events. The following webhooks have been tested and implemented: 
+- payment_intent.created
+- payment_intent.succeeded
+- payment_intent.payment_failed
+- charge.succeeded
+- charge.failed
+
+The webhook handler processes successful payments, handles failed transactions gracefully, and ensures robust communication between Stripe and the backend. All events were tested using the Stripe CLI for reliability in a real-world payment flow.
+
+## Testing with Django
+I have implemented automated tests using Django’s built-in testing framework for models, views, forms, and utilities across all apps. Tests cover core functionality including user authentication, webshop behavior, product CRUD operations, size recommendation logic, and context processors. Custom logic like stretch factor calculations and webhook handling is also tested. The test suite ensures data integrity, proper redirects, and session behavior. All tests run in an isolated environment using Django’s test database and can be executed via python manage.py test for continuous development confidence.
 
 ## Bugs and Fixes
 Here I have recorded some issues that I spent excessive time solving with the solutions indicated below.
