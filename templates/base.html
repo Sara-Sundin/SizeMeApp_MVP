@@ -103,7 +103,7 @@
 </footer>
 
 <!-- Hidden logout form for POST submission -->
-<form id="logout-form" method="post" action="{% url 'logout' %}" style="display: none;">{% csrf_token %}</form>
+<form id="logout-form" method="post" action="{% url 'custom_logout' %}?next={{ request.path }}" style="display: none;">{% csrf_token %}</form>
 
 <!-- Logout Confirmation Modal -->
 <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">

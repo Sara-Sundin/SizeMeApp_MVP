@@ -4,6 +4,7 @@ from .models import Plan
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib import messages
 from django.http import HttpResponse
+from django.contrib.auth import logout
 
 
 def index(request):
@@ -97,6 +98,18 @@ def clear_success_flag(request):
     """
     request.session.pop('show_success_modal', None)
     return HttpResponse(status=204)
+
+
+def custom_logout(request):
+    """
+    Logs the user out and redirects to ?next= if available,
+    otherwise home.
+    Also sets flag to show logout modal.
+    """
+    logout(request)
+    request.session["show_logged_out_modal"] = True
+    next_url = request.GET.get('next') or 'home'
+    return redirect(next_url)
 
 
 def custom_404(request, exception):

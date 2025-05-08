@@ -6,14 +6,24 @@ def global_context(request):
     Provides global context variables to all templates.
 
     Includes:
-    - A contact form instance with a 'contact' prefix, used in the footer.
-    - A flag to show the contact success modal if the session
-    indicates a message was sent.
+    - Contact form with 'contact' prefix for footer use
+    - Flags for triggering modals after form submission or logout
     """
-    return {
-        # Reusable contact form shown in the footer of all templates
-        "contact_form": ContactForm(prefix='contact'),
 
-        # Flag used to trigger a "Message sent" modal
-        "show_success_modal": request.session.get("show_success_modal", False),
+    # Pop session flags (remove after one use)
+    show_success_modal = request.session.pop(
+        "show_success_modal", False
+        )
+    show_logged_out_modal = request.session.pop(
+        "show_logged_out_modal", False
+        )
+    show_account_deleted_modal = request.session.pop(
+        "show_account_deleted_modal", False
+        )
+
+    return {
+        "contact_form": ContactForm(prefix='contact'),
+        "show_success_modal": show_success_modal,
+        "show_logged_out_modal": show_logged_out_modal,
+        "show_account_deleted_modal": show_account_deleted_modal,
     }
