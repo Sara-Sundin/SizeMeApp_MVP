@@ -24,10 +24,18 @@ def dashboard_view(request):
     user = request.user
 
     show_modal = not all([user.chest, user.waist, user.hips, user.shoulders])
-    show_profile_updated_modal = request.session.pop("show_profile_updated_modal", False)
-    show_measurements_updated_modal = request.session.pop("show_measurements_updated_modal", False)
-    show_measurements_deleted_modal = request.session.pop("show_measurements_deleted_modal", False)
-    show_redirect_modal = request.session.pop("show_redirect_modal", False)
+    show_profile_updated_modal = request.session.pop(
+        "show_profile_updated_modal", False
+    )
+    show_measurements_updated_modal = request.session.pop(
+        "show_measurements_updated_modal", False
+    )
+    show_measurements_deleted_modal = request.session.pop(
+        "show_measurements_deleted_modal", False
+    )
+    show_redirect_modal = request.session.pop(
+        "show_redirect_modal", False
+    )
 
     context = {
         "show_modal": show_modal,
