@@ -42,9 +42,18 @@
                 </div>
                 <div class="row"><div class="col"><hr></div></div>
                 {% endfor %}
+                
                 {% include "bag/bag-total.html" %}
                 {% include "bag/checkout-buttons.html" %}
-            </div>
+            
+                <!-- Keep Shopping button for mobile -->
+                <div class="mt-4">
+                    <a href="{% url 'plan' %}" class="btn btn-outline-black rounded-0 btn-lg">
+                        <span class="icon"><i class="fas fa-chevron-left"></i></span>
+                        <span class="text-uppercase">Keep Shopping</span>
+                    </a>
+                </div>
+            </div>            
 
             <div class="table-responsive rounded d-none d-md-block">
                 <table class="table table-sm table-borderless">
