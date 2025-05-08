@@ -9,7 +9,7 @@
 - [Validation](#validation)
 - [Webhooks](#webhooks)
 - [Testing with Django](#testing-with-django)
-- [Testing with Coverage](#testing-with-coverage)
+- [Testing Code Coverage](#testing-code-coverage)
 - [Bugs & Fixes](#bugs-and-fixes)
 
 <hr>
