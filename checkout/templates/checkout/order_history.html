@@ -2,28 +2,35 @@
 {% load static %}
 
 {% block content %}
-<div class="container mt-5">
-    <h2 class="mb-4">Order History</h2>
+<div class="container-fluid px-3 py-4">
+    <h2 class="my-5 text-center text-md-start">Order History</h2>
 
     {% if orders %}
         <div class="table-responsive">
             <table class="table table-striped align-middle">
-                <thead>
+                <thead class="table-light">
                     <tr>
-                        <th scope="col">Order Number</th>
+                        <th scope="col">Order #</th>
                         <th scope="col">Date</th>
                         <th scope="col">Total</th>
-                        <th scope="col">Status</th>
                         <th scope="col">Details</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for order in orders %}
                         <tr>
-                            <td>{{ order.order_number }}</td>
-                            <td>{{ order.date|date:"Y-m-d H:i" }}</td>
-                            <td>${{ order.grand_total }}</td>
-                            <td>Processed</td>
+                            <td>
+                                <span class="d-block d-md-none small fw-semibold">{{ order.order_number }}</span>
+                                <span class="d-none d-md-block">{{ order.order_number }}</span>
+                            </td>                            
+                            <td class="text-break">
+                                <span class="d-block d-md-none small">{{ order.date|date:"Y-m-d H:i" }}</span>
+                                <span class="d-none d-md-block">{{ order.date|date:"Y-m-d H:i" }}</span>
+                            </td> 
+                            <td>
+                                <span class="d-block d-md-none small">${{ order.grand_total }}</span>
+                                <span class="d-none d-md-block">${{ order.grand_total }}</span>
+                            </td>
                             <td>
                                 <a href="{% url 'order_detail' order.order_number %}" class="btn btn-sm btn-outline-primary">
                                     View
@@ -35,7 +42,7 @@
             </table>
         </div>
     {% else %}
-        <p>You have not placed any orders yet.</p>
+        <p class="text-muted text-center">You have not placed any orders yet.</p>
     {% endif %}
 </div>
 {% endblock %}
