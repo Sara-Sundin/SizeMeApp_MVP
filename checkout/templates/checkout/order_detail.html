@@ -8,9 +8,18 @@
     <p><strong>Total:</strong> ${{ order.grand_total }}</p>
 
     <h4 class="mt-4">Items:</h4>
-    <ul>
+    <ul class="list-unstyled">
         {% for item in order.lineitems.all %}
-            <li>{{ item.plan.name }} × {{ item.quantity }}</li>
+            <li class="mb-4">
+                <div>
+                    <strong>{{ item.plan.name }}</strong> × {{ item.quantity }}
+                </div>
+                {% if item.plan.icon_class %}
+                    <div class="mt-4">
+                        <i class="fa-solid {{ item.plan.icon_class }} responsive-icon {{ item.plan.icon_color_class }}"></i>
+                    </div>
+                {% endif %}
+            </li>
         {% endfor %}
     </ul>
 </div>
