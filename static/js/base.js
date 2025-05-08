@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (window.showContactModal) {
       const contactModal = new bootstrap.Modal(document.getElementById("contactSuccessModal"));
       contactModal.show();
-
+      setTimeout(() => contactModal.hide(), 2000);
       // Optional: call to server to clear the success flag
       fetch("/clear-success-flag/");
   }
