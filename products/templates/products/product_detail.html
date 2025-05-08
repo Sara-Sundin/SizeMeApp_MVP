@@ -9,197 +9,132 @@
 {% block content %}
 <div class="overlay"></div> 
 <div class="container-fluid bg-black py-5">
-  <div class="row bg-white p-4 m-4 rounded">
+  <div class="row bg-white rounded">
 
-    <!-- Left column: product image -->
-    <div class="col-12 col-md-6 col-lg-4 offset-lg-2">
-      <div class="image-container my-5">
-        {% if product.image %}
-        <a href="{{ product.image.url }}" target="_blank">
-          <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
-        </a>
-        {% else %}
-        <a href="#">
-          <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
-        </a>
-        {% endif %}
+    <!-- Column 1: Product image -->
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="product-details-container my-4">
+        <div class="image-container position-relative">
+          {% if product.category %}
+            <a class="btn {{ category_button_class }} btn-sm position-absolute top-0 start-0 m-2 px-3"
+               href="{% url 'products' %}?category={{ product.category.name }}">
+              {{ product.category.friendly_name }}
+            </a>
+          {% endif %}
+
+          {% if product.image %}
+            <a href="{{ product.image.url }}" target="_blank">
+              <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
+            </a>
+          {% else %}
+            <a href="#">
+              <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+            </a>
+          {% endif %}
+        </div>
       </div>
     </div>
 
-    <!-- Right column: product details and form -->
-    <div class="col-12 col-md-6 col-lg-4">
-      <div class="product-details-container mb-5 mt-md-5">
-          <!-- Category tag button -->
-        {% if product.category %}
-        <p class="small my-2">
-          <a class="btn {{ category_button_class }} btn-sm px-4" href="{% url 'products' %}?category={{ product.category.name }}">
-            {{ product.category.friendly_name }}
-          </a>          
-        </p>
-        {% endif %}
-        <p class="mb-0">{{ product.name }}</p>
-        <p class="lead mb-0 text-left font-weight-bold">${{ product.price }}</p>
-        <p class="mt-3">{{ product.description }}</p>
+    <!-- Column 2: Description + Form on tablet, split into two on desktop -->
+    <div class="col-12 col-md-6 col-lg-8">
+      <div class="row">
 
-        <!-- Add-to-cart form -->
-        <form id="add-to-cart-form" class="form" action="#" method="POST">
-          {% csrf_token %}
-          <div class="form-row">
+        <!-- Description -->
+        <div class="col-12 col-lg-6">
+          <div class="product-details-container mt-4">
+            <p class="mb-0">{{ product.name }}</p>
+            <p class="lead mb-0 text-left font-weight-bold">${{ product.price }}</p>
+            <p class="mt-3">{{ product.description }}</p>
 
-            <!-- Display size recommendations if available -->
             {% if size_mode and recommendations %}
             <div class="my-4 p-2 list-recommendations">
               <h5>Recommended Sizes for You</h5>
               <ul>
                 {% for rec in recommendations %}
-                <li>{{ rec.fit }} Fit: <strong>{{ rec.size_label }}</strong></li>
+                  <li>{{ rec.fit }} Fit: <strong>{{ rec.size_label }}</strong></li>
                 {% endfor %}
               </ul>
               <button type="button" class="btn btn-sm btn-dark mt-2" data-bs-toggle="modal" data-bs-target="#UpdateMeasurementsModal">
                 Update Measurements
               </button>
             </div>
-
-            <!-- Show prompt to add measurements if none available -->
             {% elif size_mode %}
               {% if user.is_authenticated %}
-              <p class="text-black">No size recommendation available. Did you add your measurements?<br>
-                <button type="button" class="btn btn-sm cta-btn--secondary mt-2" data-bs-toggle="modal" data-bs-target="#UpdateMeasurementsModal">
-                  Add Measurements
-                </button>
-              </p>
+                <p class="text-black">No size recommendation available. Did you add your measurements?<br>
+                  <button type="button" class="btn btn-sm cta-btn--secondary mt-2" data-bs-toggle="modal" data-bs-target="#UpdateMeasurementsModal">
+                    Add Measurements
+                  </button>
+                </p>
               {% else %}
-              <a class="btn cta-btn--primary btn-sm py-2 mb-4" 
-                href="{% url 'login' %}?next={{ request.path }}">
-                Log in to see size recommendations.
-              </a>
+                <a class="btn cta-btn--primary btn-sm py-2 mb-4" href="{% url 'login' %}?next={{ request.path }}">
+                  Log in to see size recommendations.
+                </a>
               {% endif %}
             {% endif %}
+          </div>
+        </div>
 
-            <!-- Size dropdown if product has sizes -->
-            {% if product.has_sizes %}
-            <div class="col-12">
-              <p><strong>Size:</strong></p>
-              <div class="form-group position-relative w-50">
-                <label for="id_product_size" class="form-label">Select Size</label>
-                <select class="form-control rounded-0" name="product_size" id="id_product_size">
-                  <option disabled selected value="">Choose size...</option>
-                  <option value="xs">XS</option>
-                  <option value="s">S</option>
-                  <option value="m">M</option>
-                  <option value="l">L</option>
-                  <option value="xl">XL</option>
-                </select>
-              </div>              
-            </div>
-            {% endif %}
-
-            <!-- Quantity selector -->
-            <div class="col-12">
-              <p class="mt-3"><strong>Quantity:</strong></p>
-              <div class="form-group w-50">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <button class="decrement-qty btn btn-black rounded-0" type="button"
-                      data-item_id="{{ product.id }}" id="decrement-qty_{{ product.id }}"
-                      aria-label="Decrease quantity">
-                      <span><i class="fas fa-minus" aria-hidden="true"></i></span>
-                    </button>
+        <!-- Form -->
+        <div class="col-12 col-lg-6">
+          <div class="product-details-container mt-4">
+            <form id="add-to-cart-form" class="form" action="#" method="POST">
+              {% csrf_token %}
+              <div class="form-row">
+                {% if product.has_sizes %}
+                <div class="row mt-4 g-3">
+                  <!-- Size -->
+                  <div class="col-12 col-md-6">
+                    <label for="id_product_size" class="form-label"><strong>Size</strong></label>
+                    <select class="form-control rounded-0" name="product_size" id="id_product_size">
+                      <option disabled selected value="">Choose size...</option>
+                      <option value="xs">XS</option>
+                      <option value="s">S</option>
+                      <option value="m">M</option>
+                      <option value="l">L</option>
+                      <option value="xl">XL</option>
+                    </select>
                   </div>
 
-                  <label for="id_qty_{{ product.id }}" class="visually-hidden">Quantity</label>
-                  <input class="form-control qty_input" type="number" name="quantity" value="1"
-                    min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
+                  <!-- Quantity -->
+                  <div class="col-12 col-md-6">
+                    <label for="id_qty_{{ product.id }}" class="form-label"><strong>Quantity</strong></label>
+                    <div class="input-group">
+                      <button class="decrement-qty btn btn-black rounded-0" type="button"
+                              data-item_id="{{ product.id }}" id="decrement-qty_{{ product.id }}"
+                              aria-label="Decrease quantity">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                      <input class="form-control qty_input" type="number" name="quantity" value="1"
+                             min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
+                      <button class="increment-qty btn btn-black rounded-0" type="button"
+                              data-item_id="{{ product.id }}" id="increment-qty_{{ product.id }}"
+                              aria-label="Increase quantity">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>
+                  </div>
 
-                  <div class="input-group-append">
-                    <button class="increment-qty btn btn-black rounded-0" type="button"
-                      data-item_id="{{ product.id }}" id="increment-qty_{{ product.id }}"
-                      aria-label="Increase quantity">
-                      <span><i class="fas fa-plus" aria-hidden="true"></i></span>
+                  <!-- Buttons -->
+                  <div class="col-12 d-flex flex-wrap gap-3 mt-3">
+                    <button type="button" class="cta-btn checkout-btn" data-bs-toggle="modal" data-bs-target="#prototypeModal">
+                      Add to Cart <i class="fa-solid fa-cart-shopping ms-2"></i>
                     </button>
+                    <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0">
+                      <i class="fas fa-chevron-left"></i> Keep Shopping
+                    </a>
                   </div>
                 </div>
+                {% endif %}
               </div>
-            </div>
+            </form>
+          </div>
+        </div>
 
-            <!-- Keep shopping / Add to Cart buttons -->
-            <div class="col-12 mt-4">
-              <div class="d-flex justify-content-start align-items-center gap-3">
-                <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0">
-                  <span class="icon"><i class="fas fa-chevron-left"></i></span>
-                  <span class="text-uppercase">Keep Shopping</span>
-                </a>
-                <button type="button" class="cta-btn checkout-btn" data-bs-toggle="modal" data-bs-target="#prototypeModal">
-                  Add to Cart <i class="fa-solid fa-cart-shopping ms-2"></i>
-                </button>                
-              </div>
-            </div>
-
-            <input type="hidden" name="redirect_url" value="{{ request.path }}">
-          </div> 
-        </form> 
       </div>
     </div>
+
   </div>
-</div> 
+</div>
 
-<!-- Include modal markup -->
 {% include "products/includes/product_modals.html" %}
-
-{% endblock %}
-
-{% block postloadjs %}
-{{ block.super }}
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Quantity increment/decrement logic
-    const incrementBtn = document.getElementById("increment-qty_{{ product.id }}");
-    const decrementBtn = document.getElementById("decrement-qty_{{ product.id }}");
-    const qtyInput = document.getElementById("id_qty_{{ product.id }}");
-
-    if (incrementBtn && decrementBtn && qtyInput) {
-      incrementBtn.addEventListener("click", () => {
-        let value = parseInt(qtyInput.value);
-        if (value < 99) qtyInput.value = Math.min(99, Math.max(1, value + 1));
-      });
-
-      decrementBtn.addEventListener("click", () => {
-        let value = parseInt(qtyInput.value);
-        if (value > 1) qtyInput.value = Math.min(99, Math.max(1, value - 1));
-      });
-    }
-  });
-</script>
-
-<!-- Conditional success modals -->
-{% if show_webshop_measurements_success %}
-<script>
-  window.onload = function () {
-    const successModal = new bootstrap.Modal(document.getElementById('measurementsUpdatedModalWebshop'));
-    successModal.show();
-    setTimeout(() => successModal.hide(), 2000);
-  }
-</script>
-{% endif %}
-
-{% if show_size_mode_entered_modal %}
-<script>
-  window.onload = function () {
-    const enteredModal = new bootstrap.Modal(document.getElementById('sizeModeEnteredModal'));
-    enteredModal.show();
-    setTimeout(() => enteredModal.hide(), 1500);
-  }
-</script>
-{% endif %}
-
-{% if show_size_mode_exited_modal %}
-<script>
-  window.onload = function () {
-    const exitedModal = new bootstrap.Modal(document.getElementById('sizeModeExitedModal'));
-    exitedModal.show();
-    setTimeout(() => exitedModal.hide(), 1500);
-  }
-</script>
-{% endif %}
-
 {% endblock %}
