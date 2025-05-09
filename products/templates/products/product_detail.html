@@ -162,6 +162,16 @@
 </script>
 {% endif %}
 
+{% if show_webshop_measurements_success %}
+<script>
+  window.onload = function () {
+    const modal = new bootstrap.Modal(document.getElementById('measurementsUpdatedModalWebshop'));
+    modal.show();
+    setTimeout(() => modal.hide(), 2000);
+  };
+</script>
+{% endif %}
+
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const incrementBtn = document.getElementById("increment-qty_{{ product.id }}");
@@ -181,4 +191,7 @@
     }
   });
 </script>
+
+<script src="{% static 'js/aria-fix-modals.js' %}"></script>
+
 {% endblock %}
