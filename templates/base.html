@@ -172,8 +172,10 @@
 <!-- Custom JS -->
 <script src="{% static 'js/base.js' %}"></script>
 
-<!--Block for page-specific JS -->
-{% block postloadjs %}{% endblock %}
+{% block postloadjs %}
+  <script src="{% static 'js/aria-fix-modals.js' %}"></script>
+  {{ block.super }}
+{% endblock %}
 
 </body>
 </html>
