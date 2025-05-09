@@ -140,29 +140,29 @@
   
           <div class="modal-body">
             <div class="form-group mb-3">
-              <label for="chest">Chest (cm)</label>
-              <input type="number" name="chest" id="chest" class="form-control" required
+              <label for="chest_login">Chest (cm)</label>
+              <input type="number" name="chest" id="chest_login" class="form-control" required
                      min="20" max="200" step="0.1"
                      value="{{ user.chest|default_if_none:'' }}">
             </div>
   
             <div class="form-group mb-3">
-              <label for="waist">Waist (cm)</label>
-              <input type="number" name="waist" id="waist" class="form-control" required
+              <label for="waist_login">Waist (cm)</label>
+              <input type="number" name="waist" id="waist_login" class="form-control" required
                      min="20" max="200" step="0.1"
                      value="{{ user.waist|default_if_none:'' }}">
             </div>
   
             <div class="form-group mb-3">
-              <label for="hips">Hips (cm)</label>
-              <input type="number" name="hips" id="hips" class="form-control" required
+              <label for="hips_login">Hips (cm)</label>
+              <input type="number" name="hips" id="hips_login" class="form-control" required
                      min="20" max="200" step="0.1"
                      value="{{ user.hips|default_if_none:'' }}">
             </div>
   
             <div class="form-group mb-3">
-              <label for="shoulders">Shoulders (cm)</label>
-              <input type="number" name="shoulders" id="shoulders" class="form-control" required
+              <label for="shoulders_login">Shoulders (cm)</label>
+              <input type="number" name="shoulders" id="shoulders_login" class="form-control" required
                      min="10" max="70" step="0.1"
                      value="{{ user.shoulders|default_if_none:'' }}">
             </div>
@@ -228,29 +228,29 @@
         </div>
         <div class="modal-body">
           <div class="form-group mb-3">
-            <label for="chest">Chest (cm)</label>
-            <input type="number" name="chest" id="chest" class="form-control" required
+            <label for="chest_update">Chest (cm)</label>
+            <input type="number" name="chest" id="chest_update" class="form-control" required
                    min="20" max="200" step="0.1"
                    value="{{ user.chest|default_if_none:'' }}">
           </div>
 
           <div class="form-group mb-3">
-            <label for="waist">Waist (cm)</label>
-            <input type="number" name="waist" id="waist" class="form-control" required
+            <label for="waist_update">Waist (cm)</label>
+            <input type="number" name="waist" id="waist_update" class="form-control" required
                    min="20" max="200" step="0.1"
                    value="{{ user.waist|default_if_none:'' }}">
           </div>
 
           <div class="form-group mb-3">
-            <label for="hips">Hips (cm)</label>
-            <input type="number" name="hips" id="hips" class="form-control" required
+            <label for="hips_update">Hips (cm)</label>
+            <input type="number" name="hips" id="hips_update" class="form-control" required
                    min="20" max="200" step="0.1"
                    value="{{ user.hips|default_if_none:'' }}">
           </div>
 
           <div class="form-group mb-3">
-            <label for="shoulders">Shoulders (cm)</label>
-            <input type="number" name="shoulders" id="shoulders" class="form-control" required
+            <label for="shoulders_update">Shoulders (cm)</label>
+            <input type="number" name="shoulders" id="shoulders_update" class="form-control" required
                    min="10" max="70" step="0.1"
                    value="{{ user.shoulders|default_if_none:'' }}">
           </div>
