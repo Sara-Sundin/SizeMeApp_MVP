@@ -13,6 +13,7 @@
         Don't have an account yet?
         <a class="link" href="{% url 'signup' %}{% if next %}?next={{ next }}{% endif %}">SIGN UP</a> instead.
       </p>
+      <a class="small text-muted" href="{% url 'password_reset' %}">Forgot your password?</a>
     </div>
   </div>
 
@@ -41,7 +42,7 @@
               <i class="fa fa-eye"></i>
               <span class="toggle-text">Show Password</span>
             </button>
-          </div>
+          </div>          
 
           {% if form.password.errors %}
             <small class="text-danger">{{ form.password.errors.0 }}</small>
