@@ -26,7 +26,7 @@
         </div>
         {% endif %}
 
-        <div class="product-container col-10 offset-1">
+        <div class="product-container">
 
             <!-- Sort dropdown and product count -->
             <div class="row mt-1 mb-2">
@@ -55,7 +55,7 @@
             <!-- Product grid -->
             <div class="row">
                 {% for product in products %}
-                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                     <div class="card h-100 border-0">
                         <div class="position-relative">
                             <!-- Category button -->
@@ -127,16 +127,16 @@
 
                     <!-- Responsive HR between product cards -->
                     {% if forloop.counter|divisibleby:1 %}
-                        <div class="col-12 d-sm-none mb-5"><hr></div>
+                        <div class="col-12 d-sm-none mb-2"><hr class="mt-4" style="border-top: 2px solid white;"></div>
                     {% endif %}
                     {% if forloop.counter|divisibleby:2 %}
-                        <div class="col-12 d-none d-sm-block d-md-block d-lg-none mb-5"><hr></div>
+                        <div class="col-12 d-none d-sm-block d-md-block d-lg-none mb-3"><hr class="mt-4" style="border-top: 2px solid white;"></div>
                     {% endif %}
                     {% if forloop.counter|divisibleby:3 %}
-                        <div class="col-12 d-none d-lg-block d-xl-none mb-5"><hr></div>
+                        <div class="col-12 d-none d-lg-block d-xl-none mb-3"><hr class="mt-4" style="border-top: 2px solid white;"></div>
                     {% endif %}
                     {% if forloop.counter|divisibleby:4 %}
-                        <div class="col-12 d-none d-xl-block mb-5"><hr></div>
+                        <div class="col-12 d-none d-xl-block mb-2"><hr class="mt-4" style="border-top: 2px solid white;"></div>
                     {% endif %}
                 {% endfor %}
             </div>
