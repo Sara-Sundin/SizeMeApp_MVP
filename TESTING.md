@@ -500,12 +500,12 @@ When a user attempted to add a Plan to the shopping bag, the app crashed with a 
 ![Bug Recursion](documents/images_readme/bug-error.jpg)
 
 #### Root Cause  
-The error was caused by circular logic between the plan_detail view, the bag system, and the page rendering. A template tag {% url 'plan_detail' plan.id %} was triggering the view recursively during template evaluation.
+The bug was caused by JavaScript trying to interact with a DOM element (#payment-form) that didn’t exist at the moment the script ran. Specifically, it attempted to call .classList.toggle('d-none') on document.getElementById('payment-form'), but since that element was null, it threw a TypeError. This crash stopped the entire script from running, which meant important logic like saving form data or completing the Stripe payment never executed. 
 
-#### Resolution  
-The bug was resolved by identifying and removing the recursive call chain. This involved:
-- Reviewing all template tags and context variables that pointed to plan_detail.
-- Ensuring that redirects, reverse(), or includes did not re-invoke the view.
-- Refactoring plan_detail to avoid loading templates or partials that included self-referential links.
+#### Resolution 
+The solution was to add the form and implement a safety check to make sure the element exists before trying to change it.
+
+![Bug Recursion](documents/images_readme/bug-error-fix.jpg)
+
 
 [Back to README](README.md)
