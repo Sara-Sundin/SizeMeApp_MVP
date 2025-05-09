@@ -1,7 +1,7 @@
 {% load static %}
 
     <!-- Profile Update Modal -->
-<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel">
     <div class="modal-dialog">
       <div class="modal-content">
         <form method="post" action="{% url 'update_profile' %}">
@@ -53,7 +53,7 @@
 
   
 <!-- Avatar Modal -->
-<div class="modal fade" id="avatarModal" tabindex="-1" aria-labelledby="avatarModalLabel" aria-hidden="true">
+<div class="modal fade" id="avatarModal" tabindex="-1" aria-labelledby="avatarModalLabel">
   <div class="modal-dialog modal-lg modal-fullscreen-sm-down modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header border-0">
@@ -86,7 +86,7 @@
 </div>
 
   <!-- Delete Account Confirmation Modal -->
-<div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel">
     <div class="modal-dialog">
       <div class="modal-content">
         <form method="post" action="{% url 'delete_account' %}">
@@ -110,7 +110,7 @@
   </div>
 
   <!-- Profile Updated Confirmation Modal -->
-<div class="modal fade" id="profileUpdatedModal" tabindex="-1" aria-labelledby="profileUpdatedLabel" aria-hidden="true">
+<div class="modal fade" id="profileUpdatedModal" tabindex="-1" aria-labelledby="profileUpdatedLabel">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-dark border border-white text-white">
@@ -128,7 +128,7 @@
   </div>
 
   <!-- Login/Signup Measurement Modal -->
-  <div class="modal fade" id="loginMeasurementModal" tabindex="-1" aria-labelledby="measurementsEntryLabel" aria-hidden="true">
+  <div class="modal fade" id="loginMeasurementModal" tabindex="-1" aria-labelledby="measurementsEntryLabel">
     <div class="modal-dialog">
       <div class="modal-content">
         <form method="post" action="{% url 'login_update_measurements' %}">
@@ -181,7 +181,7 @@
   </div>
   
 <!-- Welcome Modal -->
-<div class="modal fade" id="redirectModal" tabindex="-1" aria-labelledby="redirectModalLabel" aria-hidden="true">
+<div class="modal fade" id="redirectModal" tabindex="-1" aria-labelledby="redirectModalLabel">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
 
@@ -217,7 +217,7 @@
 </div>
  
 <!-- Update Modal Measurements -->
-<div class="modal fade" id="measurementModal" tabindex="-1" aria-labelledby="measurementsLabel" aria-hidden="true">
+<div class="modal fade" id="measurementModal" tabindex="-1" aria-labelledby="measurementsLabel">
   <div class="modal-dialog">
     <div class="modal-content">
       <form method="post" action="{% url 'update_measurements' %}">
@@ -265,7 +265,7 @@
 </div>
 
   <!-- Measurements Updated Confirmation Modal -->
-<div class="modal fade" id="measurementsUpdatedModal" tabindex="-1" aria-labelledby="measurementsUpdatedLabel" aria-hidden="true">
+<div class="modal fade" id="measurementsUpdatedModal" tabindex="-1" aria-labelledby="measurementsUpdatedLabel">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-dark border border-white text-white">
@@ -280,7 +280,7 @@
   </div>
 
   <!-- Delete Confirmation Modal -->
-<div class="modal fade" id="deleteMeasurementsModal" tabindex="-1" aria-labelledby="deleteMeasurementsLabel" aria-hidden="true">
+<div class="modal fade" id="deleteMeasurementsModal" tabindex="-1" aria-labelledby="deleteMeasurementsLabel">
   <div class="modal-dialog">
     <div class="modal-content">
       <form method="post" action="{% url 'delete_measurements' %}">
@@ -303,7 +303,7 @@
 
 
   <!-- Measurements Delete Confirmation Modal -->
-  <div class="modal fade" id="measurementsDeletedModal" tabindex="-1" aria-labelledby="measurementsDeletedLabel" aria-hidden="true">
+  <div class="modal fade" id="measurementsDeletedModal" tabindex="-1" aria-labelledby="measurementsDeletedLabel">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-dark border border-white text-white">
@@ -318,7 +318,7 @@
   </div>
   
   <!-- Logout Confirmation Modal -->
-<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -338,64 +338,74 @@
 
 {% if show_modal %}
 <script>
-  window.onload = function () {
-    const modal = new bootstrap.Modal(document.getElementById('loginMeasurementModal'));
-    modal.show();
-  }
+  document.addEventListener("DOMContentLoaded", function () {
+    window.onload = function () {
+      const modal = new bootstrap.Modal(document.getElementById('loginMeasurementModal'));
+      modal.show();
+    }
+  });
 </script>
 {% endif %}
 
 {% if redirect_modal %}
 <script>
-  window.onload = function () {
-    const redirectModal = new bootstrap.Modal(document.getElementById('redirectModal'));
-    redirectModal.show();
-  };
+  document.addEventListener("DOMContentLoaded", function () {  
+    window.onload = function () {
+      const redirectModal = new bootstrap.Modal(document.getElementById('redirectModal'));
+      redirectModal.show();
+    };
+  });
 </script>
 {% endif %}
 
 {% if show_profile_updated_modal %}
 <script>
-window.onload = function () {
-  const successModalEl = document.getElementById('profileUpdatedModal');
-  const successModal = new bootstrap.Modal(successModalEl);
-  successModal.show();
+  document.addEventListener("DOMContentLoaded", function () {  
+    window.onload = function () {
+      const successModalEl = document.getElementById('profileUpdatedModal');
+      const successModal = new bootstrap.Modal(successModalEl);
+      successModal.show();
 
-  // Auto-dismiss after 2 seconds
-  setTimeout(() => {
-    successModal.hide();
-  }, 2000);
-}
+      // Auto-dismiss after 2 seconds
+      setTimeout(() => {
+        successModal.hide();
+      }, 2000);
+    }
+  });
 </script>
 {% endif %}
 
 
 {% if show_measurements_updated_modal %}
 <script>
-window.onload = function () {
-  const measureModalEl = document.getElementById('measurementsUpdatedModal');
-  const measureModal = new bootstrap.Modal(measureModalEl);
-  measureModal.show();
+  document.addEventListener("DOMContentLoaded", function () {  
+    window.onload = function () {
+      const measureModalEl = document.getElementById('measurementsUpdatedModal');
+      const measureModal = new bootstrap.Modal(measureModalEl);
+      measureModal.show();
 
-  // Auto-dismiss after 2 seconds
-  setTimeout(() => {
-    measureModal.hide();
-  }, 2000);
-}
+      // Auto-dismiss after 2 seconds
+      setTimeout(() => {
+        measureModal.hide();
+      }, 2000);
+    }
+  });
 </script>
 {% endif %}
 
 {% if show_measurements_deleted_modal %}
 <script>
-window.onload = function () {
-  const measureModalEl = document.getElementById('measurementsDeletedModal');
-  const measureModal = new bootstrap.Modal(measureModalEl);
-  measureModal.show();
+  document.addEventListener("DOMContentLoaded", function () {  
+    window.onload = function () {
+      const measureModalEl = document.getElementById('measurementsDeletedModal');
+      const measureModal = new bootstrap.Modal(measureModalEl);
+      measureModal.show();
 
-  // Auto-dismiss after 2 seconds
-  setTimeout(() => {
-    measureModal.hide();
-  }, 2000);
-}
+      // Auto-dismiss after 2 seconds
+      setTimeout(() => {
+        measureModal.hide();
+      }, 2000);
+    }
+  });
 </script>
 {% endif %}

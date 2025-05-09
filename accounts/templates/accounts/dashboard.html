@@ -81,3 +81,10 @@
   {% include "accounts/includes/dashboard_modals.html" %}
 
 {% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+<script src="{% static 'js/aria-fix-modals.js' %}"></script>
+{% endblock %}
+
+
