@@ -46,88 +46,88 @@ Samsung Internet
 ## User Story Testing
 These tests ensure that the application meets user expectations by verifying functionality, usability, and responsiveness. Each user story is tested through real interactions, checking that the intended experience aligns with the actual behavior of the application. All user stories have been tested and below are some examples of the process.
 
-### User Story – New Customer Account Registration  
+### User Story - New Customer Account Registration  
 As a new customer, I want to register an account so that I can save my body measurements and try the application.
 
 To ensure that the account registration process is intuitive, functional, and secure, the following tests were used to validate the feature.
 
-#### Browser used – Google Chrome, Safari, Firefox, Samsung Internet  
-- Form Accessibility – Confirmed that the registration form is accessible from both the navbar and login page.  
-- Field Validation – Verified that empty fields trigger appropriate error messages and invalid formats (e.g. email) are caught.  
-- Password Handling – Ensured passwords are securely hashed and not exposed in any templates or logs.  
-- Measurement Requirement – Tested form logic to require measurements for users to enter size mode and receive recommendations.  
-- User Creation – Checked that submitted data is correctly saved to the CustomUser model and visible in the admin panel.  
-- Redirect Flow – Verified that users are redirected to the correct location after registration, including preservation of next if coming from a product page.  
-- Mobile Responsiveness – Confirmed the form displays and functions properly on smaller screens.  
-- User Feedback – Informal tester feedback indicated the form was clear, intuitive, and aligned with user expectations.
+#### Browser used - Google Chrome, Safari, Firefox, Samsung Internet  
+- Form Accessibility - Confirmed that the registration form is accessible from both the navbar and login page.  
+- Field Validation - Verified that empty fields trigger appropriate error messages and invalid formats (e.g. email) are caught.  
+- Password Handling - Ensured passwords are securely hashed and not exposed in any templates or logs.  
+- Measurement Requirement - Tested form logic to require measurements for users to enter size mode and receive recommendations.  
+- User Creation - Checked that submitted data is correctly saved to the CustomUser model and visible in the admin panel.  
+- Redirect Flow - Verified that users are redirected to the correct location after registration, including preservation of next if coming from a product page.  
+- Mobile Responsiveness - Confirmed the form displays and functions properly on smaller screens.  
+- User Feedback - Informal tester feedback indicated the form was clear, intuitive, and aligned with user expectations.
 
 This feature meets the user story goal by providing a clean and functional way for new customers to register and access the core functionality of SizeMeApp.
 
 ![Test User Story 1 Desktop](documents/images_readme/user_story-signup-desktop.jpg)
 ![Test User Story 1 Mobile](documents/images_readme/user_story-signup-mobile.jpg)
 
-### User Story – Personalized Size Recommendations for Logged-In Users  
+### User Story - Personalized Size Recommendations for Logged-In Users  
 As a logged-in user, I want to see size recommendations so that I choose the best-fitting garment and decide if SizeMeApp is right for my business.
 
 To ensure that the feature provides useful, accurate, and accessible recommendations, the following user story tests were conducted:
 
-#### Browser used – Google Chrome, Safari, Firefox, Samsung Internet  
-- Size Mode Activation – Verified that users can activate size mode from the navbar and receive confirmation via a modal.  
-- Measurements Handling – Confirmed that size recommendations are only shown when the user has submitted valid body measurements (chest, waist, hips, shoulders).  
-- Recommendation Accuracy – Tested various user profiles and garment fits to ensure appropriate labels ("Perfect", "Tight", or "Loose") are displayed per size.  
-- Modal Prompts – Verified that users without saved measurements are prompted to add them via a modal dialog and redirected appropriately.  
-- Measurement Updates – Confirmed that users can update their measurements directly from the product page and receive success feedback.  
-- UI Consistency – Ensured the list of recommended sizes appears clearly styled and easy to interpret within the product detail layout.  
-- Accessibility – Checked that recommendations and modal interactions are fully navigable via keyboard and screen reader-friendly.  
-- Mobile Responsiveness – Tested layout and readability of recommendations on multiple screen sizes.
-- Login Prompt Clarity – Verified that the messaging explains the benefit of logging in to access personalized size recommendations.  
-- CTA Visibility – Ensured the “Log in to see size recommendations” button is prominent, styled consistently, and redirects to the login page with next parameter preserved.  
-- Login Flow – Confirmed that after logging in, users are returned to the product detail page and can immediately see recommendations if measurements are stored.  
-- User Understanding – Collected informal feedback to confirm that guest users understood what size mode offers and why logging in is necessary.
+#### Browser used - Google Chrome, Safari, Firefox, Samsung Internet  
+- Size Mode Activation - Verified that users can activate size mode from the navbar and receive confirmation via a modal.  
+- Measurements Handling - Confirmed that size recommendations are only shown when the user has submitted valid body measurements (chest, waist, hips, shoulders).  
+- Recommendation Accuracy - Tested various user profiles and garment fits to ensure appropriate labels ("Perfect", "Tight", or "Loose") are displayed per size.  
+- Modal Prompts - Verified that users without saved measurements are prompted to add them via a modal dialog and redirected appropriately.  
+- Measurement Updates - Confirmed that users can update their measurements directly from the product page and receive success feedback.  
+- UI Consistency - Ensured the list of recommended sizes appears clearly styled and easy to interpret within the product detail layout.  
+- Accessibility - Checked that recommendations and modal interactions are fully navigable via keyboard and screen reader-friendly.  
+- Mobile Responsiveness - Tested layout and readability of recommendations on multiple screen sizes.
+- Login Prompt Clarity - Verified that the messaging explains the benefit of logging in to access personalized size recommendations.  
+- CTA Visibility - Ensured the “Log in to see size recommendations” button is prominent, styled consistently, and redirects to the login page with next parameter preserved.  
+- Login Flow - Confirmed that after logging in, users are returned to the product detail page and can immediately see recommendations if measurements are stored.  
+- User Understanding - Collected informal feedback to confirm that guest users understood what size mode offers and why logging in is necessary.
 
 This feature successfully meets the user story criteria, enabling logged-in users to receive tailored fit suggestions and evaluate the usefulness of SizeMeApp for their needs.
 
 ![Test User Story 2 Desktop](documents/images_readme/user_story-size_recommendations-desktop.jpg)
 ![Test User Story 2 Mobile](documents/images_readme/user_story-size_recommendations-mobile.jpg)
 
-### User Story – Add a Plan to the Cart for Future Purchase  
+### User Story - Add a Plan to the Cart for Future Purchase  
 As a user, I want to add a Plan to my cart so that I can buy it later.
 
 To ensure that subscription plans can be stored and managed in the shopping cart, the following user story tests were conducted:
 
-#### Browser used – Google Chrome, Safari, Firefox, Samsung Internet  
-- Add to Cart Button – Verified that the “Add to Cart” button is visible and functional on each Plan detail page.  
-- Cart Logic – Confirmed that each plan added is stored in the session under a custom cart structure separate from products.  
-- Plan Detail Rendering – Ensured that the correct plan information (name, price, description) is displayed in the cart view.  
-- Unique Plan Handling – Verified that only one plan can be added at a time and duplicates are not permitted.  
-- Redirect Flow – Tested that users are redirected correctly back to the plan detail after adding a plan.  
-- Session Persistence – Ensured that plans remain in the session-based cart when navigating away or refreshing the browser.  
-- Clear Cart Option – Verified that users can remove the selected plan and the cart state updates accordingly.  
-- UI Feedback – Confirmed that a minicart is displayed as visual feedback to notify the user that a plan has been successfully added.  
-- Accessibility – Checked that cart controls and plan descriptions are screen reader-friendly and fully keyboard-navigable.  
-- Mobile Responsiveness – Tested that the “Add to Cart” interaction and cart summary page display correctly across mobile devices.  
-- Recursion Bug Regression – Retested after fixing a prior RecursionError to ensure no circular rendering or crashes occur when adding a plan.
+#### Browser used - Google Chrome, Safari, Firefox, Samsung Internet  
+- Add to Cart Button - Verified that the “Add to Cart” button is visible and functional on each Plan detail page.  
+- Cart Logic - Confirmed that each plan added is stored in the session under a custom cart structure separate from products.  
+- Plan Detail Rendering - Ensured that the correct plan information (name, price, description) is displayed in the cart view.  
+- Unique Plan Handling - Verified that only one plan can be added at a time and duplicates are not permitted.  
+- Redirect Flow - Tested that users are redirected correctly back to the plan detail after adding a plan.  
+- Session Persistence - Ensured that plans remain in the session-based cart when navigating away or refreshing the browser.  
+- Clear Cart Option - Verified that users can remove the selected plan and the cart state updates accordingly.  
+- UI Feedback - Confirmed that a minicart is displayed as visual feedback to notify the user that a plan has been successfully added.  
+- Accessibility - Checked that cart controls and plan descriptions are screen reader-friendly and fully keyboard-navigable.  
+- Mobile Responsiveness - Tested that the “Add to Cart” interaction and cart summary page display correctly across mobile devices.  
+- Recursion Bug Regression - Retested after fixing a prior RecursionError to ensure no circular rendering or crashes occur when adding a plan.
 
 This feature successfully meets the user story criteria, allowing users to add a subscription plan to their cart and complete the purchase at a later time.
 
 ![Test User Story 3 Desktop](documents/images_readme/user_story-add_to_cart-desktop.jpg)
 ![Test User Story 3 Mobile](documents/images_readme/user_story-add_to_cart-mobile.jpg)
 
-### User Story – Secure and Streamlined Plan Checkout  
+### User Story - Secure and Streamlined Plan Checkout  
 As a business owner, I want to complete my purchase easily and securely so that I can subscribe to a Plan and start using SizeMeApp.
 
 To ensure that the checkout process is clear, secure, and successfully stores purchase data, the following user story tests were conducted:
 
-#### Browser used – Google Chrome, Safari, Firefox, Samsung Internet  
-- Form Rendering – Verified that billing fields and plan summary are displayed clearly on the checkout page.  
-- Field Validation – Confirmed that missing or invalid entries trigger appropriate error messages.  
-- Payment Integration – Tested Stripe integration to ensure tokens are created, processed, and confirmed securely.  
-- Successful Order Flow – Verified that the user can complete the payment and is redirected to an order confirmation page.  
-- Order Persistence – Ensured that completed orders are saved to the database and linked to the logged-in user.  
-- Session Clearing – Confirmed that the session cart is cleared after successful checkout to avoid duplicate charges.  
-- Payment Failure Handling – Tested failure scenarios (e.g. declined card) and confirmed clear error messages appear.  
-- Mobile Responsiveness – Ensured that the checkout form and payment fields are usable on smaller screens.  
-- Security Checks – Verified HTTPS enforcement and secure handling of user and payment data throughout the flow.
+#### Browser used - Google Chrome, Safari, Firefox, Samsung Internet  
+- Form Rendering - Verified that billing fields and plan summary are displayed clearly on the checkout page.  
+- Field Validation - Confirmed that missing or invalid entries trigger appropriate error messages.  
+- Payment Integration - Tested Stripe integration to ensure tokens are created, processed, and confirmed securely.  
+- Successful Order Flow - Verified that the user can complete the payment and is redirected to an order confirmation page.  
+- Order Persistence - Ensured that completed orders are saved to the database and linked to the logged-in user.  
+- Session Clearing - Confirmed that the session cart is cleared after successful checkout to avoid duplicate charges.  
+- Payment Failure Handling - Tested failure scenarios (e.g. declined card) and confirmed clear error messages appear.  
+- Mobile Responsiveness - Ensured that the checkout form and payment fields are usable on smaller screens.  
+- Security Checks - Verified HTTPS enforcement and secure handling of user and payment data throughout the flow.
 
 This feature successfully meets the user story requirements, allowing business users to complete a secure purchase of a Plan and begin using SizeMeApp.
 
@@ -135,22 +135,22 @@ This feature successfully meets the user story requirements, allowing business u
 ![Test User Story 4 Tablet](documents/images_readme/user_story-checkout-tablet.jpg)
 ![Test User Story 4 Mobile](documents/images_readme/user_story-checkout-mobile.jpg)
 
-### User Story – View Full Product Details 
+### User Story - View Full Product Details 
 As a user, I want to view full product details so that I can browse products and get size recommendations.
 
 To ensure that product detail pages are informative, functional, and integrated with personalized features, the following user story tests were conducted:
 
-#### Browser used – Google Chrome, Safari, Firefox, Samsung Internet  
-- Product Detail Access – Verified that clicking on a product from the shop or search results navigates to the correct product detail page.  
-- Product Information – Confirmed that each product page displays the name, image, price, description, and category clearly.  
-- Size Mode Awareness – Checked that the interface updates based on whether the user is in size mode (e.g. recommendations shown or prompts displayed).  
-- Size Recommendations – For logged-in users with measurements, verified that recommended sizes appear along with fit labels like "Perfect", "Tight", or "Loose".  
-- Add Measurements – For users without measurements, confirmed that a clear prompt and modal allow them to add or update body data directly.  
-- Login Requirement – Verified that guest users are prompted to log in before seeing size recommendations and are redirected properly after login.  
-- Add to Cart Flow – Ensured that size selection and quantity inputs work and that clicking “Add to Cart” opens the prototype info modal.  
-- Modal Interactions – Confirmed that modals for size mode entry, measurements, and prototype notices behave as expected.  
-- UI and Layout – Checked that all product details are styled consistently and responsive across devices.  
-- Accessibility – Ensured all buttons, modals, and dynamic elements are accessible via keyboard and screen reader.
+#### Browser used - Google Chrome, Safari, Firefox, Samsung Internet  
+- Product Detail Access - Verified that clicking on a product from the shop or search results navigates to the correct product detail page.  
+- Product Information - Confirmed that each product page displays the name, image, price, description, and category clearly.  
+- Size Mode Awareness - Checked that the interface updates based on whether the user is in size mode (e.g. recommendations shown or prompts displayed).  
+- Size Recommendations - For logged-in users with measurements, verified that recommended sizes appear along with fit labels like "Perfect", "Tight", or "Loose".  
+- Add Measurements - For users without measurements, confirmed that a clear prompt and modal allow them to add or update body data directly.  
+- Login Requirement - Verified that guest users are prompted to log in before seeing size recommendations and are redirected properly after login.  
+- Add to Cart Flow - Ensured that size selection and quantity inputs work and that clicking “Add to Cart” opens the prototype info modal.  
+- Modal Interactions - Confirmed that modals for size mode entry, measurements, and prototype notices behave as expected.  
+- UI and Layout - Checked that all product details are styled consistently and responsive across devices.  
+- Accessibility - Ensured all buttons, modals, and dynamic elements are accessible via keyboard and screen reader.
 
 This feature successfully meets the user story criteria, giving users a complete and dynamic product viewing experience enhanced by personalized sizing data.
 
@@ -396,15 +396,15 @@ I have included screenprints of all final validation for each script validated w
 The CI Python Linter helps ensure that our code is clean, maintainable, and error-free, improving the overall development workflow and reducing potential bugs before deployment.
 
 It implements:
-- Automatic Code Checks – The linter runs automatically when code is pushed to the repository.
-- PEP 8 Compliance – Ensures that the code follows Python’s official style guide.
-- Error & Warning Detection – Identifies syntax errors, unused imports, and other common issues.
-- Consistent Formatting – Helps enforce standard formatting, reducing unnecessary code style variations.
+- Automatic Code Checks - The linter runs automatically when code is pushed to the repository.
+- PEP 8 Compliance - Ensures that the code follows Python’s official style guide.
+- Error & Warning Detection - Identifies syntax errors, unused imports, and other common issues.
+- Consistent Formatting - Helps enforce standard formatting, reducing unnecessary code style variations.
 
 Tools used:
-- Flake8 – Checks for syntax errors, style violations, and undefined variables.
-- Black – Automatically formats code to follow best practices.
-- Pylint – Provides detailed code analysis and improvement suggestions.
+- Flake8 - Checks for syntax errors, style violations, and undefined variables.
+- Black - Automatically formats code to follow best practices.
+- Pylint - Provides detailed code analysis and improvement suggestions.
 
 I ran all my Python code through the Python Linter with the following results. The final check for all code files were without errors. For more images tested on all apps see the [Read Me Images](documents/images_readme) folder.
 
