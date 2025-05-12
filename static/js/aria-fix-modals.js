@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 /*
  Fixes accessibility issue where Bootstrap modals retain focus
  while aria-hidden="true" is applied, which violates WAI-ARIA.
