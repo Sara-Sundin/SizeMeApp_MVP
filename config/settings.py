@@ -51,7 +51,7 @@ INSTALLED_APPS = [
 # <!-- Middleware configuration -->
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # for static file serving in production
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # for static in production
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -66,7 +66,7 @@ JAZZMIN_SETTINGS = {
     "site_brand": "SizeMeApp",
     "welcome_sign": "Welcome to SizeMeApp Admin",
     "copyright": "SizeMeApp © 2025",
-      "icons": {
+    "icons": {
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-users",
         "home.Plan": "fas fa-clipboard",
@@ -157,18 +157,28 @@ STORAGES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'UserAttributeSimilarityValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'MinimumLengthValidator'
+        ),
         'OPTIONS': {
             'min_length': 8,
-        }
+        },
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'CommonPasswordValidator'
+        ),
     },
 ]
+
 
 # <!-- Email backend configuration -->
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
