@@ -41,6 +41,8 @@ Safari <br>
 Firefox <br>
 Samsung Internet
 
+[Back to Content Table](#testing)
+
 <hr>
 
 ## User Story Testing
@@ -156,6 +158,8 @@ This feature successfully meets the user story criteria, giving users a complete
 
 ![Test User Story 5 Mobile](documents/images_readme/user_story-products-mobile.jpg)
 ![Test User Story 5 Desktop](documents/images_readme/user_story-products-desktop.jpg)
+
+[Back to Content Table](#testing)
 
 <hr>
 
@@ -286,9 +290,9 @@ I received a NO_LCP error for performance at the checkout page. This page does n
 
 ![Lighthouse Checkout 1st run](documents/images_readme/lighthouse_checkout_first.jpg)
 
+[Back to Content Table](#testing)
+
 <hr>
-
-
 
 ## Validation
 The HTML, CSS, Javascript and Python code has been validated on below editors. The issues arising has been documented below.
@@ -418,6 +422,9 @@ I ran all my Python code through the Python Linter with the following results. T
 
 ![Account forms.py first check](documents/images_readme/accounts_forms_linting_test_final.jpg)
 
+[Back to Content Table](#testing)
+
+<hr>
 
 ## Webhooks
 This project includes Stripe webhook integration to handle key payment events. The following webhooks have been tested and implemented: 
@@ -449,6 +456,10 @@ I decided to improve the coverage for below tests.
 
 My final run I received 93% coverage.
 ![Testing with coverage final run](documents/images_readme/coverage-report-final.jpg)
+
+[Back to Content Table](#testing)
+
+<hr>
 
 ## Bugs and Fixes
 Here I have recorded some issues that I spent excessive time solving with the solutions indicated below.
@@ -507,5 +518,6 @@ The solution was to add the form and implement a safety check to make sure the e
 
 ![Bug Recursion](documents/images_readme/bug-error-fix.jpg)
 
+[Back to Content Table](#testing)
 
 [Back to README](README.md)
