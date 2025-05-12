@@ -5,7 +5,7 @@
     <div class="container">
         <!-- Brand logo linking to homepage -->
         <a class="navbar-brand" href="{% url 'home' %}">
-            <img src="{% static 'images/logo_icon.png' %}" alt="SizeMeApp Logo" width="50">
+            <img src="{% static 'images/logo_icon.png' %}" alt="SizeMeApp Logo" width="70">
         </a>
 
         <!-- Size Mode toggle button -->
@@ -95,7 +95,7 @@
 </nav>
 
 <!-- Category Filter Buttons (visible below navbar) -->
-<div class="d-flex flex-wrap justify-content-center gap-2 py-4 bg-white">
+<div class="d-flex flex-wrap justify-content-center gap-2 py-4 bg-white mt-3">
     <a href="{% url 'products' %}?category=tshirts" class="btn cta-btn--primary btn-sm px-4">T Shirts</a>
     <a href="{% url 'products' %}?category=shirts" class="btn cta-btn--tertiary btn-sm px-4">Shirts</a>
     <a href="{% url 'products' %}?category=sweatshirts" class="btn cta-btn--black btn-sm px-4">Sweatshirts</a>
