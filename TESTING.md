@@ -486,7 +486,7 @@ Ownership verification: If the user is authenticated and the order is associated
 
 The flag is removed from the session after use to prevent reuse. This ensures the confirmation page can only be accessed immediately after an actual purchase and only by the rightful user.
 
-![Session Flag](documents\images_readme\session-flag-checkout.jpg)
+![Session Flag](documents/images_readme/session-flag-checkout.jpg)
 
 ### Bug: Multiple Modals Opened Simultaneously on ***product_detail*** Page
 
