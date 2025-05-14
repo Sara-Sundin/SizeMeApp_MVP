@@ -60,7 +60,7 @@
                     <thead class="text-black">
                         <tr>
                             <th scope="col">Product Info</th>
-                            <th scope="col">Price</th>
+                            <th scope="col">Price/<br>Setup Cost</th>
                             <th scope="col">Qty</th>
                             <th scope="col">Subtotal</th>
                         </tr>
@@ -70,6 +70,9 @@
                         <td class="py-3">
                             {% include "bag/product-info.html" %}
                             <small class="text-muted">Monthly: ${{ item.plan.monthly_price|floatformat:2 }}</small>
+                            <br>
+                            <br>
+                            <small>We will contact you shortly to set up the subscription.</small>
                         </td>
                         <td class="py-3">
                             ${{ item.plan.setup_cost }}<br>
