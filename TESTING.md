@@ -19,7 +19,7 @@ Software testing ensures that applications work as expected, are free of critica
 
 The manual testing in this project has been done to check the responsiveness on different devices and browsers as well as the user experience both in terms of functionality and various workflows to find unexpected behavior. I have used a testing grid to make sure all components are being included.
 
-The automated testing have used frameworks and tools such as Lighthouse, W3C Validators, JSHint, and Django testing framework to run test cases, making it more efficient for large-scale and repetitive testing.
+The automated testing have used frameworks and tools such as Lighthouse, W3C Validators, JSHint, and Django testing framework to run test cases, making it more efficient for large-scale and repetitive testing. I also used Coverage to see if there were any areas i could improve on the testing coverage.
 
 <hr>
 
@@ -407,10 +407,9 @@ It implements:
 
 Tools used:
 - Flake8 - Checks for syntax errors, style violations, and undefined variables.
-- Black - Automatically formats code to follow best practices.
 - Pylint - Provides detailed code analysis and improvement suggestions.
 
-I ran all my Python code through the Python Linter with the following results. The final check for all code files were without errors. For more images tested on all apps see the [Read Me Images](documents/images_readme) folder.
+I ran all my Python code through the Python Linter. The final check for all code files were without errors. Below is an example. For more images tested on all apps see the [Read Me Images](documents/images_readme) folder.
 
 ### Example Testing - Accounts App
 
@@ -437,7 +436,13 @@ This project includes Stripe webhook integration to handle key payment events. T
 The webhook handler processes successful payments, handles failed transactions gracefully, and ensures robust communication between Stripe and the backend. All events were tested using the Stripe CLI for reliability in a real-world payment flow.
 
 ## Testing with Django
-I have implemented automated tests using Django’s built-in testing framework for models, views, forms, and utilities across all apps. Tests cover core functionality including user authentication, webshop behavior, product CRUD operations, size recommendation logic, and context processors. Custom logic like stretch factor calculations and webhook handling is also tested. The test suite ensures data integrity, proper redirects, and session behavior. All tests run in an isolated environment using Django’s test database and can be executed via python manage.py test for continuous development confidence. All tests are passing OK.
+I have implemented automated tests using Django’s built-in testing framework for models, views, forms, and utilities across all apps. The test suite covers core functionality including user authentication, webshop behavior, product CRUD operations, size recommendation logic, and context processors. Custom logic like stretch factor calculations and webhook handling is also tested to ensure edge cases are properly handled.
+
+Tests are executed in an isolated environment using Django’s test database, which allows for repeatable and safe testing without affecting real data. I run all tests via python manage.py test, providing continuous development confidence and rapid feedback during coding.
+
+Throughout development, the test suite played a crucial role. In several cases, test failures revealed issues I hadn’t anticipated, helping me catch bugs. This often led to changes in the application code to align with the expected behavior. Conversely, when I refactored or adjusted parts of the codebase, some existing tests began to fail, not because the logic was broken, but because the tests no longer matched the new implementation. In those cases, I reviewed and updated the tests accordingly to reflect the new logic without losing coverage.
+
+This test-driven feedback loop significantly improved the stability of the application. I found the testing process very valuable. Not just as a safety net, but also as a tool for clarifying the intended behavior of complex features and catching regressions. Now with all tests passing, I feel confident that the system is robust and behaves as expected even during ongoing development.
 
 ![Testing with django](documents/images_readme/testing-django.jpg)
 
