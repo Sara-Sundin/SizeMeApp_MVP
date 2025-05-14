@@ -469,6 +469,25 @@ My final run I received 93% coverage.
 ## Bugs and Fixes
 Here I have recorded some issues that I spent excessive time solving with the solutions indicated below.
 
+### Fix: Order Confirmation accessible by anyone with the link
+
+#### Description
+The order confirmation page (checkout_success) was accessible to anyone who had the URL, regardless of whether they had just completed a purchase. This created both a privacy issue and a potential security loophole.
+
+#### Root Cause
+There was no validation in place to confirm that a user had just completed an order. Without a gatekeeper mechanism, the view could be accessed by simply entering a known or guessed order number in the URL.
+
+#### Resolution
+To secure the confirmation view, I implemented a two-step validation:
+
+Session flag check: A just_ordered flag is set in the session after successful checkout. The confirmation view checks for this flag, and access is denied (HttpResponseForbidden) if it’s missing.
+
+Ownership verification: If the user is authenticated and the order is associated with a user account, an additional check ensures that the order belongs to the logged-in user.
+
+The flag is removed from the session after use to prevent reuse. This ensures the confirmation page can only be accessed immediately after an actual purchase and only by the rightful user.
+
+![Session Flag](documents\images_readme\session-flag-checkout.jpg)
+
 ### Bug: Multiple Modals Opened Simultaneously on ***product_detail*** Page
 
 #### Description
