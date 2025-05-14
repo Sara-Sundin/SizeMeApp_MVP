@@ -52,7 +52,7 @@
 
             <!-- Call-to-action -->
             <div class="col-md-12">  
-                <a class="cta-btn cta-btn--tertiary" href="{% url 'signup' %}">Start Exploring.</a> 
+                <a class="cta-btn cta-btn--tertiary" href="{% if user.is_authenticated %}{% url 'webshop' %}{% else %}{% url 'signup' %}{% endif %}">Start Exploring.</a> 
             </div> 
         </div>
     </div>
